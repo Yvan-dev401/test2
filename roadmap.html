@@ -1,0 +1,291 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.wrap{padding:1rem 0;font-family:var(--font-sans)}
+.hdr{margin-bottom:1.5rem}
+.hdr h1{font-size:20px;font-weight:500;color:var(--color-text-primary)}
+.hdr p{font-size:13px;color:var(--color-text-secondary);margin-top:4px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:1.5rem;align-items:center}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--color-text-secondary)}
+.legend-dot{width:12px;height:12px;border-radius:3px;flex-shrink:0}
+.phase{margin-bottom:2rem}
+.phase-bar{font-size:11px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;padding:6px 12px;border-radius:6px;margin-bottom:10px;display:inline-block}
+.week{border:0.5px solid var(--color-border-tertiary);border-radius:10px;margin-bottom:8px;overflow:hidden;background:var(--color-background-primary)}
+.week-head{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;cursor:pointer;user-select:none;-webkit-user-select:none}
+.week-head:hover{background:var(--color-background-secondary)}
+.week-left{display:flex;align-items:center;gap:10px}
+.wlevel{font-size:11px;font-weight:500;padding:3px 9px;border-radius:20px}
+.wname{font-size:14px;font-weight:500;color:var(--color-text-primary)}
+.wdates{font-size:12px;color:var(--color-text-tertiary)}
+.arrow{font-size:16px;color:var(--color-text-tertiary);transition:transform .25s;display:inline-block}
+.week-body{display:none;border-top:0.5px solid var(--color-border-tertiary)}
+.week-body.open{display:block}
+.day-row{display:grid;grid-template-columns:76px 1fr;border-bottom:0.5px solid var(--color-border-tertiary)}
+.day-row:last-child{border-bottom:none}
+.day-lbl{padding:11px 12px;font-size:12px;font-weight:500;color:var(--color-text-secondary);background:var(--color-background-secondary);display:flex;align-items:flex-start;padding-top:12px;line-height:1.4}
+.day-txt{padding:10px 14px;font-size:13px;color:var(--color-text-primary);line-height:1.65}
+.day-row.rest .day-lbl{background:#E1F5EE}
+.day-row.rest .day-txt{background:#F5FDF9;color:#0F6E56}
+.day-row.rest .day-lbl{color:#0F6E56;font-weight:600}
+.exam-row .day-txt{background:#FBEAF0;color:#993556;font-weight:500}
+.exam-row .day-lbl{background:#F4C0D1;color:#72243E;font-weight:600}
+</style>
+
+<div class="wrap">
+  <h2 style="position:absolute;left:-9999px">Roadmap allemand B1 – 14 semaines</h2>
+  <div class="hdr">
+    <h1>Roadmap Allemand B1 — 14 semaines</h1>
+    <p>Début : 20 mai 2026 · Examen : août 2026 · 3–4h/jour</p>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#E1F5EE;border:1px solid #5DCAA5"></div>Repos actif (écoute légère, vidéo)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary)"></div>Jour d'étude</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#FBEAF0;border:1px solid #D4537E"></div>Examen / blanc</div>
+  </div>
+
+  <div id="root"></div>
+</div>
+
+<script>
+const phases=[
+  {
+    name:"Phase 1 — Fondations A1",bg:"#E1F5EE",color:"#0F6E56",lbg:"#E1F5EE",lc:"#0F6E56",
+    weeks:[
+      {name:"Semaine 1",dates:"20–26 mai",level:"A1",days:[
+        {d:"Mer 20",t:"Installe Anki + Duolingo + DW Deutsch lernen. Regarde \"German Alphabet\" sur YouTube. Apprends les chiffres 1–20 en allemand."},
+        {d:"Jeu 21",t:"Prononciation : ä, ö, ü, ß, ch. Salutations : Hallo, Guten Morgen, Auf Wiedersehen. Verbe sein au présent (ich bin, du bist…)."},
+        {d:"Ven 22",t:"Verbe haben au présent. Se présenter : Ich heiße…, Ich bin…, Ich komme aus… Écrire 10 phrases."},
+        {d:"Sam 23",t:"Genre des noms : der / die / das. Règles de base + 20 noms à mémoriser dans Anki."},
+        {d:"Dim 24",t:"Vocabulaire famille : Vater, Mutter, Bruder, Schwester… + corps humain. Créer les flashcards Anki."},
+        {d:"Lun 25",t:"Révision générale semaine 1. Exercice écrit : se présenter en 5–7 phrases (prénom, âge, pays, famille)."},
+        {d:"Mar 26",t:"🌿 Repos actif : regarder une vidéo Easy German sous-titrée. Écoute sans pression, note 5 mots.",rest:true},
+      ]},
+      {name:"Semaine 2",dates:"27 mai – 2 juin",level:"A1",days:[
+        {d:"Mer 27",t:"Verbes réguliers au présent : machen, spielen, lernen. Conjugaison complète ich/du/er/wir/ihr/sie."},
+        {d:"Jeu 28",t:"Verbes irréguliers courants : gehen, kommen, lesen, schreiben. 10 phrases exemples."},
+        {d:"Ven 29",t:"Articles définis/indéfinis : der/die/das + ein/eine. Nominatif. 30 noms + articles sur Anki."},
+        {d:"Sam 30",t:"Vocabulaire maison : Küche, Zimmer, Tür, Fenster… + couleurs. 25 mots Anki."},
+        {d:"Dim 31",t:"Vocabulaire nourriture + boissons. Dialogue écrit : commander au restaurant."},
+        {d:"Lun 1",t:"Négation : nicht et kein/keine. Différenciation + 10 phrases de négation à écrire."},
+        {d:"Mar 2",t:"🌿 Repos actif : épisode DW Deutsch langsam gesprochen (A1). Écoute d'un épisode complet.",rest:true},
+      ]},
+      {name:"Semaine 3",dates:"3–9 juin",level:"A1→A2",days:[
+        {d:"Mer 3",t:"Cas accusatif : den/die/das. Verbes qui prennent l'accusatif : haben, sehen, kaufen."},
+        {d:"Jeu 4",t:"Prépositions + accusatif : durch, für, gegen, ohne, um. Écrire 15 phrases."},
+        {d:"Ven 5",t:"Questions W-Fragen : Wer, Was, Wo, Wann, Warum, Wie. Formuler 20 questions."},
+        {d:"Sam 6",t:"Vocabulaire ville + transports. Demander son chemin : Wo ist der Bahnhof? Wie komme ich zu…?"},
+        {d:"Dim 7",t:"Révision complète A1. Faire un mini-test Goethe A1 (disponible gratuitement sur goethe.de)."},
+        {d:"Lun 8",t:"Correction du mini-test. Points faibles identifiés → exercices ciblés sur les erreurs."},
+        {d:"Mar 9",t:"🌿 Repos actif : film court ou dessin animé en allemand. Note 5 mots inconnus.",rest:true},
+      ]},
+    ]
+  },
+  {
+    name:"Phase 2 — Structure grammaticale A2",bg:"#E6F1FB",color:"#185FA5",lbg:"#E6F1FB",lc:"#185FA5",
+    weeks:[
+      {name:"Semaine 4",dates:"10–16 juin",level:"A2",days:[
+        {d:"Mer 10",t:"Cas datif : dem/der/dem/den. Verbes avec datif : helfen, geben, sagen. Tableau des articles."},
+        {d:"Jeu 11",t:"Prépositions + datif : mit, bei, nach, seit, von, zu, aus, gegenüber. 15 phrases."},
+        {d:"Ven 12",t:"Prépositions à double cas (accusatif ou datif) : in, an, auf, über, unter, vor, hinter, zwischen."},
+        {d:"Sam 13",t:"Verbes séparables : aufstehen, anrufen, einkaufen. Règle de la séparation en phrase principale."},
+        {d:"Dim 14",t:"Vocabulaire travail + bureau. 40 mots Anki. Dialogue : se présenter en contexte professionnel."},
+        {d:"Lun 15",t:"Adjectifs : formes selon le cas (nominatif/accusatif/datif). Tableau de déclinaison."},
+        {d:"Mar 16",t:"🌿 Repos actif : podcast Slow German (niveau A2). Note les structures de phrases.",rest:true},
+      ]},
+      {name:"Semaine 5",dates:"17–23 juin",level:"A2",days:[
+        {d:"Mer 17",t:"Passé composé (Perfekt) : haben ou sein ? Participe passé régulier ge-…-t."},
+        {d:"Jeu 18",t:"Participes passés irréguliers (top 30) : gegangen, gewesen, gemacht… Anki obligatoire."},
+        {d:"Ven 19",t:"Prétérit des auxiliaires : war, hatte, wurde. Usage dans les récits et phrases passées."},
+        {d:"Sam 20",t:"Vocabulaire santé + corps. Dialogue : chez le médecin. Phrases utiles à mémoriser."},
+        {d:"Dim 21",t:"Subordonnées avec weil (parce que). Inversion verbe en fin de phrase. 15 phrases."},
+        {d:"Lun 22",t:"Subordonnées avec dass et wenn. Exercices mixtes weil / dass / wenn."},
+        {d:"Mar 23",t:"🌿 Repos actif : lire un article simplifié sur DW.com (niveau A2). Résumer en 3 phrases.",rest:true},
+      ]},
+      {name:"Semaine 6",dates:"24–30 juin",level:"A2→B1",days:[
+        {d:"Mer 24",t:"Futur : werden + infinitif. Futur proche avec présent + adverbe de temps (morgen, bald…)."},
+        {d:"Jeu 25",t:"Comparatif et superlatif : schneller, am schnellsten. 20 adjectifs comparés."},
+        {d:"Ven 26",t:"Pronoms personnels datif et accusatif : mich/mir, dich/dir, ihn/ihm…"},
+        {d:"Sam 27",t:"Vocabulaire voyages + hôtel + aéroport. 40 mots Anki. Dialogue check-in à l'hôtel."},
+        {d:"Dim 28",t:"Mini-test A2 (Goethe ou telc en ligne). Corriger attentivement. Identifier les lacunes."},
+        {d:"Lun 29",t:"Correction ciblée des points faibles du mini-test A2."},
+        {d:"Mar 30",t:"🌿 Repos actif : Easy German (interview dans la rue sous-titrée). Note 8 expressions.",rest:true},
+      ]},
+    ]
+  },
+  {
+    name:"Phase 3 — Montée en puissance A2+ → B1",bg:"#FAEEDA",color:"#854F0B",lbg:"#FAEEDA",lc:"#854F0B",
+    weeks:[
+      {name:"Semaine 7",dates:"1–7 juillet",level:"B1",days:[
+        {d:"Mer 1",t:"Vocabulaire thématique B1 — Environnement : Klimawandel, Umwelt, erneuerbare Energie. 40 mots."},
+        {d:"Jeu 2",t:"Exprimer une opinion : Ich finde…, Meiner Meinung nach…, Ich bin der Meinung, dass… 10 formulations."},
+        {d:"Ven 3",t:"Subjonctif II (Konjunktiv II) : würde + infinitif. Formuler des souhaits et conditions."},
+        {d:"Sam 4",t:"Vocabulaire B1 — Société et politique. Arguer pour/contre. Exercice écrit 100 mots."},
+        {d:"Dim 5",t:"Lecture d'un texte B1 (DW Top-Thema) : souligner mots inconnus, reformuler en 5 phrases."},
+        {d:"Lun 6",t:"Écoute B1 : 2 extraits audio Goethe B1 (sur goethe.de). Répondre aux questions de compréhension."},
+        {d:"Mar 7",t:"🌿 Repos actif : podcast Deutsche Welle Top-Thema. Un épisode complet, écoute passive.",rest:true},
+      ]},
+      {name:"Semaine 8",dates:"8–14 juillet",level:"B1",days:[
+        {d:"Mer 8",t:"Conjonctions avancées : obwohl, damit, sodass, bevor, nachdem. 15 phrases."},
+        {d:"Jeu 9",t:"Vocabulaire B1 — Travail et économie. Rédiger une lettre de motivation structurée (150 mots)."},
+        {d:"Ven 10",t:"Pronoms relatifs : der/die/das qui varient selon le cas. 15 phrases relatives."},
+        {d:"Sam 11",t:"Compréhension écrite (Lesen B1) : exercices format Goethe — 3 types de textes."},
+        {d:"Dim 12",t:"Production écrite : rédiger un email semi-formel (200 mots). Auto-correction avec checklist."},
+        {d:"Lun 13",t:"Vocabulaire B1 — Éducation et famille. 40 mots Anki. Dialogue : conseiller quelqu'un."},
+        {d:"Mar 14",t:"🌿 Repos actif : épisode de série allemande sous-titrée (ex : Dark sur Netflix).",rest:true},
+      ]},
+      {name:"Semaine 9",dates:"15–21 juillet",level:"B1",days:[
+        {d:"Mer 15",t:"Passif : werden + participe passé. Passif au présent et au passé. 10 transformations."},
+        {d:"Jeu 16",t:"Vocabulaire B1 — Médias et technologie. Exprimer accord/désaccord en discussion."},
+        {d:"Ven 17",t:"Exercices Hören B1 : 2 exercices d'écoute format Goethe. Vérifier les réponses."},
+        {d:"Sam 18",t:"Production orale : enregistre-toi 3 minutes sur un sujet B1. Réécoute et identifie les erreurs."},
+        {d:"Dim 19",t:"Révision grammaticale complète : tableau récap cas / verbes / subordonnées / passif."},
+        {d:"Lun 20",t:"Lecture intensive : article B1 DW Top-Thema. Vocabulaire en contexte, 20 mots nouveaux."},
+        {d:"Mar 21",t:"🌿 Repos actif : YouTube Lingoni German (vidéo niveau B1). Note 10 expressions utiles.",rest:true},
+      ]},
+      {name:"Semaine 10",dates:"22–28 juillet",level:"B1",days:[
+        {d:"Mer 22",t:"Simulation partielle : 1 exercice Lesen + 1 exercice Hören chronométrés (format Goethe)."},
+        {d:"Jeu 23",t:"Production écrite B1 : discussion pour/contre (200 mots). Envoyer à un tuteur sur italki."},
+        {d:"Ven 24",t:"Vocabulaire B1 — Santé et société. Construire un argumentaire oral de 2 minutes."},
+        {d:"Sam 25",t:"Exercice Sprechen B1 : décrire une image, réagir à une situation. Format Goethe officiel."},
+        {d:"Dim 26",t:"Test blanc partiel B1 (Lesen + Hören) en conditions réelles. Strictement chronométré."},
+        {d:"Lun 27",t:"Correction du test + révision des points les plus faibles identifiés."},
+        {d:"Mar 28",t:"🌿 Repos actif : bilan de la phase 3. Note tes 10 points les plus fragiles pour la phase 4.",rest:true},
+      ]},
+    ]
+  },
+  {
+    name:"Phase 4 — Préparation examen B1",bg:"#FBEAF0",color:"#993556",lbg:"#FBEAF0",lc:"#993556",
+    weeks:[
+      {name:"Semaine 11",dates:"29 juil – 4 août",level:"Blanc",days:[
+        {d:"Mer 29",t:"Examen blanc complet B1 (annale Goethe officielle). 4 épreuves chronométrées en conditions réelles.",exam:true},
+        {d:"Jeu 30",t:"Correction détaillée. Classer les erreurs par type : vocabulaire / grammaire / compréhension."},
+        {d:"Ven 31",t:"Révision ciblée grammaire : points les plus erronés dans le blanc."},
+        {d:"Sam 1",t:"Révision ciblée vocabulaire thématique manquant. Nouvelles flashcards Anki."},
+        {d:"Dim 2",t:"Entraînement Schreiben : rédiger 2 textes B1 (email + opinion). Correction par tuteur ou auto."},
+        {d:"Lun 3",t:"Entraînement Sprechen : simulation de la partie orale avec un partenaire ou enregistrement."},
+        {d:"Mar 4",t:"🌿 Repos actif : Anki uniquement. Pas de nouvelles notions. Récupération mentale.",rest:true},
+      ]},
+      {name:"Semaine 12",dates:"5–11 août",level:"Blanc",days:[
+        {d:"Mer 5",t:"2e examen blanc complet B1 (annale différente). Conditions strictes, sans interruption.",exam:true},
+        {d:"Jeu 6",t:"Correction + comparaison avec le 1er blanc. Mesurer la progression."},
+        {d:"Ven 7",t:"Hören intensif : 3 exercices d'écoute B1. Travail sur la vitesse de compréhension."},
+        {d:"Sam 8",t:"Lesen intensif : 3 exercices de lecture B1. Types : article, annonce, email."},
+        {d:"Dim 9",t:"Révision expressions figées utiles à l'oral et à l'écrit (formules B1 mémorisées)."},
+        {d:"Lun 10",t:"Simulation orale complète : monologue + dialogue guidé. Enregistrement + réécoute."},
+        {d:"Mar 11",t:"🌿 Repos actif : écoute podcast uniquement. Aucune grammaire.",rest:true},
+      ]},
+      {name:"Semaine 13",dates:"12–18 août",level:"Final",days:[
+        {d:"Mer 12",t:"3e examen blanc complet. Objectif : passer tous les seuils (60% minimum par épreuve).",exam:true},
+        {d:"Jeu 13",t:"Correction + analyse finale. Si une épreuve reste faible → sprint ciblé 2 jours."},
+        {d:"Ven 14",t:"Révision globale : revoir toutes les fiches grammaire créées depuis la semaine 1."},
+        {d:"Sam 15",t:"Vocabulaire final : liste des 500 mots B1 les plus fréquents (DW / Wortschatz Leipzig)."},
+        {d:"Dim 16",t:"Simulation conditions réelles : même horaire que l'examen prévu. Blanc complet.",exam:true},
+        {d:"Lun 17",t:"Repos + Anki uniquement. Aucune nouvelle grammaire. Récupération mentale."},
+        {d:"Mar 18",t:"Entraînement Sprechen final. Mémoriser les phrases d'accroche pour l'oral."},
+      ]},
+      {name:"Semaine 14 — Semaine de l'examen",dates:"19–26 août",level:"Examen",days:[
+        {d:"Mer 19",t:"Révision très légère : Anki 20 min, expressions figées, formules Schreiben. Rien de nouveau."},
+        {d:"Jeu 20",t:"Relire ses meilleures productions écrites. Répéter la partie orale une dernière fois."},
+        {d:"Ven 21",t:"🌿 Repos total. Promenade, détente. Cerveau en mode récupération complète.",rest:true},
+        {d:"Sam 22",t:"Anki 20 min. Revoir les instructions de l'examen : format, durées, consignes officielles."},
+        {d:"Dim 23",t:"Repos. Préparer les affaires : pièce d'identité, stylos, confirmation d'inscription."},
+        {d:"Lun–Mer",t:"🎯 EXAMEN B1 — Goethe-Zertifikat ou telc. Tu es prêt(e). Viel Erfolg !",exam:true},
+      ]},
+    ]
+  }
+];
+
+function build(){
+  const root=document.getElementById('root');
+  phases.forEach((ph,pi)=>{
+    const phDiv=document.createElement('div');
+    phDiv.className='phase';
+    const bar=document.createElement('div');
+    bar.className='phase-bar';
+    bar.style.background=ph.bg;
+    bar.style.color=ph.color;
+    bar.textContent=ph.name;
+    phDiv.appendChild(bar);
+
+    ph.weeks.forEach((wk,wi)=>{
+      const wDiv=document.createElement('div');
+      wDiv.className='week';
+
+      const head=document.createElement('div');
+      head.className='week-head';
+      head.setAttribute('role','button');
+      head.setAttribute('tabindex','0');
+
+      const left=document.createElement('div');
+      left.className='week-left';
+
+      const lvl=document.createElement('span');
+      lvl.className='wlevel';
+      lvl.style.background=ph.lbg;
+      lvl.style.color=ph.lc;
+      lvl.textContent=wk.level;
+
+      const nm=document.createElement('span');
+      nm.className='wname';
+      nm.textContent=wk.name;
+
+      left.appendChild(lvl);
+      left.appendChild(nm);
+
+      const right=document.createElement('div');
+      right.style.cssText='display:flex;align-items:center;gap:14px';
+
+      const dt=document.createElement('span');
+      dt.className='wdates';
+      dt.textContent=wk.dates;
+
+      const arr=document.createElement('span');
+      arr.className='arrow';
+      arr.textContent='▾';
+
+      right.appendChild(dt);
+      right.appendChild(arr);
+      head.appendChild(left);
+      head.appendChild(right);
+
+      const body=document.createElement('div');
+      body.className='week-body';
+
+      wk.days.forEach(day=>{
+        const row=document.createElement('div');
+        row.className='day-row'+(day.rest?' rest':'')+(day.exam?' exam-row':'');
+        row.innerHTML='<div class="day-lbl">'+day.d+'</div><div class="day-txt">'+day.t+'</div>';
+        body.appendChild(row);
+      });
+
+      function toggle(){
+        const isOpen=body.classList.contains('open');
+        if(isOpen){
+          body.classList.remove('open');
+          arr.style.transform='rotate(0deg)';
+        } else {
+          body.classList.add('open');
+          arr.style.transform='rotate(180deg)';
+        }
+      }
+
+      head.addEventListener('click', toggle);
+      head.addEventListener('keydown', function(e){
+        if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}
+      });
+
+      wDiv.appendChild(head);
+      wDiv.appendChild(body);
+      phDiv.appendChild(wDiv);
+    });
+    root.appendChild(phDiv);
+  });
+
+  const firstBody=document.querySelector('.week-body');
+  const firstArr=document.querySelector('.arrow');
+  if(firstBody){firstBody.classList.add('open');firstArr.style.transform='rotate(180deg)';}
+}
+
+build();
+</script>

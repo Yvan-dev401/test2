@@ -4,36 +4,61 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Roadmap Allemand B1 – 14 semaines</title>
-</head>
+  <!-- Police -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<body>
+  <title>Roadmap Allemand B1 – 14 semaines</title>
+
   <style>
     * {
       box-sizing: border-box;
       margin: 0;
-      padding: 0
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f3f4f6;
+      min-height: 100vh;
+
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+
+      padding: 40px 20px;
     }
 
     .wrap {
-      padding: 1rem 0;
-      font-family: var(--font-sans)
+      width: 100%;
+      max-width: 1000px;
+
+      background: white;
+      border-radius: 24px;
+
+      padding: 32px;
+
+      box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.08);
+
+      border: 1px solid #e5e7eb;
     }
 
     .hdr {
-      margin-bottom: 1.5rem
+      margin-bottom: 1.5rem;
     }
 
     .hdr h1 {
-      font-size: 20px;
-      font-weight: 500;
-      color: var(--color-text-primary)
+      font-size: 32px;
+      font-weight: 700;
+      color: #111827;
     }
 
     .hdr p {
-      font-size: 13px;
-      color: var(--color-text-secondary);
-      margin-top: 4px
+      font-size: 14px;
+      color: #6b7280;
+      margin-top: 6px;
     }
 
     .legend {
@@ -41,159 +66,218 @@
       gap: 16px;
       flex-wrap: wrap;
       margin-bottom: 1.5rem;
-      align-items: center
+      align-items: center;
     }
 
     .legend-item {
       display: flex;
       align-items: center;
       gap: 6px;
-      font-size: 12px;
-      color: var(--color-text-secondary)
+      font-size: 13px;
+      color: #4b5563;
     }
 
     .legend-dot {
       width: 12px;
       height: 12px;
       border-radius: 3px;
-      flex-shrink: 0
+      flex-shrink: 0;
     }
 
     .phase {
-      margin-bottom: 2rem
+      margin-bottom: 2rem;
     }
 
     .phase-bar {
       font-size: 11px;
-      font-weight: 500;
+      font-weight: 600;
       letter-spacing: .07em;
       text-transform: uppercase;
       padding: 6px 12px;
       border-radius: 6px;
-      margin-bottom: 10px;
-      display: inline-block
+      margin-bottom: 8px;
+      display: inline-block;
+    }
+
+    .phase-progress {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 12px;
+      font-size: 12px;
+      color: #6b7280;
+    }
+
+    .phase-progress-track {
+      flex: 1;
+      height: 8px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: #e5e7eb;
+    }
+
+    .phase-progress-fill {
+      height: 100%;
+      width: 0;
+      border-radius: 999px;
+      background: #111827;
+    }
+
+    .phase-stats {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 0 0 18px;
+    }
+
+    .phase-stat {
+      font-size: 12px;
+      color: #4b5563;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 999px;
+      padding: 4px 10px;
     }
 
     .week {
-      border: 0.5px solid var(--color-border-tertiary);
-      border-radius: 10px;
-      margin-bottom: 8px;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      margin-bottom: 12px;
       overflow: hidden;
-      background: var(--color-background-primary)
+      background: white;
     }
 
     .week-head {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 11px 14px;
+      padding: 14px 16px;
       cursor: pointer;
       user-select: none;
-      -webkit-user-select: none
     }
 
     .week-head:hover {
-      background: var(--color-background-secondary)
+      background: #f9fafb;
     }
 
     .week-left {
       display: flex;
       align-items: center;
-      gap: 10px
+      gap: 10px;
     }
 
     .wlevel {
       font-size: 11px;
-      font-weight: 500;
-      padding: 3px 9px;
-      border-radius: 20px
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
     }
 
     .wname {
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--color-text-primary)
+      font-size: 15px;
+      font-weight: 600;
+      color: #111827;
     }
 
     .wdates {
       font-size: 12px;
-      color: var(--color-text-tertiary)
+      color: #9ca3af;
     }
 
     .arrow {
       font-size: 16px;
-      color: var(--color-text-tertiary);
+      color: #9ca3af;
       transition: transform .25s;
-      display: inline-block
+      display: inline-block;
     }
 
     .week-body {
       display: none;
-      border-top: 0.5px solid var(--color-border-tertiary)
+      border-top: 1px solid #e5e7eb;
     }
 
     .week-body.open {
-      display: block
+      display: block;
     }
 
     .day-row {
       display: grid;
-      grid-template-columns: 76px 1fr;
-      border-bottom: 0.5px solid var(--color-border-tertiary)
+      grid-template-columns: 90px 1fr auto;
+      border-bottom: 1px solid #e5e7eb;
     }
 
     .day-row:last-child {
-      border-bottom: none
+      border-bottom: none;
     }
 
     .day-lbl {
-      padding: 11px 12px;
+      padding: 12px;
       font-size: 12px;
-      font-weight: 500;
-      color: var(--color-text-secondary);
-      background: var(--color-background-secondary);
-      display: flex;
-      align-items: flex-start;
-      padding-top: 12px;
-      line-height: 1.4
+      font-weight: 600;
+      color: #4b5563;
+      background: #f9fafb;
+      line-height: 1.4;
     }
 
     .day-txt {
-      padding: 10px 14px;
-      font-size: 13px;
-      color: var(--color-text-primary);
-      line-height: 1.65
+      padding: 12px 16px;
+      font-size: 14px;
+      color: #111827;
+      line-height: 1.7;
+    }
+
+    .day-check {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 12px 14px;
+    }
+
+    .day-check input {
+      width: 18px;
+      height: 18px;
+      accent-color: #2563eb;
+      cursor: pointer;
+    }
+
+    .day-row.done .day-lbl,
+    .day-row.done .day-txt {
+      opacity: 0.55;
+      text-decoration: line-through;
     }
 
     .day-row.rest .day-lbl {
-      background: #E1F5EE
+      background: #E1F5EE;
+      color: #0F6E56;
     }
 
     .day-row.rest .day-txt {
       background: #F5FDF9;
-      color: #0F6E56
-    }
-
-    .day-row.rest .day-lbl {
       color: #0F6E56;
-      font-weight: 600
     }
 
     .exam-row .day-txt {
       background: #FBEAF0;
       color: #993556;
-      font-weight: 500
+      font-weight: 500;
     }
 
     .exam-row .day-lbl {
       background: #F4C0D1;
       color: #72243E;
-      font-weight: 600
+      font-weight: 600;
     }
   </style>
+</head>
+
+<body>
 
   <div class="wrap">
-    <h2 style="position:absolute;left:-9999px">Roadmap allemand B1 – 14 semaines</h2>
+
+    <h2 style="position:absolute;left:-9999px">
+      Roadmap allemand B1 – 14 semaines
+    </h2>
+
     <div class="hdr">
       <h1>Roadmap Allemand B1 — 14 semaines</h1>
       <p>Début : 20 mai 2026 · Examen : août 2026 · 3–4h/jour</p>
@@ -201,22 +285,28 @@
 
     <div class="legend">
       <div class="legend-item">
-        <div class="legend-dot" style="background:#E1F5EE;border:1px solid #5DCAA5"></div>Repos actif (écoute légère,
-        vidéo)
+        <div class="legend-dot" style="background:#E1F5EE;border:1px solid #5DCAA5"></div>
+        Repos actif
       </div>
+
       <div class="legend-item">
-        <div class="legend-dot"
-          style="background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary)"></div>
+        <div class="legend-dot" style="background:#f9fafb;border:1px solid #e5e7eb"></div>
         Jour d'étude
       </div>
+
       <div class="legend-item">
-        <div class="legend-dot" style="background:#FBEAF0;border:1px solid #D4537E"></div>Examen / blanc
+        <div class="legend-dot" style="background:#FBEAF0;border:1px solid #D4537E"></div>
+        Examen / blanc
+      </div>
+      <div class="legend-item">
+        <div class="phase-progress-track" style="width:42px;flex:0 0 auto"><div class="phase-progress-fill" style="width:65%;background:#2563eb"></div></div>
+        Progression phase
       </div>
     </div>
 
     <div id="root"></div>
-  </div>
 
+  </div>
   <script>
     const phases = [
       {
@@ -396,6 +486,8 @@
 
     function build() {
       const root = document.getElementById('root');
+      const storageKey = 'roadmap-b1-checklist';
+      const saved = JSON.parse(localStorage.getItem(storageKey) || '{}');
       phases.forEach((ph, pi) => {
         const phDiv = document.createElement('div');
         phDiv.className = 'phase';
@@ -405,6 +497,35 @@
         bar.style.color = ph.color;
         bar.textContent = ph.name;
         phDiv.appendChild(bar);
+
+        const progress = document.createElement('div');
+        progress.className = 'phase-progress';
+        const progressTrack = document.createElement('div');
+        progressTrack.className = 'phase-progress-track';
+        const progressFill = document.createElement('div');
+        progressFill.className = 'phase-progress-fill';
+        progressTrack.appendChild(progressFill);
+        const progressText = document.createElement('span');
+        progress.appendChild(progressTrack);
+        progress.appendChild(progressText);
+
+        const stats = document.createElement('div');
+        stats.className = 'phase-stats';
+        phDiv.appendChild(progress);
+        phDiv.appendChild(stats);
+
+        const phaseDays = ph.weeks.flatMap(wk => wk.days.map(day => ({ wk, day })));
+
+        function updateProgress() {
+          const phaseState = saved[ph.name] || {};
+          const done = phaseDays.filter(({ day }) => phaseState[day.d]).length;
+          const total = phaseDays.length;
+          const percent = total ? Math.round((done / total) * 100) : 0;
+          progressFill.style.width = percent + '%';
+          progressFill.style.background = ph.color;
+          progressText.textContent = done + '/' + total + ' jours';
+          stats.innerHTML = '<div class="phase-stat">' + percent + '% complété</div><div class="phase-stat">' + (total - done) + ' à faire</div>';
+        }
 
         ph.weeks.forEach((wk, wi) => {
           const wDiv = document.createElement('div');
@@ -453,7 +574,16 @@
           wk.days.forEach(day => {
             const row = document.createElement('div');
             row.className = 'day-row' + (day.rest ? ' rest' : '') + (day.exam ? ' exam-row' : '');
-            row.innerHTML = '<div class="day-lbl">' + day.d + '</div><div class="day-txt">' + day.t + '</div>';
+            const done = !!((saved[ph.name] || {})[day.d]);
+            if (done) row.classList.add('done');
+            row.innerHTML = '<div class="day-lbl">' + day.d + '</div><div class="day-txt">' + day.t + '</div><div class="day-check"><input type="checkbox" ' + (done ? 'checked' : '') + ' aria-label="Marquer ' + day.d + ' comme fait"></div>';
+            row.querySelector('input').addEventListener('change', function () {
+              saved[ph.name] = saved[ph.name] || {};
+              saved[ph.name][day.d] = this.checked;
+              localStorage.setItem(storageKey, JSON.stringify(saved));
+              row.classList.toggle('done', this.checked);
+              updateProgress();
+            });
             body.appendChild(row);
           });
 
@@ -477,6 +607,7 @@
           wDiv.appendChild(body);
           phDiv.appendChild(wDiv);
         });
+        updateProgress();
         root.appendChild(phDiv);
       });
 

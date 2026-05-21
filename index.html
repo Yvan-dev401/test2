@@ -106,11 +106,12 @@
       margin: 0 0 12px;
       font-size: 12px;
       color: #6b7280;
+      font-weight: 500;
     }
 
     .phase-progress-track {
       flex: 1;
-      height: 8px;
+      height: 9px;
       border-radius: 999px;
       overflow: hidden;
       background: #e5e7eb;
@@ -121,6 +122,7 @@
       width: 0;
       border-radius: 999px;
       background: #111827;
+      transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .phase-stats {
@@ -128,6 +130,7 @@
       gap: 8px;
       flex-wrap: wrap;
       margin: 0 0 18px;
+      align-items: center;
     }
 
     .phase-stat {
@@ -137,6 +140,23 @@
       border: 1px solid #e5e7eb;
       border-radius: 999px;
       padding: 4px 10px;
+    }
+
+    .phase-complete-badge {
+      font-size: 12px;
+      font-weight: 600;
+      color: #15803d;
+      background: #dcfce7;
+      border: 1px solid #86efac;
+      border-radius: 999px;
+      padding: 4px 12px;
+      display: none;
+    }
+
+    .phase-complete-badge.visible {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
     }
 
     .week {
@@ -226,24 +246,83 @@
       line-height: 1.7;
     }
 
+    .week-head-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .week-check-all {
+      font-size: 11px;
+      font-weight: 500;
+      color: #6b7280;
+      background: #f3f4f6;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      padding: 3px 9px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s, color 0.15s;
+      user-select: none;
+    }
+
+    .week-check-all:hover {
+      background: #e5e7eb;
+      color: #374151;
+    }
+
+    .week-progress-count {
+      font-size: 12px;
+      font-weight: 500;
+      color: #9ca3af;
+      white-space: nowrap;
+    }
+
+    .week-progress-count.all-done {
+      color: #16a34a;
+    }
+
     .day-check {
       display: flex;
       align-items: flex-start;
       justify-content: center;
-      padding: 12px 14px;
+      padding: 12px 16px;
     }
 
-    .day-check input {
+    .day-check input[type="checkbox"] {
       width: 18px;
       height: 18px;
       accent-color: #2563eb;
       cursor: pointer;
+      flex-shrink: 0;
     }
 
-    .day-row.done .day-lbl,
+    .day-row.done {
+      background: #f9fefb;
+    }
+
+    .day-row.done .day-lbl {
+      color: #86efac;
+      background: #f0fdf4;
+    }
+
     .day-row.done .day-txt {
-      opacity: 0.55;
+      color: #9ca3af;
       text-decoration: line-through;
+      text-decoration-color: #d1fae5;
+    }
+
+    .day-row.done .day-check input {
+      accent-color: #16a34a;
+    }
+
+    .day-row.rest.done .day-lbl {
+      background: #d1fae5;
+      color: #15803d;
+    }
+
+    .day-row.rest.done .day-txt {
+      background: #f0fdf4;
     }
 
     .day-row.rest .day-lbl {
@@ -488,9 +567,11 @@
       const root = document.getElementById('root');
       const storageKey = 'roadmap-b1-checklist';
       const saved = JSON.parse(localStorage.getItem(storageKey) || '{}');
-      phases.forEach((ph, pi) => {
+
+      phases.forEach((ph) => {
         const phDiv = document.createElement('div');
         phDiv.className = 'phase';
+
         const bar = document.createElement('div');
         bar.className = 'phase-bar';
         bar.style.background = ph.bg;
@@ -511,23 +592,42 @@
 
         const stats = document.createElement('div');
         stats.className = 'phase-stats';
+
+        const completeBadge = document.createElement('span');
+        completeBadge.className = 'phase-complete-badge';
+        completeBadge.innerHTML = '✓ Phase terminée !';
+
         phDiv.appendChild(progress);
         phDiv.appendChild(stats);
 
         const phaseDays = ph.weeks.flatMap(wk => wk.days.map(day => ({ wk, day })));
 
+        const statPercent = document.createElement('div');
+        statPercent.className = 'phase-stat';
+        const statRemaining = document.createElement('div');
+        statRemaining.className = 'phase-stat';
+        stats.appendChild(statPercent);
+        stats.appendChild(statRemaining);
+        stats.appendChild(completeBadge);
+
         function updateProgress() {
           const phaseState = saved[ph.name] || {};
-          const done = phaseDays.filter(({ day }) => phaseState[day.d]).length;
+          const doneCount = phaseDays.filter(({ day }) => phaseState[day.d]).length;
           const total = phaseDays.length;
-          const percent = total ? Math.round((done / total) * 100) : 0;
+          const percent = total ? Math.round((doneCount / total) * 100) : 0;
           progressFill.style.width = percent + '%';
           progressFill.style.background = ph.color;
-          progressText.textContent = done + '/' + total + ' jours';
-          stats.innerHTML = '<div class="phase-stat">' + percent + '% complété</div><div class="phase-stat">' + (total - done) + ' à faire</div>';
+          progressText.textContent = doneCount + '/' + total + ' jours';
+
+          const remaining = total - doneCount;
+          statPercent.textContent = percent + '% complété';
+          statRemaining.textContent = remaining > 0 ? remaining + ' jour' + (remaining > 1 ? 's' : '') + ' à faire' : '';
+          statRemaining.style.display = remaining > 0 ? '' : 'none';
+
+          completeBadge.classList.toggle('visible', percent === 100);
         }
 
-        ph.weeks.forEach((wk, wi) => {
+        ph.weeks.forEach((wk) => {
           const wDiv = document.createElement('div');
           wDiv.className = 'week';
 
@@ -553,17 +653,26 @@
           left.appendChild(nm);
 
           const right = document.createElement('div');
-          right.style.cssText = 'display:flex;align-items:center;gap:14px';
+          right.className = 'week-head-right';
+
+          const weekCount = document.createElement('span');
+          weekCount.className = 'week-progress-count';
 
           const dt = document.createElement('span');
           dt.className = 'wdates';
           dt.textContent = wk.dates;
 
+          const checkAllBtn = document.createElement('span');
+          checkAllBtn.className = 'week-check-all';
+          checkAllBtn.textContent = 'Tout cocher';
+
           const arr = document.createElement('span');
           arr.className = 'arrow';
           arr.textContent = '▾';
 
+          right.appendChild(weekCount);
           right.appendChild(dt);
+          right.appendChild(checkAllBtn);
           right.appendChild(arr);
           head.appendChild(left);
           head.appendChild(right);
@@ -571,49 +680,86 @@
           const body = document.createElement('div');
           body.className = 'week-body';
 
+          const rows = [];
+
+          function updateWeekCount() {
+            const phaseState = saved[ph.name] || {};
+            const doneInWeek = wk.days.filter(d => phaseState[d.d]).length;
+            const totalInWeek = wk.days.length;
+            weekCount.textContent = doneInWeek + '/' + totalInWeek;
+            weekCount.classList.toggle('all-done', doneInWeek === totalInWeek);
+            checkAllBtn.textContent = doneInWeek === totalInWeek ? 'Tout décocher' : 'Tout cocher';
+          }
+
           wk.days.forEach(day => {
             const row = document.createElement('div');
             row.className = 'day-row' + (day.rest ? ' rest' : '') + (day.exam ? ' exam-row' : '');
-            const done = !!((saved[ph.name] || {})[day.d]);
-            if (done) row.classList.add('done');
-            row.innerHTML = '<div class="day-lbl">' + day.d + '</div><div class="day-txt">' + day.t + '</div><div class="day-check"><input type="checkbox" ' + (done ? 'checked' : '') + ' aria-label="Marquer ' + day.d + ' comme fait"></div>';
-            row.querySelector('input').addEventListener('change', function () {
+            const isDone = !!((saved[ph.name] || {})[day.d]);
+            if (isDone) row.classList.add('done');
+
+            row.innerHTML =
+              '<div class="day-lbl">' + day.d + '</div>' +
+              '<div class="day-txt">' + day.t + '</div>' +
+              '<div class="day-check"><input type="checkbox"' + (isDone ? ' checked' : '') + ' aria-label="Marquer ' + day.d + ' comme fait"></div>';
+
+            const cb = row.querySelector('input');
+            cb.addEventListener('click', function (e) {
+              e.stopPropagation();
+            });
+            cb.addEventListener('change', function () {
               saved[ph.name] = saved[ph.name] || {};
               saved[ph.name][day.d] = this.checked;
               localStorage.setItem(storageKey, JSON.stringify(saved));
               row.classList.toggle('done', this.checked);
+              updateWeekCount();
               updateProgress();
             });
+
+            rows.push({ row, day, cb });
             body.appendChild(row);
+          });
+
+          checkAllBtn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            const phaseState = saved[ph.name] || {};
+            const allDone = wk.days.every(d => phaseState[d.d]);
+            const newState = !allDone;
+            saved[ph.name] = saved[ph.name] || {};
+            rows.forEach(({ row, day, cb }) => {
+              saved[ph.name][day.d] = newState;
+              cb.checked = newState;
+              row.classList.toggle('done', newState);
+            });
+            localStorage.setItem(storageKey, JSON.stringify(saved));
+            updateWeekCount();
+            updateProgress();
           });
 
           function toggle() {
             const isOpen = body.classList.contains('open');
-            if (isOpen) {
-              body.classList.remove('open');
-              arr.style.transform = 'rotate(0deg)';
-            } else {
-              body.classList.add('open');
-              arr.style.transform = 'rotate(180deg)';
-            }
+            body.classList.toggle('open', !isOpen);
+            arr.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
           }
 
           head.addEventListener('click', toggle);
           head.addEventListener('keydown', function (e) {
-            if (e.key === 'Enter' || e.key === ' ') {e.preventDefault(); toggle();}
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
           });
 
+          updateWeekCount();
           wDiv.appendChild(head);
           wDiv.appendChild(body);
           phDiv.appendChild(wDiv);
         });
+
+        stats.appendChild(completeBadge);
         updateProgress();
         root.appendChild(phDiv);
       });
 
       const firstBody = document.querySelector('.week-body');
       const firstArr = document.querySelector('.arrow');
-      if (firstBody) {firstBody.classList.add('open'); firstArr.style.transform = 'rotate(180deg)';}
+      if (firstBody) { firstBody.classList.add('open'); firstArr.style.transform = 'rotate(180deg)'; }
     }
 
     build();

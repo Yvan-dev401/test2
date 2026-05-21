@@ -346,6 +346,36 @@
       color: #72243E;
       font-weight: 600;
     }
+
+    .late-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      color: #b45309;
+      background: #fef3c7;
+      border: 1px solid #fcd34d;
+      border-radius: 4px;
+      padding: 1px 5px;
+      margin-top: 4px;
+      line-height: 1.4;
+      white-space: nowrap;
+    }
+
+    .day-row.overdue .day-lbl {
+      background: #fffbeb;
+    }
+
+    .day-row.overdue:not(.rest) .day-txt {
+      background: #fffbeb;
+    }
+
+    .day-row.overdue .day-lbl .day-lbl-name {
+      display: block;
+    }
+
+    .day-lbl-name {
+      display: block;
+    }
   </style>
 </head>
 
@@ -378,7 +408,9 @@
         Examen / blanc
       </div>
       <div class="legend-item">
-        <div class="phase-progress-track" style="width:42px;flex:0 0 auto"><div class="phase-progress-fill" style="width:65%;background:#2563eb"></div></div>
+        <div class="phase-progress-track" style="width:42px;flex:0 0 auto">
+          <div class="phase-progress-fill" style="width:65%;background:#2563eb"></div>
+        </div>
         Progression phase
       </div>
     </div>
@@ -563,9 +595,28 @@
       }
     ];
 
+    const MONTH_MAP = { 'jan':0,'fév':1,'févr':1,'mar':2,'avr':3,'mai':4,'juin':5,'juil':6,'août':7,'sep':8,'oct':9,'nov':10,'déc':11 };
+
+    function parseDayDate(weekDates, dayLabel) {
+      const dayNum = parseInt(dayLabel.split(' ').pop());
+      if (isNaN(dayNum)) return null;
+      const parts = weekDates.split(/\s*–\s*/);
+      const startParts = parts[0].trim().split(/\s+/);
+      const endParts = parts[1] ? parts[1].trim().split(/\s+/) : [];
+      const startNum = parseInt(startParts[0]);
+      let month1 = startParts[1] ? MONTH_MAP[startParts[1].toLowerCase()] : undefined;
+      let month2 = endParts[1] ? MONTH_MAP[endParts[1].toLowerCase()] : undefined;
+      if (month1 === undefined) month1 = month2;
+      if (month2 === undefined) month2 = month1;
+      const month = (month1 !== month2 && dayNum < startNum) ? month2 : month1;
+      return new Date(2026, month, dayNum);
+    }
+
     function build() {
       const root = document.getElementById('root');
       const storageKey = 'roadmap-b1-checklist';
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
       const saved = JSON.parse(localStorage.getItem(storageKey) || '{}');
 
       phases.forEach((ph) => {
@@ -600,7 +651,7 @@
         phDiv.appendChild(progress);
         phDiv.appendChild(stats);
 
-        const phaseDays = ph.weeks.flatMap(wk => wk.days.map(day => ({ wk, day })));
+        const phaseDays = ph.weeks.flatMap(wk => wk.days.map(day => ({wk, day})));
 
         const statPercent = document.createElement('div');
         statPercent.className = 'phase-stat';
@@ -612,7 +663,7 @@
 
         function updateProgress() {
           const phaseState = saved[ph.name] || {};
-          const doneCount = phaseDays.filter(({ day }) => phaseState[day.d]).length;
+          const doneCount = phaseDays.filter(({day}) => phaseState[day.d]).length;
           const total = phaseDays.length;
           const percent = total ? Math.round((doneCount / total) * 100) : 0;
           progressFill.style.width = percent + '%';
@@ -697,8 +748,15 @@
             const isDone = !!((saved[ph.name] || {})[day.d]);
             if (isDone) row.classList.add('done');
 
+            const dayDate = parseDayDate(wk.dates, day.d);
+            const isLate = !isDone && dayDate !== null && dayDate < today;
+            if (isLate) row.classList.add('overdue');
+
+            const lateBadgeHTML = '<span class="late-badge">En retard</span>';
+            const lblContent = '<span class="day-lbl-name">' + day.d + '</span>' + (isLate ? lateBadgeHTML : '');
+
             row.innerHTML =
-              '<div class="day-lbl">' + day.d + '</div>' +
+              '<div class="day-lbl">' + lblContent + '</div>' +
               '<div class="day-txt">' + day.t + '</div>' +
               '<div class="day-check"><input type="checkbox"' + (isDone ? ' checked' : '') + ' aria-label="Marquer ' + day.d + ' comme fait"></div>';
 
@@ -711,11 +769,22 @@
               saved[ph.name][day.d] = this.checked;
               localStorage.setItem(storageKey, JSON.stringify(saved));
               row.classList.toggle('done', this.checked);
+              if (this.checked) {
+                row.classList.remove('overdue');
+                const badge = row.querySelector('.late-badge');
+                if (badge) badge.remove();
+              } else if (dayDate !== null && dayDate < today) {
+                row.classList.add('overdue');
+                const lbl = row.querySelector('.day-lbl');
+                if (!lbl.querySelector('.late-badge')) {
+                  lbl.insertAdjacentHTML('beforeend', lateBadgeHTML);
+                }
+              }
               updateWeekCount();
               updateProgress();
             });
 
-            rows.push({ row, day, cb });
+            rows.push({row, day, cb});
             body.appendChild(row);
           });
 
@@ -725,10 +794,24 @@
             const allDone = wk.days.every(d => phaseState[d.d]);
             const newState = !allDone;
             saved[ph.name] = saved[ph.name] || {};
-            rows.forEach(({ row, day, cb }) => {
+            rows.forEach(({row, day, cb}) => {
               saved[ph.name][day.d] = newState;
               cb.checked = newState;
               row.classList.toggle('done', newState);
+              if (newState) {
+                row.classList.remove('overdue');
+                const badge = row.querySelector('.late-badge');
+                if (badge) badge.remove();
+              } else {
+                const d = parseDayDate(wk.dates, day.d);
+                if (d !== null && d < today) {
+                  row.classList.add('overdue');
+                  const lbl = row.querySelector('.day-lbl');
+                  if (!lbl.querySelector('.late-badge')) {
+                    lbl.insertAdjacentHTML('beforeend', '<span class="late-badge">En retard</span>');
+                  }
+                }
+              }
             });
             localStorage.setItem(storageKey, JSON.stringify(saved));
             updateWeekCount();
@@ -743,7 +826,7 @@
 
           head.addEventListener('click', toggle);
           head.addEventListener('keydown', function (e) {
-            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+            if (e.key === 'Enter' || e.key === ' ') {e.preventDefault(); toggle();}
           });
 
           updateWeekCount();
@@ -759,7 +842,7 @@
 
       const firstBody = document.querySelector('.week-body');
       const firstArr = document.querySelector('.arrow');
-      if (firstBody) { firstBody.classList.add('open'); firstArr.style.transform = 'rotate(180deg)'; }
+      if (firstBody) {firstBody.classList.add('open'); firstArr.style.transform = 'rotate(180deg)';}
     }
 
     build();

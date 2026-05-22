@@ -214,6 +214,8 @@
     .week-body {
       display: none;
       border-top: 1px solid #e5e7eb;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
     .week-body.open {
@@ -224,6 +226,7 @@
       display: grid;
       grid-template-columns: 90px 1fr auto;
       border-bottom: 1px solid #e5e7eb;
+      min-width: 520px;
     }
 
     .day-row:last-child {

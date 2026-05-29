@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Mes Roadmaps</title>
+
+  <!-- Police -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background:
+        radial-gradient(circle at top left, #1e293b 0%, #0f172a 40%),
+        #0f172a;
+
+      color: white;
+      min-height: 100vh;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      padding: 40px 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .04em;
+
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(38px, 6vw, 72px);
+      font-weight: 800;
+      line-height: 1.05;
+
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      max-width: 720px;
+      margin: auto;
+
+      color: #cbd5e1;
+      line-height: 1.8;
+      font-size: 17px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      position: relative;
+
+      overflow: hidden;
+
+      border-radius: 28px;
+
+      padding: 32px;
+
+      background: rgba(255, 255, 255, 0.06);
+
+      border: 1px solid rgba(255, 255, 255, 0.08);
+
+      backdrop-filter: blur(10px);
+
+      transition:
+        transform .25s ease,
+        border-color .25s ease,
+        background .25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+
+      border-color: rgba(255, 255, 255, 0.18);
+
+      background: rgba(255, 255, 255, 0.09);
+    }
+
+    .icon {
+      width: 64px;
+      height: 64px;
+
+      border-radius: 18px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      font-size: 28px;
+
+      margin-bottom: 24px;
+    }
+
+    .icon.language {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    }
+
+    .icon.business {
+      background: linear-gradient(135deg, #10b981, #059669);
+    }
+
+    .tag {
+      display: inline-block;
+
+      font-size: 12px;
+      font-weight: 600;
+
+      padding: 6px 10px;
+
+      border-radius: 999px;
+
+      margin-bottom: 18px;
+    }
+
+    .tag.blue {
+      background: rgba(37, 99, 235, 0.15);
+      color: #93c5fd;
+      border: 1px solid rgba(147, 197, 253, 0.15);
+    }
+
+    .tag.green {
+      background: rgba(16, 185, 129, 0.15);
+      color: #6ee7b7;
+      border: 1px solid rgba(110, 231, 183, 0.15);
+    }
+
+    .card h2 {
+      font-size: 28px;
+      font-weight: 700;
+
+      margin-bottom: 14px;
+    }
+
+    .card p {
+      color: #cbd5e1;
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+
+      text-decoration: none;
+
+      padding: 14px 20px;
+
+      border-radius: 14px;
+
+      font-weight: 600;
+      font-size: 15px;
+
+      transition: .2s ease;
+    }
+
+    .btn-blue {
+      background: #2563eb;
+      color: white;
+    }
+
+    .btn-blue:hover {
+      background: #1d4ed8;
+    }
+
+    .btn-green {
+      background: #10b981;
+      color: white;
+    }
+
+    .btn-green:hover {
+      background: #059669;
+    }
+
+    .card-glow {
+      position: absolute;
+
+      width: 220px;
+      height: 220px;
+
+      border-radius: 50%;
+
+      top: -100px;
+      right: -100px;
+
+      opacity: .15;
+
+      pointer-events: none;
+    }
+
+    .glow-blue {
+      background: #2563eb;
+    }
+
+    .glow-green {
+      background: #10b981;
+    }
+
+    footer {
+      margin-top: 50px;
+      text-align: center;
+
+      color: #94a3b8;
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        margin-bottom: 40px;
+      }
+
+      .card {
+        padding: 26px;
+      }
+
+      .card h2 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <section class="hero">
+
+      <div class="badge">
+        Navigation des roadmaps
+      </div>
+
+      <h1>
+        Mes Roadmaps
+      </h1>
+
+      <p>
+        Retrouvez tous vos plans d’apprentissage et de progression
+        dans un seul espace. Langues, business, compétences et
+        projets personnels.
+      </p>
+
+    </section>
+
+    <section class="grid">
+
+      <!-- Roadmap Allemand -->
+      <div class="card">
+
+        <div class="card-glow glow-blue"></div>
+
+        <div class="icon language">
+          🇩🇪
+        </div>
+
+        <div class="tag blue">
+          Langue
+        </div>
+
+        <h2>
+          Roadmap Allemand B1
+        </h2>
+
+        <p>
+          Programme complet sur 14 semaines pour atteindre le niveau B1
+          en allemand avec grammaire, vocabulaire, écoute, lecture et
+          examens blancs.
+        </p>
+
+        <!-- Remplace roadmap-allemand.html par le nom de ton fichier -->
+        <a href="roadmap-allemand.html" class="btn btn-blue">
+          Ouvrir la roadmap →
+        </a>
+
+      </div>
+
+      <!-- Roadmap Business -->
+      <div class="card">
+
+        <div class="card-glow glow-green"></div>
+
+        <div class="icon business">
+          💼
+        </div>
+
+        <div class="tag green">
+          Business
+        </div>
+
+        <h2>
+          Roadmap Business
+        </h2>
+
+        <p>
+          Développez votre activité étape par étape :
+          acquisition de clients, branding, marketing,
+          automatisation et croissance.
+        </p>
+
+        <!-- Remplace roadmap-business.html par le nom de ton fichier -->
+        <a href="roadmap-business.html" class="btn btn-green">
+          Ouvrir la roadmap →
+        </a>
+
+      </div>
+
+    </section>
+
+    <footer>
+      © 2026 — Espace personnel de progression
+    </footer>
+
+  </div>
+
+</body>
+
+</html>

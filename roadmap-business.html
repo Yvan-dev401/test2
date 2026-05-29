@@ -1,0 +1,1681 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan d'Action 90 Jours</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0e0e0e;
+    --ink-muted: #5a5a5a;
+    --ink-faint: #9a9a9a;
+    --surface: #f5f2ed;
+    --surface-alt: #ece8e0;
+    --white: #ffffff;
+    --accent: #c8401a;
+    --accent-pale: #fdf0ec;
+    --accent-mid: #e8633d;
+    --phase1: #1a3a4a;
+    --phase2: #2d5016;
+    --phase3: #4a1a0e;
+    --phase1-pale: #e8f0f4;
+    --phase2-pale: #eaf2e3;
+    --phase3-pale: #f5ece9;
+    --border: rgba(14,14,14,0.12);
+    --border-strong: rgba(14,14,14,0.25);
+    --radius: 4px;
+    --radius-lg: 8px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Mono', monospace;
+    background: var(--surface);
+    color: var(--ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--ink);
+    color: var(--white);
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: -0.02em;
+  }
+  .logo span { color: var(--accent-mid); }
+
+  .header-badge {
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 0.3rem 0.75rem;
+    border-radius: 2px;
+  }
+
+  /* ── MAIN LAYOUT ── */
+  .app {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem 4rem;
+  }
+
+  /* ── SCREENS ── */
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 4rem 0 2.5rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 3rem;
+  }
+
+  .hero-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  .hero-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.25rem;
+  }
+
+  .hero-title em {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: 0.85rem;
+    color: var(--ink-muted);
+    line-height: 1.7;
+    max-width: 520px;
+  }
+
+  /* ── MODEL GRID ── */
+  .section-label {
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .models-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 2.5rem;
+  }
+
+  .model-card {
+    background: var(--white);
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: background 0.15s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .model-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: transparent;
+    transition: background 0.2s;
+  }
+
+  .model-card:hover { background: var(--accent-pale); }
+  .model-card:hover::before { background: var(--accent); }
+
+  .model-card.selected {
+    background: var(--ink);
+    color: var(--white);
+  }
+  .model-card.selected::before { background: var(--accent-mid); }
+
+  .model-icon {
+    font-size: 1.4rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .model-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 0.4rem;
+    letter-spacing: -0.01em;
+  }
+
+  .model-principle {
+    font-size: 0.72rem;
+    color: var(--ink-muted);
+    line-height: 1.5;
+    margin-bottom: 0.85rem;
+  }
+  .model-card.selected .model-principle { color: rgba(255,255,255,0.55); }
+
+  .model-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  .tag {
+    font-size: 0.6rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+  }
+
+  .tag-pro {
+    background: #e8f4e8;
+    color: #1a5c1a;
+  }
+  .model-card.selected .tag-pro { background: rgba(40,180,40,0.2); color: #8eda8e; }
+
+  .tag-con {
+    background: #f5e8e8;
+    color: #8b1a1a;
+  }
+  .model-card.selected .tag-con { background: rgba(200,60,60,0.2); color: #f59a9a; }
+
+  .model-check {
+    position: absolute;
+    top: 1rem; right: 1rem;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--accent-mid);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 0.65rem;
+  }
+  .model-card.selected .model-check { display: flex; }
+
+  /* ── CTA BUTTON ── */
+  .btn-primary {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    background: var(--ink);
+    color: var(--white);
+    border: none;
+    padding: 1rem 2.5rem;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+    border-radius: var(--radius);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .btn-primary:hover { background: var(--accent); }
+  .btn-primary:active { transform: scale(0.98); }
+  .btn-primary:disabled { opacity: 0.35; cursor: not-allowed; }
+
+  .btn-secondary {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    background: transparent;
+    color: var(--ink-muted);
+    border: 1px solid var(--border-strong);
+    padding: 0.65rem 1.25rem;
+    cursor: pointer;
+    border-radius: var(--radius);
+    transition: all 0.15s;
+  }
+  .btn-secondary:hover { border-color: var(--ink); color: var(--ink); }
+
+  /* ── ROADMAP SCREEN ── */
+  .roadmap-header {
+    padding: 3rem 0 2rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2.5rem;
+  }
+
+  .roadmap-title-area {}
+  .roadmap-back {
+    font-size: 0.7rem;
+    color: var(--ink-faint);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-bottom: 0.75rem;
+    background: none;
+    border: none;
+    font-family: 'DM Mono', monospace;
+  }
+  .roadmap-back:hover { color: var(--ink); }
+
+  .roadmap-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.6rem, 4vw, 2.6rem);
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    margin-bottom: 0.5rem;
+  }
+
+  .roadmap-subtitle {
+    font-size: 0.75rem;
+    color: var(--ink-muted);
+  }
+
+  .progress-summary {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1.5rem;
+    min-width: 240px;
+  }
+
+  .progress-label {
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 0.75rem;
+  }
+
+  .progress-bar-wrap {
+    background: var(--surface-alt);
+    border-radius: 2px;
+    height: 6px;
+    margin-bottom: 0.75rem;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+
+  .progress-stats {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    color: var(--ink-muted);
+  }
+
+  .progress-count {
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  /* ── PHASES ── */
+  .phases {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .phase {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .phase-header {
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .phase-1 .phase-header { background: var(--phase1); color: white; }
+  .phase-2 .phase-header { background: var(--phase2); color: white; }
+  .phase-3 .phase-header { background: var(--phase3); color: white; }
+
+  .phase-number {
+    font-family: 'Instrument Serif', serif;
+    font-size: 2.5rem;
+    font-style: italic;
+    opacity: 0.35;
+    line-height: 1;
+  }
+
+  .phase-info { flex: 1; }
+
+  .phase-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.2rem;
+  }
+
+  .phase-period {
+    font-size: 0.68rem;
+    opacity: 0.65;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .phase-progress-badge {
+    font-size: 0.68rem;
+    background: rgba(255,255,255,0.15);
+    padding: 0.35rem 0.75rem;
+    border-radius: 2px;
+  }
+
+  /* ── TASKS ── */
+  .phase-body { padding: 0; }
+
+  .task-week {
+    border-bottom: 1px solid var(--border);
+  }
+  .task-week:last-child { border-bottom: none; }
+
+  .week-label {
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    padding: 0.85rem 2rem 0.5rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .task-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.1s;
+    cursor: pointer;
+  }
+  .task-item:last-child { border-bottom: none; }
+  .task-item:hover { background: var(--accent-pale); }
+  .task-item.done { background: var(--surface); }
+
+  .task-checkbox {
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid var(--border-strong);
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+    color: transparent;
+    font-size: 0.65rem;
+  }
+
+  .task-item.done .task-checkbox {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+  }
+
+  .task-content { flex: 1; }
+
+  .task-title {
+    font-size: 0.82rem;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+    line-height: 1.4;
+  }
+  .task-item.done .task-title {
+    text-decoration: line-through;
+    color: var(--ink-faint);
+  }
+
+  .task-desc {
+    font-size: 0.7rem;
+    color: var(--ink-muted);
+    line-height: 1.55;
+  }
+
+  .task-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.4rem;
+  }
+
+  .task-category {
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.15rem 0.45rem;
+    border-radius: 2px;
+    background: var(--surface-alt);
+    color: var(--ink-muted);
+  }
+
+  .task-category.marketing { background: #fdf5e0; color: #7a5500; }
+  .task-category.technique { background: #e8f0f8; color: #1a3560; }
+  .task-category.finance { background: #e8f5e8; color: #1a5a1a; }
+  .task-category.legal { background: #f5e8f5; color: #5a1a5a; }
+  .task-category.produit { background: #f0ece0; color: #4a3a10; }
+  .task-category.client { background: #ffe8f0; color: #7a1a3a; }
+  .task-category.contenu { background: #e8faf5; color: #0a4a35; }
+
+  /* ── MARKETING SECTION ── */
+  .marketing-section {
+    border-top: 2px solid var(--border);
+    padding: 1.5rem 2rem;
+    background: var(--accent-pale);
+  }
+
+  .marketing-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+
+  .marketing-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .marketing-pill {
+    font-size: 0.7rem;
+    border: 1px solid rgba(200,64,26,0.25);
+    color: var(--accent);
+    padding: 0.3rem 0.75rem;
+    border-radius: 2px;
+    background: white;
+  }
+
+  /* ── KPIs ── */
+  .kpis-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-bottom: 2.5rem;
+  }
+
+  .kpi-card {
+    background: var(--white);
+    padding: 1.25rem 1.5rem;
+  }
+
+  .kpi-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 0.5rem;
+  }
+
+  .kpi-value {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  .kpi-sub {
+    font-size: 0.65rem;
+    color: var(--ink-muted);
+  }
+
+  /* ── LOADING ── */
+  .loading-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    gap: 1.5rem;
+  }
+
+  .loading-spinner {
+    width: 40px; height: 40px;
+    border: 2px solid var(--border);
+    border-top-color: var(--ink);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .loading-text {
+    font-size: 0.75rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.06em;
+  }
+
+  /* ── PRINT / EXPORT ── */
+  .actions-row {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    header { padding: 1rem 1.25rem; }
+    .app { padding: 0 1rem 3rem; }
+    .hero { padding: 2.5rem 0 1.5rem; }
+    .phase-header { padding: 1.25rem 1.25rem; }
+    .task-item { padding: 0.9rem 1.25rem; }
+    .week-label { padding: 0.75rem 1.25rem 0.4rem; }
+  }
+
+  @media print {
+    header { position: static; }
+    .actions-row { display: none; }
+    .roadmap-back { display: none; }
+    body { background: white; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Plan <span>90J</span></div>
+  <span class="header-badge">Roadmap Entrepreneur</span>
+</header>
+
+<div class="app">
+
+  <!-- ── SCREEN 1 : SELECTION ── -->
+  <div class="screen active" id="screen-select">
+    <div class="hero">
+      <div class="hero-label">Outil de planification stratégique</div>
+      <h1 class="hero-title">Votre plan d'action<br><em>90 jours</em></h1>
+      <p class="hero-sub">Choisissez votre modèle d'affaires. Obtenez un plan semaine par semaine, adapté à vos spécificités — avec les leviers marketing qui font la différence.</p>
+    </div>
+
+    <div class="section-label">10 modèles disponibles — sélectionnez le vôtre</div>
+
+    <div class="models-grid" id="models-grid"></div>
+
+    <div style="text-align:center; padding: 1rem 0 2rem;">
+      <button class="btn-primary" id="btn-generate" disabled onclick="generateRoadmap()">
+        Générer mon plan →
+      </button>
+      <p style="font-size:0.65rem; color:var(--ink-faint); margin-top:0.75rem;">Génération instantanée · Exportable en PDF</p>
+    </div>
+  </div>
+
+  <!-- ── SCREEN 2 : LOADING ── -->
+  <div class="screen" id="screen-loading">
+    <div class="loading-screen">
+      <div class="loading-spinner"></div>
+      <div class="loading-text" id="loading-text">Structuration de votre plan...</div>
+    </div>
+  </div>
+
+  <!-- ── SCREEN 3 : ROADMAP ── -->
+  <div class="screen" id="screen-roadmap">
+    <div class="roadmap-header">
+      <div class="roadmap-title-area">
+        <button class="roadmap-back" onclick="goBack()">← Changer de modèle</button>
+        <div class="roadmap-title" id="roadmap-title">Plan 90 jours</div>
+        <div class="roadmap-subtitle" id="roadmap-subtitle"></div>
+      </div>
+      <div class="progress-summary">
+        <div class="progress-label">Progression globale</div>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-fill" id="progress-fill"></div>
+        </div>
+        <div class="progress-stats">
+          <span><span class="progress-count" id="done-count">0</span> tâches complétées</span>
+          <span id="pct-text">0 %</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="kpis-row" id="kpis-row"></div>
+
+    <div class="actions-row">
+      <button class="btn-secondary" onclick="window.print()">Imprimer / Exporter PDF</button>
+      <button class="btn-secondary" onclick="resetProgress()">Réinitialiser la progression</button>
+    </div>
+
+    <div class="phases" id="phases-container"></div>
+
+    <div class="marketing-section" style="border-radius:var(--radius-lg); margin-top:2rem;">
+      <div class="marketing-label">Leviers marketing & acquisition clients — spécifiques à votre modèle</div>
+      <div class="marketing-items" id="marketing-items"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const MODELS = [
+  {
+    id: 'commerce',
+    icon: '🏪',
+    name: 'Commerce Physique',
+    principle: 'Vente en boutique de matériel informatique',
+    pro: 'Stabilité locale',
+    con: 'Capital élevé',
+    marketing: ['Local SEO', 'Affichage & flyers', 'Partenariats B2B', 'Google My Business', 'Réseaux de quartier'],
+    kpis: [
+      { label: 'Budget semences', value: '500K+', sub: 'Ar minimum estimé' },
+      { label: 'Délai d\'ouverture', value: '90j', sub: 'Avec ce plan' },
+      { label: 'Clients cible M3', value: '50+', sub: 'Visiteurs / mois' },
+      { label: 'CA objectif', value: '>1M', sub: 'Ar / mois' },
+    ],
+    phases: [
+      {
+        name: 'Fondation & Légal',
+        period: 'Jours 1–30',
+        weeks: [
+          {
+            label: 'Semaine 1–2 · Cadrage projet',
+            tasks: [
+              { title: 'Étude de marché locale', desc: 'Analyser la demande en matériel informatique dans votre quartier / ville cible. Visiter 3 concurrents.', cat: 'produit' },
+              { title: 'Business plan simplifié', desc: 'Projections financières sur 12 mois, seuil de rentabilité, besoins en capital initial.', cat: 'finance' },
+              { title: 'Choix du local commercial', desc: 'Critères : passage piéton, visibilité, loyer < 15 % du CA prévisionnel, parking.', cat: 'produit' },
+            ]
+          },
+          {
+            label: 'Semaine 3–4 · Structure légale & fournisseurs',
+            tasks: [
+              { title: 'Immatriculation EDBM / INSTAT', desc: 'Créer votre entité légale à Madagascar. Prévoir 2–3 semaines de délai administratif.', cat: 'legal' },
+              { title: 'Identification des fournisseurs', desc: 'Sourcing : grossistes Tana, importateurs Chine/Dubai. Négocier conditions de paiement et garanties SAV.', cat: 'finance' },
+              { title: 'Aménagement & signalétique', desc: 'Vitrine attractive, étiquetage produits, point de vente organisé. Budget déco / mobilier.', cat: 'produit' },
+            ]
+          }
+        ]
+      },
+      {
+        name: 'Lancement & Acquisition',
+        period: 'Jours 31–60',
+        weeks: [
+          {
+            label: 'Semaine 5–6 · Ouverture & présence digitale',
+            tasks: [
+              { title: 'Lancement officiel', desc: 'Événement d\'ouverture, offre inaugurale (–10 % première semaine). Inviter partenaires locaux.', cat: 'marketing' },
+              { title: 'Google My Business & Local SEO', desc: 'Fiche GMB complète (photos, horaires, catégorie). Collecte des 10 premiers avis Google.', cat: 'marketing' },
+              { title: 'Flyers & affichage quartier', desc: 'Distribution ciblée : écoles, cybercafés, bureaux à 500m. QR code vers votre fiche GMB.', cat: 'marketing' },
+            ]
+          },
+          {
+            label: 'Semaine 7–8 · Partenariats B2B',
+            tasks: [
+              { title: 'Démarchage PME locales', desc: 'Proposer contrats d\'entretien informatique + fourniture matériel. Cibler 10 entreprises proches.', cat: 'client' },
+              { title: 'Partenariat écoles & bureaux', desc: 'Offres spéciales étudiants, achats groupés institutionnels. Conditions préférentielles annuelles.', cat: 'client' },
+              { title: 'Mise en place SAV différenciante', desc: 'Service après-vente rapide (48h max) comme argument de vente. Formulaire de suivi client.', cat: 'client' },
+            ]
+          }
+        ]
+      },
+      {
+        name: 'Optimisation & Croissance',
+        period: 'Jours 61–90',
+        weeks: [
+          {
+            label: 'Semaine 9–10 · Fidélisation',
+            tasks: [
+              { title: 'Programme de fidélité simple', desc: 'Carte de fidélité physique ou WhatsApp groupe clients VIP. Offre préférentielle répétée.', cat: 'client' },
+              { title: 'Analyse des ventes', desc: 'Identifier top 10 produits vendus, marges réelles, produits à éliminer. Ajuster commandes fournisseurs.', cat: 'finance' },
+            ]
+          },
+          {
+            label: 'Semaine 11–13 · Passage à l\'échelle',
+            tasks: [
+              { title: 'Présence Facebook / WhatsApp Business', desc: 'Catalogue produits en ligne, gestion des commandes à distance. Stories régulières avec nouveautés.', cat: 'marketing' },
+              { title: 'Recrutement premier employé (si besoin)', desc: 'Technicien ou vendeur formé à vos standards. Processus de formation 1 semaine.', cat: 'produit' },
+              { title: 'Bilan J90 & objectifs J180', desc: 'Revue complète : CA, marges, clients fidèles, enseignements. Plan du prochain trimestre.', cat: 'finance' },
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'saas',
+    icon: '💻',
+    name: 'SaaS Madagascar',
+    principle: 'Logiciel pour commerçants malgaches',
+    pro: 'Fort potentiel de valeur',
+    con: 'Complexité technique',
+    marketing: ['Lancement bêta fermé', 'Inbound marketing', 'Démos ciblées', 'Content marketing FR', 'SEO éditorial'],
+    kpis: [
+      { label: 'Bêta-testeurs', value: '20', sub: 'Objectif J60' },
+      { label: 'MRR objectif', value: '500K', sub: 'Ar / mois J90' },
+      { label: 'Taux churn cible', value: '<10%', sub: 'Mensuel' },
+      { label: 'CAC estimé', value: '<50K', sub: 'Ar / client' },
+    ],
+    phases: [
+      {
+        name: 'Validation & MVP',
+        period: 'Jours 1–30',
+        weeks: [
+          {
+            label: 'Semaine 1–2 · Découverte client',
+            tasks: [
+              { title: '20 interviews de commerçants', desc: 'Aller sur le terrain (Analakely, Isotry, Behoririka). Documenter les vrais problèmes, pas supposés.', cat: 'client' },
+              { title: 'Définition du problème principal', desc: 'Choisir UN problème aigu que votre SaaS résout. Rédiger la proposition de valeur en 1 phrase.', cat: 'produit' },
+              { title: 'Benchmark concurrents', desc: 'Analyser solutions existantes (locales & régionales). Identifier l\'angle différenciateur.', cat: 'produit' },
+            ]
+          },
+          {
+            label: 'Semaine 3–4 · MVP',
+            tasks: [
+              { title: 'Wireframes & maquettes Figma', desc: 'Prototyper les 3–5 écrans essentiels. Valider avec 5 utilisateurs cible avant de coder.', cat: 'technique' },
+              { title: 'Stack technique choisie', desc: 'Next.js + Supabase recommandé pour rapidité. Hébergement : Vercel + Supabase (tier gratuit).', cat: 'technique' },
+              { title: 'Développement MVP core', desc: 'Fonctionnalité principale uniquement. Pas de polish, pas de features secondaires. Livrer vite.', cat: 'technique' },
+            ]
+          }
+        ]
+      },
+      {
+        name: 'Bêta & Premiers Clients',
+        period: 'Jours 31–60',
+        weeks: [
+          {
+            label: 'Semaine 5–6 · Bêta fermé',
+            tasks: [
+              { title: 'Recrutement 20 bêta-testeurs', desc: 'Contact direct commerçants interviewés. Accès gratuit en échange de feedback hebdomadaire structuré.', cat: 'client' },
+              { title: 'Onboarding simplifié', desc: 'Session de 30 min par nouveau client. Documentation minimaliste. Support WhatsApp direct.', cat: 'client' },
+              { title: 'Itérations rapides sur feedback', desc: 'Sprint 1 semaine max. Prioriser ce qui bloque l\'usage quotidien. Journaliser chaque bug critique.', cat: 'technique' },
+            ]
+          },
+          {
+            label: 'Semaine 7–8 · Monétisation',
+            tasks: [
+              { title: 'Définir tarification', desc: 'Freemium limité + Plan Pro (ex: 15–25K Ar/mois). Tester willingness to pay auprès des bêta.', cat: 'finance' },
+              { title: 'Intégration paiement MVola/Orange Money', desc: 'Lier paiement mobile malgache. Prévoir factures automatiques et relances.', cat: 'technique' },
+              { title: 'Premier landing page optimisé', desc: 'SEO basique, CTA démo claire, témoignages bêta, FAQ objections. Héberger sur domaine propre.', cat: 'marketing' },
+            ]
+          }
+        ]
+      },
+      {
+        name: 'Scale & Rétention',
+        period: 'Jours 61–90',
+        weeks: [
+          {
+            label: 'Semaine 9–11 · Inbound & démos',
+            tasks: [
+              { title: 'Stratégie content marketing', desc: '2 articles / semaine ciblant les commerçants malgaches : gestion stock, comptabilité simple, etc.', cat: 'contenu' },
+              { title: 'Programme démos ciblées', desc: '5 démos / semaine avec commerçants qualifiés. Script rodé, conversion visée > 30 %.', cat: 'client' },
+              { title: 'Dashboard métriques SaaS', desc: 'Tracker MRR, churn, NPS, DAU/MAU. Décisions basées sur données réelles.', cat: 'technique' },
+            ]
+          },
+          {
+            label: 'Semaine 12–13 · Bilan & consolidation',
+            tasks: [
+              { title: 'Analyse cohortes utilisateurs', desc: 'Identifier pourquoi certains churntent. Améliorer onboarding et feature set en conséquence.', cat: 'produit' },
+              { title: 'Objectifs J90 → J180', desc: 'Définir roadmap produit prochain trimestre. Recruter 1er développeur si MRR le permet.', cat: 'finance' },
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'content',
+    icon: '🎬',
+    name: 'Création de Contenu',
+    principle: 'Audience + monétisation TikTok / YouTube',
+    pro: 'Effet levier audience',
+    con: 'Effort long & rétention',
+    marketing: ['Contenu viral ciblé', 'CTA vers produits', 'Collabs créateurs', 'SEO YouTube', 'Cross-posting'],
+    kpis: [
+      { label: 'Publications / sem', value: '5+', sub: 'Objectif dès J15' },
+      { label: 'Abonnés J90', value: '1K+', sub: 'Seuil monétisation' },
+      { label: 'Taux engagement', value: '>5%', sub: 'Moyenne visée' },
+      { label: 'Revenus J90', value: '1ère', sub: 'Source activée' },
+    ],
+    phases: [
+      {
+        name: 'Positionnement & Premiers Contenus',
+        period: 'Jours 1–30',
+        weeks: [
+          {
+            label: 'Semaine 1–2 · Stratégie de niche',
+            tasks: [
+              { title: 'Définir sa niche & avatar', desc: 'Croiser passion / compétence / demande. Une niche trop large = invisible. Ex: "Finances perso jeunes Malgaches" plutôt que "Finance".', cat: 'produit' },
+              { title: 'Analyser 10 créateurs référents', desc: 'Étudier leur format, fréquence, CTA, commentaires. Repérer les gaps de contenu à exploiter.', cat: 'contenu' },
+              { title: 'Setup production minimum viable', desc: 'Smartphone + lumière naturelle suffisent. Capcut (gratuit) pour montage. Pas d\'équipement coûteux en phase 1.', cat: 'technique' },
+            ]
+          },
+          {
+            label: 'Semaine 3–4 · Lancement contenu',
+            tasks: [
+              { title: 'Publier 3 premières vidéos tests', desc: 'Varier formats (talking head, vlog, tutoriel). Observer lequel performe. Pas de perfectionnisme.', cat: 'contenu' },
+              { title: 'Optimisation profil plateforme', desc: 'Bio claire, photo professionnelle, lien en bio (Linktree), cohérence visuelle.', cat: 'marketing' },
+              { title: 'Analyse métriques première semaine', desc: 'Vues, durée de visionnage, commentaires. Le feedback de l\'algorithme est votre boussole.', cat: 'produit' },
+            ]
+          }
+        ]
+      },
+      {
+        name: 'Régularité & Croissance',
+        period: 'Jours 31–60',
+        weeks: [
+          {
+            label: 'Semaine 5–7 · Machine à contenu',
+            tasks: [
+              { title: 'Calendrier éditorial 30 jours', desc: '5 vidéos / semaine sur TikTok + 1 longue sur YouTube. Batching : filmer 3 vidéos en 1 session.', cat: 'contenu' },
+              { title: 'Recyclage de contenu', desc: 'Long YouTube → Shorts → Reels → Thread X. Un sujet = 4–5 posts différents.', cat: 'contenu' },
+              { title: 'Première collaboration', desc: 'DM 10 créateurs de taille similaire. Proposer collab win-win (cross-promotion, vidéo commune).', cat: 'client' },
+            ]
+          },
+          {
+            label: 'Semaine 8 · Monétisation',
+            tasks: [
+              { title: 'Activer première source de revenus', desc: 'Lien vers service freelance, produit digital (e-book 5K Ar), ou affiliation. Ne pas attendre les 1000 abonnés.', cat: 'finance' },
+              { title: 'CTA systématique dans chaque vidéo', desc: '1 seul appel à l\'action par vidéo. Clair, court, répété 2 fois (début + fin). Tester différents CTAs.', cat: 'marketing' },
+            ]
+          }
+        ]
+      },
+      {
+        name: 'Optimisation & Revenus',
+        period: 'Jours 61–90',
+        weeks: [
+          {
+            label: 'Semaine 9–11 · Doublage de performance',
+            tasks: [
+              { title: 'Analyser top 3 vidéos virales', desc: 'Reproduire la structure exacte (hook, rythme, CTA) sur d\'autres sujets. Scalabilité du format gagnant.', cat: 'produit' },
+              { title: 'Construire email list', desc: 'Lead magnet (PDF, template gratuit) en échange d\'email. Viser 100 premiers abonnés email.', cat: 'marketing' },
+            ]
+          },
+          {
+            label: 'Semaine 12–13 · Diversification revenus',
+            tasks: [
+              { title: 'Lancer produit / service premium', desc: 'Coaching 1:1, formation en ligne, pack de templates payant. Prix testés auprès de l\'audience.', cat: 'finance' },
+              { title: 'Négocier 1er partenariat marque', desc: 'Pitch deck simple : stats, démographie audience, idée de collab. Cibler marques locales d\'abord.', cat: 'client' },
+              { title: 'Bilan J90 : plan de croissance', desc: 'CA généré, abonnés, taux de conversion. Décider : niche à approfondir ou à pivoter ?', cat: 'finance' },
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'app',
+    icon: '📱',
+    name: 'Application Mobile',
+    principle: 'App niche répondant un besoin précis',
+    pro: 'Accessibilité via IA',
+    con: 'Acquisition utilisateurs difficile',
+    marketing: ['ASO (App Store Optimisation)', 'Pubs UA ciblées', 'Partenariats intégration', 'Product Hunt launch', 'Communautés thématiques'],
+    kpis: [
+      { label: 'Downloads J30', value: '100+', sub: 'Utilisateurs réels' },
+      { label: 'Rétention J7', value: '>40%', sub: 'Benchmark sain' },
+      { label: 'Rating Store', value: '4.0+', sub: 'Objectif qualité' },
+      { label: 'DAU objectif', value: '50+', sub: 'Utilisateurs actifs / j' },
+    ],
+    phases: [
+      {
+        name: 'Recherche & Prototype',
+        period: 'Jours 1–30',
+        weeks: [
+          {
+            label: 'Semaine 1–2 · Validation niche',
+            tasks: [
+              { title: 'Recherche problème non adressé', desc: 'Explorer app stores : chercher catégories avec mauvaises notes, plaintes dans les avis. Gap = opportunité.', cat: 'produit' },
+              { title: 'Définir user stories essentielles', desc: 'En tant que [persona], je veux [fonctionnalité] pour [bénéfice]. Limiter au strict MVP (3–5 fonctionnalités).', cat: 'produit' },
+              { title: 'Choix de stack IA-friendly', desc: 'Flutter + Firebase pour cross-platform. Ou React Native. Utiliser Cursor / Claude pour accélérer le dev.', cat: 'technique' },
+            ]
+          },
+          {
+            label: 'Semaine 3–4 · Build MVP',
+            tasks: [
+              { title: 'Développement MVP avec IA', desc: 'Générer le boilerplate, les composants UI, la logique CRUD via prompts IA. Tester à chaque sprint.', cat: 'technique' },
+              { title: 'Setup analytics in-app', desc: 'Firebase Analytics ou Mixpanel. Tracker : onboarding completion, feature usage, crash reports.', cat: 'technique' },
+              { title: 'Tests utilisateurs (5 personnes)', desc: 'Observation silencieuse. Où bloquent-ils ? Qu\'est-ce qui leur plaît ? Itérer avant tout lancement public.', cat: 'client' },
+            ]
+          }
+        ]
+      },
+      {
+        name: 'Lancement & Acquisition',
+        period: 'Jours 31–60',
+        weeks: [
+          {
+            label: 'Semaine 5–6 · Submission stores',
+            tasks: [
+              { title: 'Publication Google Play & App Store', desc: 'Screenshots optimisés, description keyword-rich, icône professionnelle. ASO dès le J1.', cat: 'marketing' },
+              { title: 'Product Hunt & Reddit launch', desc: 'Préparer post PH, demander upvotes à son réseau. Post r/[niche] avec story behind the build.', cat: 'marketing' },
+              { title: 'Recrutement early adopters', desc: 'Facebook Groups, communautés Discord, forums spécialisés. 50 utilisateurs actifs = feedback gold.', cat: 'client' },
+            ]
+          },
+          {
+            label: 'Semaine 7–8 · Rétention & pubs',
+            tasks: [
+              { title: 'Corriger top 5 friction points', desc: 'Basé sur analytics + avis stores. La rétention J7 est le KPI numéro 1 à cette étape.', cat: 'produit' },
+              { title: 'Lancer campagne UA test (50$)', desc: 'Facebook/Instagram Ads ou TikTok Ads. Ciblage intérêt précis. Mesurer CPI (coût par install).', cat: 'marketing' },
+            ]
+          }
+        ]
+      },
+      {
+        name: 'Monétisation & Scale',
+        period: 'Jours 61–90',
+        weeks: [
+          {
+            label: 'Semaine 9–11 · Modèle de revenus',
+            tasks: [
+              { title: 'Activer monétisation (freemium/abo)', desc: 'In-app purchases ou abonnement Pro. Tester prix différents selon pays. Vérifier taux de conversion free → paid.', cat: 'finance' },
+              { title: 'Partenariats d\'intégration', desc: 'Proposer l\'app à des plateformes / SaaS complémentaires. Intégration = distribution sans coût UA.', cat: 'client' },
+            ]
+          },
+          {
+            label: 'Semaine 12–13 · Optimisation & roadmap',
+            tasks: [
+              { title: 'A/B test onboarding', desc: 'Tester 2 versions du flow d\'inscription. La version qui améliore la complétion de 10 % = victoire.', cat: 'produit' },
+              { title: 'Bilan J90 & plan de croissance', desc: 'DAU, rétention, revenus, LTV vs CAC. Décision : continuer, pivoter ou doubler la mise ?', cat: 'finance' },
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'freelance',
+    icon: '🧑‍💻',
+    name: 'Freelance',
+    principle: 'Vendre ses compétences en indépendant',
+    pro: 'Coût de démarrage faible',
+    con: 'Plafond de revenus',
+    marketing: ['Prospection LinkedIn', 'Plateformes freelance', 'Cold outreach ciblé', 'Portfolio en ligne', 'Bouche-à-oreille'],
+    kpis: [
+      { label: 'Clients J30', value: '2+', sub: 'Premiers contrats' },
+      { label: 'Taux horaire', value: 'x2', sub: 'Vs salariat visé' },
+      { label: 'Prospects / sem', value: '20+', sub: 'Outreach régulier' },
+      { label: 'CA objectif J90', value: '3M+', sub: 'Ar (selon secteur)' },
+    ],
+    phases: [
+      {
+        name: 'Positionnement & Portfolio',
+        period: 'Jours 1–30',
+        weeks: [
+          {
+            label: 'Semaine 1–2 · Niche & offre',
+            tasks: [
+              { title: 'Définir sa spécialité claire', desc: 'Pas "développeur" mais "développeur WordPress pour PME malgaches". La niche rend crédible et facilite la prospection.', cat: 'produit' },
+              { title: 'Construire portfolio de 3–5 projets', desc: 'Projets clients existants ou projets fictifs de qualité. Avant/après, résultats mesurables si possible.', cat: 'produit' },
+              { title: 'Fixer sa grille tarifaire', desc: 'Rechercher les tarifs du marché local + international. Définir forfaits clairs plutôt que taux horaire seul.', cat: 'finance' },
+            ]
+          },
+          {
+            label: 'Semaine 3–4 · Présence en ligne',
+            tasks: [
+              { title: 'Profil LinkedIn optimisé', desc: 'Titre accrocheur, résumé orienté résultats clients, portfolio visible, recommandations actives.', cat: 'marketing' },
+              { title: 'Profils Upwork / Fiverr / Malt', desc: 'Portfolio complet, description orientée client (pas compétences, mais problèmes résolus). Tests de compétences.', cat: 'marketing' },
+              { title: 'Site portfolio simple', desc: 'Une page suffisante : services, projets, témoignages, formulaire de contact. Pas besoin de CMS complexe.', cat: 'technique' },
+            ]
+          }
+        ]
+      },
+      {
+        name: 'Premiers Clients',
+        period: 'Jours 31–60',
+        weeks: [
+          {
+            label: 'Semaine 5–7 · Prospection intensive',
+            tasks: [
+              { title: 'Cold outreach quotidien (10 contacts/j)', desc: 'LinkedIn DMs personnalisés. Email : objet court, problème identifié, solution proposée, CTA unique.', cat: 'client' },
+              { title: 'Réactivation réseau existant', desc: 'Contacter anciens collègues, camarades, famille. Annoncer votre activité freelance. Le premier client vient souvent de là.', cat: 'client' },
+              { title: 'Sous-traiter pour d\'autres freelances', desc: 'S\'associer à des agences ou freelances seniors. Moins rémunérateur mais expérience + références rapides.', cat: 'client' },
+            ]
+          },
+          {
+            label: 'Semaine 8 · Livraison & témoignages',
+            tasks: [
+              { title: 'Sur-livrer sur les premiers clients', desc: 'Aller au-delà de ce qui est demandé. Le bouche-à-oreille et les recommandations sont votre meilleur marketing.', cat: 'client' },
+              { title: 'Collecter témoignages écrits + notes', desc: 'Demander systématiquement après chaque mission. Google, LinkedIn, Upwork : les avis = crédibilité future.', cat: 'marketing' },
+            ]
+          }
+        ]
+      },
+      {
+        name: 'Montée en Gamme',
+        period: 'Jours 61–90',
+        weeks: [
+          {
+            label: 'Semaine 9–11 · Augmenter les tarifs',
+            tasks: [
+              { title: 'Revaloriser son taux horaire / forfait', desc: 'Avec 3+ clients satisfaits et des références, augmenter les prix de 20–30 % sur nouveaux prospects.', cat: 'finance' },
+              { title: 'Créer des offres packagees', desc: 'Passer du projet one-shot aux retainers mensuels. Revenus prévisibles = moins de stress commercial.', cat: 'produit' },
+            ]
+          },
+          {
+            label: 'Semaine 12–13 · Délégation & scalabilité',
+            tasks: [
+              { title: 'Identifier tâches à déléguer', desc: 'Les tâches que d\'autres font aussi bien pour moins cher = à externaliser (admin, certains livrables).', cat: 'produit' },
+              { title: 'Réflexion transition agence', desc: 'Le plafond freelance se repousse via équipe. Premier recrutement : sous-traitant sur mission précise.', cat: 'finance' },
+              { title: 'Bilan J90 : CA, clients, taux horaire', desc: 'Mesurer l\'évolution depuis J1. Objectifs J180 : retainers, taux augmenté, premier sous-traitant.', cat: 'finance' },
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'coaching',
+    icon: '🎓',
+    name: 'Coaching / Formation',
+    principle: 'Vendre son expertise via cours et coaching',
+    pro: 'Marges élevées',
+    con: 'Multitâche requis',
+    marketing: ['Webinaires lead gen', 'Tunnels de vente', 'Publicité ciblée', 'Email marketing', 'Partenariats affiliés'],
+    kpis: [
+      { label: 'Participants webinaire', value: '50+', sub: 'Objectif J30' },
+      { label: 'Clients coaching', value: '5+', sub: 'Objectif J60' },
+      { label: 'Taux conversion', value: '>10%', sub: 'Webinaire → client' },
+      { label: 'Panier moyen', value: '200K+', sub: 'Ar (programme)' },
+    ],
+    phases: [
+      {
+        name: 'Offre & Autorité',
+        period: 'Jours 1–30',
+        weeks: [
+          {
+            label: 'Semaine 1–2 · Design de l\'offre',
+            tasks: [
+              { title: 'Définir transformation promise', desc: 'Pas "formation en marketing" mais "passer de 0 à 1er client en 30 jours". La transformation = l\'offre.', cat: 'produit' },
+              { title: 'Structurer le curriculum', desc: 'Modules, leçons, exercices, ressources. Prévoir 4–8 semaines de programme. Résultat mesurable à la fin.', cat: 'produit' },
+              { title: 'Créer le contenu d\'autorité', desc: '5 contenus LinkedIn / Facebook par semaine. Partager expertise gratuitement pour bâtir la confiance.', cat: 'contenu' },
+            ]
+          },
+          {
+            label: 'Semaine 3–4 · Validation',
+            tasks: [
+              { title: 'Pré-vente du programme', desc: 'Vendre avant de créer le contenu complet. 5 ventes à prix early bird = validation + financement initial.', cat: 'finance' },
+              { title: 'Premier webinaire gratuit', desc: '45 min de valeur pure sur votre sujet. 15 min de présentation offre. Cibler 20–30 participants minimum.', cat: 'marketing' },
+            ]
+          }
+        ]
+      },
+      {
+        name: 'Lancement & Clients',
+        period: 'Jours 31–60',
+        weeks: [
+          {
+            label: 'Semaine 5–7 · Machine de lancement',
+            tasks: [
+              { title: 'Tunnel de vente simplifié', desc: 'Landing page → Email séquence (5 emails) → Webinaire → Vente. Un outil simple suffit (MailerLite, Brevo).', cat: 'technique' },
+              { title: 'Coaching 1:1 pour crédibilité rapide', desc: 'Proposer 3 sessions de coaching offertes contre témoignages vidéo. Preuve sociale avant tout.', cat: 'client' },
+              { title: 'Publicité Facebook ciblée', desc: 'Budget test : 50–100$ / semaine. Ciblage intérêt précis, retargeting visiteurs page. Objectif : leads webinaire.', cat: 'marketing' },
+            ]
+          },
+          {
+            label: 'Semaine 8 · Optimisation tunnel',
+            tasks: [
+              { title: 'A/B test landing page', desc: 'Tester titre principal, CTA, proposition de valeur. Amélioration de 10 % = doublement du CA.', cat: 'marketing' },
+              { title: 'Programme d\'affiliation simple', desc: 'Proposer 20 % de commission aux partenaires qui apportent des clients. Réseau de recommandation passif.', cat: 'client' },
+            ]
+          }
+        ]
+      },
+      {
+        name: 'Automatisation & Revenus Passifs',
+        period: 'Jours 61–90',
+        weeks: [
+          {
+            label: 'Semaine 9–11 · Evergreen',
+            tasks: [
+              { title: 'Programme en accès perpétuel', desc: 'Transformer la formation en produit evergreen. Le webinaire devient enregistré. Tunnel automatisé 24/7.', cat: 'produit' },
+              { title: 'Community building', desc: 'Groupe Facebook privé ou Discord pour vos clients. Rétention, upsell naturel, bouche-à-oreille.', cat: 'client' },
+            ]
+          },
+          {
+            label: 'Semaine 12–13 · Scaling',
+            tasks: [
+              { title: 'Lancement offre groupe premium', desc: 'Programme de 3 mois à prix élevé (10x). Accès illimité, coaching hebdo, communauté. 10 clients = revenu solide.', cat: 'finance' },
+              { title: 'Bilan J90 & plan J180', desc: 'Nombre de clients, CA, taux de satisfaction, témoignages. Décision : nicher plus ou élargir l\'offre.', cat: 'finance' },
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'closing',
+    icon: '📞',
+    name: 'Closing / Vente',
+    principle: 'Vendre pour d\'autres à la commission',
+    pro: 'Pas de produit à créer',
+    con: 'Pression commerciale',
+    marketing: ['Cold calls structurés', 'Séquences email', 'LinkedIn outreach', 'Réseau de coachs', 'Plateformes closers'],
+    kpis: [
+      { label: 'Calls / semaine', value: '30+', sub: 'Volume minimum' },
+      { label: 'Taux de closing', value: '>20%', sub: 'Objectif J60' },
+      { label: 'Commission moy.', value: '10–20%', sub: 'Par vente' },
+      { label: 'CA J90', value: '2M+', sub: 'Ar (selon offre)' },
+    ],
+    phases: [
+      {
+        name: 'Formation & Partenariats',
+        period: 'Jours 1–30',
+        weeks: [
+          {
+            label: 'Semaine 1–2 · Compétences vente',
+            tasks: [
+              { title: 'Maîtriser le script de vente de base', desc: 'SPIN Selling ou Sandler. Pratiquer chaque jour avec un partenaire. Enregistrer et analyser ses calls.', cat: 'produit' },
+              { title: 'Identifier les offres à closer', desc: 'Coaching, formations, SaaS, agences. Contacter 20 entrepreneurs avec offres établies et demander à closer pour eux.', cat: 'client' },
+              { title: 'Formation objections courantes', desc: 'Préparer réponses à : "trop cher", "j\'y réfléchis", "je dois consulter mon conjoint". Jeu de rôle quotidien.', cat: 'produit' },
+            ]
+          },
+          {
+            label: 'Semaine 3–4 · Premier partenariat',
+            tasks: [
+              { title: 'Closer pour 1 entrepreneur gratuitement', desc: 'Négocier de closer les premiers leads gratuitement contre références et formation. Apprendre sur le terrain.', cat: 'client' },
+              { title: 'Structurer ses outils (CRM simple)', desc: 'Notion ou Trello pour tracker les leads, statuts, relances. La rigueur du suivi = la différence entre amateurs et pros.', cat: 'technique' },
+            ]
+          }
+        ]
+      },
+      {
+        name: 'Closing & Commissions',
+        period: 'Jours 31–60',
+        weeks: [
+          {
+            label: 'Semaine 5–7 · Volume & performance',
+            tasks: [
+              { title: 'Objectif 30 calls / semaine', desc: 'Prospection + leads fournis par partenaire. Suivre métriques : taux de show-up, no-show, conversions.', cat: 'client' },
+              { title: 'Analyse et amélioration call par call', desc: 'Écouter chaque call enregistré. Identifier le moment exact de la perte. Corriger 1 chose à la fois.', cat: 'produit' },
+              { title: 'Développer son réseau closers', desc: 'Rejoindre communautés de closers (France, Madagascar). Partager scripts, objections, bonnes pratiques.', cat: 'client' },
+            ]
+          },
+          {
+            label: 'Semaine 8 · Négociation commission',
+            tasks: [
+              { title: 'Revaloriser sa commission', desc: 'Avec 5+ ventes prouvées, négocier passage à 15–20 % ou bonus sur objectif dépassé.', cat: 'finance' },
+            ]
+          }
+        ]
+      },
+      {
+        name: 'Systèmes & Revenus Stables',
+        period: 'Jours 61–90',
+        weeks: [
+          {
+            label: 'Semaine 9–11 · Systématisation',
+            tasks: [
+              { title: 'Créer ses propres séquences outreach', desc: 'Email / LinkedIn / WhatsApp séquences pour générer ses propres leads. Ne plus dépendre uniquement d\'un partenaire.', cat: 'marketing' },
+              { title: 'Closer pour 2–3 entrepreneurs simultanément', desc: 'Diversifier le risque. Si un partenaire change d\'offre, avoir d\'autres sources de commissions.', cat: 'client' },
+            ]
+          },
+          {
+            label: 'Semaine 12–13 · Transition setter ou agence',
+            tasks: [
+              { title: 'Recruter un setter', desc: 'Le setter qualifie, le closer ferme. Déléguer la qualification libère du temps et augmente le volume de ventes.', cat: 'produit' },
+              { title: 'Bilan J90 : CA, taux, commissions', desc: 'Mesurer progression depuis J1. Objectif : dépasser 2M Ar / mois et viser sa propre agence de closing.', cat: 'finance' },
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'ecommerce',
+    icon: '🛍️',
+    name: 'E-commerce Moderne',
+    principle: 'Marque propre + TikTok Shop',
+    pro: 'IA réduit les barrières',
+    con: 'Forte concurrence',
+    marketing: ['TikTok Ads', 'Influenceurs micro-niche', 'Optimisation conversion', 'UGC vidéo', 'Retargeting'],
+    kpis: [
+      { label: 'Première vente', value: 'J14', sub: 'Objectif impératif' },
+      { label: 'ROAS cible', value: '3x', sub: 'Retour sur pub' },
+      { label: 'Panier moyen', value: '50K+', sub: 'Ar (selon produit)' },
+      { label: 'CA J90', value: '5M+', sub: 'Ar (objectif réaliste)' },
+    ],
+    phases: [
+      {
+        name: 'Produit & Boutique',
+        period: 'Jours 1–30',
+        weeks: [
+          {
+            label: 'Semaine 1–2 · Validation produit',
+            tasks: [
+              { title: 'Trouver produit à fort potentiel viral', desc: 'Outils : TikTok Creative Center, Minea, AdSpy. Chercher produits déjà vendus ailleurs mais absents sur votre marché.', cat: 'produit' },
+              { title: 'Sourcing fournisseur & test qualité', desc: 'Commander 5–10 échantillons. Tester soi-même. Photos et vidéos UGC authentiques valent plus que du studio.', cat: 'produit' },
+              { title: 'Créer identité de marque', desc: 'Logo (Canva), palette couleurs, nom mémorable. Une marque crédible double le taux de conversion.', cat: 'marketing' },
+            ]
+          },
+          {
+            label: 'Semaine 3–4 · Boutique & paiement',
+            tasks: [
+              { title: 'Boutique Shopify ou WooCommerce', desc: 'Thème propre, pages produit optimisées, photos haute qualité, avis vérifiés. Tunnel d\'achat sans friction.', cat: 'technique' },
+              { title: 'Intégrer paiement local', desc: 'MVola, Orange Money, virement bancaire. Paiement mobile = +40 % de conversions pour Madagascar.', cat: 'technique' },
+              { title: 'Politique retour & SAV claire', desc: 'La confiance convertit. Afficher clairement délais livraison, conditions retour, contact SAV.', cat: 'produit' },
+            ]
+          }
+        ]
+      },
+      {
+        name: 'Trafic & Premières Ventes',
+        period: 'Jours 31–60',
+        weeks: [
+          {
+            label: 'Semaine 5–6 · Contenu TikTok organique',
+            tasks: [
+              { title: '3–5 vidéos TikTok / jour', desc: 'Unboxing, utilisation, avant/après, témoignage. Pas de budget pub nécessaire au démarrage. L\'organique valide d\'abord.', cat: 'contenu' },
+              { title: 'Partenariats micro-influenceurs', desc: 'Envoyer produits à 10–20 créateurs (5K–50K followers). Accord : une vidéo contre produit gratuit + code promo.', cat: 'marketing' },
+            ]
+          },
+          {
+            label: 'Semaine 7–8 · Premières publicités',
+            tasks: [
+              { title: 'Campagne TikTok Ads test (100$)', desc: 'Objectif : trafic ou conversion. Tester 3–5 visuels différents. Couper ce qui ne convertit pas après 48h.', cat: 'marketing' },
+              { title: 'Pixel & retargeting setup', desc: 'TikTok Pixel, Facebook Pixel. Retargeter visiteurs panier abandonné = ROI le plus rapide.', cat: 'technique' },
+            ]
+          }
+        ]
+      },
+      {
+        name: 'Scale & Profitabilité',
+        period: 'Jours 61–90',
+        weeks: [
+          {
+            label: 'Semaine 9–11 · Scaling des ads',
+            tasks: [
+              { title: 'Doubler budget sur creatives gagnants', desc: 'Le creative qui performe bien en petit budget performe en gros. Scaler par paliers de 30–50 %.', cat: 'finance' },
+              { title: 'Optimisation taux de conversion', desc: 'A/B test titre produit, images, CTA, urgence (stock limité). CRO = argent gratuit sur trafic existant.', cat: 'produit' },
+            ]
+          },
+          {
+            label: 'Semaine 12–13 · Fidélisation & catalogue',
+            tasks: [
+              { title: 'Email & SMS post-achat', desc: 'Séquence : confirmation, upsell J3, relance J7, feedback J14. LTV client = clé de la profitabilité.', cat: 'marketing' },
+              { title: 'Élargir le catalogue produits', desc: 'Ajouter 2–3 produits complémentaires testés. Bundle deals augmentent panier moyen de 25 %.', cat: 'produit' },
+              { title: 'Bilan J90 : CA, ROAS, marges', desc: 'Décision basée sur données : continuer niche, pivoter produit, ou ouvrir un second vertical ?', cat: 'finance' },
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'aidrop',
+    icon: '🤖',
+    name: 'AI Drop Servicing',
+    principle: 'Vendre des services, produire via IA',
+    pro: 'Scalabilité rapide',
+    con: 'Qualité à contrôler',
+    marketing: ['Funnels automatisés', 'Landing pages optimisées', 'Pubs payantes', 'Cold email IA-assisted', 'Contenu d\'autorité IA'],
+    kpis: [
+      { label: 'Premiers clients J30', value: '3+', sub: 'Objectif impératif' },
+      { label: 'Marge brute', value: '>60%', sub: 'Après outils IA' },
+      { label: 'Temps livraison', value: '<48h', sub: 'Argument de vente' },
+      { label: 'CA objectif J90', value: '3M+', sub: 'Ar' },
+    ],
+    phases: [
+      {
+        name: 'Service & Outils',
+        period: 'Jours 1–30',
+        weeks: [
+          {
+            label: 'Semaine 1–2 · Choix du service',
+            tasks: [
+              { title: 'Choisir 1 service productizable par IA', desc: 'Création de contenu, copywriting, montage vidéo IA, designs visuels, rapports SEO. Tester en 24h avec ChatGPT / Claude.', cat: 'produit' },
+              { title: 'Maîtriser les outils IA du service', desc: 'Claude pour copy, Sora pour vidéo, Midjourney pour images, Descript pour audio. Pratiquer 1h / jour.', cat: 'technique' },
+              { title: 'Définir son package commercial', desc: 'Forfait clair, délai précis, révisions incluses. "10 posts LinkedIn / mois = 200K Ar, livré en 48h." Simple vend mieux.', cat: 'produit' },
+            ]
+          },
+          {
+            label: 'Semaine 3–4 · Premiers livrables portfolio',
+            tasks: [
+              { title: 'Créer 3 cas clients fictifs convaincants', desc: 'Avant / après, résultats simulés réalistes. Le portfolio compte plus que les certifications pour vendre.', cat: 'marketing' },
+              { title: 'Landing page simple', desc: 'Problème → Solution → Preuves → CTA. Un bouton, un message. Hébergé sur Carrd ou Notion.', cat: 'technique' },
+            ]
+          }
+        ]
+      },
+      {
+        name: 'Acquisition & Livraison',
+        period: 'Jours 31–60',
+        weeks: [
+          {
+            label: 'Semaine 5–7 · Machine commerciale',
+            tasks: [
+              { title: 'Cold email automatisé (Instantly / Lemlist)', desc: '100 emails / jour vers ICP ciblé. Template personnalisé via IA. Viser 10 % de réponse, 2 % de closing.', cat: 'marketing' },
+              { title: 'Offre d\'essai gratuite limitée', desc: 'Livrer 1 mini-livrables gratuit (ex : 3 posts, 1 court texte). La preuve de qualité convertit mieux que tout.', cat: 'client' },
+              { title: 'Workflow de livraison standardisé', desc: 'Prompt templates, étapes de contrôle qualité, outils IA intégrés. Livraison rapide + qualité constante.', cat: 'technique' },
+            ]
+          },
+          {
+            label: 'Semaine 8 · Upsell & rétention',
+            tasks: [
+              { title: 'Convertir clients one-shot en retainers', desc: 'Proposer contrat mensuel après première mission réussie. Revenu récurrent = base de l\'activité.', cat: 'client' },
+            ]
+          }
+        ]
+      },
+      {
+        name: 'Scale & Agence',
+        period: 'Jours 61–90',
+        weeks: [
+          {
+            label: 'Semaine 9–11 · Délégation',
+            tasks: [
+              { title: 'Recruter 1 assistant de production', desc: 'Déléguer les tâches IA répétitives. Vous = direction, stratégie, relation client. Lui = exécution.', cat: 'produit' },
+              { title: 'Funnel publicitaire test', desc: 'Facebook Ads ou LinkedIn Ads vers votre landing page. Budget test : 50–100$ / semaine.', cat: 'marketing' },
+            ]
+          },
+          {
+            label: 'Semaine 12–13 · Productisation complète',
+            tasks: [
+              { title: 'Créer une offre d\'abonnement SaaS-like', desc: 'Contenu illimité / mois, livré en 48h, pour prix fixe. Le client commande via formulaire simple.', cat: 'produit' },
+              { title: 'Bilan J90 & plan d\'agence', desc: 'CA, marges, clients actifs. Vision : 5 clients retainers = revenus stables. Prochain recrutement planifié.', cat: 'finance' },
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'aaa',
+    icon: '⚙️',
+    name: 'Agence Automatisation IA',
+    principle: 'Automatiser les tâches répétitives d\'entreprises (AAA)',
+    pro: 'Forte valeur B2B',
+    con: 'Vente consultative nécessaire',
+    marketing: ['Cas clients concrets', 'RDV démo ROI', 'LinkedIn Ads B2B', 'Études de cas PDF', 'Partenariats intégrateurs'],
+    kpis: [
+      { label: 'Demos J30', value: '5+', sub: 'Rendez-vous qualifiés' },
+      { label: 'Premier contrat', value: 'J45', sub: 'Objectif impératif' },
+      { label: 'ACV moyen', value: '5M+', sub: 'Ar / contrat annuel' },
+      { label: 'NPS clients', value: '>8', sub: 'Sur 10' },
+    ],
+    phases: [
+      {
+        name: 'Positionnement & Démos',
+        period: 'Jours 1–30',
+        weeks: [
+          {
+            label: 'Semaine 1–2 · Niche verticale',
+            tasks: [
+              { title: 'Choisir 1 secteur d\'entreprise cible', desc: 'RH, comptabilité, service client, e-commerce logistique. La spécialisation = crédibilité = prix premium.', cat: 'produit' },
+              { title: 'Identifier les 5 tâches les plus automatisables', desc: 'Saisie de données, envoi d\'emails, génération de rapports, qualification de leads, onboarding client.', cat: 'produit' },
+              { title: 'Maîtriser les outils d\'automatisation', desc: 'n8n, Make.com, Zapier, OpenAI API, Claude API. Construire 3 automatisations démo fonctionnelles en 2 semaines.', cat: 'technique' },
+            ]
+          },
+          {
+            label: 'Semaine 3–4 · Démonstration',
+            tasks: [
+              { title: 'Construire une démo ROI chiffrée', desc: '"Automatiser votre saisie facturation = 10h / semaine économisées = 400K Ar / mois de gain." Les chiffres vendent.', cat: 'client' },
+              { title: 'Prospection LinkedIn ciblée', desc: 'Contacter DG, DAF, responsables opérations de PME locales. Message : problème → chiffre → invitation à démo.', cat: 'marketing' },
+            ]
+          }
+        ]
+      },
+      {
+        name: 'Premiers Contrats',
+        period: 'Jours 31–60',
+        weeks: [
+          {
+            label: 'Semaine 5–7 · Cycle de vente B2B',
+            tasks: [
+              { title: 'Conduire 5 démos par semaine', desc: 'Script rodé : découverte (15min) → démo (20min) → ROI chiffré (10min) → proposition commerciale (5min).', cat: 'client' },
+              { title: 'Proposer un pilote gratuit de 2 semaines', desc: 'Le pilote prouve la valeur avant l\'engagement. Réduit le risque perçu et accélère la décision.', cat: 'client' },
+              { title: 'Rédiger contrat et CGV', desc: 'Frais de setup + abonnement mensuel de maintenance. Prévoir clause de confidentialité (données entreprise).', cat: 'legal' },
+            ]
+          },
+          {
+            label: 'Semaine 8 · Livraison excellence',
+            tasks: [
+              { title: 'Sur-livrer sur le premier client', desc: 'Documenter les gains réels (heures économisées, erreurs évitées). Ces données = futur cas client pour prospecter.', cat: 'client' },
+            ]
+          }
+        ]
+      },
+      {
+        name: 'Réputation & Croissance',
+        period: 'Jours 61–90',
+        weeks: [
+          {
+            label: 'Semaine 9–11 · Cas clients & références',
+            tasks: [
+              { title: 'Produire 2 études de cas PDF', desc: 'Problème client → Solution déployée → Résultats mesurés. Format 1–2 pages, visuellement soigné. Outil de vente clé.', cat: 'marketing' },
+              { title: 'Activer LinkedIn Ads B2B', desc: 'Sponsoriser les études de cas vers les décideurs de votre secteur cible. Budget : 100$ / semaine minimum.', cat: 'marketing' },
+            ]
+          },
+          {
+            label: 'Semaine 12–13 · Structuration agence',
+            tasks: [
+              { title: 'Recruter 1 développeur automatisation', desc: 'Vous = commercial et stratégie. Lui = déploiement et maintenance. Ratio : 1 dev pour 3–4 clients.', cat: 'produit' },
+              { title: 'Créer offres packagées par secteur', desc: '"Pack PME Comptabilité : 3 automatisations incluses + support 6 mois = X Ar". La clarté accélère les ventes.', cat: 'produit' },
+              { title: 'Bilan J90 : contrats, CA, NPS', desc: 'Analyser taux de closing, durée du cycle de vente, valeur contrat moyen. Plan de croissance J180.', cat: 'finance' },
+            ]
+          }
+        ]
+      }
+    ]
+  }
+];
+
+let selectedModelId = null;
+let checkedTasks = {};
+
+function renderModels() {
+  const grid = document.getElementById('models-grid');
+  grid.innerHTML = MODELS.map(m => `
+    <div class="model-card" id="card-${m.id}" onclick="selectModel('${m.id}')">
+      <div class="model-check">✓</div>
+      <div class="model-icon">${m.icon}</div>
+      <div class="model-name">${m.name}</div>
+      <div class="model-principle">${m.principle}</div>
+      <div class="model-tags">
+        <span class="tag tag-pro">✓ ${m.pro}</span>
+        <span class="tag tag-con">⚠ ${m.con}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+function selectModel(id) {
+  document.querySelectorAll('.model-card').forEach(c => c.classList.remove('selected'));
+  selectedModelId = id;
+  document.getElementById(`card-${id}`).classList.add('selected');
+  document.getElementById('btn-generate').disabled = false;
+}
+
+function generateRoadmap() {
+  if (!selectedModelId) return;
+
+  const model = MODELS.find(m => m.id === selectedModelId);
+
+  document.getElementById('screen-select').classList.remove('active');
+  document.getElementById('screen-loading').classList.add('active');
+
+  const msgs = [
+    'Analyse de votre modèle...',
+    'Structuration des 90 jours...',
+    'Intégration des leviers marketing...',
+    'Finalisation de votre plan d\'action...'
+  ];
+  let i = 0;
+  const txt = document.getElementById('loading-text');
+  const interval = setInterval(() => {
+    i++;
+    if (i < msgs.length) txt.textContent = msgs[i];
+  }, 350);
+
+  setTimeout(() => {
+    clearInterval(interval);
+    renderRoadmap(model);
+    document.getElementById('screen-loading').classList.remove('active');
+    document.getElementById('screen-roadmap').classList.add('active');
+    updateProgress();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, 1600);
+}
+
+function renderRoadmap(model) {
+  document.getElementById('roadmap-title').textContent = `${model.icon} ${model.name} — 90 jours`;
+  document.getElementById('roadmap-subtitle').textContent = model.principle;
+
+  const kpisEl = document.getElementById('kpis-row');
+  kpisEl.innerHTML = model.kpis.map(k => `
+    <div class="kpi-card">
+      <div class="kpi-label">${k.label}</div>
+      <div class="kpi-value">${k.value}</div>
+      <div class="kpi-sub">${k.sub}</div>
+    </div>
+  `).join('');
+
+  const container = document.getElementById('phases-container');
+  const phaseColors = ['phase-1', 'phase-2', 'phase-3'];
+
+  container.innerHTML = model.phases.map((phase, pi) => `
+    <div class="phase ${phaseColors[pi]}">
+      <div class="phase-header">
+        <div class="phase-number">0${pi + 1}</div>
+        <div class="phase-info">
+          <div class="phase-name">Phase ${pi + 1} — ${phase.name}</div>
+          <div class="phase-period">${phase.period}</div>
+        </div>
+        <div class="phase-progress-badge" id="phase-badge-${pi}">0 %</div>
+      </div>
+      <div class="phase-body">
+        ${phase.weeks.map((week, wi) => `
+          <div class="task-week">
+            <div class="week-label">${week.label}</div>
+            ${week.tasks.map((task, ti) => {
+              const key = `${selectedModelId}-${pi}-${wi}-${ti}`;
+              const done = checkedTasks[key] || false;
+              return `
+                <div class="task-item ${done ? 'done' : ''}" id="task-${key}" onclick="toggleTask('${key}', ${pi})">
+                  <div class="task-checkbox">${done ? '✓' : ''}</div>
+                  <div class="task-content">
+                    <div class="task-title">${task.title}</div>
+                    <div class="task-desc">${task.desc}</div>
+                    <div class="task-meta">
+                      <span class="task-category ${task.cat}">${task.cat}</span>
+                    </div>
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+
+  const mktEl = document.getElementById('marketing-items');
+  mktEl.innerHTML = model.marketing.map(m => `<span class="marketing-pill">${m}</span>`).join('');
+}
+
+function toggleTask(key, phaseIndex) {
+  checkedTasks[key] = !checkedTasks[key];
+  const item = document.getElementById(`task-${key}`);
+  const checkbox = item.querySelector('.task-checkbox');
+  item.classList.toggle('done', checkedTasks[key]);
+  checkbox.textContent = checkedTasks[key] ? '✓' : '';
+  updateProgress();
+}
+
+function updateProgress() {
+  const model = MODELS.find(m => m.id === selectedModelId);
+  if (!model) return;
+
+  let total = 0;
+  let done = 0;
+
+  model.phases.forEach((phase, pi) => {
+    let phaseTotal = 0;
+    let phaseDone = 0;
+    phase.weeks.forEach((week, wi) => {
+      week.tasks.forEach((task, ti) => {
+        const key = `${selectedModelId}-${pi}-${wi}-${ti}`;
+        total++;
+        phaseTotal++;
+        if (checkedTasks[key]) { done++; phaseDone++; }
+      });
+    });
+    const badge = document.getElementById(`phase-badge-${pi}`);
+    if (badge) badge.textContent = `${Math.round((phaseDone / phaseTotal) * 100)} %`;
+  });
+
+  const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('done-count').textContent = done;
+  document.getElementById('pct-text').textContent = pct + ' %';
+}
+
+function goBack() {
+  document.getElementById('screen-roadmap').classList.remove('active');
+  document.getElementById('screen-select').classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function resetProgress() {
+  if (!confirm('Réinitialiser toute la progression pour ce modèle ?')) return;
+  const model = MODELS.find(m => m.id === selectedModelId);
+  model.phases.forEach((phase, pi) => {
+    phase.weeks.forEach((week, wi) => {
+      week.tasks.forEach((task, ti) => {
+        const key = `${selectedModelId}-${pi}-${wi}-${ti}`;
+        checkedTasks[key] = false;
+        const item = document.getElementById(`task-${key}`);
+        if (item) {
+          item.classList.remove('done');
+          item.querySelector('.task-checkbox').textContent = '';
+        }
+      });
+    });
+  });
+  updateProgress();
+}
+
+renderModels();
+</script>
+</body>
+</html>

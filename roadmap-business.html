@@ -6,35 +6,35 @@
 <title>Plan d'Action 90 Jours</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink: #0e0e0e;
-    --ink-muted: #5a5a5a;
-    --ink-faint: #9a9a9a;
-    --surface: #f5f2ed;
-    --surface-alt: #ece8e0;
+    --ink: #111827;
+    --ink-muted: #6b7280;
+    --ink-faint: #9ca3af;
+    --surface: #f3f4f6;
+    --surface-alt: #f9fafb;
     --white: #ffffff;
-    --accent: #c8401a;
-    --accent-pale: #fdf0ec;
-    --accent-mid: #e8633d;
-    --phase1: #1a3a4a;
-    --phase2: #2d5016;
-    --phase3: #4a1a0e;
-    --phase1-pale: #e8f0f4;
-    --phase2-pale: #eaf2e3;
-    --phase3-pale: #f5ece9;
-    --border: rgba(14,14,14,0.12);
-    --border-strong: rgba(14,14,14,0.25);
-    --radius: 4px;
-    --radius-lg: 8px;
+    --accent: #2563eb;
+    --accent-pale: #eff6ff;
+    --accent-mid: #3b82f6;
+    --phase1: #1e3a5f;
+    --phase2: #14532d;
+    --phase3: #7c2d12;
+    --phase1-pale: #eff6ff;
+    --phase2-pale: #f0fdf4;
+    --phase3-pale: #fff7ed;
+    --border: #e5e7eb;
+    --border-strong: #d1d5db;
+    --radius: 8px;
+    --radius-lg: 14px;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    font-family: 'DM Mono', monospace;
-    background: var(--surface);
+    font-family: 'Inter', sans-serif;
+    background: #f3f4f6;
     color: var(--ink);
     min-height: 100vh;
     overflow-x: hidden;
@@ -42,32 +42,37 @@
 
   /* ── HEADER ── */
   header {
-    background: var(--ink);
-    color: var(--white);
-    padding: 1.5rem 2rem;
+    background: #ffffff;
+    color: var(--ink);
+    padding: 1rem 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     position: sticky;
     top: 0;
     z-index: 100;
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   }
 
   .logo {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
     font-size: 1.1rem;
     letter-spacing: -0.02em;
+    color: var(--ink);
   }
-  .logo span { color: var(--accent-mid); }
+  .logo span { color: var(--accent); }
 
   .header-badge {
     font-size: 0.65rem;
-    letter-spacing: 0.12em;
+    font-weight: 600;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    border: 1px solid rgba(255,255,255,0.2);
+    border: 1px solid var(--border-strong);
+    color: var(--ink-muted);
     padding: 0.3rem 0.75rem;
-    border-radius: 2px;
+    border-radius: 999px;
   }
 
   /* ── MAIN LAYOUT ── */
@@ -97,18 +102,18 @@
   }
 
   .hero-title {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(2.2rem, 5vw, 3.8rem);
-    font-weight: 800;
-    line-height: 1.05;
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.1;
     letter-spacing: -0.03em;
     margin-bottom: 1.25rem;
+    color: #111827;
   }
 
   .hero-title em {
-    font-family: 'Instrument Serif', serif;
     font-style: italic;
-    font-weight: 400;
+    font-weight: 700;
     color: var(--accent);
   }
 
@@ -172,7 +177,7 @@
   }
 
   .model-name {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 700;
     font-size: 0.9rem;
     margin-bottom: 0.4rem;
@@ -229,7 +234,7 @@
 
   /* ── CTA BUTTON ── */
   .btn-primary {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 700;
     font-size: 0.85rem;
     letter-spacing: 0.04em;
@@ -250,7 +255,7 @@
   .btn-primary:disabled { opacity: 0.35; cursor: not-allowed; }
 
   .btn-secondary {
-    font-family: 'DM Mono', monospace;
+    font-family: 'Inter', sans-serif;
     font-size: 0.75rem;
     background: transparent;
     color: var(--ink-muted);
@@ -285,13 +290,13 @@
     margin-bottom: 0.75rem;
     background: none;
     border: none;
-    font-family: 'DM Mono', monospace;
+    font-family: 'Inter', sans-serif;
   }
   .roadmap-back:hover { color: var(--ink); }
 
   .roadmap-title {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
     font-size: clamp(1.6rem, 4vw, 2.6rem);
     line-height: 1.1;
     letter-spacing: -0.025em;
@@ -373,17 +378,18 @@
   .phase-3 .phase-header { background: var(--phase3); color: white; }
 
   .phase-number {
-    font-family: 'Instrument Serif', serif;
+    font-family: 'Inter', sans-serif;
     font-size: 2.5rem;
-    font-style: italic;
-    opacity: 0.35;
+    font-weight: 700;
+    font-style: normal;
+    opacity: 0.25;
     line-height: 1;
   }
 
   .phase-info { flex: 1; }
 
   .phase-name {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 700;
     font-size: 1rem;
     letter-spacing: -0.01em;
@@ -556,9 +562,9 @@
   }
 
   .kpi-value {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 1.6rem;
-    font-weight: 800;
+    font-weight: 700;
     letter-spacing: -0.03em;
     color: var(--ink);
     line-height: 1;
@@ -625,7 +631,10 @@
 <body>
 
 <header>
-  <div class="logo">Plan <span>90J</span></div>
+  <div style="display:flex;align-items:center;gap:16px;">
+    <a href="index.html" style="font-size:13px;font-weight:500;color:#6b7280;text-decoration:none;padding:5px 10px;border:1px solid #e5e7eb;border-radius:8px;background:#f9fafb;transition:all 0.15s;" onmouseover="this.style.color='#111827';this.style.borderColor='#d1d5db'" onmouseout="this.style.color='#6b7280';this.style.borderColor='#e5e7eb'">← Accueil</a>
+    <div class="logo">Plan <span>90J</span></div>
+  </div>
   <span class="header-badge">Roadmap Entrepreneur</span>
 </header>
 

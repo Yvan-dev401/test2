@@ -1,0 +1,1601 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apprendre l'Allemand - Les 300 mots</title>
+    <style>
+         :root {
+            --primary-color: #005a9c;
+            --bg-color: #f4f7f9;
+            --card-bg: #ffffff;
+            --text-main: #333333;
+            --text-muted: #666666;
+            --correct-color: #2e7d32;
+            --wrong-color: #c62828;
+        }
+        
+        * {
+            box-sizing: border-box;
+            font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        
+        .stats {
+            background: var(--card-bg);
+            padding: 10px 20px;
+            border-radius: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            font-size: 0.9em;
+            margin-bottom: 30px;
+            display: flex;
+            gap: 20px;
+        }
+        
+        .stats span {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        /* Flashcard Styles */
+        
+        .flashcard-container {
+            perspective: 1000px;
+            width: 100%;
+            max-width: 400px;
+            height: 250px;
+            margin-bottom: 30px;
+        }
+        
+        .flashcard {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+            transform-style: preserve-3d;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .flashcard.is-flipped {
+            transform: rotateY(180deg);
+        }
+        
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            background: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .card-front {
+            border-top: 5px solid var(--primary-color);
+        }
+        
+        .card-back {
+            transform: rotateY(180deg);
+            border-top: 5px solid #ffcc00;
+            /* Couleur rappelant le drapeau allemand */
+            background-color: #fafbfc;
+        }
+        
+        .word-de {
+            font-size: 2.2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .word-fr {
+            font-size: 1.8em;
+            color: var(--primary-color);
+        }
+        
+        .hint {
+            font-size: 0.85em;
+            color: var(--text-muted);
+            margin-top: 15px;
+        }
+        /* Controls */
+        
+        .controls {
+            display: flex;
+            gap: 15px;
+            width: 100%;
+            max-width: 400px;
+            justify-content: center;
+        }
+        
+        button {
+            border: none;
+            padding: 12px 24px;
+            font-size: 1em;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.1s, opacity 0.2s;
+            color: white;
+            flex: 1;
+        }
+        
+        button:active {
+            transform: scale(0.95);
+        }
+        
+        #btn-show {
+            background-color: var(--primary-color);
+            flex: 0 0 100%;
+        }
+        
+        #btn-wrong {
+            background-color: var(--wrong-color);
+            display: none;
+        }
+        
+        #btn-correct {
+            background-color: var(--correct-color);
+            display: none;
+        }
+        
+        .message {
+            margin-top: 20px;
+            font-style: italic;
+            color: var(--text-muted);
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>🇩🇪 Les Mots Allemands</h1>
+        <p>Apprentissage par répétition espacée</p>
+    </header>
+
+    <div class="stats">
+        <div>À réviser aujourd'hui : <span id="stat-due">0</span></div>
+        <div>Nouveaux mots : <span id="stat-new">0</span></div>
+    </div>
+
+    <div class="flashcard-container" id="flashcard-container">
+        <div class="flashcard" id="flashcard">
+            <div class="card-face card-front">
+                <div class="word-de" id="word-front">...</div>
+                <div class="hint">Cliquez ou appuyez sur Espace pour retourner</div>
+            </div>
+            <div class="card-face card-back">
+                <div class="word-fr" id="word-back">...</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button id="btn-show">Voir la réponse</button>
+        <button id="btn-wrong">J'ai eu faux ❌</button>
+        <button id="btn-correct">Je le savais ✅</button>
+    </div>
+
+    <div class="message" id="message"></div>
+
+    <script>
+        // ---------------------------------------------------------
+        // 1. BASE DE DONNÉES DES MOTS (Les 50 premiers pour commencer)
+        // Vous pouvez ajouter le reste de vos mots à la suite.
+        // ---------------------------------------------------------
+        const database = [
+            // --- 1 à 50 (déjà fournis) ---
+            {
+                id: 1,
+                de: "der, die, das",
+                fr: "le, la, les (articles)"
+            }, {
+                id: 2,
+                de: "und",
+                fr: "et"
+            }, {
+                id: 3,
+                de: "sein",
+                fr: "être"
+            }, {
+                id: 4,
+                de: "in",
+                fr: "dans, en"
+            }, {
+                id: 5,
+                de: "ein, eine",
+                fr: "un, une"
+            }, {
+                id: 6,
+                de: "zu",
+                fr: "à, vers (direction)"
+            }, {
+                id: 7,
+                de: "haben",
+                fr: "avoir"
+            }, {
+                id: 8,
+                de: "ich",
+                fr: "je"
+            }, {
+                id: 9,
+                de: "werden",
+                fr: "devenir (ou futur)"
+            }, {
+                id: 10,
+                de: "sie",
+                fr: "elle / ils, elles"
+            }, {
+                id: 11,
+                de: "von",
+                fr: "de (provenance)"
+            }, {
+                id: 12,
+                de: "nicht",
+                fr: "ne... pas"
+            }, {
+                id: 13,
+                de: "mit",
+                fr: "avec"
+            }, {
+                id: 14,
+                de: "es",
+                fr: "il / elle (neutre)"
+            }, {
+                id: 15,
+                de: "sich",
+                fr: "se (réfléchi)"
+            }, {
+                id: 16,
+                de: "auch",
+                fr: "aussi"
+            }, {
+                id: 17,
+                de: "auf",
+                fr: "sur"
+            }, {
+                id: 18,
+                de: "für",
+                fr: "pour"
+            }, {
+                id: 19,
+                de: "an",
+                fr: "à, contre"
+            }, {
+                id: 20,
+                de: "er",
+                fr: "il"
+            }, {
+                id: 21,
+                de: "so",
+                fr: "ainsi, si"
+            }, {
+                id: 22,
+                de: "dass",
+                fr: "que (conjonction)"
+            }, {
+                id: 23,
+                de: "können",
+                fr: "pouvoir (capacité)"
+            }, {
+                id: 24,
+                de: "dies",
+                fr: "ce, ceci"
+            }, {
+                id: 25,
+                de: "als",
+                fr: "comme, en tant que, que"
+            }, {
+                id: 26,
+                de: "ihr",
+                fr: "vous (pluriel) / son, sa (à elle)"
+            }, {
+                id: 27,
+                de: "ja",
+                fr: "oui"
+            }, {
+                id: 28,
+                de: "wie",
+                fr: "comment, comme"
+            }, {
+                id: 29,
+                de: "bei",
+                fr: "chez, lors de"
+            }, {
+                id: 30,
+                de: "oder",
+                fr: "ou"
+            }, {
+                id: 31,
+                de: "wir",
+                fr: "nous"
+            }, {
+                id: 32,
+                de: "aber",
+                fr: "mais"
+            }, {
+                id: 33,
+                de: "dann",
+                fr: "ensuite, alors"
+            }, {
+                id: 34,
+                de: "man",
+                fr: "on"
+            }, {
+                id: 35,
+                de: "da",
+                fr: "là, puisque"
+            }, {
+                id: 36,
+                de: "sein (possession)",
+                fr: "son, sa (à lui)"
+            }, {
+                id: 37,
+                de: "noch",
+                fr: "encore"
+            }, {
+                id: 38,
+                de: "nach",
+                fr: "après, vers (pays/ville)"
+            }, {
+                id: 39,
+                de: "was",
+                fr: "quoi, que"
+            }, {
+                id: 40,
+                de: "also",
+                fr: "donc"
+            }, {
+                id: 41,
+                de: "aus",
+                fr: "de (qui sort de), en (matière)"
+            }, {
+                id: 42,
+                de: "all",
+                fr: "tout, tous"
+            }, {
+                id: 43,
+                de: "wenn",
+                fr: "quand (présent/futur), si"
+            }, {
+                id: 44,
+                de: "nur",
+                fr: "seulement"
+            }, {
+                id: 45,
+                de: "müssen",
+                fr: "devoir (obligation)"
+            }, {
+                id: 46,
+                de: "sagen",
+                fr: "dire"
+            }, {
+                id: 47,
+                de: "um",
+                fr: "autour de, à (heure), pour (but)"
+            }, {
+                id: 48,
+                de: "über",
+                fr: "au-dessus, à propos de"
+            }, {
+                id: 49,
+                de: "machen",
+                fr: "faire"
+            }, {
+                id: 50,
+                de: "kein",
+                fr: "aucun, pas de"
+            },
+
+            // --- 51 à 100 ---
+            {
+                id: 51,
+                de: "Jahr",
+                fr: "année"
+            }, {
+                id: 52,
+                de: "du",
+                fr: "tu"
+            }, {
+                id: 53,
+                de: "mein",
+                fr: "mon, ma"
+            }, {
+                id: 54,
+                de: "schon",
+                fr: "déjà"
+            }, {
+                id: 55,
+                de: "vor",
+                fr: "devant, avant, il y a"
+            }, {
+                id: 56,
+                de: "durch",
+                fr: "à travers, par"
+            }, {
+                id: 57,
+                de: "geben",
+                fr: "donner"
+            }, {
+                id: 58,
+                de: "mehr",
+                fr: "plus (davantage)"
+            }, {
+                id: 59,
+                de: "andere",
+                fr: "autre(s)"
+            }, {
+                id: 60,
+                de: "viel",
+                fr: "beaucoup"
+            }, {
+                id: 61,
+                de: "kommen",
+                fr: "venir"
+            }, {
+                id: 62,
+                de: "jetzt",
+                fr: "maintenant"
+            }, {
+                id: 63,
+                de: "sollen",
+                fr: "devoir (obligation morale)"
+            }, {
+                id: 64,
+                de: "mir",
+                fr: "me, moi (datif)"
+            }, {
+                id: 65,
+                de: "wollen",
+                fr: "vouloir"
+            }, {
+                id: 66,
+                de: "ganz",
+                fr: "entier, tout à fait"
+            }, {
+                id: 67,
+                de: "mich",
+                fr: "me, moi (accusatif)"
+            }, {
+                id: 68,
+                de: "immer",
+                fr: "toujours"
+            }, {
+                id: 69,
+                de: "gehen",
+                fr: "aller"
+            }, {
+                id: 70,
+                de: "sehr",
+                fr: "très"
+            }, {
+                id: 71,
+                de: "hier",
+                fr: "ici"
+            }, {
+                id: 72,
+                de: "doch",
+                fr: "pourtant, si (contraire de non)"
+            }, {
+                id: 73,
+                de: "bis",
+                fr: "jusqu'à"
+            }, {
+                id: 74,
+                de: "groß",
+                fr: "grand"
+            }, {
+                id: 75,
+                de: "wieder",
+                fr: "de nouveau, encore"
+            }, {
+                id: 76,
+                de: "Mal",
+                fr: "fois"
+            }, {
+                id: 77,
+                de: "zwei",
+                fr: "deux"
+            }, {
+                id: 78,
+                de: "gut",
+                fr: "bon, bien"
+            }, {
+                id: 79,
+                de: "wissen",
+                fr: "savoir"
+            }, {
+                id: 80,
+                de: "neu",
+                fr: "nouveau, neuf"
+            }, {
+                id: 81,
+                de: "sehen",
+                fr: "voir"
+            }, {
+                id: 82,
+                de: "lassen",
+                fr: "laisser, faire faire"
+            }, {
+                id: 83,
+                de: "uns",
+                fr: "nous (accusatif/datif)"
+            }, {
+                id: 84,
+                de: "weil",
+                fr: "parce que"
+            }, {
+                id: 85,
+                de: "unter",
+                fr: "sous, parmi"
+            }, {
+                id: 86,
+                de: "denn",
+                fr: "car, parce que"
+            }, {
+                id: 87,
+                de: "stehen",
+                fr: "se tenir debout, être écrit"
+            }, {
+                id: 88,
+                de: "jed-",
+                fr: "chaque, tout"
+            }, {
+                id: 89,
+                de: "Beispiel",
+                fr: "exemple"
+            }, {
+                id: 90,
+                de: "Zeit",
+                fr: "temps, heure"
+            }, {
+                id: 91,
+                de: "erste",
+                fr: "premier, première"
+            }, {
+                id: 92,
+                de: "ihm",
+                fr: "lui (datif masculin/neutre)"
+            }, {
+                id: 93,
+                de: "ihn",
+                fr: "le, lui (accusatif masculin)"
+            }, {
+                id: 94,
+                de: "wo",
+                fr: "où"
+            }, {
+                id: 95,
+                de: "lang",
+                fr: "long, longtemps"
+            }, {
+                id: 96,
+                de: "eigentlich",
+                fr: "en fait, vraiment"
+            }, {
+                id: 97,
+                de: "damit",
+                fr: "avec ça, afin que"
+            }, {
+                id: 98,
+                de: "selbst",
+                fr: "soi-même, même"
+            }, {
+                id: 99,
+                de: "unser",
+                fr: "notre, nos"
+            }, {
+                id: 100,
+                de: "oben",
+                fr: "en haut, ci-dessus"
+            },
+
+            // --- 101 à 150 ---
+            {
+                id: 101,
+                de: "drei",
+                fr: "trois"
+            }, {
+                id: 102,
+                de: "wenig",
+                fr: "peu"
+            }, {
+                id: 103,
+                de: "Frau",
+                fr: "femme, madame, épouse"
+            }, {
+                id: 104,
+                de: "Mensch",
+                fr: "être humain, personne"
+            }, {
+                id: 105,
+                de: "deutsch",
+                fr: "allemand(e)"
+            }, {
+                id: 106,
+                de: "Kind",
+                fr: "enfant"
+            }, {
+                id: 107,
+                de: "etwas",
+                fr: "quelque chose, un peu"
+            }, {
+                id: 108,
+                de: "Tag",
+                fr: "jour"
+            }, {
+                id: 109,
+                de: "nun",
+                fr: "maintenant, eh bien"
+            }, {
+                id: 110,
+                de: "finden",
+                fr: "trouver"
+            }, {
+                id: 111,
+                de: "nichts",
+                fr: "rien"
+            }, {
+                id: 112,
+                de: "bleiben",
+                fr: "rester"
+            }, {
+                id: 113,
+                de: "sondern",
+                fr: "mais (au contraire)"
+            }, {
+                id: 114,
+                de: "klein",
+                fr: "petit"
+            }, {
+                id: 115,
+                de: "zwischen",
+                fr: "entre"
+            }, {
+                id: 116,
+                de: "alt",
+                fr: "vieux, âgé"
+            }, {
+                id: 117,
+                de: "gegen",
+                fr: "contre"
+            }, {
+                id: 118,
+                de: "liegen",
+                fr: "être allongé, se situer"
+            }, {
+                id: 119,
+                de: "ohne",
+                fr: "sans"
+            }, {
+                id: 120,
+                de: "nein",
+                fr: "non"
+            }, {
+                id: 121,
+                de: "heute",
+                fr: "aujourd'hui"
+            }, {
+                id: 122,
+                de: "weit",
+                fr: "loin, large"
+            }, {
+                id: 123,
+                de: "heißen",
+                fr: "s'appeler"
+            }, {
+                id: 124,
+                de: "denken",
+                fr: "penser"
+            }, {
+                id: 125,
+                de: "eben",
+                fr: "justement, tout simplement"
+            }, {
+                id: 126,
+                de: "erst",
+                fr: "d'abord, seulement, pas avant"
+            }, {
+                id: 127,
+                de: "natürlich",
+                fr: "naturellement, bien sûr"
+            }, {
+                id: 128,
+                de: "ob",
+                fr: "si (interrogatif indirect)"
+            }, {
+                id: 129,
+                de: "hoch",
+                fr: "haut, élevé"
+            }, {
+                id: 130,
+                de: "beide",
+                fr: "les deux, tous les deux"
+            }, {
+                id: 131,
+                de: "zusammen",
+                fr: "ensemble"
+            }, {
+                id: 132,
+                de: "ihr (possessif)",
+                fr: "leur(s)"
+            }, {
+                id: 133,
+                de: "dürfen",
+                fr: "avoir le droit de, pouvoir"
+            }, {
+                id: 134,
+                de: "Hand",
+                fr: "main"
+            }, {
+                id: 135,
+                de: "Mann",
+                fr: "homme, mari"
+            }, {
+                id: 136,
+                de: "schreiben",
+                fr: "écrire"
+            }, {
+                id: 137,
+                de: "Haus",
+                fr: "maison"
+            }, {
+                id: 138,
+                de: "glauben",
+                fr: "croire, penser"
+            }, {
+                id: 139,
+                de: "während",
+                fr: "pendant que, tandis que"
+            }, {
+                id: 140,
+                de: "her",
+                fr: "par ici, venu de"
+            }, {
+                id: 141,
+                de: "nehmen",
+                fr: "prendre"
+            }, {
+                id: 142,
+                de: "abr-",
+                fr: "à partir de, off (préfixe)"
+            }, {
+                id: 143,
+                de: "mögen",
+                fr: "aimer, peut-être"
+            }, {
+                id: 144,
+                de: "Weg",
+                fr: "chemin, voie"
+            }, {
+                id: 145,
+                de: "vielleicht",
+                fr: "peut-être"
+            }, {
+                id: 146,
+                de: "ihnen",
+                fr: "leur (datif pluriel)"
+            }, {
+                id: 147,
+                de: "halten",
+                fr: "tenir, s'arrêter"
+            }, {
+                id: 148,
+                de: "Frage",
+                fr: "question"
+            }, {
+                id: 149,
+                de: "zeigen",
+                fr: "montrer"
+            }, {
+                id: 150,
+                de: "Land",
+                fr: "pays, région"
+            },
+
+            // --- 151 à 200 ---
+            {
+                id: 151,
+                de: "ihr (pronom datif)",
+                fr: "lui (datif féminin)"
+            }, {
+                id: 152,
+                de: "führen",
+                fr: "mener, diriger"
+            }, {
+                id: 153,
+                de: "welch-",
+                fr: "quel, lequel"
+            }, {
+                id: 154,
+                de: "Arbeit",
+                fr: "travail"
+            }, {
+                id: 155,
+                de: "weniger",
+                fr: "moins"
+            }, {
+                id: 156,
+                de: "gelten",
+                fr: "valoir, être valable"
+            }, {
+                id: 157,
+                de: "Wort",
+                fr: "mot, parole"
+            }, {
+                id: 158,
+                de: "legen",
+                fr: "poser, mettre (à plat)"
+            }, {
+                id: 159,
+                de: "weiter",
+                fr: "plus loin, continuer"
+            }, {
+                id: 160,
+                de: "gleichzeitig",
+                fr: "simultanément"
+            }, {
+                id: 161,
+                de: "womit",
+                fr: "avec quoi, par quoi"
+            }, {
+                id: 162,
+                de: "ander-",
+                fr: "autre"
+            }, {
+                id: 163,
+                de: "sprechen",
+                fr: "parler"
+            }, {
+                id: 164,
+                de: "Staat",
+                fr: "État"
+            }, {
+                id: 165,
+                de: "zwar",
+                fr: "certes, c'est vrai que"
+            }, {
+                id: 166,
+                de: "Art",
+                fr: "sorte, manière, espèce"
+            }, {
+                id: 167,
+                de: "spät",
+                fr: "tard"
+            }, {
+                id: 168,
+                de: "möglich",
+                fr: "possible"
+            }, {
+                id: 169,
+                de: "Stelle",
+                fr: "endroit, poste, passage"
+            }, {
+                id: 170,
+                de: "eigene",
+                fr: "propre (à soi)"
+            }, {
+                id: 171,
+                de: "lesen",
+                fr: "lire"
+            }, {
+                id: 172,
+                de: "gerade",
+                fr: "justement, tout droit"
+            }, {
+                id: 173,
+                de: "Welt",
+                fr: "monde"
+            }, {
+                id: 174,
+                de: "vier",
+                fr: "quatre"
+            }, {
+                id: 175,
+                de: "stellen",
+                fr: "poser, placer (debout)"
+            }, {
+                id: 176,
+                de: "Bundesrepublik",
+                fr: "République fédérale"
+            }, {
+                id: 177,
+                de: "politisch",
+                fr: "politique"
+            }, {
+                id: 178,
+                de: "bekommen",
+                fr: "recevoir, obtenir"
+            }, {
+                id: 179,
+                de: "nämlich",
+                fr: "à savoir, en effet"
+            }, {
+                id: 180,
+                de: "Teil",
+                fr: "partie, partie"
+            }, {
+                id: 181,
+                de: "Stadt",
+                fr: "ville"
+            }, {
+                id: 182,
+                de: "klar",
+                fr: "clair, bien sûr"
+            }, {
+                id: 183,
+                de: "früher",
+                fr: "avant, autrefois"
+            }, {
+                id: 184,
+                de: "bereits",
+                fr: "déjà"
+            }, {
+                id: 185,
+                de: "möchten",
+                fr: "voudrais (forme de mögen)"
+            }, {
+                id: 186,
+                de: "fragen",
+                fr: "demander, poser une question"
+            }, {
+                id: 187,
+                de: "Prozent",
+                fr: "pour cent"
+            }, {
+                id: 188,
+                de: "Recht",
+                fr: "droit, justice"
+            }, {
+                id: 189,
+                de: "jemand",
+                fr: "quelqu'un"
+            }, {
+                id: 190,
+                de: "wenige",
+                fr: "peu de gens, quelques-uns"
+            }, {
+                id: 191,
+                de: "einmal",
+                fr: "une fois, un jour"
+            }, {
+                id: 192,
+                de: "verschiedene",
+                fr: "divers, différents"
+            }, {
+                id: 193,
+                de: "gleich",
+                fr: "égal, tout de suite, pareil"
+            }, {
+                id: 194,
+                de: "warum",
+                fr: "pourquoi"
+            }, {
+                id: 195,
+                de: "bringen",
+                fr: "apporter, amener"
+            }, {
+                id: 196,
+                de: "Punkt",
+                fr: "point"
+            }, {
+                id: 197,
+                de: "einfach",
+                fr: "simple, simplement"
+            }, {
+                id: 198,
+                de: "Gesellschaft",
+                fr: "société, compagnie"
+            }, {
+                id: 199,
+                de: "laufen",
+                fr: "courir, marcher"
+            }, {
+                id: 200,
+                de: "ihr (possessif pluriel)",
+                fr: "votre, vos (formel)"
+            },
+
+            // --- 201 à 250 ---
+            {
+                id: 201,
+                de: "brauchen",
+                fr: "avoir besoin de"
+            }, {
+                id: 202,
+                de: "folgen",
+                fr: "suivre"
+            }, {
+                id: 203,
+                de: "lernen",
+                fr: "apprendre"
+            }, {
+                id: 204,
+                de: "Ende",
+                fr: "fin"
+            }, {
+                id: 205,
+                de: "kurz",
+                fr: "court, bref"
+            }, {
+                id: 206,
+                de: "Million",
+                fr: "million"
+            }, {
+                id: 207,
+                de: "stark",
+                fr: "fort, puissant"
+            }, {
+                id: 208,
+                de: "Schule",
+                fr: "école"
+            }, {
+                id: 209,
+                de: "Woche",
+                fr: "semaine"
+            }, {
+                id: 210,
+                de: "bestehen",
+                fr: "exister, réussir (un examen)"
+            }, {
+                id: 211,
+                de: "richtig",
+                fr: "juste, correct"
+            }, {
+                id: 212,
+                de: "dich",
+                fr: "te, toi (accusatif)"
+            }, {
+                id: 213,
+                de: "dafür",
+                fr: "pour ça, en échange"
+            }, {
+                id: 214,
+                de: "sowie",
+                fr: "ainsi que, dès que"
+            }, {
+                id: 215,
+                de: "oft",
+                fr: "souvent"
+            }, {
+                id: 216,
+                de: "Vater",
+                fr: "père"
+            }, {
+                id: 217,
+                de: "Seite",
+                fr: "côté, page"
+            }, {
+                id: 218,
+                de: "verschieden",
+                fr: "différent, varié"
+            }, {
+                id: 219,
+                de: "halt",
+                fr: "tout simplement (particule)"
+            }, {
+                id: 220,
+                de: "Leben",
+                fr: "vie"
+            }, {
+                id: 221,
+                de: "allerdings",
+                fr: "certes, cependant, bien sûr"
+            }, {
+                id: 222,
+                de: "verstehen",
+                fr: "comprendre"
+            }, {
+                id: 223,
+                de: "fast",
+                fr: "presque"
+            }, {
+                id: 224,
+                de: "wohl",
+                fr: "bien, probablement"
+            }, {
+                id: 225,
+                de: "dein",
+                fr: "ton, ta, tes"
+            }, {
+                id: 226,
+                de: "bestimmt",
+                fr: "certainement, précis"
+            }, {
+                id: 227,
+                de: "Mutter",
+                fr: "mère"
+            }, {
+                id: 228,
+                de: "setzen",
+                fr: "placer, mettre"
+            }, {
+                id: 229,
+                de: "überhaupt",
+                fr: "en général, du tout"
+            }, {
+                id: 230,
+                de: "Grund",
+                fr: "raison, base, fond"
+            }, {
+                id: 231,
+                de: "besser",
+                fr: "mieux, meilleur"
+            }, {
+                id: 232,
+                de: "dir",
+                fr: "te, toi (datif)"
+            }, {
+                id: 233,
+                de: "häufig",
+                fr: "fréquent, souvent"
+            }, {
+                id: 234,
+                de: "Ort",
+                fr: "lieu, endroit, localité"
+            }, {
+                id: 235,
+                de: "Buch",
+                fr: "livre"
+            }, {
+                id: 236,
+                de: "wann",
+                fr: "quand (interrogatif)"
+            }, {
+                id: 237,
+                de: "kaum",
+                fr: "à peine, presque pas"
+            }, {
+                id: 238,
+                de: "deren",
+                fr: "dont, de laquelle, desquels"
+            }, {
+                id: 239,
+                de: "Uhr",
+                fr: "heure, montre, horloge"
+            }, {
+                id: 240,
+                de: "bekannt",
+                fr: "connu, célèbre"
+            }, {
+                id: 241,
+                de: "lieben",
+                fr: "aimer (sentiment)"
+            }, {
+                id: 242,
+                de: "wichtig",
+                fr: "important"
+            }, {
+                id: 243,
+                de: "her (direction)",
+                fr: "vers ici (mouvement)"
+            }, {
+                id: 244,
+                de: "irgend-",
+                fr: "quelque (indéfini)"
+            }, {
+                id: 245,
+                de: "Stelle",
+                fr: "endroit, poste"
+            }, {
+                id: 246,
+                de: "neben",
+                fr: "à côté de, en plus de"
+            }, {
+                id: 247,
+                de: "hin",
+                fr: "là-bas (direction)"
+            }, {
+                id: 248,
+                de: "Thema",
+                fr: "thème, sujet"
+            }, {
+                id: 249,
+                de: "nennen",
+                fr: "nommer, appeler"
+            }, {
+                id: 250,
+                de: "Problem",
+                fr: "problème"
+            },
+
+            // --- 251 à 300 ---
+            {
+                id: 251,
+                de: "anfangen",
+                fr: "commencer"
+            }, {
+                id: 252,
+                de: "Stunde",
+                fr: "heure (durée)"
+            }, {
+                id: 253,
+                de: "dadurch",
+                fr: "par là, grâce à ça"
+            }, {
+                id: 254,
+                de: "Möglichkeit",
+                fr: "possibilité"
+            }, {
+                id: 255,
+                de: "gar",
+                fr: "vraiment, du tout (renforcateur)"
+            }, {
+                id: 256,
+                de: "obwohl",
+                fr: "bien que, quoique"
+            }, {
+                id: 257,
+                de: "meisten",
+                fr: "la plupart"
+            }, {
+                id: 258,
+                de: "spielen",
+                fr: "jouer"
+            }, {
+                id: 259,
+                de: "Nummer",
+                fr: "numéro"
+            }, {
+                id: 260,
+                de: "Interesse",
+                fr: "intérêt"
+            }, {
+                id: 261,
+                de: "Ergebnis",
+                fr: "résultat"
+            }, {
+                id: 262,
+                de: "erzählen",
+                fr: "raconter"
+            }, {
+                id: 263,
+                de: "Entwicklung",
+                fr: "développement, évolution"
+            }, {
+                id: 264,
+                de: "weiteren",
+                fr: "supplémentaire, de plus"
+            }, {
+                id: 265,
+                de: "aufgrund",
+                fr: "en raison de"
+            }, {
+                id: 266,
+                de: "besonders",
+                fr: "particulièrement, surtout"
+            }, {
+                id: 267,
+                de: "öffentlich",
+                fr: "public"
+            }, {
+                id: 268,
+                de: "außerdem",
+                fr: "en outre, de plus"
+            }, {
+                id: 269,
+                de: "Name",
+                fr: "nom"
+            }, {
+                id: 270,
+                de: "geben (es gibt)",
+                fr: "il y a"
+            }, {
+                id: 271,
+                de: "direkt",
+                fr: "direct, directement"
+            }, {
+                id: 272,
+                de: "entsprechend",
+                fr: "correspondant, conformément"
+            }, {
+                id: 273,
+                de: "dazu",
+                fr: "à ça, en plus, pour cela"
+            }, {
+                id: 274,
+                de: "sollte",
+                fr: "devrait (conditionnel de sollen)"
+            }, {
+                id: 275,
+                de: "allein",
+                fr: "seul, seulement"
+            }, {
+                id: 276,
+                de: "Moment",
+                fr: "moment"
+            }, {
+                id: 277,
+                de: "seit",
+                fr: "depuis"
+            }, {
+                id: 278,
+                de: "schaffen",
+                fr: "créer, réussir, parvenir à"
+            }, {
+                id: 279,
+                de: "deren (relatif)",
+                fr: "dont (génitif féminin/pluriel)",
+            }, {
+                id: 280,
+                de: "Aufgabe",
+                fr: "tâche, exercice, mission"
+            }, {
+                id: 281,
+                de: "trotzdem",
+                fr: "quand même, malgré tout"
+            }, {
+                id: 282,
+                de: "Anfang",
+                fr: "début, commencement"
+            }, {
+                id: 283,
+                de: "danach",
+                fr: "après, ensuite"
+            }, {
+                id: 284,
+                de: "etwa",
+                fr: "environ, à peu près"
+            }, {
+                id: 285,
+                de: "erhalten",
+                fr: "recevoir, obtenir, conserver"
+            }, {
+                id: 286,
+                de: "besondere",
+                fr: "particulier, spécial"
+            }, {
+                id: 287,
+                de: "erkennen",
+                fr: "reconnaître, percevoir"
+            }, {
+                id: 288,
+                de: "Erfahrung",
+                fr: "expérience"
+            }, {
+                id: 289,
+                de: "zunächst",
+                fr: "d'abord, pour commencer"
+            }, {
+                id: 290,
+                de: "bedeuten",
+                fr: "signifier, vouloir dire"
+            }, {
+                id: 291,
+                de: "daher",
+                fr: "de là, c'est pourquoi"
+            }, {
+                id: 292,
+                de: "Zahl",
+                fr: "chiffre, nombre"
+            }, {
+                id: 293,
+                de: "zeigen",
+                fr: "montrer, indiquer"
+            }, {
+                id: 294,
+                de: "gegenüber",
+                fr: "en face de, envers"
+            }, {
+                id: 295,
+                de: "Bereich",
+                fr: "domaine, zone, secteur"
+            }, {
+                id: 296,
+                de: "genau",
+                fr: "exactement, précis"
+            }, {
+                id: 297,
+                de: "daran",
+                fr: "à ça, là-dessus"
+            }, {
+                id: 298,
+                de: "Kraft",
+                fr: "force, puissance"
+            }, {
+                id: 299,
+                de: "Sprache",
+                fr: "langue, langage"
+            }, {
+                id: 300,
+                de: "Fall",
+                fr: "cas, chute, affaire"
+            },
+        ];
+
+        // ---------------------------------------------------------
+        // 2. LOGIQUE DE RÉPÉTITION ESPACÉE
+        // ---------------------------------------------------------
+        let deck = [];
+        let currentCard = null;
+
+        // Paliers de révision en millisecondes (1 min, 10 min, 1 jour, 3 jours, 7 jours, 14 jours, 30 jours)
+        const intervals = [
+            60 * 1000,
+            10 * 60 * 1000,
+            24 * 60 * 60 * 1000,
+            3 * 24 * 60 * 60 * 1000,
+            7 * 24 * 60 * 60 * 1000,
+            14 * 24 * 60 * 60 * 1000,
+            30 * 24 * 60 * 60 * 1000,
+        ];
+
+        // Initialisation de l'application
+        function init() {
+            loadDeck();
+            nextCard();
+        }
+
+        // Charger les données de progression depuis le navigateur
+        function loadDeck() {
+            const savedDeck = localStorage.getItem("germanVocabDeck");
+
+            if (savedDeck) {
+                deck = JSON.parse(savedDeck);
+                // Ajouter les nouveaux mots qui auraient été ajoutés dans la database entre temps
+                database.forEach((dbWord) => {
+                    if (!deck.find((w) => w.id === dbWord.id)) {
+                        deck.push({...dbWord,
+                            level: 0,
+                            nextReview: 0
+                        });
+                    }
+                });
+            } else {
+                deck = database.map((word) => ({
+                    ...word,
+                    level: 0, // Niveau de mémorisation
+                    nextReview: 0, // Timestamp de la prochaine révision (0 = tout de suite)
+                }));
+            }
+            saveDeck();
+            updateStats();
+        }
+
+        function saveDeck() {
+            localStorage.setItem("germanVocabDeck", JSON.stringify(deck));
+        }
+
+        // Trouver la prochaine carte à réviser
+        function nextCard() {
+            const now = Date.now();
+
+            // Priorité 1: Les cartes dont l'heure de révision est passée
+            let dueCards = deck.filter(
+                (c) => c.nextReview > 0 && c.nextReview <= now,
+            );
+            // Priorité 2: S'il n'y a pas de révision due, on prend les mots jamais appris
+            let newCards = deck.filter((c) => c.nextReview === 0);
+
+            let candidates = dueCards.length > 0 ? dueCards : newCards;
+
+            if (candidates.length === 0) {
+                document.getElementById("word-front").innerText = "Bravo !";
+                document.getElementById("word-back").innerText =
+                    "Toutes vos révisions sont terminées pour le moment.";
+                document.getElementById("btn-show").style.display = "none";
+                document.getElementById("message").innerText =
+                    "Revenez un peu plus tard pour de nouvelles révisions.";
+                currentCard = null;
+                return;
+            }
+
+            // Sélectionner une carte au hasard parmi les candidates
+            currentCard = candidates[Math.floor(Math.random() * candidates.length)];
+
+            // Affichage
+            document.getElementById("word-front").innerText = currentCard.de;
+            document.getElementById("word-back").innerText = currentCard.fr;
+
+            resetCardUI();
+            updateStats();
+        }
+
+        // Gérer le traitement de la réponse
+        function answerCard(knewIt) {
+            if (!currentCard) return;
+
+            if (knewIt) {
+                currentCard.level = Math.min(
+                    currentCard.level + 1,
+                    intervals.length - 1,
+                ); // Monte d'un niveau
+            } else {
+                currentCard.level = 0; // Retour à la case départ (réviser dans 1 minute)
+            }
+
+            // Calculer la prochaine date de révision
+            currentCard.nextReview = Date.now() + intervals[currentCard.level];
+
+            saveDeck();
+            nextCard();
+        }
+
+        function updateStats() {
+            const now = Date.now();
+            document.getElementById("stat-due").innerText = deck.filter(
+                (c) => c.nextReview > 0 && c.nextReview <= now,
+            ).length;
+            document.getElementById("stat-new").innerText = deck.filter(
+                (c) => c.nextReview === 0,
+            ).length;
+        }
+
+        // ---------------------------------------------------------
+        // 3. GESTION DE L'INTERFACE (UI)
+        // ---------------------------------------------------------
+        const flashcard = document.getElementById("flashcard");
+        const btnShow = document.getElementById("btn-show");
+        const btnWrong = document.getElementById("btn-wrong");
+        const btnCorrect = document.getElementById("btn-correct");
+
+        function revealCard() {
+            if (!currentCard) return;
+            flashcard.classList.add("is-flipped");
+            btnShow.style.display = "none";
+            btnWrong.style.display = "block";
+            btnCorrect.style.display = "block";
+        }
+
+        function resetCardUI() {
+            flashcard.classList.remove("is-flipped");
+            btnShow.style.display = "block";
+            btnWrong.style.display = "none";
+            btnCorrect.style.display = "none";
+        }
+
+        // Écouteurs d'événements
+        btnShow.addEventListener("click", revealCard);
+        flashcard.addEventListener("click", () => {
+            if (btnShow.style.display !== "none") revealCard();
+        });
+
+        btnCorrect.addEventListener("click", () => answerCard(true));
+        btnWrong.addEventListener("click", () => answerCard(false));
+
+        // Raccourcis clavier (Espace pour retourner, Flèche gauche pour Faux, Flèche droite pour Vrai)
+        document.addEventListener("keydown", (e) => {
+            if (e.code === "Space") {
+                if (btnShow.style.display !== "none") revealCard();
+            } else if (e.code === "ArrowLeft" && btnShow.style.display === "none") {
+                answerCard(false);
+            } else if (
+                e.code === "ArrowRight" &&
+                btnShow.style.display === "none"
+            ) {
+                answerCard(true);
+            }
+        });
+
+        // Lancement au chargement
+        window.onload = init;
+    </script>
+</body>
+
+</html>

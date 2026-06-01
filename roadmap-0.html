@@ -5,85 +5,78 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Roadmap 0€ — 90 Jours</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0f0f0f;
-  --bg2: #161616;
-  --bg3: #1e1e1e;
-  --line: rgba(255,255,255,0.08);
-  --line2: rgba(255,255,255,0.15);
-  --white: #f0ede6;
-  --muted: #7a7a7a;
-  --faint: #3a3a3a;
-  --yellow: #f5e642;
-  --green: #42f58a;
-  --red: #f54242;
-  --blue: #42c8f5;
-  --orange: #f5a042;
-  --pink: #f542c8;
-  --radius: 3px;
+  --bg: #f3f4f6;
+  --bg2: #ffffff;
+  --bg3: #f9fafb;
+  --line: #e5e7eb;
+  --line2: #d1d5db;
+  --white: #111827;
+  --muted: #6b7280;
+  --faint: #e5e7eb;
+  --yellow: #2563eb;
+  --green: #16a34a;
+  --red: #dc2626;
+  --blue: #2563eb;
+  --orange: #ea580c;
+  --pink: #db2777;
+  --radius: 8px;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  font-family: 'Space Mono', monospace;
-  background: var(--bg);
-  color: var(--white);
+  font-family: 'Inter', sans-serif;
+  background: #f3f4f6;
+  color: #111827;
   min-height: 100vh;
   overflow-x: hidden;
 }
 
-/* ── NOISE OVERLAY ── */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-  opacity: 0.025;
-  pointer-events: none;
-  z-index: 9999;
-}
-
 /* ── HEADER ── */
 header {
-  border-bottom: 1px solid var(--line2);
-  padding: 1.25rem 2rem;
+  border-bottom: 1px solid var(--line);
+  padding: 1rem 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   position: sticky;
   top: 0;
-  background: rgba(15,15,15,0.92);
-  backdrop-filter: blur(12px);
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   z-index: 100;
 }
 
 .logo {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.5rem;
-  letter-spacing: 0.08em;
-  color: var(--yellow);
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #111827;
   line-height: 1;
 }
 
 .logo sup {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.45rem;
-  color: var(--muted);
-  letter-spacing: 0.12em;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.55rem;
+  color: var(--yellow);
+  letter-spacing: 0;
   vertical-align: super;
-  margin-left: 0.3rem;
+  margin-left: 0.15rem;
+  font-weight: 600;
 }
 
 .header-tag {
-  font-size: 0.58rem;
-  letter-spacing: 0.14em;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--muted);
-  border: 1px solid var(--faint);
+  border: 1px solid var(--line2);
   padding: 0.3rem 0.75rem;
+  border-radius: 999px;
 }
 
 /* ── APP ── */
@@ -123,18 +116,19 @@ header {
 }
 
 .hero-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(3.5rem, 9vw, 7rem);
-  letter-spacing: 0.02em;
-  line-height: 0.95;
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
   margin-bottom: 0.5rem;
+  color: #111827;
 }
 
 .hero-title .italic {
-  font-family: 'Libre Baskerville', serif;
   font-style: italic;
+  font-weight: 700;
   color: var(--yellow);
-  font-size: 0.9em;
 }
 
 .hero-sub {
@@ -151,10 +145,11 @@ header {
   position: absolute;
   right: 0;
   top: 3rem;
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 10rem;
-  color: var(--faint);
-  opacity: 0.3;
+  font-weight: 700;
+  color: #e5e7eb;
+  opacity: 0.6;
   line-height: 1;
   pointer-events: none;
   letter-spacing: -0.04em;
@@ -178,10 +173,11 @@ header {
 }
 
 .section-head-num {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 1.1rem;
+  font-weight: 700;
   color: var(--yellow);
-  letter-spacing: 0.06em;
+  letter-spacing: 0.02em;
 }
 
 .models-list {
@@ -215,20 +211,21 @@ header {
 }
 
 .model-row:hover {
-  background: var(--bg3);
+  background: #f3f4f6;
   border-color: var(--line2);
 }
 
 .model-row.selected {
-  background: var(--bg3);
-  border-color: rgba(245,230,66,0.3);
+  background: #eff6ff;
+  border-color: rgba(37,99,235,0.35);
 }
 .model-row.selected::before { background: var(--yellow); }
 
 .model-num {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 2rem;
-  color: var(--faint);
+  font-weight: 700;
+  color: #d1d5db;
   line-height: 1;
   transition: color 0.2s;
 }
@@ -308,20 +305,22 @@ header {
 }
 
 .btn-launch {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.1rem;
-  letter-spacing: 0.12em;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
   background: var(--yellow);
-  color: var(--bg);
+  color: #ffffff;
   border: none;
   padding: 1rem 3rem;
+  border-radius: 10px;
   cursor: pointer;
   transition: all 0.15s;
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
 }
-.btn-launch:hover { background: var(--white); }
+.btn-launch:hover { background: #1d4ed8; }
 .btn-launch:active { transform: scale(0.98); }
 .btn-launch:disabled { opacity: 0.2; cursor: not-allowed; }
 
@@ -382,14 +381,13 @@ header {
 }
 
 .rm-back {
-  font-size: 0.6rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font-size: 0.7rem;
+  font-weight: 500;
   color: var(--muted);
   cursor: pointer;
   background: none;
   border: none;
-  font-family: 'Space Mono', monospace;
+  font-family: 'Inter', sans-serif;
   display: flex;
   align-items: center;
   gap: 0.4rem;
@@ -398,12 +396,13 @@ header {
 .rm-back:hover { color: var(--white); }
 
 .rm-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  letter-spacing: 0.04em;
-  line-height: 1;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  letter-spacing: -0.025em;
+  line-height: 1.1;
   margin-bottom: 0.4rem;
-  color: var(--yellow);
+  color: #111827;
 }
 
 .rm-sub {
@@ -474,9 +473,10 @@ header {
 }
 
 .kpi-val {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 1.8rem;
-  letter-spacing: 0.04em;
+  font-weight: 700;
+  letter-spacing: -0.03em;
   line-height: 1;
   margin-bottom: 0.25rem;
 }
@@ -502,13 +502,14 @@ header {
   padding: 1.25rem 1.5rem;
 }
 
-.phase-1 .phase-head { background: #12201a; border-bottom: 1px solid rgba(66,245,138,0.12); }
-.phase-2 .phase-head { background: #201a10; border-bottom: 1px solid rgba(245,160,66,0.12); }
-.phase-3 .phase-head { background: #1a1020; border-bottom: 1px solid rgba(245,66,200,0.12); }
+.phase-1 .phase-head { background: #1e3a5f; color: white; border-bottom: none; }
+.phase-2 .phase-head { background: #14532d; color: white; border-bottom: none; }
+.phase-3 .phase-head { background: #7c2d12; color: white; border-bottom: none; }
 
 .phase-num {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 3rem;
+  font-weight: 700;
   line-height: 1;
   opacity: 0.2;
 }
@@ -530,9 +531,10 @@ header {
 }
 
 .phase-pct {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.4rem;
-  letter-spacing: 0.04em;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 .phase-1 .phase-pct { color: var(--green); }
 .phase-2 .phase-pct { color: var(--orange); }
@@ -545,7 +547,7 @@ header {
   text-transform: uppercase;
   color: var(--muted);
   padding: 0.65rem 1.5rem;
-  background: rgba(255,255,255,0.02);
+  background: #f9fafb;
   border-bottom: 1px solid var(--line);
   border-top: 1px solid var(--line);
 }
@@ -560,8 +562,8 @@ header {
   transition: background 0.1s;
 }
 .task:last-child { border-bottom: none; }
-.task:hover { background: rgba(255,255,255,0.03); }
-.task.done { background: rgba(0,0,0,0.2); }
+.task:hover { background: #f9fafb; }
+.task.done { background: #f0fdf4; }
 
 .task-cb {
   display: flex;
@@ -645,19 +647,20 @@ header {
   font-size: 0.52rem;
   letter-spacing: 0.06em;
   padding: 0.18rem 0.55rem;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
   color: var(--muted);
-  border-radius: 1px;
+  border-radius: 4px;
 }
 .tool-pill::before { content: '⚙ '; opacity: 0.5; }
 
 /* ── MARKETING BOX ── */
 .mkt-box {
   margin-top: 2.5rem;
-  border: 1px solid rgba(245,230,66,0.2);
-  background: rgba(245,230,66,0.03);
+  border: 1px solid #bfdbfe;
+  background: #eff6ff;
   padding: 1.5rem;
+  border-radius: var(--radius);
 }
 
 .mkt-label {
@@ -693,17 +696,18 @@ header {
 }
 
 .btn-ghost {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.65rem;
-  letter-spacing: 0.06em;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
   background: transparent;
   color: var(--muted);
-  border: 1px solid var(--faint);
+  border: 1px solid var(--line2);
   padding: 0.6rem 1.25rem;
+  border-radius: var(--radius);
   cursor: pointer;
   transition: all 0.15s;
 }
-.btn-ghost:hover { border-color: var(--white); color: var(--white); }
+.btn-ghost:hover { border-color: #111827; color: #111827; }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 600px) {
@@ -726,7 +730,10 @@ header {
 <body>
 
 <header>
-  <div class="logo">0€<sup>ROADMAP</sup></div>
+  <div style="display:flex;align-items:center;gap:16px;">
+    <a href="index.html" style="font-size:13px;font-weight:500;color:#6b7280;text-decoration:none;padding:5px 10px;border:1px solid #e5e7eb;border-radius:8px;background:#f9fafb;transition:all 0.15s;" onmouseover="this.style.color='#111827';this.style.borderColor='#d1d5db'" onmouseout="this.style.color='#6b7280';this.style.borderColor='#e5e7eb'">← Accueil</a>
+    <div class="logo">0€<sup>ROADMAP</sup></div>
+  </div>
   <span class="header-tag">6 business sans capital</span>
 </header>
 

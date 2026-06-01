@@ -602,6 +602,22 @@
     letter-spacing: 0.06em;
   }
 
+  /* ── TOOL PILLS ── */
+  .tool-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 0.58rem;
+    font-weight: 500;
+    padding: 0.15rem 0.5rem;
+    background: #f3f4f6;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    color: #374151;
+    white-space: nowrap;
+  }
+  .tool-pill::before { content: '⚙'; opacity: 0.5; font-size: 0.55rem; }
+
   /* ── PRINT / EXPORT ── */
   .actions-row {
     display: flex;
@@ -729,17 +745,17 @@ const MODELS = [
           {
             label: 'Semaine 1–2 · Cadrage projet',
             tasks: [
-              { title: 'Étude de marché locale', desc: 'Analyser la demande en matériel informatique dans votre quartier / ville cible. Visiter 3 concurrents.', cat: 'produit' },
-              { title: 'Business plan simplifié', desc: 'Projections financières sur 12 mois, seuil de rentabilité, besoins en capital initial.', cat: 'finance' },
-              { title: 'Choix du local commercial', desc: 'Critères : passage piéton, visibilité, loyer < 15 % du CA prévisionnel, parking.', cat: 'produit' },
+              { title: 'Étude de marché locale', desc: 'Analyser la demande en matériel informatique dans votre quartier / ville cible. Visiter 3 concurrents.', cat: 'produit', tools: ['Google Forms', 'Google Maps'] },
+              { title: 'Business plan simplifié', desc: 'Projections financières sur 12 mois, seuil de rentabilité, besoins en capital initial.', cat: 'finance', tools: ['Google Sheets', 'Wave (gratuit)'] },
+              { title: 'Choix du local commercial', desc: 'Critères : passage piéton, visibilité, loyer < 15 % du CA prévisionnel, parking.', cat: 'produit', tools: ['Google Maps'] },
             ]
           },
           {
             label: 'Semaine 3–4 · Structure légale & fournisseurs',
             tasks: [
-              { title: 'Immatriculation EDBM / INSTAT', desc: 'Créer votre entité légale à Madagascar. Prévoir 2–3 semaines de délai administratif.', cat: 'legal' },
-              { title: 'Identification des fournisseurs', desc: 'Sourcing : grossistes Tana, importateurs Chine/Dubai. Négocier conditions de paiement et garanties SAV.', cat: 'finance' },
-              { title: 'Aménagement & signalétique', desc: 'Vitrine attractive, étiquetage produits, point de vente organisé. Budget déco / mobilier.', cat: 'produit' },
+              { title: 'Immatriculation EDBM / INSTAT', desc: 'Créer votre entité légale à Madagascar. Prévoir 2–3 semaines de délai administratif.', cat: 'legal', tools: ['EDBM.mg'] },
+              { title: 'Identification des fournisseurs', desc: 'Sourcing : grossistes Tana, importateurs Chine/Dubai. Négocier conditions de paiement et garanties SAV.', cat: 'finance', tools: ['WhatsApp Business', 'Google Sheets'] },
+              { title: 'Aménagement & signalétique', desc: 'Vitrine attractive, étiquetage produits, point de vente organisé. Budget déco / mobilier.', cat: 'produit', tools: ['Canva (gratuit)'] },
             ]
           }
         ]
@@ -751,17 +767,17 @@ const MODELS = [
           {
             label: 'Semaine 5–6 · Ouverture & présence digitale',
             tasks: [
-              { title: 'Lancement officiel', desc: 'Événement d\'ouverture, offre inaugurale (–10 % première semaine). Inviter partenaires locaux.', cat: 'marketing' },
-              { title: 'Google My Business & Local SEO', desc: 'Fiche GMB complète (photos, horaires, catégorie). Collecte des 10 premiers avis Google.', cat: 'marketing' },
-              { title: 'Flyers & affichage quartier', desc: 'Distribution ciblée : écoles, cybercafés, bureaux à 500m. QR code vers votre fiche GMB.', cat: 'marketing' },
+              { title: 'Lancement officiel', desc: 'Événement d\'ouverture, offre inaugurale (–10 % première semaine). Inviter partenaires locaux.', cat: 'marketing', tools: ['WhatsApp', 'Facebook (gratuit)'] },
+              { title: 'Google My Business & Local SEO', desc: 'Fiche GMB complète (photos, horaires, catégorie). Collecte des 10 premiers avis Google.', cat: 'marketing', tools: ['Google Business Profile (gratuit)'] },
+              { title: 'Flyers & affichage quartier', desc: 'Distribution ciblée : écoles, cybercafés, bureaux à 500m. QR code vers votre fiche GMB.', cat: 'marketing', tools: ['Canva (gratuit)', 'QR Code Monkey (gratuit)'] },
             ]
           },
           {
             label: 'Semaine 7–8 · Partenariats B2B',
             tasks: [
-              { title: 'Démarchage PME locales', desc: 'Proposer contrats d\'entretien informatique + fourniture matériel. Cibler 10 entreprises proches.', cat: 'client' },
-              { title: 'Partenariat écoles & bureaux', desc: 'Offres spéciales étudiants, achats groupés institutionnels. Conditions préférentielles annuelles.', cat: 'client' },
-              { title: 'Mise en place SAV différenciante', desc: 'Service après-vente rapide (48h max) comme argument de vente. Formulaire de suivi client.', cat: 'client' },
+              { title: 'Démarchage PME locales', desc: 'Proposer contrats d\'entretien informatique + fourniture matériel. Cibler 10 entreprises proches.', cat: 'client', tools: ['WhatsApp Business', 'Google Docs'] },
+              { title: 'Partenariat écoles & bureaux', desc: 'Offres spéciales étudiants, achats groupés institutionnels. Conditions préférentielles annuelles.', cat: 'client', tools: ['Google Docs', 'Gmail'] },
+              { title: 'Mise en place SAV différenciante', desc: 'Service après-vente rapide (48h max) comme argument de vente. Formulaire de suivi client.', cat: 'client', tools: ['Google Forms (gratuit)', 'Notion (gratuit)'] },
             ]
           }
         ]
@@ -773,16 +789,16 @@ const MODELS = [
           {
             label: 'Semaine 9–10 · Fidélisation',
             tasks: [
-              { title: 'Programme de fidélité simple', desc: 'Carte de fidélité physique ou WhatsApp groupe clients VIP. Offre préférentielle répétée.', cat: 'client' },
-              { title: 'Analyse des ventes', desc: 'Identifier top 10 produits vendus, marges réelles, produits à éliminer. Ajuster commandes fournisseurs.', cat: 'finance' },
+              { title: 'Programme de fidélité simple', desc: 'Carte de fidélité physique ou WhatsApp groupe clients VIP. Offre préférentielle répétée.', cat: 'client', tools: ['WhatsApp', 'Canva (gratuit)'] },
+              { title: 'Analyse des ventes', desc: 'Identifier top 10 produits vendus, marges réelles, produits à éliminer. Ajuster commandes fournisseurs.', cat: 'finance', tools: ['Google Sheets', 'Wave (gratuit)'] },
             ]
           },
           {
             label: 'Semaine 11–13 · Passage à l\'échelle',
             tasks: [
-              { title: 'Présence Facebook / WhatsApp Business', desc: 'Catalogue produits en ligne, gestion des commandes à distance. Stories régulières avec nouveautés.', cat: 'marketing' },
-              { title: 'Recrutement premier employé (si besoin)', desc: 'Technicien ou vendeur formé à vos standards. Processus de formation 1 semaine.', cat: 'produit' },
-              { title: 'Bilan J90 & objectifs J180', desc: 'Revue complète : CA, marges, clients fidèles, enseignements. Plan du prochain trimestre.', cat: 'finance' },
+              { title: 'Présence Facebook / WhatsApp Business', desc: 'Catalogue produits en ligne, gestion des commandes à distance. Stories régulières avec nouveautés.', cat: 'marketing', tools: ['Facebook (gratuit)', 'WhatsApp Business'] },
+              { title: 'Recrutement premier employé (si besoin)', desc: 'Technicien ou vendeur formé à vos standards. Processus de formation 1 semaine.', cat: 'produit', tools: ['Facebook Jobs (gratuit)', 'LinkedIn'] },
+              { title: 'Bilan J90 & objectifs J180', desc: 'Revue complète : CA, marges, clients fidèles, enseignements. Plan du prochain trimestre.', cat: 'finance', tools: ['Google Sheets'] },
             ]
           }
         ]
@@ -811,17 +827,17 @@ const MODELS = [
           {
             label: 'Semaine 1–2 · Découverte client',
             tasks: [
-              { title: '20 interviews de commerçants', desc: 'Aller sur le terrain (Analakely, Isotry, Behoririka). Documenter les vrais problèmes, pas supposés.', cat: 'client' },
-              { title: 'Définition du problème principal', desc: 'Choisir UN problème aigu que votre SaaS résout. Rédiger la proposition de valeur en 1 phrase.', cat: 'produit' },
-              { title: 'Benchmark concurrents', desc: 'Analyser solutions existantes (locales & régionales). Identifier l\'angle différenciateur.', cat: 'produit' },
+              { title: '20 interviews de commerçants', desc: 'Aller sur le terrain (Analakely, Isotry, Behoririka). Documenter les vrais problèmes, pas supposés.', cat: 'client', tools: ['Notion (gratuit)', 'Google Forms'] },
+              { title: 'Définition du problème principal', desc: 'Choisir UN problème aigu que votre SaaS résout. Rédiger la proposition de valeur en 1 phrase.', cat: 'produit', tools: ['Notion (gratuit)'] },
+              { title: 'Benchmark concurrents', desc: 'Analyser solutions existantes (locales & régionales). Identifier l\'angle différenciateur.', cat: 'produit', tools: ['Google', 'Product Hunt (gratuit)'] },
             ]
           },
           {
             label: 'Semaine 3–4 · MVP',
             tasks: [
-              { title: 'Wireframes & maquettes Figma', desc: 'Prototyper les 3–5 écrans essentiels. Valider avec 5 utilisateurs cible avant de coder.', cat: 'technique' },
-              { title: 'Stack technique choisie', desc: 'Next.js + Supabase recommandé pour rapidité. Hébergement : Vercel + Supabase (tier gratuit).', cat: 'technique' },
-              { title: 'Développement MVP core', desc: 'Fonctionnalité principale uniquement. Pas de polish, pas de features secondaires. Livrer vite.', cat: 'technique' },
+              { title: 'Wireframes & maquettes Figma', desc: 'Prototyper les 3–5 écrans essentiels. Valider avec 5 utilisateurs cible avant de coder.', cat: 'technique', tools: ['Figma (gratuit)'] },
+              { title: 'Stack technique choisie', desc: 'Next.js + Supabase recommandé pour rapidité. Hébergement : Vercel + Supabase (tier gratuit).', cat: 'technique', tools: ['Next.js (gratuit)', 'Supabase (gratuit)', 'Vercel (gratuit)'] },
+              { title: 'Développement MVP core', desc: 'Fonctionnalité principale uniquement. Pas de polish, pas de features secondaires. Livrer vite.', cat: 'technique', tools: ['Cursor (gratuit)', 'GitHub (gratuit)'] },
             ]
           }
         ]
@@ -833,17 +849,17 @@ const MODELS = [
           {
             label: 'Semaine 5–6 · Bêta fermé',
             tasks: [
-              { title: 'Recrutement 20 bêta-testeurs', desc: 'Contact direct commerçants interviewés. Accès gratuit en échange de feedback hebdomadaire structuré.', cat: 'client' },
-              { title: 'Onboarding simplifié', desc: 'Session de 30 min par nouveau client. Documentation minimaliste. Support WhatsApp direct.', cat: 'client' },
-              { title: 'Itérations rapides sur feedback', desc: 'Sprint 1 semaine max. Prioriser ce qui bloque l\'usage quotidien. Journaliser chaque bug critique.', cat: 'technique' },
+              { title: 'Recrutement 20 bêta-testeurs', desc: 'Contact direct commerçants interviewés. Accès gratuit en échange de feedback hebdomadaire structuré.', cat: 'client', tools: ['WhatsApp', 'Google Forms'] },
+              { title: 'Onboarding simplifié', desc: 'Session de 30 min par nouveau client. Documentation minimaliste. Support WhatsApp direct.', cat: 'client', tools: ['Notion (gratuit)', 'WhatsApp'] },
+              { title: 'Itérations rapides sur feedback', desc: 'Sprint 1 semaine max. Prioriser ce qui bloque l\'usage quotidien. Journaliser chaque bug critique.', cat: 'technique', tools: ['GitHub Issues (gratuit)', 'Linear (gratuit)'] },
             ]
           },
           {
             label: 'Semaine 7–8 · Monétisation',
             tasks: [
-              { title: 'Définir tarification', desc: 'Freemium limité + Plan Pro (ex: 15–25K Ar/mois). Tester willingness to pay auprès des bêta.', cat: 'finance' },
-              { title: 'Intégration paiement MVola/Orange Money', desc: 'Lier paiement mobile malgache. Prévoir factures automatiques et relances.', cat: 'technique' },
-              { title: 'Premier landing page optimisé', desc: 'SEO basique, CTA démo claire, témoignages bêta, FAQ objections. Héberger sur domaine propre.', cat: 'marketing' },
+              { title: 'Définir tarification', desc: 'Freemium limité + Plan Pro (ex: 15–25K Ar/mois). Tester willingness to pay auprès des bêta.', cat: 'finance', tools: ['Notion (gratuit)', 'Google Sheets'] },
+              { title: 'Intégration paiement MVola/Orange Money', desc: 'Lier paiement mobile malgache. Prévoir factures automatiques et relances.', cat: 'technique', tools: ['API MVola', 'Stripe (gratuit setup)'] },
+              { title: 'Premier landing page optimisé', desc: 'SEO basique, CTA démo claire, témoignages bêta, FAQ objections. Héberger sur domaine propre.', cat: 'marketing', tools: ['Vercel (gratuit)', 'Next.js'] },
             ]
           }
         ]
@@ -855,16 +871,16 @@ const MODELS = [
           {
             label: 'Semaine 9–11 · Inbound & démos',
             tasks: [
-              { title: 'Stratégie content marketing', desc: '2 articles / semaine ciblant les commerçants malgaches : gestion stock, comptabilité simple, etc.', cat: 'contenu' },
-              { title: 'Programme démos ciblées', desc: '5 démos / semaine avec commerçants qualifiés. Script rodé, conversion visée > 30 %.', cat: 'client' },
-              { title: 'Dashboard métriques SaaS', desc: 'Tracker MRR, churn, NPS, DAU/MAU. Décisions basées sur données réelles.', cat: 'technique' },
+              { title: 'Stratégie content marketing', desc: '2 articles / semaine ciblant les commerçants malgaches : gestion stock, comptabilité simple, etc.', cat: 'contenu', tools: ['Hashnode (gratuit)', 'Notion (gratuit)'] },
+              { title: 'Programme démos ciblées', desc: '5 démos / semaine avec commerçants qualifiés. Script rodé, conversion visée > 30 %.', cat: 'client', tools: ['Google Meet (gratuit)', 'Calendly (gratuit)'] },
+              { title: 'Dashboard métriques SaaS', desc: 'Tracker MRR, churn, NPS, DAU/MAU. Décisions basées sur données réelles.', cat: 'technique', tools: ['PostHog (gratuit)', 'Google Sheets'] },
             ]
           },
           {
             label: 'Semaine 12–13 · Bilan & consolidation',
             tasks: [
-              { title: 'Analyse cohortes utilisateurs', desc: 'Identifier pourquoi certains churntent. Améliorer onboarding et feature set en conséquence.', cat: 'produit' },
-              { title: 'Objectifs J90 → J180', desc: 'Définir roadmap produit prochain trimestre. Recruter 1er développeur si MRR le permet.', cat: 'finance' },
+              { title: 'Analyse cohortes utilisateurs', desc: 'Identifier pourquoi certains churntent. Améliorer onboarding et feature set en conséquence.', cat: 'produit', tools: ['PostHog (gratuit)', 'Google Sheets'] },
+              { title: 'Objectifs J90 → J180', desc: 'Définir roadmap produit prochain trimestre. Recruter 1er développeur si MRR le permet.', cat: 'finance', tools: ['Notion (gratuit)', 'Linear (gratuit)'] },
             ]
           }
         ]
@@ -893,17 +909,17 @@ const MODELS = [
           {
             label: 'Semaine 1–2 · Stratégie de niche',
             tasks: [
-              { title: 'Définir sa niche & avatar', desc: 'Croiser passion / compétence / demande. Une niche trop large = invisible. Ex: "Finances perso jeunes Malgaches" plutôt que "Finance".', cat: 'produit' },
-              { title: 'Analyser 10 créateurs référents', desc: 'Étudier leur format, fréquence, CTA, commentaires. Repérer les gaps de contenu à exploiter.', cat: 'contenu' },
-              { title: 'Setup production minimum viable', desc: 'Smartphone + lumière naturelle suffisent. Capcut (gratuit) pour montage. Pas d\'équipement coûteux en phase 1.', cat: 'technique' },
+              { title: 'Définir sa niche & avatar', desc: 'Croiser passion / compétence / demande. Une niche trop large = invisible. Ex: "Finances perso jeunes Malgaches" plutôt que "Finance".', cat: 'produit', tools: ['Notion (gratuit)', 'Google Trends (gratuit)'] },
+              { title: 'Analyser 10 créateurs référents', desc: 'Étudier leur format, fréquence, CTA, commentaires. Repérer les gaps de contenu à exploiter.', cat: 'contenu', tools: ['TikTok Analytics', 'YouTube Studio (gratuit)'] },
+              { title: 'Setup production minimum viable', desc: 'Smartphone + lumière naturelle suffisent. Capcut (gratuit) pour montage. Pas d\'équipement coûteux en phase 1.', cat: 'technique', tools: ['CapCut (gratuit)', 'OBS Studio (gratuit)'] },
             ]
           },
           {
             label: 'Semaine 3–4 · Lancement contenu',
             tasks: [
-              { title: 'Publier 3 premières vidéos tests', desc: 'Varier formats (talking head, vlog, tutoriel). Observer lequel performe. Pas de perfectionnisme.', cat: 'contenu' },
-              { title: 'Optimisation profil plateforme', desc: 'Bio claire, photo professionnelle, lien en bio (Linktree), cohérence visuelle.', cat: 'marketing' },
-              { title: 'Analyse métriques première semaine', desc: 'Vues, durée de visionnage, commentaires. Le feedback de l\'algorithme est votre boussole.', cat: 'produit' },
+              { title: 'Publier 3 premières vidéos tests', desc: 'Varier formats (talking head, vlog, tutoriel). Observer lequel performe. Pas de perfectionnisme.', cat: 'contenu', tools: ['TikTok (gratuit)', 'YouTube Studio'] },
+              { title: 'Optimisation profil plateforme', desc: 'Bio claire, photo professionnelle, lien en bio (Linktree), cohérence visuelle.', cat: 'marketing', tools: ['Linktree (gratuit)', 'Canva (gratuit)'] },
+              { title: 'Analyse métriques première semaine', desc: 'Vues, durée de visionnage, commentaires. Le feedback de l\'algorithme est votre boussole.', cat: 'produit', tools: ['TikTok Analytics', 'YouTube Studio (gratuit)'] },
             ]
           }
         ]
@@ -915,16 +931,16 @@ const MODELS = [
           {
             label: 'Semaine 5–7 · Machine à contenu',
             tasks: [
-              { title: 'Calendrier éditorial 30 jours', desc: '5 vidéos / semaine sur TikTok + 1 longue sur YouTube. Batching : filmer 3 vidéos en 1 session.', cat: 'contenu' },
-              { title: 'Recyclage de contenu', desc: 'Long YouTube → Shorts → Reels → Thread X. Un sujet = 4–5 posts différents.', cat: 'contenu' },
-              { title: 'Première collaboration', desc: 'DM 10 créateurs de taille similaire. Proposer collab win-win (cross-promotion, vidéo commune).', cat: 'client' },
+              { title: 'Calendrier éditorial 30 jours', desc: '5 vidéos / semaine sur TikTok + 1 longue sur YouTube. Batching : filmer 3 vidéos en 1 session.', cat: 'contenu', tools: ['Notion (gratuit)', 'Google Sheets'] },
+              { title: 'Recyclage de contenu', desc: 'Long YouTube → Shorts → Reels → Thread X. Un sujet = 4–5 posts différents.', cat: 'contenu', tools: ['CapCut (gratuit)', 'Canva (gratuit)'] },
+              { title: 'Première collaboration', desc: 'DM 10 créateurs de taille similaire. Proposer collab win-win (cross-promotion, vidéo commune).', cat: 'client', tools: ['Instagram DM', 'TikTok DM'] },
             ]
           },
           {
             label: 'Semaine 8 · Monétisation',
             tasks: [
-              { title: 'Activer première source de revenus', desc: 'Lien vers service freelance, produit digital (e-book 5K Ar), ou affiliation. Ne pas attendre les 1000 abonnés.', cat: 'finance' },
-              { title: 'CTA systématique dans chaque vidéo', desc: '1 seul appel à l\'action par vidéo. Clair, court, répété 2 fois (début + fin). Tester différents CTAs.', cat: 'marketing' },
+              { title: 'Activer première source de revenus', desc: 'Lien vers service freelance, produit digital (e-book 5K Ar), ou affiliation. Ne pas attendre les 1000 abonnés.', cat: 'finance', tools: ['Gumroad (gratuit)', 'Ko-fi (gratuit)'] },
+              { title: 'CTA systématique dans chaque vidéo', desc: '1 seul appel à l\'action par vidéo. Clair, court, répété 2 fois (début + fin). Tester différents CTAs.', cat: 'marketing', tools: ['Linktree (gratuit)'] },
             ]
           }
         ]
@@ -936,16 +952,16 @@ const MODELS = [
           {
             label: 'Semaine 9–11 · Doublage de performance',
             tasks: [
-              { title: 'Analyser top 3 vidéos virales', desc: 'Reproduire la structure exacte (hook, rythme, CTA) sur d\'autres sujets. Scalabilité du format gagnant.', cat: 'produit' },
-              { title: 'Construire email list', desc: 'Lead magnet (PDF, template gratuit) en échange d\'email. Viser 100 premiers abonnés email.', cat: 'marketing' },
+              { title: 'Analyser top 3 vidéos virales', desc: 'Reproduire la structure exacte (hook, rythme, CTA) sur d\'autres sujets. Scalabilité du format gagnant.', cat: 'produit', tools: ['TikTok Analytics', 'YouTube Studio (gratuit)'] },
+              { title: 'Construire email list', desc: 'Lead magnet (PDF, template gratuit) en échange d\'email. Viser 100 premiers abonnés email.', cat: 'marketing', tools: ['Brevo (gratuit)', 'MailerLite (gratuit)'] },
             ]
           },
           {
             label: 'Semaine 12–13 · Diversification revenus',
             tasks: [
-              { title: 'Lancer produit / service premium', desc: 'Coaching 1:1, formation en ligne, pack de templates payant. Prix testés auprès de l\'audience.', cat: 'finance' },
-              { title: 'Négocier 1er partenariat marque', desc: 'Pitch deck simple : stats, démographie audience, idée de collab. Cibler marques locales d\'abord.', cat: 'client' },
-              { title: 'Bilan J90 : plan de croissance', desc: 'CA généré, abonnés, taux de conversion. Décider : niche à approfondir ou à pivoter ?', cat: 'finance' },
+              { title: 'Lancer produit / service premium', desc: 'Coaching 1:1, formation en ligne, pack de templates payant. Prix testés auprès de l\'audience.', cat: 'finance', tools: ['Gumroad (gratuit)', 'Notion (gratuit)'] },
+              { title: 'Négocier 1er partenariat marque', desc: 'Pitch deck simple : stats, démographie audience, idée de collab. Cibler marques locales d\'abord.', cat: 'client', tools: ['Canva (gratuit)', 'Gmail'] },
+              { title: 'Bilan J90 : plan de croissance', desc: 'CA généré, abonnés, taux de conversion. Décider : niche à approfondir ou à pivoter ?', cat: 'finance', tools: ['Google Sheets'] },
             ]
           }
         ]
@@ -974,17 +990,17 @@ const MODELS = [
           {
             label: 'Semaine 1–2 · Validation niche',
             tasks: [
-              { title: 'Recherche problème non adressé', desc: 'Explorer app stores : chercher catégories avec mauvaises notes, plaintes dans les avis. Gap = opportunité.', cat: 'produit' },
-              { title: 'Définir user stories essentielles', desc: 'En tant que [persona], je veux [fonctionnalité] pour [bénéfice]. Limiter au strict MVP (3–5 fonctionnalités).', cat: 'produit' },
-              { title: 'Choix de stack IA-friendly', desc: 'Flutter + Firebase pour cross-platform. Ou React Native. Utiliser Cursor / Claude pour accélérer le dev.', cat: 'technique' },
+              { title: 'Recherche problème non adressé', desc: 'Explorer app stores : chercher catégories avec mauvaises notes, plaintes dans les avis. Gap = opportunité.', cat: 'produit', tools: ['Google Play (gratuit)', 'AppFollow (gratuit)'] },
+              { title: 'Définir user stories essentielles', desc: 'En tant que [persona], je veux [fonctionnalité] pour [bénéfice]. Limiter au strict MVP (3–5 fonctionnalités).', cat: 'produit', tools: ['Notion (gratuit)', 'Trello (gratuit)'] },
+              { title: 'Choix de stack IA-friendly', desc: 'Flutter + Firebase pour cross-platform. Ou React Native. Utiliser Cursor / Claude pour accélérer le dev.', cat: 'technique', tools: ['Flutter (gratuit)', 'Firebase (gratuit)', 'Cursor (gratuit)'] },
             ]
           },
           {
             label: 'Semaine 3–4 · Build MVP',
             tasks: [
-              { title: 'Développement MVP avec IA', desc: 'Générer le boilerplate, les composants UI, la logique CRUD via prompts IA. Tester à chaque sprint.', cat: 'technique' },
-              { title: 'Setup analytics in-app', desc: 'Firebase Analytics ou Mixpanel. Tracker : onboarding completion, feature usage, crash reports.', cat: 'technique' },
-              { title: 'Tests utilisateurs (5 personnes)', desc: 'Observation silencieuse. Où bloquent-ils ? Qu\'est-ce qui leur plaît ? Itérer avant tout lancement public.', cat: 'client' },
+              { title: 'Développement MVP avec IA', desc: 'Générer le boilerplate, les composants UI, la logique CRUD via prompts IA. Tester à chaque sprint.', cat: 'technique', tools: ['Cursor (gratuit)', 'Claude (gratuit)', 'GitHub (gratuit)'] },
+              { title: 'Setup analytics in-app', desc: 'Firebase Analytics ou Mixpanel. Tracker : onboarding completion, feature usage, crash reports.', cat: 'technique', tools: ['Firebase Analytics (gratuit)', 'Mixpanel (gratuit)'] },
+              { title: 'Tests utilisateurs (5 personnes)', desc: 'Observation silencieuse. Où bloquent-ils ? Qu\'est-ce qui leur plaît ? Itérer avant tout lancement public.', cat: 'client', tools: ['Notion (gratuit)', 'WhatsApp'] },
             ]
           }
         ]
@@ -996,16 +1012,16 @@ const MODELS = [
           {
             label: 'Semaine 5–6 · Submission stores',
             tasks: [
-              { title: 'Publication Google Play & App Store', desc: 'Screenshots optimisés, description keyword-rich, icône professionnelle. ASO dès le J1.', cat: 'marketing' },
-              { title: 'Product Hunt & Reddit launch', desc: 'Préparer post PH, demander upvotes à son réseau. Post r/[niche] avec story behind the build.', cat: 'marketing' },
-              { title: 'Recrutement early adopters', desc: 'Facebook Groups, communautés Discord, forums spécialisés. 50 utilisateurs actifs = feedback gold.', cat: 'client' },
+              { title: 'Publication Google Play & App Store', desc: 'Screenshots optimisés, description keyword-rich, icône professionnelle. ASO dès le J1.', cat: 'marketing', tools: ['Google Play Console', 'App Store Connect', 'Canva (gratuit)'] },
+              { title: 'Product Hunt & Reddit launch', desc: 'Préparer post PH, demander upvotes à son réseau. Post r/[niche] avec story behind the build.', cat: 'marketing', tools: ['Product Hunt (gratuit)', 'Reddit (gratuit)'] },
+              { title: 'Recrutement early adopters', desc: 'Facebook Groups, communautés Discord, forums spécialisés. 50 utilisateurs actifs = feedback gold.', cat: 'client', tools: ['Facebook Groups (gratuit)', 'Discord (gratuit)'] },
             ]
           },
           {
             label: 'Semaine 7–8 · Rétention & pubs',
             tasks: [
-              { title: 'Corriger top 5 friction points', desc: 'Basé sur analytics + avis stores. La rétention J7 est le KPI numéro 1 à cette étape.', cat: 'produit' },
-              { title: 'Lancer campagne UA test (50$)', desc: 'Facebook/Instagram Ads ou TikTok Ads. Ciblage intérêt précis. Mesurer CPI (coût par install).', cat: 'marketing' },
+              { title: 'Corriger top 5 friction points', desc: 'Basé sur analytics + avis stores. La rétention J7 est le KPI numéro 1 à cette étape.', cat: 'produit', tools: ['Firebase Analytics (gratuit)', 'AppFollow (gratuit)'] },
+              { title: 'Lancer campagne UA test (50$)', desc: 'Facebook/Instagram Ads ou TikTok Ads. Ciblage intérêt précis. Mesurer CPI (coût par install).', cat: 'marketing', tools: ['Facebook Ads', 'TikTok Ads Manager'] },
             ]
           }
         ]
@@ -1017,15 +1033,15 @@ const MODELS = [
           {
             label: 'Semaine 9–11 · Modèle de revenus',
             tasks: [
-              { title: 'Activer monétisation (freemium/abo)', desc: 'In-app purchases ou abonnement Pro. Tester prix différents selon pays. Vérifier taux de conversion free → paid.', cat: 'finance' },
-              { title: 'Partenariats d\'intégration', desc: 'Proposer l\'app à des plateformes / SaaS complémentaires. Intégration = distribution sans coût UA.', cat: 'client' },
+              { title: 'Activer monétisation (freemium/abo)', desc: 'In-app purchases ou abonnement Pro. Tester prix différents selon pays. Vérifier taux de conversion free → paid.', cat: 'finance', tools: ['RevenueCat (gratuit tier)', 'Firebase (gratuit)'] },
+              { title: 'Partenariats d\'intégration', desc: 'Proposer l\'app à des plateformes / SaaS complémentaires. Intégration = distribution sans coût UA.', cat: 'client', tools: ['Gmail', 'LinkedIn'] },
             ]
           },
           {
             label: 'Semaine 12–13 · Optimisation & roadmap',
             tasks: [
-              { title: 'A/B test onboarding', desc: 'Tester 2 versions du flow d\'inscription. La version qui améliore la complétion de 10 % = victoire.', cat: 'produit' },
-              { title: 'Bilan J90 & plan de croissance', desc: 'DAU, rétention, revenus, LTV vs CAC. Décision : continuer, pivoter ou doubler la mise ?', cat: 'finance' },
+              { title: 'A/B test onboarding', desc: 'Tester 2 versions du flow d\'inscription. La version qui améliore la complétion de 10 % = victoire.', cat: 'produit', tools: ['Firebase Remote Config (gratuit)', 'Mixpanel (gratuit)'] },
+              { title: 'Bilan J90 & plan de croissance', desc: 'DAU, rétention, revenus, LTV vs CAC. Décision : continuer, pivoter ou doubler la mise ?', cat: 'finance', tools: ['Google Sheets', 'AppFollow (gratuit)'] },
             ]
           }
         ]
@@ -1054,17 +1070,17 @@ const MODELS = [
           {
             label: 'Semaine 1–2 · Niche & offre',
             tasks: [
-              { title: 'Définir sa spécialité claire', desc: 'Pas "développeur" mais "développeur WordPress pour PME malgaches". La niche rend crédible et facilite la prospection.', cat: 'produit' },
-              { title: 'Constituer 3–5 exemples de travaux', desc: 'Sélectionner ou créer des cas concrets à montrer aux clients : missions passées, projets fictifs de démonstration, avant/après avec résultats concrets si possible.', cat: 'produit' },
-              { title: 'Fixer sa grille tarifaire', desc: 'Rechercher les tarifs du marché local + international. Définir forfaits clairs plutôt que taux horaire seul.', cat: 'finance' },
+              { title: 'Définir sa spécialité claire', desc: 'Pas "développeur" mais "développeur WordPress pour PME malgaches". La niche rend crédible et facilite la prospection.', cat: 'produit', tools: ['Notion (gratuit)'] },
+              { title: 'Constituer 3–5 exemples de travaux', desc: 'Sélectionner ou créer des cas concrets à montrer aux clients : missions passées, projets fictifs de démonstration, avant/après avec résultats concrets si possible.', cat: 'produit', tools: ['Behance (gratuit)', 'Notion (gratuit)'] },
+              { title: 'Fixer sa grille tarifaire', desc: 'Rechercher les tarifs du marché local + international. Définir forfaits clairs plutôt que taux horaire seul.', cat: 'finance', tools: ['Google Sheets', 'Malt (gratuit)'] },
             ]
           },
           {
             label: 'Semaine 3–4 · Présence en ligne',
             tasks: [
-              { title: 'Profil LinkedIn optimisé', desc: 'Titre accrocheur, résumé orienté résultats clients, portfolio visible, recommandations actives.', cat: 'marketing' },
-              { title: 'Profils Upwork / Fiverr / Malt', desc: 'Portfolio complet, description orientée client (pas compétences, mais problèmes résolus). Tests de compétences.', cat: 'marketing' },
-              { title: 'Site portfolio simple', desc: 'Une page suffisante : services, projets, témoignages, formulaire de contact. Pas besoin de CMS complexe.', cat: 'technique' },
+              { title: 'Profil LinkedIn optimisé', desc: 'Titre accrocheur, résumé orienté résultats clients, portfolio visible, recommandations actives.', cat: 'marketing', tools: ['LinkedIn (gratuit)'] },
+              { title: 'Profils Upwork / Fiverr / Malt', desc: 'Portfolio complet, description orientée client (pas compétences, mais problèmes résolus). Tests de compétences.', cat: 'marketing', tools: ['Upwork (gratuit)', 'Fiverr (gratuit)', 'Malt (gratuit)'] },
+              { title: 'Site portfolio simple', desc: 'Une page suffisante : services, projets, témoignages, formulaire de contact. Pas besoin de CMS complexe.', cat: 'technique', tools: ['Carrd (gratuit)', 'Notion (gratuit)'] },
             ]
           }
         ]
@@ -1076,16 +1092,16 @@ const MODELS = [
           {
             label: 'Semaine 5–7 · Prospection intensive',
             tasks: [
-              { title: 'Cold outreach quotidien (10 contacts/j)', desc: 'LinkedIn DMs personnalisés. Email : objet court, problème identifié, solution proposée, CTA unique.', cat: 'client' },
-              { title: 'Réactivation réseau existant', desc: 'Contacter anciens collègues, camarades, famille. Annoncer votre activité freelance. Le premier client vient souvent de là.', cat: 'client' },
-              { title: 'Sous-traiter pour d\'autres freelances', desc: 'S\'associer à des agences ou freelances seniors. Moins rémunérateur mais expérience + références rapides.', cat: 'client' },
+              { title: 'Cold outreach quotidien (10 contacts/j)', desc: 'LinkedIn DMs personnalisés. Email : objet court, problème identifié, solution proposée, CTA unique.', cat: 'client', tools: ['LinkedIn (gratuit)', 'Gmail'] },
+              { title: 'Réactivation réseau existant', desc: 'Contacter anciens collègues, camarades, famille. Annoncer votre activité freelance. Le premier client vient souvent de là.', cat: 'client', tools: ['WhatsApp', 'LinkedIn'] },
+              { title: 'Sous-traiter pour d\'autres freelances', desc: 'S\'associer à des agences ou freelances seniors. Moins rémunérateur mais expérience + références rapides.', cat: 'client', tools: ['Upwork (gratuit)', 'Malt (gratuit)'] },
             ]
           },
           {
             label: 'Semaine 8 · Livraison & témoignages',
             tasks: [
-              { title: 'Sur-livrer sur les premiers clients', desc: 'Aller au-delà de ce qui est demandé. Le bouche-à-oreille et les recommandations sont votre meilleur marketing.', cat: 'client' },
-              { title: 'Collecter témoignages écrits + notes', desc: 'Demander systématiquement après chaque mission. Google, LinkedIn, Upwork : les avis = crédibilité future.', cat: 'marketing' },
+              { title: 'Sur-livrer sur les premiers clients', desc: 'Aller au-delà de ce qui est demandé. Le bouche-à-oreille et les recommandations sont votre meilleur marketing.', cat: 'client', tools: ['Notion (gratuit)', 'Google Docs'] },
+              { title: 'Collecter témoignages écrits + notes', desc: 'Demander systématiquement après chaque mission. Google, LinkedIn, Upwork : les avis = crédibilité future.', cat: 'marketing', tools: ['LinkedIn (gratuit)', 'Google Reviews (gratuit)'] },
             ]
           }
         ]
@@ -1097,16 +1113,16 @@ const MODELS = [
           {
             label: 'Semaine 9–11 · Augmenter les tarifs',
             tasks: [
-              { title: 'Revaloriser son taux horaire / forfait', desc: 'Avec 3+ clients satisfaits et des références, augmenter les prix de 20–30 % sur nouveaux prospects.', cat: 'finance' },
-              { title: 'Créer des offres packagees', desc: 'Passer du projet one-shot aux retainers mensuels. Revenus prévisibles = moins de stress commercial.', cat: 'produit' },
+              { title: 'Revaloriser son taux horaire / forfait', desc: 'Avec 3+ clients satisfaits et des références, augmenter les prix de 20–30 % sur nouveaux prospects.', cat: 'finance', tools: ['Google Sheets', 'Notion (gratuit)'] },
+              { title: 'Créer des offres packagees', desc: 'Passer du projet one-shot aux retainers mensuels. Revenus prévisibles = moins de stress commercial.', cat: 'produit', tools: ['Notion (gratuit)', 'Google Docs'] },
             ]
           },
           {
             label: 'Semaine 12–13 · Délégation & scalabilité',
             tasks: [
-              { title: 'Identifier tâches à déléguer', desc: 'Les tâches que d\'autres font aussi bien pour moins cher = à externaliser (admin, certains livrables).', cat: 'produit' },
-              { title: 'Réflexion transition agence', desc: 'Le plafond freelance se repousse via équipe. Premier recrutement : sous-traitant sur mission précise.', cat: 'finance' },
-              { title: 'Bilan J90 : CA, clients, taux horaire', desc: 'Mesurer l\'évolution depuis J1. Objectifs J180 : retainers, taux augmenté, premier sous-traitant.', cat: 'finance' },
+              { title: 'Identifier tâches à déléguer', desc: 'Les tâches que d\'autres font aussi bien pour moins cher = à externaliser (admin, certains livrables).', cat: 'produit', tools: ['Notion (gratuit)', 'Trello (gratuit)'] },
+              { title: 'Réflexion transition agence', desc: 'Le plafond freelance se repousse via équipe. Premier recrutement : sous-traitant sur mission précise.', cat: 'finance', tools: ['LinkedIn', 'Upwork (gratuit)'] },
+              { title: 'Bilan J90 : CA, clients, taux horaire', desc: 'Mesurer l\'évolution depuis J1. Objectifs J180 : retainers, taux augmenté, premier sous-traitant.', cat: 'finance', tools: ['Google Sheets'] },
             ]
           }
         ]
@@ -1135,16 +1151,16 @@ const MODELS = [
           {
             label: 'Semaine 1–2 · Design de l\'offre',
             tasks: [
-              { title: 'Définir transformation promise', desc: 'Pas "formation en marketing" mais "passer de 0 à 1er client en 30 jours". La transformation = l\'offre.', cat: 'produit' },
-              { title: 'Structurer le curriculum', desc: 'Modules, leçons, exercices, ressources. Prévoir 4–8 semaines de programme. Résultat mesurable à la fin.', cat: 'produit' },
-              { title: 'Créer le contenu d\'autorité', desc: '5 contenus LinkedIn / Facebook par semaine. Partager expertise gratuitement pour bâtir la confiance.', cat: 'contenu' },
+              { title: 'Définir transformation promise', desc: 'Pas "formation en marketing" mais "passer de 0 à 1er client en 30 jours". La transformation = l\'offre.', cat: 'produit', tools: ['Notion (gratuit)'] },
+              { title: 'Structurer le curriculum', desc: 'Modules, leçons, exercices, ressources. Prévoir 4–8 semaines de programme. Résultat mesurable à la fin.', cat: 'produit', tools: ['Notion (gratuit)', 'Google Docs'] },
+              { title: 'Créer le contenu d\'autorité', desc: '5 contenus LinkedIn / Facebook par semaine. Partager expertise gratuitement pour bâtir la confiance.', cat: 'contenu', tools: ['LinkedIn (gratuit)', 'Canva (gratuit)'] },
             ]
           },
           {
             label: 'Semaine 3–4 · Validation',
             tasks: [
-              { title: 'Pré-vente du programme', desc: 'Vendre avant de créer le contenu complet. 5 ventes à prix early bird = validation + financement initial.', cat: 'finance' },
-              { title: 'Premier webinaire gratuit', desc: '45 min de valeur pure sur votre sujet. 15 min de présentation offre. Cibler 20–30 participants minimum.', cat: 'marketing' },
+              { title: 'Pré-vente du programme', desc: 'Vendre avant de créer le contenu complet. 5 ventes à prix early bird = validation + financement initial.', cat: 'finance', tools: ['WhatsApp', 'Stripe (gratuit setup)'] },
+              { title: 'Premier webinaire gratuit', desc: '45 min de valeur pure sur votre sujet. 15 min de présentation offre. Cibler 20–30 participants minimum.', cat: 'marketing', tools: ['Google Meet (gratuit)', 'Zoom (gratuit)'] },
             ]
           }
         ]
@@ -1156,16 +1172,16 @@ const MODELS = [
           {
             label: 'Semaine 5–7 · Machine de lancement',
             tasks: [
-              { title: 'Tunnel de vente simplifié', desc: 'Landing page → Email séquence (5 emails) → Webinaire → Vente. Un outil simple suffit (MailerLite, Brevo).', cat: 'technique' },
-              { title: 'Coaching 1:1 pour crédibilité rapide', desc: 'Proposer 3 sessions de coaching offertes contre témoignages vidéo. Preuve sociale avant tout.', cat: 'client' },
-              { title: 'Publicité Facebook ciblée', desc: 'Budget test : 50–100$ / semaine. Ciblage intérêt précis, retargeting visiteurs page. Objectif : leads webinaire.', cat: 'marketing' },
+              { title: 'Tunnel de vente simplifié', desc: 'Landing page → Email séquence (5 emails) → Webinaire → Vente. Un outil simple suffit (MailerLite, Brevo).', cat: 'technique', tools: ['MailerLite (gratuit)', 'Brevo (gratuit)'] },
+              { title: 'Coaching 1:1 pour crédibilité rapide', desc: 'Proposer 3 sessions de coaching offertes contre témoignages vidéo. Preuve sociale avant tout.', cat: 'client', tools: ['Google Meet (gratuit)', 'Calendly (gratuit)'] },
+              { title: 'Publicité Facebook ciblée', desc: 'Budget test : 50–100$ / semaine. Ciblage intérêt précis, retargeting visiteurs page. Objectif : leads webinaire.', cat: 'marketing', tools: ['Facebook Ads Manager'] },
             ]
           },
           {
             label: 'Semaine 8 · Optimisation tunnel',
             tasks: [
-              { title: 'A/B test landing page', desc: 'Tester titre principal, CTA, proposition de valeur. Amélioration de 10 % = doublement du CA.', cat: 'marketing' },
-              { title: 'Programme d\'affiliation simple', desc: 'Proposer 20 % de commission aux partenaires qui apportent des clients. Réseau de recommandation passif.', cat: 'client' },
+              { title: 'A/B test landing page', desc: 'Tester titre principal, CTA, proposition de valeur. Amélioration de 10 % = doublement du CA.', cat: 'marketing', tools: ['Google Analytics (gratuit)', 'Hotjar (gratuit)'] },
+              { title: 'Programme d\'affiliation simple', desc: 'Proposer 20 % de commission aux partenaires qui apportent des clients. Réseau de recommandation passif.', cat: 'client', tools: ['Notion (gratuit)', 'WhatsApp'] },
             ]
           }
         ]
@@ -1177,15 +1193,15 @@ const MODELS = [
           {
             label: 'Semaine 9–11 · Evergreen',
             tasks: [
-              { title: 'Programme en accès perpétuel', desc: 'Transformer la formation en produit evergreen. Le webinaire devient enregistré. Tunnel automatisé 24/7.', cat: 'produit' },
-              { title: 'Community building', desc: 'Groupe Facebook privé ou Discord pour vos clients. Rétention, upsell naturel, bouche-à-oreille.', cat: 'client' },
+              { title: 'Programme en accès perpétuel', desc: 'Transformer la formation en produit evergreen. Le webinaire devient enregistré. Tunnel automatisé 24/7.', cat: 'produit', tools: ['Gumroad (gratuit)', 'Notion (gratuit)'] },
+              { title: 'Community building', desc: 'Groupe Facebook privé ou Discord pour vos clients. Rétention, upsell naturel, bouche-à-oreille.', cat: 'client', tools: ['Discord (gratuit)', 'Facebook Groups (gratuit)'] },
             ]
           },
           {
             label: 'Semaine 12–13 · Scaling',
             tasks: [
-              { title: 'Lancement offre groupe premium', desc: 'Programme de 3 mois à prix élevé (10x). Accès illimité, coaching hebdo, communauté. 10 clients = revenu solide.', cat: 'finance' },
-              { title: 'Bilan J90 & plan J180', desc: 'Nombre de clients, CA, taux de satisfaction, témoignages. Décision : nicher plus ou élargir l\'offre.', cat: 'finance' },
+              { title: 'Lancement offre groupe premium', desc: 'Programme de 3 mois à prix élevé (10x). Accès illimité, coaching hebdo, communauté. 10 clients = revenu solide.', cat: 'finance', tools: ['WhatsApp', 'Google Meet (gratuit)'] },
+              { title: 'Bilan J90 & plan J180', desc: 'Nombre de clients, CA, taux de satisfaction, témoignages. Décision : nicher plus ou élargir l\'offre.', cat: 'finance', tools: ['Google Sheets'] },
             ]
           }
         ]
@@ -1214,16 +1230,16 @@ const MODELS = [
           {
             label: 'Semaine 1–2 · Compétences vente',
             tasks: [
-              { title: 'Maîtriser le script de vente de base', desc: 'SPIN Selling ou Sandler. Pratiquer chaque jour avec un partenaire. Enregistrer et analyser ses calls.', cat: 'produit' },
-              { title: 'Identifier les offres à closer', desc: 'Coaching, formations, SaaS, agences. Contacter 20 entrepreneurs avec offres établies et demander à closer pour eux.', cat: 'client' },
-              { title: 'Formation objections courantes', desc: 'Préparer réponses à : "trop cher", "j\'y réfléchis", "je dois consulter mon conjoint". Jeu de rôle quotidien.', cat: 'produit' },
+              { title: 'Maîtriser le script de vente de base', desc: 'SPIN Selling ou Sandler. Pratiquer chaque jour avec un partenaire. Enregistrer et analyser ses calls.', cat: 'produit', tools: ['Notion (gratuit)', 'Otter.ai (gratuit)'] },
+              { title: 'Identifier les offres à closer', desc: 'Coaching, formations, SaaS, agences. Contacter 20 entrepreneurs avec offres établies et demander à closer pour eux.', cat: 'client', tools: ['LinkedIn (gratuit)', 'WhatsApp'] },
+              { title: 'Formation objections courantes', desc: 'Préparer réponses à : "trop cher", "j\'y réfléchis", "je dois consulter mon conjoint". Jeu de rôle quotidien.', cat: 'produit', tools: ['Notion (gratuit)', 'YouTube (gratuit)'] },
             ]
           },
           {
             label: 'Semaine 3–4 · Premier partenariat',
             tasks: [
-              { title: 'Closer pour 1 entrepreneur gratuitement', desc: 'Négocier de closer les premiers leads gratuitement contre références et formation. Apprendre sur le terrain.', cat: 'client' },
-              { title: 'Structurer ses outils (CRM simple)', desc: 'Notion ou Trello pour tracker les leads, statuts, relances. La rigueur du suivi = la différence entre amateurs et pros.', cat: 'technique' },
+              { title: 'Closer pour 1 entrepreneur gratuitement', desc: 'Négocier de closer les premiers leads gratuitement contre références et formation. Apprendre sur le terrain.', cat: 'client', tools: ['WhatsApp', 'Zoom (gratuit)'] },
+              { title: 'Structurer ses outils (CRM simple)', desc: 'Notion ou Trello pour tracker les leads, statuts, relances. La rigueur du suivi = la différence entre amateurs et pros.', cat: 'technique', tools: ['Notion (gratuit)', 'HubSpot CRM (gratuit)'] },
             ]
           }
         ]
@@ -1235,15 +1251,15 @@ const MODELS = [
           {
             label: 'Semaine 5–7 · Volume & performance',
             tasks: [
-              { title: 'Objectif 30 calls / semaine', desc: 'Prospection + leads fournis par partenaire. Suivre métriques : taux de show-up, no-show, conversions.', cat: 'client' },
-              { title: 'Analyse et amélioration call par call', desc: 'Écouter chaque call enregistré. Identifier le moment exact de la perte. Corriger 1 chose à la fois.', cat: 'produit' },
-              { title: 'Développer son réseau closers', desc: 'Rejoindre communautés de closers (France, Madagascar). Partager scripts, objections, bonnes pratiques.', cat: 'client' },
+              { title: 'Objectif 30 calls / semaine', desc: 'Prospection + leads fournis par partenaire. Suivre métriques : taux de show-up, no-show, conversions.', cat: 'client', tools: ['Google Meet (gratuit)', 'Zoom (gratuit)', 'Notion (gratuit)'] },
+              { title: 'Analyse et amélioration call par call', desc: 'Écouter chaque call enregistré. Identifier le moment exact de la perte. Corriger 1 chose à la fois.', cat: 'produit', tools: ['Otter.ai (gratuit)', 'Notion (gratuit)'] },
+              { title: 'Développer son réseau closers', desc: 'Rejoindre communautés de closers (France, Madagascar). Partager scripts, objections, bonnes pratiques.', cat: 'client', tools: ['Facebook Groups (gratuit)', 'Discord (gratuit)'] },
             ]
           },
           {
             label: 'Semaine 8 · Négociation commission',
             tasks: [
-              { title: 'Revaloriser sa commission', desc: 'Avec 5+ ventes prouvées, négocier passage à 15–20 % ou bonus sur objectif dépassé.', cat: 'finance' },
+              { title: 'Revaloriser sa commission', desc: 'Avec 5+ ventes prouvées, négocier passage à 15–20 % ou bonus sur objectif dépassé.', cat: 'finance', tools: ['Notion (gratuit)', 'Google Sheets'] },
             ]
           }
         ]
@@ -1255,15 +1271,15 @@ const MODELS = [
           {
             label: 'Semaine 9–11 · Systématisation',
             tasks: [
-              { title: 'Créer ses propres séquences outreach', desc: 'Email / LinkedIn / WhatsApp séquences pour générer ses propres leads. Ne plus dépendre uniquement d\'un partenaire.', cat: 'marketing' },
-              { title: 'Closer pour 2–3 entrepreneurs simultanément', desc: 'Diversifier le risque. Si un partenaire change d\'offre, avoir d\'autres sources de commissions.', cat: 'client' },
+              { title: 'Créer ses propres séquences outreach', desc: 'Email / LinkedIn / WhatsApp séquences pour générer ses propres leads. Ne plus dépendre uniquement d\'un partenaire.', cat: 'marketing', tools: ['Gmail', 'LinkedIn (gratuit)', 'Brevo (gratuit)'] },
+              { title: 'Closer pour 2–3 entrepreneurs simultanément', desc: 'Diversifier le risque. Si un partenaire change d\'offre, avoir d\'autres sources de commissions.', cat: 'client', tools: ['Notion (gratuit)', 'HubSpot CRM (gratuit)'] },
             ]
           },
           {
             label: 'Semaine 12–13 · Transition setter ou agence',
             tasks: [
-              { title: 'Recruter un setter', desc: 'Le setter qualifie, le closer ferme. Déléguer la qualification libère du temps et augmente le volume de ventes.', cat: 'produit' },
-              { title: 'Bilan J90 : CA, taux, commissions', desc: 'Mesurer progression depuis J1. Objectif : dépasser 2M Ar / mois et viser sa propre agence de closing.', cat: 'finance' },
+              { title: 'Recruter un setter', desc: 'Le setter qualifie, le closer ferme. Déléguer la qualification libère du temps et augmente le volume de ventes.', cat: 'produit', tools: ['WhatsApp', 'Notion (gratuit)'] },
+              { title: 'Bilan J90 : CA, taux, commissions', desc: 'Mesurer progression depuis J1. Objectif : dépasser 2M Ar / mois et viser sa propre agence de closing.', cat: 'finance', tools: ['Google Sheets'] },
             ]
           }
         ]
@@ -1292,17 +1308,17 @@ const MODELS = [
           {
             label: 'Semaine 1–2 · Validation produit',
             tasks: [
-              { title: 'Trouver produit à fort potentiel viral', desc: 'Outils : TikTok Creative Center, Minea, AdSpy. Chercher produits déjà vendus ailleurs mais absents sur votre marché.', cat: 'produit' },
-              { title: 'Sourcing fournisseur & test qualité', desc: 'Commander 5–10 échantillons. Tester soi-même. Photos et vidéos UGC authentiques valent plus que du studio.', cat: 'produit' },
-              { title: 'Créer identité de marque', desc: 'Logo (Canva), palette couleurs, nom mémorable. Une marque crédible double le taux de conversion.', cat: 'marketing' },
+              { title: 'Trouver produit à fort potentiel viral', desc: 'Outils : TikTok Creative Center, Minea, AdSpy. Chercher produits déjà vendus ailleurs mais absents sur votre marché.', cat: 'produit', tools: ['TikTok Creative Center (gratuit)', 'Google Trends (gratuit)'] },
+              { title: 'Sourcing fournisseur & test qualité', desc: 'Commander 5–10 échantillons. Tester soi-même. Photos et vidéos UGC authentiques valent plus que du studio.', cat: 'produit', tools: ['Alibaba', 'WhatsApp Business'] },
+              { title: 'Créer identité de marque', desc: 'Logo (Canva), palette couleurs, nom mémorable. Une marque crédible double le taux de conversion.', cat: 'marketing', tools: ['Canva (gratuit)', 'Namelix (gratuit)'] },
             ]
           },
           {
             label: 'Semaine 3–4 · Boutique & paiement',
             tasks: [
-              { title: 'Boutique Shopify ou WooCommerce', desc: 'Thème propre, pages produit optimisées, photos haute qualité, avis vérifiés. Tunnel d\'achat sans friction.', cat: 'technique' },
-              { title: 'Intégrer paiement local', desc: 'MVola, Orange Money, virement bancaire. Paiement mobile = +40 % de conversions pour Madagascar.', cat: 'technique' },
-              { title: 'Politique retour & SAV claire', desc: 'La confiance convertit. Afficher clairement délais livraison, conditions retour, contact SAV.', cat: 'produit' },
+              { title: 'Boutique Shopify ou WooCommerce', desc: 'Thème propre, pages produit optimisées, photos haute qualité, avis vérifiés. Tunnel d\'achat sans friction.', cat: 'technique', tools: ['WooCommerce (gratuit)', 'Shopify'] },
+              { title: 'Intégrer paiement local', desc: 'MVola, Orange Money, virement bancaire. Paiement mobile = +40 % de conversions pour Madagascar.', cat: 'technique', tools: ['API MVola', 'Orange Money API'] },
+              { title: 'Politique retour & SAV claire', desc: 'La confiance convertit. Afficher clairement délais livraison, conditions retour, contact SAV.', cat: 'produit', tools: ['Notion (gratuit)', 'Google Docs'] },
             ]
           }
         ]
@@ -1314,15 +1330,15 @@ const MODELS = [
           {
             label: 'Semaine 5–6 · Contenu TikTok organique',
             tasks: [
-              { title: '3–5 vidéos TikTok / jour', desc: 'Unboxing, utilisation, avant/après, témoignage. Pas de budget pub nécessaire au démarrage. L\'organique valide d\'abord.', cat: 'contenu' },
-              { title: 'Partenariats micro-influenceurs', desc: 'Envoyer produits à 10–20 créateurs (5K–50K followers). Accord : une vidéo contre produit gratuit + code promo.', cat: 'marketing' },
+              { title: '3–5 vidéos TikTok / jour', desc: 'Unboxing, utilisation, avant/après, témoignage. Pas de budget pub nécessaire au démarrage. L\'organique valide d\'abord.', cat: 'contenu', tools: ['TikTok (gratuit)', 'CapCut (gratuit)'] },
+              { title: 'Partenariats micro-influenceurs', desc: 'Envoyer produits à 10–20 créateurs (5K–50K followers). Accord : une vidéo contre produit gratuit + code promo.', cat: 'marketing', tools: ['TikTok DM', 'Instagram DM'] },
             ]
           },
           {
             label: 'Semaine 7–8 · Premières publicités',
             tasks: [
-              { title: 'Campagne TikTok Ads test (100$)', desc: 'Objectif : trafic ou conversion. Tester 3–5 visuels différents. Couper ce qui ne convertit pas après 48h.', cat: 'marketing' },
-              { title: 'Pixel & retargeting setup', desc: 'TikTok Pixel, Facebook Pixel. Retargeter visiteurs panier abandonné = ROI le plus rapide.', cat: 'technique' },
+              { title: 'Campagne TikTok Ads test (100$)', desc: 'Objectif : trafic ou conversion. Tester 3–5 visuels différents. Couper ce qui ne convertit pas après 48h.', cat: 'marketing', tools: ['TikTok Ads Manager', 'Canva (gratuit)'] },
+              { title: 'Pixel & retargeting setup', desc: 'TikTok Pixel, Facebook Pixel. Retargeter visiteurs panier abandonné = ROI le plus rapide.', cat: 'technique', tools: ['TikTok Pixel (gratuit)', 'Meta Pixel (gratuit)'] },
             ]
           }
         ]
@@ -1334,16 +1350,16 @@ const MODELS = [
           {
             label: 'Semaine 9–11 · Scaling des ads',
             tasks: [
-              { title: 'Doubler budget sur creatives gagnants', desc: 'Le creative qui performe bien en petit budget performe en gros. Scaler par paliers de 30–50 %.', cat: 'finance' },
-              { title: 'Optimisation taux de conversion', desc: 'A/B test titre produit, images, CTA, urgence (stock limité). CRO = argent gratuit sur trafic existant.', cat: 'produit' },
+              { title: 'Doubler budget sur creatives gagnants', desc: 'Le creative qui performe bien en petit budget performe en gros. Scaler par paliers de 30–50 %.', cat: 'finance', tools: ['TikTok Ads Manager', 'Facebook Ads'] },
+              { title: 'Optimisation taux de conversion', desc: 'A/B test titre produit, images, CTA, urgence (stock limité). CRO = argent gratuit sur trafic existant.', cat: 'produit', tools: ['Google Analytics (gratuit)', 'Hotjar (gratuit)'] },
             ]
           },
           {
             label: 'Semaine 12–13 · Fidélisation & catalogue',
             tasks: [
-              { title: 'Email & SMS post-achat', desc: 'Séquence : confirmation, upsell J3, relance J7, feedback J14. LTV client = clé de la profitabilité.', cat: 'marketing' },
-              { title: 'Élargir le catalogue produits', desc: 'Ajouter 2–3 produits complémentaires testés. Bundle deals augmentent panier moyen de 25 %.', cat: 'produit' },
-              { title: 'Bilan J90 : CA, ROAS, marges', desc: 'Décision basée sur données : continuer niche, pivoter produit, ou ouvrir un second vertical ?', cat: 'finance' },
+              { title: 'Email & SMS post-achat', desc: 'Séquence : confirmation, upsell J3, relance J7, feedback J14. LTV client = clé de la profitabilité.', cat: 'marketing', tools: ['Brevo (gratuit)', 'MailerLite (gratuit)'] },
+              { title: 'Élargir le catalogue produits', desc: 'Ajouter 2–3 produits complémentaires testés. Bundle deals augmentent panier moyen de 25 %.', cat: 'produit', tools: ['WooCommerce (gratuit)', 'Canva (gratuit)'] },
+              { title: 'Bilan J90 : CA, ROAS, marges', desc: 'Décision basée sur données : continuer niche, pivoter produit, ou ouvrir un second vertical ?', cat: 'finance', tools: ['Google Sheets', 'TikTok Ads Manager'] },
             ]
           }
         ]
@@ -1372,16 +1388,16 @@ const MODELS = [
           {
             label: 'Semaine 1–2 · Choix du service',
             tasks: [
-              { title: 'Choisir 1 service productizable par IA', desc: 'Création de contenu, copywriting, montage vidéo IA, designs visuels, rapports SEO. Tester en 24h avec ChatGPT / Claude.', cat: 'produit' },
-              { title: 'Maîtriser les outils IA du service', desc: 'Claude pour copy, Sora pour vidéo, Midjourney pour images, Descript pour audio. Pratiquer 1h / jour.', cat: 'technique' },
-              { title: 'Définir son package commercial', desc: 'Forfait clair, délai précis, révisions incluses. "10 posts LinkedIn / mois = 200K Ar, livré en 48h." Simple vend mieux.', cat: 'produit' },
+              { title: 'Choisir 1 service productizable par IA', desc: 'Création de contenu, copywriting, montage vidéo IA, designs visuels, rapports SEO. Tester en 24h avec ChatGPT / Claude.', cat: 'produit', tools: ['ChatGPT (gratuit)', 'Claude (gratuit)'] },
+              { title: 'Maîtriser les outils IA du service', desc: 'Claude pour copy, Sora pour vidéo, Midjourney pour images, Descript pour audio. Pratiquer 1h / jour.', cat: 'technique', tools: ['Claude (gratuit)', 'Canva IA (gratuit)', 'CapCut IA (gratuit)'] },
+              { title: 'Définir son package commercial', desc: 'Forfait clair, délai précis, révisions incluses. "10 posts LinkedIn / mois = 200K Ar, livré en 48h." Simple vend mieux.', cat: 'produit', tools: ['Notion (gratuit)', 'Google Docs'] },
             ]
           },
           {
             label: 'Semaine 3–4 · Premiers livrables portfolio',
             tasks: [
-              { title: 'Créer 3 cas clients fictifs convaincants', desc: 'Avant / après, résultats simulés réalistes. Le portfolio compte plus que les certifications pour vendre.', cat: 'marketing' },
-              { title: 'Landing page simple', desc: 'Problème → Solution → Preuves → CTA. Un bouton, un message. Hébergé sur Carrd ou Notion.', cat: 'technique' },
+              { title: 'Créer 3 cas clients fictifs convaincants', desc: 'Avant / après, résultats simulés réalistes. Le portfolio compte plus que les certifications pour vendre.', cat: 'marketing', tools: ['Canva (gratuit)', 'Notion (gratuit)'] },
+              { title: 'Landing page simple', desc: 'Problème → Solution → Preuves → CTA. Un bouton, un message. Hébergé sur Carrd ou Notion.', cat: 'technique', tools: ['Carrd (gratuit)', 'Notion (gratuit)'] },
             ]
           }
         ]
@@ -1393,15 +1409,15 @@ const MODELS = [
           {
             label: 'Semaine 5–7 · Machine commerciale',
             tasks: [
-              { title: 'Cold email automatisé (Instantly / Lemlist)', desc: '100 emails / jour vers ICP ciblé. Template personnalisé via IA. Viser 10 % de réponse, 2 % de closing.', cat: 'marketing' },
-              { title: 'Offre d\'essai gratuite limitée', desc: 'Livrer 1 mini-livrables gratuit (ex : 3 posts, 1 court texte). La preuve de qualité convertit mieux que tout.', cat: 'client' },
-              { title: 'Workflow de livraison standardisé', desc: 'Prompt templates, étapes de contrôle qualité, outils IA intégrés. Livraison rapide + qualité constante.', cat: 'technique' },
+              { title: 'Cold email automatisé (Instantly / Lemlist)', desc: '100 emails / jour vers ICP ciblé. Template personnalisé via IA. Viser 10 % de réponse, 2 % de closing.', cat: 'marketing', tools: ['Brevo (gratuit)', 'Gmail + scripts'] },
+              { title: 'Offre d\'essai gratuite limitée', desc: 'Livrer 1 mini-livrables gratuit (ex : 3 posts, 1 court texte). La preuve de qualité convertit mieux que tout.', cat: 'client', tools: ['Google Docs', 'Notion (gratuit)'] },
+              { title: 'Workflow de livraison standardisé', desc: 'Prompt templates, étapes de contrôle qualité, outils IA intégrés. Livraison rapide + qualité constante.', cat: 'technique', tools: ['Notion (gratuit)', 'Trello (gratuit)', 'Claude (gratuit)'] },
             ]
           },
           {
             label: 'Semaine 8 · Upsell & rétention',
             tasks: [
-              { title: 'Convertir clients one-shot en retainers', desc: 'Proposer contrat mensuel après première mission réussie. Revenu récurrent = base de l\'activité.', cat: 'client' },
+              { title: 'Convertir clients one-shot en retainers', desc: 'Proposer contrat mensuel après première mission réussie. Revenu récurrent = base de l\'activité.', cat: 'client', tools: ['Notion (gratuit)', 'Google Docs'] },
             ]
           }
         ]
@@ -1413,15 +1429,15 @@ const MODELS = [
           {
             label: 'Semaine 9–11 · Délégation',
             tasks: [
-              { title: 'Recruter 1 assistant de production', desc: 'Déléguer les tâches IA répétitives. Vous = direction, stratégie, relation client. Lui = exécution.', cat: 'produit' },
-              { title: 'Funnel publicitaire test', desc: 'Facebook Ads ou LinkedIn Ads vers votre landing page. Budget test : 50–100$ / semaine.', cat: 'marketing' },
+              { title: 'Recruter 1 assistant de production', desc: 'Déléguer les tâches IA répétitives. Vous = direction, stratégie, relation client. Lui = exécution.', cat: 'produit', tools: ['Upwork (gratuit)', 'LinkedIn'] },
+              { title: 'Funnel publicitaire test', desc: 'Facebook Ads ou LinkedIn Ads vers votre landing page. Budget test : 50–100$ / semaine.', cat: 'marketing', tools: ['Facebook Ads Manager', 'Canva (gratuit)'] },
             ]
           },
           {
             label: 'Semaine 12–13 · Productisation complète',
             tasks: [
-              { title: 'Créer une offre d\'abonnement SaaS-like', desc: 'Contenu illimité / mois, livré en 48h, pour prix fixe. Le client commande via formulaire simple.', cat: 'produit' },
-              { title: 'Bilan J90 & plan d\'agence', desc: 'CA, marges, clients actifs. Vision : 5 clients retainers = revenus stables. Prochain recrutement planifié.', cat: 'finance' },
+              { title: 'Créer une offre d\'abonnement SaaS-like', desc: 'Contenu illimité / mois, livré en 48h, pour prix fixe. Le client commande via formulaire simple.', cat: 'produit', tools: ['Notion (gratuit)', 'Google Forms (gratuit)'] },
+              { title: 'Bilan J90 & plan d\'agence', desc: 'CA, marges, clients actifs. Vision : 5 clients retainers = revenus stables. Prochain recrutement planifié.', cat: 'finance', tools: ['Google Sheets'] },
             ]
           }
         ]
@@ -1450,16 +1466,16 @@ const MODELS = [
           {
             label: 'Semaine 1–2 · Niche verticale',
             tasks: [
-              { title: 'Choisir 1 secteur d\'entreprise cible', desc: 'RH, comptabilité, service client, e-commerce logistique. La spécialisation = crédibilité = prix premium.', cat: 'produit' },
-              { title: 'Identifier les 5 tâches les plus automatisables', desc: 'Saisie de données, envoi d\'emails, génération de rapports, qualification de leads, onboarding client.', cat: 'produit' },
-              { title: 'Maîtriser les outils d\'automatisation', desc: 'n8n, Make.com, Zapier, OpenAI API, Claude API. Construire 3 automatisations démo fonctionnelles en 2 semaines.', cat: 'technique' },
+              { title: 'Choisir 1 secteur d\'entreprise cible', desc: 'RH, comptabilité, service client, e-commerce logistique. La spécialisation = crédibilité = prix premium.', cat: 'produit', tools: ['Notion (gratuit)', 'LinkedIn'] },
+              { title: 'Identifier les 5 tâches les plus automatisables', desc: 'Saisie de données, envoi d\'emails, génération de rapports, qualification de leads, onboarding client.', cat: 'produit', tools: ['Notion (gratuit)', 'Claude (gratuit)'] },
+              { title: 'Maîtriser les outils d\'automatisation', desc: 'n8n, Make.com, Zapier, OpenAI API, Claude API. Construire 3 automatisations démo fonctionnelles en 2 semaines.', cat: 'technique', tools: ['n8n (gratuit)', 'Make.com (gratuit tier)', 'Zapier (gratuit tier)'] },
             ]
           },
           {
             label: 'Semaine 3–4 · Démonstration',
             tasks: [
-              { title: 'Construire une démo ROI chiffrée', desc: '"Automatiser votre saisie facturation = 10h / semaine économisées = 400K Ar / mois de gain." Les chiffres vendent.', cat: 'client' },
-              { title: 'Prospection LinkedIn ciblée', desc: 'Contacter DG, DAF, responsables opérations de PME locales. Message : problème → chiffre → invitation à démo.', cat: 'marketing' },
+              { title: 'Construire une démo ROI chiffrée', desc: '"Automatiser votre saisie facturation = 10h / semaine économisées = 400K Ar / mois de gain." Les chiffres vendent.', cat: 'client', tools: ['Google Slides (gratuit)', 'Canva (gratuit)'] },
+              { title: 'Prospection LinkedIn ciblée', desc: 'Contacter DG, DAF, responsables opérations de PME locales. Message : problème → chiffre → invitation à démo.', cat: 'marketing', tools: ['LinkedIn (gratuit)', 'Gmail'] },
             ]
           }
         ]
@@ -1471,15 +1487,15 @@ const MODELS = [
           {
             label: 'Semaine 5–7 · Cycle de vente B2B',
             tasks: [
-              { title: 'Conduire 5 démos par semaine', desc: 'Script rodé : découverte (15min) → démo (20min) → ROI chiffré (10min) → proposition commerciale (5min).', cat: 'client' },
-              { title: 'Proposer un pilote gratuit de 2 semaines', desc: 'Le pilote prouve la valeur avant l\'engagement. Réduit le risque perçu et accélère la décision.', cat: 'client' },
-              { title: 'Rédiger contrat et CGV', desc: 'Frais de setup + abonnement mensuel de maintenance. Prévoir clause de confidentialité (données entreprise).', cat: 'legal' },
+              { title: 'Conduire 5 démos par semaine', desc: 'Script rodé : découverte (15min) → démo (20min) → ROI chiffré (10min) → proposition commerciale (5min).', cat: 'client', tools: ['Google Meet (gratuit)', 'Notion (gratuit)'] },
+              { title: 'Proposer un pilote gratuit de 2 semaines', desc: 'Le pilote prouve la valeur avant l\'engagement. Réduit le risque perçu et accélère la décision.', cat: 'client', tools: ['n8n (gratuit)', 'Make.com (gratuit tier)'] },
+              { title: 'Rédiger contrat et CGV', desc: 'Frais de setup + abonnement mensuel de maintenance. Prévoir clause de confidentialité (données entreprise).', cat: 'legal', tools: ['Google Docs (gratuit)', 'Notion (gratuit)'] },
             ]
           },
           {
             label: 'Semaine 8 · Livraison excellence',
             tasks: [
-              { title: 'Sur-livrer sur le premier client', desc: 'Documenter les gains réels (heures économisées, erreurs évitées). Ces données = futur cas client pour prospecter.', cat: 'client' },
+              { title: 'Sur-livrer sur le premier client', desc: 'Documenter les gains réels (heures économisées, erreurs évitées). Ces données = futur cas client pour prospecter.', cat: 'client', tools: ['Notion (gratuit)', 'Google Sheets'] },
             ]
           }
         ]
@@ -1491,16 +1507,16 @@ const MODELS = [
           {
             label: 'Semaine 9–11 · Cas clients & références',
             tasks: [
-              { title: 'Produire 2 études de cas PDF', desc: 'Problème client → Solution déployée → Résultats mesurés. Format 1–2 pages, visuellement soigné. Outil de vente clé.', cat: 'marketing' },
-              { title: 'Activer LinkedIn Ads B2B', desc: 'Sponsoriser les études de cas vers les décideurs de votre secteur cible. Budget : 100$ / semaine minimum.', cat: 'marketing' },
+              { title: 'Produire 2 études de cas PDF', desc: 'Problème client → Solution déployée → Résultats mesurés. Format 1–2 pages, visuellement soigné. Outil de vente clé.', cat: 'marketing', tools: ['Canva (gratuit)', 'Google Docs (gratuit)'] },
+              { title: 'Activer LinkedIn Ads B2B', desc: 'Sponsoriser les études de cas vers les décideurs de votre secteur cible. Budget : 100$ / semaine minimum.', cat: 'marketing', tools: ['LinkedIn Ads'] },
             ]
           },
           {
             label: 'Semaine 12–13 · Structuration agence',
             tasks: [
-              { title: 'Recruter 1 développeur automatisation', desc: 'Vous = commercial et stratégie. Lui = déploiement et maintenance. Ratio : 1 dev pour 3–4 clients.', cat: 'produit' },
-              { title: 'Créer offres packagées par secteur', desc: '"Pack PME Comptabilité : 3 automatisations incluses + support 6 mois = X Ar". La clarté accélère les ventes.', cat: 'produit' },
-              { title: 'Bilan J90 : contrats, CA, NPS', desc: 'Analyser taux de closing, durée du cycle de vente, valeur contrat moyen. Plan de croissance J180.', cat: 'finance' },
+              { title: 'Recruter 1 développeur automatisation', desc: 'Vous = commercial et stratégie. Lui = déploiement et maintenance. Ratio : 1 dev pour 3–4 clients.', cat: 'produit', tools: ['LinkedIn', 'Upwork (gratuit)'] },
+              { title: 'Créer offres packagées par secteur', desc: '"Pack PME Comptabilité : 3 automatisations incluses + support 6 mois = X Ar". La clarté accélère les ventes.', cat: 'produit', tools: ['Notion (gratuit)', 'Canva (gratuit)'] },
+              { title: 'Bilan J90 : contrats, CA, NPS', desc: 'Analyser taux de closing, durée du cycle de vente, valeur contrat moyen. Plan de croissance J180.', cat: 'finance', tools: ['Google Sheets', 'Notion (gratuit)'] },
             ]
           }
         ]
@@ -1607,6 +1623,7 @@ function renderRoadmap(model) {
                     <div class="task-desc">${task.desc}</div>
                     <div class="task-meta">
                       <span class="task-category ${task.cat}">${task.cat}</span>
+                      ${task.tools ? task.tools.map(t => `<span class="tool-pill">${t}</span>`).join('') : ''}
                     </div>
                   </div>
                 </div>

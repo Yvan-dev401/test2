@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apprendre l'Allemand - Les 300 mots</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+         :root {
+            --primary-color: #0F6E56;
+            --bg-color: #f3f4f6;
+            --card-bg: #ffffff;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --correct-color: #16a34a;
+            --wrong-color: #dc2626;
+        }
+        * { box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        header { text-align: center; margin-bottom: 20px; }
+        h1 { color: var(--primary-color); margin-bottom: 5px; }
+        .stats {
+            background: var(--card-bg);
+            padding: 10px 20px;
+            border-radius: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            font-size: 0.9em;
+            margin-bottom: 30px;
+            display: flex;
+            gap: 20px;
+        }
+        .stats span { font-weight: bold; color: var(--primary-color); }
+        .flashcard-container {
+            perspective: 1000px;
+            width: 100%;
+            max-width: 400px;
+            height: 360px;
+            margin-bottom: 30px;
+        }
+        .flashcard {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+            transform-style: preserve-3d;
+            position: relative;
+            cursor: pointer;
+        }
+        .flashcard.is-flipped { transform: rotateY(180deg); }
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            background: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+        }
+        .card-front { border-top: 5px solid var(--primary-color); }
+        .card-back {
+            transform: rotateY(180deg);
+            border-top: 5px solid #ffcc00;
+            background-color: #fafbfc;
+        }
+        .word-de { font-size: 2.2em; font-weight: bold; margin-bottom: 8px; }
+        .word-fr { font-size: 1.8em; color: var(--primary-color); margin-bottom: 8px; }
+        .card-img {
+            width: 100%;
+            max-height: 130px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .card-img.loaded { opacity: 1; }
+        .img-caption {
+            font-size: 0.72em;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-bottom: 4px;
+            min-height: 16px;
+        }
+        .hint { font-size: 0.85em; color: var(--text-muted); margin-top: 8px; }
+        .controls {
+            display: flex;
+            gap: 15px;
+            width: 100%;
+            max-width: 400px;
+            justify-content: center;
+        }
+        button {
+            border: none;
+            padding: 12px 24px;
+            font-size: 1em;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.1s, opacity 0.2s;
+            color: white;
+            flex: 1;
+        }
+        button:active { transform: scale(0.95); }
+        #btn-show { background-color: var(--primary-color); flex: 0 0 100%; }
+        #btn-wrong { background-color: var(--wrong-color); display: none; }
+        #btn-correct { background-color: var(--correct-color); display: none; }
+        .message { margin-top: 20px; font-style: italic; color: var(--text-muted); text-align: center; }
+    </style>
+</head>
+<body>
+    <div style="width:100%;max-width:900px;margin-bottom:12px;">
+      <a href="index.html" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:#6b7280;text-decoration:none;padding:6px 12px;border:1px solid #e5e7eb;border-radius:8px;background:#f9fafb;transition:all 0.15s;" onmouseover="this.style.color='#111827';this.style.borderColor='#d1d5db'" onmouseout="this.style.color='#6b7280';this.style.borderColor='#e5e7eb'">← Accueil</a>
+      <a href="roadmap-allemand.html" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:#0F6E56;text-decoration:none;padding:5px 12px;border:1px solid #5DCAA5;border-radius:999px;background:#E1F5EE;margin-left:8px;">🔗 Lié à : Roadmap Allemand B1</a>
+    </div>
+    <header>
+        <h1>🇩🇪 Les Mots Allemands</h1>
+        <p>Apprentissage par répétition espacée</p>
+    </header>
+    <div class="stats">
+        <div>À réviser aujourd'hui : <span id="stat-due">0</span></div>
+        <div>Nouveaux mots : <span id="stat-new">0</span></div>
+    </div>
+    <div class="flashcard-container" id="flashcard-container">
+        <div class="flashcard" id="flashcard">
+            <div class="card-face card-front">
+                <img id="card-img" class="card-img" src="" alt="">
+                <div class="img-caption" id="img-caption"></div>
+                <div class="word-de" id="word-front">...</div>
+                <div class="hint">Cliquez ou appuyez sur Espace pour retourner</div>
+            </div>
+            <div class="card-face card-back">
+                <div class="word-fr" id="word-back">...</div>
+            </div>
+        </div>
+    </div>
+    <div class="controls">
+        <button id="btn-show">Voir la réponse</button>
+        <button id="btn-wrong">J'ai eu faux ❌</button>
+        <button id="btn-correct">Je le savais ✅</button>
+    </div>
+    <div class="message" id="message"></div>
+
+    <script>
+        const database = [
+            {id:1,de:"der, die, das",fr:"le, la, les (articles)"},{id:2,de:"und",fr:"et"},{id:3,de:"sein",fr:"être"},{id:4,de:"in",fr:"dans, en"},{id:5,de:"ein, eine",fr:"un, une"},{id:6,de:"zu",fr:"à, vers (direction)"},{id:7,de:"haben",fr:"avoir"},{id:8,de:"ich",fr:"je"},{id:9,de:"werden",fr:"devenir (ou futur)"},{id:10,de:"sie",fr:"elle / ils, elles"},{id:11,de:"von",fr:"de (provenance)"},{id:12,de:"nicht",fr:"ne... pas"},{id:13,de:"mit",fr:"avec"},{id:14,de:"es",fr:"il / elle (neutre)"},{id:15,de:"sich",fr:"se (réfléchi)"},{id:16,de:"auch",fr:"aussi"},{id:17,de:"auf",fr:"sur"},{id:18,de:"für",fr:"pour"},{id:19,de:"an",fr:"à, contre"},{id:20,de:"er",fr:"il"},{id:21,de:"so",fr:"ainsi, si"},{id:22,de:"dass",fr:"que (conjonction)"},{id:23,de:"können",fr:"pouvoir (capacité)"},{id:24,de:"dies",fr:"ce, ceci"},{id:25,de:"als",fr:"comme, en tant que, que"},{id:26,de:"ihr",fr:"vous (pluriel) / son, sa (à elle)"},{id:27,de:"ja",fr:"oui"},{id:28,de:"wie",fr:"comment, comme"},{id:29,de:"bei",fr:"chez, lors de"},{id:30,de:"oder",fr:"ou"},{id:31,de:"wir",fr:"nous"},{id:32,de:"aber",fr:"mais"},{id:33,de:"dann",fr:"ensuite, alors"},{id:34,de:"man",fr:"on"},{id:35,de:"da",fr:"là, puisque"},{id:36,de:"sein (possession)",fr:"son, sa (à lui)"},{id:37,de:"noch",fr:"encore"},{id:38,de:"nach",fr:"après, vers (pays/ville)"},{id:39,de:"was",fr:"quoi, que"},{id:40,de:"also",fr:"donc"},{id:41,de:"aus",fr:"de (qui sort de), en (matière)"},{id:42,de:"all",fr:"tout, tous"},{id:43,de:"wenn",fr:"quand (présent/futur), si"},{id:44,de:"nur",fr:"seulement"},{id:45,de:"müssen",fr:"devoir (obligation)"},{id:46,de:"sagen",fr:"dire"},{id:47,de:"um",fr:"autour de, à (heure), pour (but)"},{id:48,de:"über",fr:"au-dessus, à propos de"},{id:49,de:"machen",fr:"faire"},{id:50,de:"kein",fr:"aucun, pas de"},
+            {id:51,de:"Jahr",fr:"année"},{id:52,de:"du",fr:"tu"},{id:53,de:"mein",fr:"mon, ma"},{id:54,de:"schon",fr:"déjà"},{id:55,de:"vor",fr:"devant, avant, il y a"},{id:56,de:"durch",fr:"à travers, par"},{id:57,de:"geben",fr:"donner"},{id:58,de:"mehr",fr:"plus (davantage)"},{id:59,de:"andere",fr:"autre(s)"},{id:60,de:"viel",fr:"beaucoup"},{id:61,de:"kommen",fr:"venir"},{id:62,de:"jetzt",fr:"maintenant"},{id:63,de:"sollen",fr:"devoir (obligation morale)"},{id:64,de:"mir",fr:"me, moi (datif)"},{id:65,de:"wollen",fr:"vouloir"},{id:66,de:"ganz",fr:"entier, tout à fait"},{id:67,de:"mich",fr:"me, moi (accusatif)"},{id:68,de:"immer",fr:"toujours"},{id:69,de:"gehen",fr:"aller"},{id:70,de:"sehr",fr:"très"},{id:71,de:"hier",fr:"ici"},{id:72,de:"doch",fr:"pourtant, si (contraire de non)"},{id:73,de:"bis",fr:"jusqu'à"},{id:74,de:"groß",fr:"grand"},{id:75,de:"wieder",fr:"de nouveau, encore"},{id:76,de:"Mal",fr:"fois"},{id:77,de:"zwei",fr:"deux"},{id:78,de:"gut",fr:"bon, bien"},{id:79,de:"wissen",fr:"savoir"},{id:80,de:"neu",fr:"nouveau, neuf"},{id:81,de:"sehen",fr:"voir"},{id:82,de:"lassen",fr:"laisser, faire faire"},{id:83,de:"uns",fr:"nous (accusatif/datif)"},{id:84,de:"weil",fr:"parce que"},{id:85,de:"unter",fr:"sous, parmi"},{id:86,de:"denn",fr:"car, parce que"},{id:87,de:"stehen",fr:"se tenir debout, être écrit"},{id:88,de:"jed-",fr:"chaque, tout"},{id:89,de:"Beispiel",fr:"exemple"},{id:90,de:"Zeit",fr:"temps, heure"},{id:91,de:"erste",fr:"premier, première"},{id:92,de:"ihm",fr:"lui (datif masculin/neutre)"},{id:93,de:"ihn",fr:"le, lui (accusatif masculin)"},{id:94,de:"wo",fr:"où"},{id:95,de:"lang",fr:"long, longtemps"},{id:96,de:"eigentlich",fr:"en fait, vraiment"},{id:97,de:"damit",fr:"avec ça, afin que"},{id:98,de:"selbst",fr:"soi-même, même"},{id:99,de:"unser",fr:"notre, nos"},{id:100,de:"oben",fr:"en haut, ci-dessus"},
+            {id:101,de:"drei",fr:"trois"},{id:102,de:"wenig",fr:"peu"},{id:103,de:"Frau",fr:"femme, madame, épouse"},{id:104,de:"Mensch",fr:"être humain, personne"},{id:105,de:"deutsch",fr:"allemand(e)"},{id:106,de:"Kind",fr:"enfant"},{id:107,de:"etwas",fr:"quelque chose, un peu"},{id:108,de:"Tag",fr:"jour"},{id:109,de:"nun",fr:"maintenant, eh bien"},{id:110,de:"finden",fr:"trouver"},{id:111,de:"nichts",fr:"rien"},{id:112,de:"bleiben",fr:"rester"},{id:113,de:"sondern",fr:"mais (au contraire)"},{id:114,de:"klein",fr:"petit"},{id:115,de:"zwischen",fr:"entre"},{id:116,de:"alt",fr:"vieux, âgé"},{id:117,de:"gegen",fr:"contre"},{id:118,de:"liegen",fr:"être allongé, se situer"},{id:119,de:"ohne",fr:"sans"},{id:120,de:"nein",fr:"non"},{id:121,de:"heute",fr:"aujourd'hui"},{id:122,de:"weit",fr:"loin, large"},{id:123,de:"heißen",fr:"s'appeler"},{id:124,de:"denken",fr:"penser"},{id:125,de:"eben",fr:"justement, tout simplement"},{id:126,de:"erst",fr:"d'abord, seulement, pas avant"},{id:127,de:"natürlich",fr:"naturellement, bien sûr"},{id:128,de:"ob",fr:"si (interrogatif indirect)"},{id:129,de:"hoch",fr:"haut, élevé"},{id:130,de:"beide",fr:"les deux, tous les deux"},{id:131,de:"zusammen",fr:"ensemble"},{id:132,de:"ihr (possessif)",fr:"leur(s)"},{id:133,de:"dürfen",fr:"avoir le droit de, pouvoir"},{id:134,de:"Hand",fr:"main"},{id:135,de:"Mann",fr:"homme, mari"},{id:136,de:"schreiben",fr:"écrire"},{id:137,de:"Haus",fr:"maison"},{id:138,de:"glauben",fr:"croire, penser"},{id:139,de:"während",fr:"pendant que, tandis que"},{id:140,de:"her",fr:"par ici, venu de"},{id:141,de:"nehmen",fr:"prendre"},{id:142,de:"abr-",fr:"à partir de, off (préfixe)"},{id:143,de:"mögen",fr:"aimer, peut-être"},{id:144,de:"Weg",fr:"chemin, voie"},{id:145,de:"vielleicht",fr:"peut-être"},{id:146,de:"ihnen",fr:"leur (datif pluriel)"},{id:147,de:"halten",fr:"tenir, s'arrêter"},{id:148,de:"Frage",fr:"question"},{id:149,de:"zeigen",fr:"montrer"},{id:150,de:"Land",fr:"pays, région"},
+            {id:151,de:"ihr (pronom datif)",fr:"lui (datif féminin)"},{id:152,de:"führen",fr:"mener, diriger"},{id:153,de:"welch-",fr:"quel, lequel"},{id:154,de:"Arbeit",fr:"travail"},{id:155,de:"weniger",fr:"moins"},{id:156,de:"gelten",fr:"valoir, être valable"},{id:157,de:"Wort",fr:"mot, parole"},{id:158,de:"legen",fr:"poser, mettre (à plat)"},{id:159,de:"weiter",fr:"plus loin, continuer"},{id:160,de:"gleichzeitig",fr:"simultanément"},{id:161,de:"womit",fr:"avec quoi, par quoi"},{id:162,de:"ander-",fr:"autre"},{id:163,de:"sprechen",fr:"parler"},{id:164,de:"Staat",fr:"État"},{id:165,de:"zwar",fr:"certes, c'est vrai que"},{id:166,de:"Art",fr:"sorte, manière, espèce"},{id:167,de:"spät",fr:"tard"},{id:168,de:"möglich",fr:"possible"},{id:169,de:"Stelle",fr:"endroit, poste, passage"},{id:170,de:"eigene",fr:"propre (à soi)"},{id:171,de:"lesen",fr:"lire"},{id:172,de:"gerade",fr:"justement, tout droit"},{id:173,de:"Welt",fr:"monde"},{id:174,de:"vier",fr:"quatre"},{id:175,de:"stellen",fr:"poser, placer (debout)"},{id:176,de:"Bundesrepublik",fr:"République fédérale"},{id:177,de:"politisch",fr:"politique"},{id:178,de:"bekommen",fr:"recevoir, obtenir"},{id:179,de:"nämlich",fr:"à savoir, en effet"},{id:180,de:"Teil",fr:"partie, partie"},{id:181,de:"Stadt",fr:"ville"},{id:182,de:"klar",fr:"clair, bien sûr"},{id:183,de:"früher",fr:"avant, autrefois"},{id:184,de:"bereits",fr:"déjà"},{id:185,de:"möchten",fr:"voudrais (forme de mögen)"},{id:186,de:"fragen",fr:"demander, poser une question"},{id:187,de:"Prozent",fr:"pour cent"},{id:188,de:"Recht",fr:"droit, justice"},{id:189,de:"jemand",fr:"quelqu'un"},{id:190,de:"wenige",fr:"peu de gens, quelques-uns"},{id:191,de:"einmal",fr:"une fois, un jour"},{id:192,de:"verschiedene",fr:"divers, différents"},{id:193,de:"gleich",fr:"égal, tout de suite, pareil"},{id:194,de:"warum",fr:"pourquoi"},{id:195,de:"bringen",fr:"apporter, amener"},{id:196,de:"Punkt",fr:"point"},{id:197,de:"einfach",fr:"simple, simplement"},{id:198,de:"Gesellschaft",fr:"société, compagnie"},{id:199,de:"laufen",fr:"courir, marcher"},{id:200,de:"ihr (possessif pluriel)",fr:"votre, vos (formel)"},
+            {id:201,de:"brauchen",fr:"avoir besoin de"},{id:202,de:"folgen",fr:"suivre"},{id:203,de:"lernen",fr:"apprendre"},{id:204,de:"Ende",fr:"fin"},{id:205,de:"kurz",fr:"court, bref"},{id:206,de:"Million",fr:"million"},{id:207,de:"stark",fr:"fort, puissant"},{id:208,de:"Schule",fr:"école"},{id:209,de:"Woche",fr:"semaine"},{id:210,de:"bestehen",fr:"exister, réussir (un examen)"},{id:211,de:"richtig",fr:"juste, correct"},{id:212,de:"dich",fr:"te, toi (accusatif)"},{id:213,de:"dafür",fr:"pour ça, en échange"},{id:214,de:"sowie",fr:"ainsi que, dès que"},{id:215,de:"oft",fr:"souvent"},{id:216,de:"Vater",fr:"père"},{id:217,de:"Seite",fr:"côté, page"},{id:218,de:"verschieden",fr:"différent, varié"},{id:219,de:"halt",fr:"tout simplement (particule)"},{id:220,de:"Leben",fr:"vie"},{id:221,de:"allerdings",fr:"certes, cependant, bien sûr"},{id:222,de:"verstehen",fr:"comprendre"},{id:223,de:"fast",fr:"presque"},{id:224,de:"wohl",fr:"bien, probablement"},{id:225,de:"dein",fr:"ton, ta, tes"},{id:226,de:"bestimmt",fr:"certainement, précis"},{id:227,de:"Mutter",fr:"mère"},{id:228,de:"setzen",fr:"placer, mettre"},{id:229,de:"überhaupt",fr:"en général, du tout"},{id:230,de:"Grund",fr:"raison, base, fond"},{id:231,de:"besser",fr:"mieux, meilleur"},{id:232,de:"dir",fr:"te, toi (datif)"},{id:233,de:"häufig",fr:"fréquent, souvent"},{id:234,de:"Ort",fr:"lieu, endroit, localité"},{id:235,de:"Buch",fr:"livre"},{id:236,de:"wann",fr:"quand (interrogatif)"},{id:237,de:"kaum",fr:"à peine, presque pas"},{id:238,de:"deren",fr:"dont, de laquelle, desquels"},{id:239,de:"Uhr",fr:"heure, montre, horloge"},{id:240,de:"bekannt",fr:"connu, célèbre"},{id:241,de:"lieben",fr:"aimer (sentiment)"},{id:242,de:"wichtig",fr:"important"},{id:243,de:"her (direction)",fr:"vers ici (mouvement)"},{id:244,de:"irgend-",fr:"quelque (indéfini)"},{id:245,de:"Stelle",fr:"endroit, poste"},{id:246,de:"neben",fr:"à côté de, en plus de"},{id:247,de:"hin",fr:"là-bas (direction)"},{id:248,de:"Thema",fr:"thème, sujet"},{id:249,de:"nennen",fr:"nommer, appeler"},{id:250,de:"Problem",fr:"problème"},
+            {id:251,de:"anfangen",fr:"commencer"},{id:252,de:"Stunde",fr:"heure (durée)"},{id:253,de:"dadurch",fr:"par là, grâce à ça"},{id:254,de:"Möglichkeit",fr:"possibilité"},{id:255,de:"gar",fr:"vraiment, du tout (renforcateur)"},{id:256,de:"obwohl",fr:"bien que, quoique"},{id:257,de:"meisten",fr:"la plupart"},{id:258,de:"spielen",fr:"jouer"},{id:259,de:"Nummer",fr:"numéro"},{id:260,de:"Interesse",fr:"intérêt"},{id:261,de:"Ergebnis",fr:"résultat"},{id:262,de:"erzählen",fr:"raconter"},{id:263,de:"Entwicklung",fr:"développement, évolution"},{id:264,de:"weiteren",fr:"supplémentaire, de plus"},{id:265,de:"aufgrund",fr:"en raison de"},{id:266,de:"besonders",fr:"particulièrement, surtout"},{id:267,de:"öffentlich",fr:"public"},{id:268,de:"außerdem",fr:"en outre, de plus"},{id:269,de:"Name",fr:"nom"},{id:270,de:"geben (es gibt)",fr:"il y a"},{id:271,de:"direkt",fr:"direct, directement"},{id:272,de:"entsprechend",fr:"correspondant, conformément"},{id:273,de:"dazu",fr:"à ça, en plus, pour cela"},{id:274,de:"sollte",fr:"devrait (conditionnel de sollen)"},{id:275,de:"allein",fr:"seul, seulement"},{id:276,de:"Moment",fr:"moment"},{id:277,de:"seit",fr:"depuis"},{id:278,de:"schaffen",fr:"créer, réussir, parvenir à"},{id:279,de:"deren (relatif)",fr:"dont (génitif féminin/pluriel)"},{id:280,de:"Aufgabe",fr:"tâche, exercice, mission"},{id:281,de:"trotzdem",fr:"quand même, malgré tout"},{id:282,de:"Anfang",fr:"début, commencement"},{id:283,de:"danach",fr:"après, ensuite"},{id:284,de:"etwa",fr:"environ, à peu près"},{id:285,de:"erhalten",fr:"recevoir, obtenir, conserver"},{id:286,de:"besondere",fr:"particulier, spécial"},{id:287,de:"erkennen",fr:"reconnaître, percevoir"},{id:288,de:"Erfahrung",fr:"expérience"},{id:289,de:"zunächst",fr:"d'abord, pour commencer"},{id:290,de:"bedeuten",fr:"signifier, vouloir dire"},{id:291,de:"daher",fr:"de là, c'est pourquoi"},{id:292,de:"Zahl",fr:"chiffre, nombre"},{id:293,de:"zeigen",fr:"montrer, indiquer"},{id:294,de:"gegenüber",fr:"en face de, envers"},{id:295,de:"Bereich",fr:"domaine, zone, secteur"},{id:296,de:"genau",fr:"exactement, précis"},{id:297,de:"daran",fr:"à ça, là-dessus"},{id:298,de:"Kraft",fr:"force, puissance"},{id:299,de:"Sprache",fr:"langue, langage"},{id:300,de:"Fall",fr:"cas, chute, affaire"},
+        ];
+
+        // imageMap complet — 300 entrées avec légendes explicatives
+        const imageMap = {
+            1:{url:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=160&fit=crop&q=60',caption:'→ typographie, articles'},
+            2:{url:'https://images.unsplash.com/photo-1474552226712-ac0f0961a954?w=300&h=160&fit=crop&q=60',caption:'→ lien, connexion'},
+            3:{url:'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=160&fit=crop&q=60',caption:'→ identité, être soi'},
+            4:{url:'https://images.unsplash.com/photo-1519567770579-c2fc5b638e02?w=300&h=160&fit=crop&q=60',caption:'→ à l\'intérieur de'},
+            5:{url:'https://images.unsplash.com/photo-1517281862878-6b5db1dc8fc9?w=300&h=160&fit=crop&q=60',caption:'→ un seul élément'},
+            6:{url:'https://images.unsplash.com/photo-1556656793-08538906a9f8?w=300&h=160&fit=crop&q=60',caption:'→ direction, flèche vers'},
+            7:{url:'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=300&h=160&fit=crop&q=60',caption:'→ tenir, posséder'},
+            8:{url:'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&h=160&fit=crop&q=60',caption:'→ portrait, moi'},
+            9:{url:'https://images.unsplash.com/photo-1487530811015-780e0c26b622?w=300&h=160&fit=crop&q=60',caption:'→ transformation, devenir'},
+            10:{url:'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=300&h=160&fit=crop&q=60',caption:'→ eux, elles, groupe'},
+            11:{url:'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=300&h=160&fit=crop&q=60',caption:'→ provenance, origine'},
+            12:{url:'https://images.unsplash.com/photo-1569144157591-c60f3f82f137?w=300&h=160&fit=crop&q=60',caption:'→ interdiction, négation'},
+            13:{url:'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=300&h=160&fit=crop&q=60',caption:'→ ensemble, compagnie'},
+            14:{url:'https://images.unsplash.com/photo-1525498128493-380d1990a112?w=300&h=160&fit=crop&q=60',caption:'→ objet neutre'},
+            15:{url:'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=160&fit=crop&q=60',caption:'→ miroir, réflexivité'},
+            16:{url:'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=300&h=160&fit=crop&q=60',caption:'→ aussi, pareillement'},
+            17:{url:'https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=300&h=160&fit=crop&q=60',caption:'→ sur la surface'},
+            18:{url:'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=300&h=160&fit=crop&q=60',caption:'→ cadeau, destiné à'},
+            19:{url:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=160&fit=crop&q=60',caption:'→ contact, adjacent'},
+            20:{url:'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=160&fit=crop&q=60',caption:'→ portrait homme, il'},
+            21:{url:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300&h=160&fit=crop&q=60',caption:'→ ainsi, de cette façon'},
+            22:{url:'https://images.unsplash.com/photo-1453738773917-9c3eff1db985?w=300&h=160&fit=crop&q=60',caption:'→ discours, citation'},
+            23:{url:'https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=300&h=160&fit=crop&q=60',caption:'→ capacité, pouvoir'},
+            24:{url:'https://images.unsplash.com/photo-1531379410502-63bfe8cdaf6f?w=300&h=160&fit=crop&q=60',caption:'→ pointer, désigner ceci'},
+            25:{url:'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=300&h=160&fit=crop&q=60',caption:'→ comparaison, balance'},
+            26:{url:'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=300&h=160&fit=crop&q=60',caption:'→ vous (groupe)'},
+            27:{url:'https://images.unsplash.com/photo-1540479859555-17af45c78602?w=300&h=160&fit=crop&q=60',caption:'→ oui, approbation'},
+            28:{url:'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=300&h=160&fit=crop&q=60',caption:'→ comment ? interrogation'},
+            29:{url:'https://images.unsplash.com/photo-1560185127-6ed189bf02f4?w=300&h=160&fit=crop&q=60',caption:'→ chez quelqu\'un, maison'},
+            30:{url:'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=300&h=160&fit=crop&q=60',caption:'→ choix, carrefour, ou'},
+            31:{url:'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=300&h=160&fit=crop&q=60',caption:'→ nous, équipe'},
+            32:{url:'https://images.unsplash.com/photo-1453738773917-9c3eff1db985?w=300&h=160&fit=crop&q=60',caption:'→ opposition, mais'},
+            33:{url:'https://images.unsplash.com/photo-1506784365847-bbad939e9501?w=300&h=160&fit=crop&q=60',caption:'→ étapes séquentielles, ensuite'},
+            34:{url:'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=300&h=160&fit=crop&q=60',caption:'→ foule anonyme, on'},
+            35:{url:'https://images.unsplash.com/photo-1519583272095-6433daf26b6e?w=300&h=160&fit=crop&q=60',caption:'→ là, emplacement'},
+            36:{url:'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=300&h=160&fit=crop&q=60',caption:'→ possession de lui'},
+            37:{url:'https://images.unsplash.com/photo-1501139083538-0139583c060f?w=300&h=160&fit=crop&q=60',caption:'→ encore, continuation'},
+            38:{url:'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=300&h=160&fit=crop&q=60',caption:'→ vers, après, destination'},
+            39:{url:'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=300&h=160&fit=crop&q=60',caption:'→ quoi ? que ?'},
+            40:{url:'https://images.unsplash.com/photo-1456406644174-8ddd4cd52a06?w=300&h=160&fit=crop&q=60',caption:'→ conclusion logique, donc'},
+            41:{url:'https://images.unsplash.com/photo-1519567770579-c2fc5b638e02?w=300&h=160&fit=crop&q=60',caption:'→ sortie, qui vient de'},
+            42:{url:'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=300&h=160&fit=crop&q=60',caption:'→ totalité, tous ensemble'},
+            43:{url:'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=300&h=160&fit=crop&q=60',caption:'→ condition, si / quand'},
+            44:{url:'https://images.unsplash.com/photo-1517281862878-6b5db1dc8fc9?w=300&h=160&fit=crop&q=60',caption:'→ seulement, un seul'},
+            45:{url:'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=300&h=160&fit=crop&q=60',caption:'→ obligation, devoir'},
+            46:{url:'https://images.unsplash.com/photo-1453738773917-9c3eff1db985?w=300&h=160&fit=crop&q=60',caption:'→ parole, dire'},
+            47:{url:'https://images.unsplash.com/photo-1501139083538-0139583c060f?w=300&h=160&fit=crop&q=60',caption:'→ autour de, heure'},
+            48:{url:'https://images.unsplash.com/photo-1473492201326-7c01dd2e596b?w=300&h=160&fit=crop&q=60',caption:'→ au-dessus, survol'},
+            49:{url:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=300&h=160&fit=crop&q=60',caption:'→ faire, créer'},
+            50:{url:'https://images.unsplash.com/photo-1569144157591-c60f3f82f137?w=300&h=160&fit=crop&q=60',caption:'→ aucun, interdit, vide'},
+            51:{url:'https://images.unsplash.com/photo-1506784365847-bbad939e9501?w=300&h=160&fit=crop&q=60',caption:'→ calendrier, année'},
+            52:{url:'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=300&h=160&fit=crop&q=60',caption:'→ doigt pointé vers toi'},
+            53:{url:'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=300&h=160&fit=crop&q=60',caption:'→ mon, ma possession'},
+            54:{url:'https://images.unsplash.com/photo-1495364141860-b0d03eccd065?w=300&h=160&fit=crop&q=60',caption:'→ déjà fait, passé'},
+            55:{url:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=300&h=160&fit=crop&q=60',caption:'→ devant, avant'},
+            56:{url:'https://images.unsplash.com/photo-1473492201326-7c01dd2e596b?w=300&h=160&fit=crop&q=60',caption:'→ traversée, tunnel'},
+            57:{url:'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=300&h=160&fit=crop&q=60',caption:'→ donner un cadeau'},
+            58:{url:'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&h=160&fit=crop&q=60',caption:'→ plus, croissance'},
+            59:{url:'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=300&h=160&fit=crop&q=60',caption:'→ différent, autre'},
+            60:{url:'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=300&h=160&fit=crop&q=60',caption:'→ abondance, beaucoup'},
+            61:{url:'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=300&h=160&fit=crop&q=60',caption:'→ arrivée, venir'},
+            62:{url:'https://images.unsplash.com/photo-1501139083538-0139583c060f?w=300&h=160&fit=crop&q=60',caption:'→ maintenant, horloge'},
+            63:{url:'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=300&h=160&fit=crop&q=60',caption:'→ devoir moral, règle'},
+            64:{url:'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&h=160&fit=crop&q=60',caption:'→ me, moi (datif)'},
+            65:{url:'https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?w=300&h=160&fit=crop&q=60',caption:'→ désir, vouloir'},
+            66:{url:'https://images.unsplash.com/photo-1494500764479-0c8f2919a3d8?w=300&h=160&fit=crop&q=60',caption:'→ cercle complet, entier'},
+            67:{url:'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=160&fit=crop&q=60',caption:'→ me, moi (accusatif)'},
+            68:{url:'https://images.unsplash.com/photo-1494500764479-0c8f2919a3d8?w=300&h=160&fit=crop&q=60',caption:'→ toujours, infini, cycle'},
+            69:{url:'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=300&h=160&fit=crop&q=60',caption:'→ marcher, aller'},
+            70:{url:'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&h=160&fit=crop&q=60',caption:'→ très, intensité élevée'},
+            71:{url:'https://images.unsplash.com/photo-1519583272095-6433daf26b6e?w=300&h=160&fit=crop&q=60',caption:'→ ici, épingle lieu'},
+            72:{url:'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=300&h=160&fit=crop&q=60',caption:'→ pourtant, contradiction'},
+            73:{url:'https://images.unsplash.com/photo-1563207153-f403bf289096?w=300&h=160&fit=crop&q=60',caption:'→ jusqu\'à, limite finale'},
+            74:{url:'https://images.unsplash.com/photo-1490901668467-2c5e9ddb71c6?w=300&h=160&fit=crop&q=60',caption:'→ grand, hauteur'},
+            75:{url:'https://images.unsplash.com/photo-1494500764479-0c8f2919a3d8?w=300&h=160&fit=crop&q=60',caption:'→ cycle, de nouveau'},
+            76:{url:'https://images.unsplash.com/photo-1506784365847-bbad939e9501?w=300&h=160&fit=crop&q=60',caption:'→ fois, répétition'},
+            77:{url:'https://images.unsplash.com/photo-1474552226712-ac0f0961a954?w=300&h=160&fit=crop&q=60',caption:'→ deux, paire'},
+            78:{url:'https://images.unsplash.com/photo-1540479859555-17af45c78602?w=300&h=160&fit=crop&q=60',caption:'→ bon, bien, sourire'},
+            79:{url:'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=300&h=160&fit=crop&q=60',caption:'→ savoir, connaissance'},
+            80:{url:'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=300&h=160&fit=crop&q=60',caption:'→ nouveau, moderne'},
+            81:{url:'https://images.unsplash.com/photo-1574169208507-84376144848b?w=300&h=160&fit=crop&q=60',caption:'→ voir, regard, œil'},
+            82:{url:'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=300&h=160&fit=crop&q=60',caption:'→ laisser, liberté'},
+            83:{url:'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=300&h=160&fit=crop&q=60',caption:'→ nous (accusatif)'},
+            84:{url:'https://images.unsplash.com/photo-1616469829581-73993eb86b02?w=300&h=160&fit=crop&q=60',caption:'→ cause-effet, parce que'},
+            85:{url:'https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=300&h=160&fit=crop&q=60',caption:'→ sous, en dessous'},
+            86:{url:'https://images.unsplash.com/photo-1616469829581-73993eb86b02?w=300&h=160&fit=crop&q=60',caption:'→ car, explication'},
+            87:{url:'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=300&h=160&fit=crop&q=60',caption:'→ debout, se tenir'},
+            88:{url:'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=300&h=160&fit=crop&q=60',caption:'→ chaque, tous sans exception'},
+            89:{url:'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=300&h=160&fit=crop&q=60',caption:'→ exemple, démonstration'},
+            90:{url:'https://images.unsplash.com/photo-1495364141860-b0d03eccd065?w=300&h=160&fit=crop&q=60',caption:'→ temps, horloge'},
+            91:{url:'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=300&h=160&fit=crop&q=60',caption:'→ premier, médaille d\'or'},
+            92:{url:'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=160&fit=crop&q=60',caption:'→ lui (datif)'},
+            93:{url:'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=160&fit=crop&q=60',caption:'→ lui (accusatif)'},
+            94:{url:'https://images.unsplash.com/photo-1519583272095-6433daf26b6e?w=300&h=160&fit=crop&q=60',caption:'→ où ? localisation'},
+            95:{url:'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=300&h=160&fit=crop&q=60',caption:'→ route longue, longtemps'},
+            96:{url:'https://images.unsplash.com/photo-1532012197267-da84d127e765?w=300&h=160&fit=crop&q=60',caption:'→ en fait, révélation'},
+            97:{url:'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=300&h=160&fit=crop&q=60',caption:'→ but, afin que'},
+            98:{url:'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=160&fit=crop&q=60',caption:'→ soi-même, miroir'},
+            99:{url:'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=300&h=160&fit=crop&q=60',caption:'→ notre famille, groupe'},
+            100:{url:'https://images.unsplash.com/photo-1490901668467-2c5e9ddb71c6?w=300&h=160&fit=crop&q=60',caption:'→ en haut, sommet'},
+            101:{url:'https://images.unsplash.com/photo-1517281862878-6b5db1dc8fc9?w=300&h=160&fit=crop&q=60',caption:'→ trois, trio'},
+            102:{url:'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=300&h=160&fit=crop&q=60',caption:'→ peu, assiette peu remplie'},
+            103:{url:'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=160&fit=crop&q=60',caption:'→ femme, portrait'},
+            104:{url:'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=300&h=160&fit=crop&q=60',caption:'→ être humain, humanité'},
+            105:{url:'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=300&h=160&fit=crop&q=60',caption:'→ Berlin, allemand'},
+            106:{url:'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=300&h=160&fit=crop&q=60',caption:'→ enfant'},
+            107:{url:'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=300&h=160&fit=crop&q=60',caption:'→ quelque chose, mystère'},
+            108:{url:'https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?w=300&h=160&fit=crop&q=60',caption:'→ jour, lever de soleil'},
+            109:{url:'https://images.unsplash.com/photo-1501139083538-0139583c060f?w=300&h=160&fit=crop&q=60',caption:'→ maintenant, présent'},
+            110:{url:'https://images.unsplash.com/photo-1532012197267-da84d127e765?w=300&h=160&fit=crop&q=60',caption:'→ trouver, chercher'},
+            111:{url:'https://images.unsplash.com/photo-1533130061792-64b345e4a833?w=300&h=160&fit=crop&q=60',caption:'→ rien, vide, désert'},
+            112:{url:'https://images.unsplash.com/photo-1560185127-6ed189bf02f4?w=300&h=160&fit=crop&q=60',caption:'→ rester, maison'},
+            113:{url:'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=300&h=160&fit=crop&q=60',caption:'→ mais au contraire, bifurcation'},
+            114:{url:'https://images.unsplash.com/photo-1425082661705-1834bfd09dca?w=300&h=160&fit=crop&q=60',caption:'→ petit, miniature'},
+            115:{url:'https://images.unsplash.com/photo-1474552226712-ac0f0961a954?w=300&h=160&fit=crop&q=60',caption:'→ entre deux éléments'},
+            116:{url:'https://images.unsplash.com/photo-1447069387593-a5de0862481e?w=300&h=160&fit=crop&q=60',caption:'→ vieux, âgé'},
+            117:{url:'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=160&fit=crop&q=60',caption:'→ contre, opposition'},
+            118:{url:'https://images.unsplash.com/photo-1488161628813-04466f872be2?w=300&h=160&fit=crop&q=60',caption:'→ allongé, horizontal'},
+            119:{url:'https://images.unsplash.com/photo-1533130061792-64b345e4a833?w=300&h=160&fit=crop&q=60',caption:'→ sans, absence'},
+            120:{url:'https://images.unsplash.com/photo-1569144157591-c60f3f82f137?w=300&h=160&fit=crop&q=60',caption:'→ non, refus'},
+            121:{url:'https://images.unsplash.com/photo-1506784365847-bbad939e9501?w=300&h=160&fit=crop&q=60',caption:'→ aujourd\'hui, calendrier'},
+            122:{url:'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=300&h=160&fit=crop&q=60',caption:'→ loin, horizon distant'},
+            123:{url:'https://images.unsplash.com/photo-1542621334-a254cf47733d?w=300&h=160&fit=crop&q=60',caption:'→ s\'appeler, badge nom'},
+            124:{url:'https://images.unsplash.com/photo-1456406644174-8ddd4cd52a06?w=300&h=160&fit=crop&q=60',caption:'→ penser, réfléchir'},
+            125:{url:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300&h=160&fit=crop&q=60',caption:'→ justement, précisément'},
+            126:{url:'https://images.unsplash.com/photo-1506784365847-bbad939e9501?w=300&h=160&fit=crop&q=60',caption:'→ d\'abord, étape 1'},
+            127:{url:'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=300&h=160&fit=crop&q=60',caption:'→ naturellement, forêt'},
+            128:{url:'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=300&h=160&fit=crop&q=60',caption:'→ si (doute), question'},
+            129:{url:'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=300&h=160&fit=crop&q=60',caption:'→ haut, montagne élevée'},
+            130:{url:'https://images.unsplash.com/photo-1474552226712-ac0f0961a954?w=300&h=160&fit=crop&q=60',caption:'→ les deux, paire'},
+            131:{url:'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=300&h=160&fit=crop&q=60',caption:'→ ensemble, unis'},
+            132:{url:'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=300&h=160&fit=crop&q=60',caption:'→ leur (possession)'},
+            133:{url:'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=300&h=160&fit=crop&q=60',caption:'→ droit, permission, vert'},
+            134:{url:'https://images.unsplash.com/photo-1585825991014-f9a46df60a09?w=300&h=160&fit=crop&q=60',caption:'→ main'},
+            135:{url:'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=160&fit=crop&q=60',caption:'→ homme, mari'},
+            136:{url:'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=300&h=160&fit=crop&q=60',caption:'→ écrire, stylo'},
+            137:{url:'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=300&h=160&fit=crop&q=60',caption:'→ maison'},
+            138:{url:'https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=300&h=160&fit=crop&q=60',caption:'→ croire, foi, espoir'},
+            139:{url:'https://images.unsplash.com/photo-1501139083538-0139583c060f?w=300&h=160&fit=crop&q=60',caption:'→ pendant que, simultané'},
+            140:{url:'https://images.unsplash.com/photo-1519583272095-6433daf26b6e?w=300&h=160&fit=crop&q=60',caption:'→ vers ici, venu de'},
+            141:{url:'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=300&h=160&fit=crop&q=60',caption:'→ prendre, saisir'},
+            142:{url:'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=300&h=160&fit=crop&q=60',caption:'→ préfixe, séparation'},
+            143:{url:'https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?w=300&h=160&fit=crop&q=60',caption:'→ aimer, cœur'},
+            144:{url:'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=300&h=160&fit=crop&q=60',caption:'→ chemin, sentier'},
+            145:{url:'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=300&h=160&fit=crop&q=60',caption:'→ peut-être, incertitude'},
+            146:{url:'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=300&h=160&fit=crop&q=60',caption:'→ leur (datif pluriel)'},
+            147:{url:'https://images.unsplash.com/photo-1585825991014-f9a46df60a09?w=300&h=160&fit=crop&q=60',caption:'→ tenir, s\'arrêter'},
+            148:{url:'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=300&h=160&fit=crop&q=60',caption:'→ question, interrogation'},
+            149:{url:'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=300&h=160&fit=crop&q=60',caption:'→ montrer, pointer'},
+            150:{url:'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=300&h=160&fit=crop&q=60',caption:'→ pays, paysage'},
+            151:{url:'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=160&fit=crop&q=60',caption:'→ lui (datif féminin)'},
+            152:{url:'https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=300&h=160&fit=crop&q=60',caption:'→ mener, leadership'},
+            153:{url:'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=300&h=160&fit=crop&q=60',caption:'→ quel ? lequel ? choix'},
+            154:{url:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=300&h=160&fit=crop&q=60',caption:'→ travail, bureau'},
+            155:{url:'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&h=160&fit=crop&q=60',caption:'→ moins, décroissance'},
+            156:{url:'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=300&h=160&fit=crop&q=60',caption:'→ valoir, être valable'},
+            157:{url:'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=300&h=160&fit=crop&q=60',caption:'→ mot, typographie'},
+            158:{url:'https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=300&h=160&fit=crop&q=60',caption:'→ poser à plat, horizontal'},
+            159:{url:'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=300&h=160&fit=crop&q=60',caption:'→ plus loin, continuer'},
+            160:{url:'https://images.unsplash.com/photo-1501139083538-0139583c060f?w=300&h=160&fit=crop&q=60',caption:'→ simultané, en même temps'},
+            161:{url:'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=300&h=160&fit=crop&q=60',caption:'→ avec quoi, outil'},
+            162:{url:'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=300&h=160&fit=crop&q=60',caption:'→ autre, différent'},
+            163:{url:'https://images.unsplash.com/photo-1543269664-647163b40b33?w=300&h=160&fit=crop&q=60',caption:'→ parler, conversation'},
+            164:{url:'https://images.unsplash.com/photo-1529243856184-fd5abb4b4792?w=300&h=160&fit=crop&q=60',caption:'→ État, parlement'},
+            165:{url:'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=300&h=160&fit=crop&q=60',caption:'→ certes, concession'},
+            166:{url:'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=300&h=160&fit=crop&q=60',caption:'→ sorte, variété, manière'},
+            167:{url:'https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=300&h=160&fit=crop&q=60',caption:'→ tard, nuit'},
+            168:{url:'https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?w=300&h=160&fit=crop&q=60',caption:'→ possible, ampoule idée'},
+            169:{url:'https://images.unsplash.com/photo-1519583272095-6433daf26b6e?w=300&h=160&fit=crop&q=60',caption:'→ endroit précis, poste'},
+            170:{url:'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&h=160&fit=crop&q=60',caption:'→ propre à soi, identité'},
+            171:{url:'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=300&h=160&fit=crop&q=60',caption:'→ lire, livre'},
+            172:{url:'https://images.unsplash.com/photo-1556856425-366d9432da90?w=300&h=160&fit=crop&q=60',caption:'→ tout droit, ligne droite'},
+            173:{url:'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=300&h=160&fit=crop&q=60',caption:'→ monde, globe'},
+            174:{url:'https://images.unsplash.com/photo-1503428593586-e225b39bddfe?w=300&h=160&fit=crop&q=60',caption:'→ quatre saisons'},
+            175:{url:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=160&fit=crop&q=60',caption:'→ placer debout, vertical'},
+            176:{url:'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=300&h=160&fit=crop&q=60',caption:'→ République fédérale, Berlin'},
+            177:{url:'https://images.unsplash.com/photo-1529243856184-fd5abb4b4792?w=300&h=160&fit=crop&q=60',caption:'→ politique, parlement'},
+            178:{url:'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=300&h=160&fit=crop&q=60',caption:'→ recevoir, obtenir'},
+            179:{url:'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=300&h=160&fit=crop&q=60',caption:'→ à savoir, explication'},
+            180:{url:'https://images.unsplash.com/photo-1494500764479-0c8f2919a3d8?w=300&h=160&fit=crop&q=60',caption:'→ partie, puzzle'},
+            181:{url:'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=300&h=160&fit=crop&q=60',caption:'→ ville, skyline'},
+            182:{url:'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=300&h=160&fit=crop&q=60',caption:'→ clair, limpide'},
+            183:{url:'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=300&h=160&fit=crop&q=60',caption:'→ autrefois, vieille photo'},
+            184:{url:'https://images.unsplash.com/photo-1495364141860-b0d03eccd065?w=300&h=160&fit=crop&q=60',caption:'→ déjà accompli, check'},
+            185:{url:'https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?w=300&h=160&fit=crop&q=60',caption:'→ voudrais, souhait'},
+            186:{url:'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=300&h=160&fit=crop&q=60',caption:'→ demander, main levée'},
+            187:{url:'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&h=160&fit=crop&q=60',caption:'→ pourcentage, graphique'},
+            188:{url:'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=300&h=160&fit=crop&q=60',caption:'→ droit, justice, balance'},
+            189:{url:'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=300&h=160&fit=crop&q=60',caption:'→ quelqu\'un, silhouette'},
+            190:{url:'https://images.unsplash.com/photo-1517281862878-6b5db1dc8fc9?w=300&h=160&fit=crop&q=60',caption:'→ peu de gens'},
+            191:{url:'https://images.unsplash.com/photo-1501139083538-0139583c060f?w=300&h=160&fit=crop&q=60',caption:'→ une fois, un seul tour'},
+            192:{url:'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=300&h=160&fit=crop&q=60',caption:'→ divers, variété'},
+            193:{url:'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=300&h=160&fit=crop&q=60',caption:'→ égal, pareil, balance'},
+            194:{url:'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=300&h=160&fit=crop&q=60',caption:'→ pourquoi ? cause'},
+            195:{url:'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=300&h=160&fit=crop&q=60',caption:'→ apporter, livraison'},
+            196:{url:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=160&fit=crop&q=60',caption:'→ point, cercle'},
+            197:{url:'https://images.unsplash.com/photo-1494500764479-0c8f2919a3d8?w=300&h=160&fit=crop&q=60',caption:'→ simple, minimaliste'},
+            198:{url:'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=300&h=160&fit=crop&q=60',caption:'→ société, groupe'},
+            199:{url:'https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=300&h=160&fit=crop&q=60',caption:'→ courir, marcher'},
+            200:{url:'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=300&h=160&fit=crop&q=60',caption:'→ votre (formel, pluriel)'},
+            201:{url:'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=300&h=160&fit=crop&q=60',caption:'→ besoin, nécessité'},
+            202:{url:'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=300&h=160&fit=crop&q=60',caption:'→ suivre, file'},
+            203:{url:'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=300&h=160&fit=crop&q=60',caption:'→ apprendre, étudier'},
+            204:{url:'https://images.unsplash.com/photo-1563207153-f403bf289096?w=300&h=160&fit=crop&q=60',caption:'→ fin, ligne d\'arrivée'},
+            205:{url:'https://images.unsplash.com/photo-1495364141860-b0d03eccd065?w=300&h=160&fit=crop&q=60',caption:'→ court, bref, minuteur'},
+            206:{url:'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=300&h=160&fit=crop&q=60',caption:'→ million, argent'},
+            207:{url:'https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=300&h=160&fit=crop&q=60',caption:'→ fort, puissant'},
+            208:{url:'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=300&h=160&fit=crop&q=60',caption:'→ école, salle de classe'},
+            209:{url:'https://images.unsplash.com/photo-1506784365847-bbad939e9501?w=300&h=160&fit=crop&q=60',caption:'→ semaine, calendrier'},
+            210:{url:'https://images.unsplash.com/photo-1525921429624-479b6a26d84d?w=300&h=160&fit=crop&q=60',caption:'→ réussir, diplôme'},
+            211:{url:'https://images.unsplash.com/photo-1540479859555-17af45c78602?w=300&h=160&fit=crop&q=60',caption:'→ juste, correct, check'},
+            212:{url:'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=300&h=160&fit=crop&q=60',caption:'→ te, toi (accusatif)'},
+            213:{url:'https://images.unsplash.com/photo-1540479859555-17af45c78602?w=300&h=160&fit=crop&q=60',caption:'→ pour ça, en faveur'},
+            214:{url:'https://images.unsplash.com/photo-1474552226712-ac0f0961a954?w=300&h=160&fit=crop&q=60',caption:'→ ainsi que, connexion'},
+            215:{url:'https://images.unsplash.com/photo-1494500764479-0c8f2919a3d8?w=300&h=160&fit=crop&q=60',caption:'→ souvent, répétition'},
+            216:{url:'https://images.unsplash.com/photo-1504257432389-52343af06ae3?w=300&h=160&fit=crop&q=60',caption:'→ père et enfant'},
+            217:{url:'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=300&h=160&fit=crop&q=60',caption:'→ page, côté'},
+            218:{url:'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=300&h=160&fit=crop&q=60',caption:'→ différent, varié'},
+            219:{url:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300&h=160&fit=crop&q=60',caption:'→ tout simplement, bof'},
+            220:{url:'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=300&h=160&fit=crop&q=60',caption:'→ vie, nature vivante'},
+            221:{url:'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=300&h=160&fit=crop&q=60',caption:'→ certes, cependant, nuance'},
+            222:{url:'https://images.unsplash.com/photo-1456406644174-8ddd4cd52a06?w=300&h=160&fit=crop&q=60',caption:'→ comprendre, ampoule'},
+            223:{url:'https://images.unsplash.com/photo-1563207153-f403bf289096?w=300&h=160&fit=crop&q=60',caption:'→ presque arrivé, quasi'},
+            224:{url:'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=300&h=160&fit=crop&q=60',caption:'→ probablement, nuage de doute'},
+            225:{url:'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=300&h=160&fit=crop&q=60',caption:'→ ton, ta possession'},
+            226:{url:'https://images.unsplash.com/photo-1540479859555-17af45c78602?w=300&h=160&fit=crop&q=60',caption:'→ certainement, sûr'},
+            227:{url:'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=160&fit=crop&q=60',caption:'→ mère, portrait'},
+            228:{url:'https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=300&h=160&fit=crop&q=60',caption:'→ asseoir, placer'},
+            229:{url:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300&h=160&fit=crop&q=60',caption:'→ en général, du tout'},
+            230:{url:'https://images.unsplash.com/photo-1616469829581-73993eb86b02?w=300&h=160&fit=crop&q=60',caption:'→ fondation, raison de base'},
+            231:{url:'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&h=160&fit=crop&q=60',caption:'→ mieux, amélioration'},
+            232:{url:'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=300&h=160&fit=crop&q=60',caption:'→ te, toi (datif)'},
+            233:{url:'https://images.unsplash.com/photo-1494500764479-0c8f2919a3d8?w=300&h=160&fit=crop&q=60',caption:'→ fréquent, souvent'},
+            234:{url:'https://images.unsplash.com/photo-1519583272095-6433daf26b6e?w=300&h=160&fit=crop&q=60',caption:'→ lieu, épingle'},
+            235:{url:'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=300&h=160&fit=crop&q=60',caption:'→ livre'},
+            236:{url:'https://images.unsplash.com/photo-1506784365847-bbad939e9501?w=300&h=160&fit=crop&q=60',caption:'→ quand ? date'},
+            237:{url:'https://images.unsplash.com/photo-1425082661705-1834bfd09dca?w=300&h=160&fit=crop&q=60',caption:'→ à peine, presque rien'},
+            238:{url:'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=300&h=160&fit=crop&q=60',caption:'→ dont, appartenance'},
+            239:{url:'https://images.unsplash.com/photo-1495364141860-b0d03eccd065?w=300&h=160&fit=crop&q=60',caption:'→ montre, horloge'},
+            240:{url:'https://images.unsplash.com/photo-1542621334-a254cf47733d?w=300&h=160&fit=crop&q=60',caption:'→ connu, célèbre'},
+            241:{url:'https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?w=300&h=160&fit=crop&q=60',caption:'→ aimer, cœur'},
+            242:{url:'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=300&h=160&fit=crop&q=60',caption:'→ important, priorité'},
+            243:{url:'https://images.unsplash.com/photo-1519583272095-6433daf26b6e?w=300&h=160&fit=crop&q=60',caption:'→ venir vers ici, direction'},
+            244:{url:'https://images.unsplash.com/photo-1533130061792-64b345e4a833?w=300&h=160&fit=crop&q=60',caption:'→ quelque, indéfini, brume'},
+            245:{url:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=300&h=160&fit=crop&q=60',caption:'→ endroit, poste travail'},
+            246:{url:'https://images.unsplash.com/photo-1474552226712-ac0f0961a954?w=300&h=160&fit=crop&q=60',caption:'→ à côté de, voisin'},
+            247:{url:'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=300&h=160&fit=crop&q=60',caption:'→ là-bas, vers l\'horizon'},
+            248:{url:'https://images.unsplash.com/photo-1543269664-647163b40b33?w=300&h=160&fit=crop&q=60',caption:'→ thème, sujet, conférence'},
+            249:{url:'https://images.unsplash.com/photo-1542621334-a254cf47733d?w=300&h=160&fit=crop&q=60',caption:'→ nommer, étiquette'},
+            250:{url:'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=300&h=160&fit=crop&q=60',caption:'→ problème, carrefour'},
+            251:{url:'https://images.unsplash.com/photo-1471286174890-9c112ffca5b4?w=300&h=160&fit=crop&q=60',caption:'→ commencer, départ'},
+            252:{url:'https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=300&h=160&fit=crop&q=60',caption:'→ heure (durée), sablier'},
+            253:{url:'https://images.unsplash.com/photo-1616469829581-73993eb86b02?w=300&h=160&fit=crop&q=60',caption:'→ par là, conséquence'},
+            254:{url:'https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?w=300&h=160&fit=crop&q=60',caption:'→ possibilité, portes ouvertes'},
+            255:{url:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300&h=160&fit=crop&q=60',caption:'→ vraiment, intensité'},
+            256:{url:'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=300&h=160&fit=crop&q=60',caption:'→ bien que, malgré tout'},
+            257:{url:'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=300&h=160&fit=crop&q=60',caption:'→ la plupart, majorité'},
+            258:{url:'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=160&fit=crop&q=60',caption:'→ jouer'},
+            259:{url:'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=300&h=160&fit=crop&q=60',caption:'→ numéro, chiffres'},
+            260:{url:'https://images.unsplash.com/photo-1456406644174-8ddd4cd52a06?w=300&h=160&fit=crop&q=60',caption:'→ intérêt, curiosité'},
+            261:{url:'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&h=160&fit=crop&q=60',caption:'→ résultat, graphique'},
+            262:{url:'https://images.unsplash.com/photo-1543269664-647163b40b33?w=300&h=160&fit=crop&q=60',caption:'→ raconter, narration'},
+            263:{url:'https://images.unsplash.com/photo-1487530811015-780e0c26b622?w=300&h=160&fit=crop&q=60',caption:'→ développement, évolution'},
+            264:{url:'https://images.unsplash.com/photo-1519583272095-6433daf26b6e?w=300&h=160&fit=crop&q=60',caption:'→ en plus, supplémentaire'},
+            265:{url:'https://images.unsplash.com/photo-1616469829581-73993eb86b02?w=300&h=160&fit=crop&q=60',caption:'→ en raison de, cause'},
+            266:{url:'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=300&h=160&fit=crop&q=60',caption:'→ particulièrement, spécial'},
+            267:{url:'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=300&h=160&fit=crop&q=60',caption:'→ public, espace commun'},
+            268:{url:'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=300&h=160&fit=crop&q=60',caption:'→ en outre, ajout'},
+            269:{url:'https://images.unsplash.com/photo-1542621334-a254cf47733d?w=300&h=160&fit=crop&q=60',caption:'→ nom, badge'},
+            270:{url:'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=300&h=160&fit=crop&q=60',caption:'→ il y a, abondance'},
+            271:{url:'https://images.unsplash.com/photo-1556856425-366d9432da90?w=300&h=160&fit=crop&q=60',caption:'→ direct, ligne droite'},
+            272:{url:'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=300&h=160&fit=crop&q=60',caption:'→ conformément, aligné'},
+            273:{url:'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=300&h=160&fit=crop&q=60',caption:'→ à ça, en plus'},
+            274:{url:'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=300&h=160&fit=crop&q=60',caption:'→ devrait, conseil'},
+            275:{url:'https://images.unsplash.com/photo-1501286353178-1ec871814838?w=300&h=160&fit=crop&q=60',caption:'→ seul, solitude'},
+            276:{url:'https://images.unsplash.com/photo-1496096265110-f83ad7f96608?w=300&h=160&fit=crop&q=60',caption:'→ moment, instant'},
+            277:{url:'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=300&h=160&fit=crop&q=60',caption:'→ depuis, passé → présent'},
+            278:{url:'https://images.unsplash.com/photo-1484417894907-623942c8ee29?w=300&h=160&fit=crop&q=60',caption:'→ créer, réussir'},
+            279:{url:'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=300&h=160&fit=crop&q=60',caption:'→ dont (génitif)'},
+            280:{url:'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=300&h=160&fit=crop&q=60',caption:'→ tâche, checklist'},
+            281:{url:'https://images.unsplash.com/photo-1548438294-1ad5d5f4f063?w=300&h=160&fit=crop&q=60',caption:'→ quand même, résistance'},
+            282:{url:'https://images.unsplash.com/photo-1471286174890-9c112ffca5b4?w=300&h=160&fit=crop&q=60',caption:'→ début, lever de soleil'},
+            283:{url:'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=300&h=160&fit=crop&q=60',caption:'→ après, ensuite, suite'},
+            284:{url:'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&h=160&fit=crop&q=60',caption:'→ environ, approximation'},
+            285:{url:'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=300&h=160&fit=crop&q=60',caption:'→ recevoir, préserver'},
+            286:{url:'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=300&h=160&fit=crop&q=60',caption:'→ spécial, particulier'},
+            287:{url:'https://images.unsplash.com/photo-1532012197267-da84d127e765?w=300&h=160&fit=crop&q=60',caption:'→ reconnaître, percevoir'},
+            288:{url:'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=160&fit=crop&q=60',caption:'→ expérience, sagesse'},
+            289:{url:'https://images.unsplash.com/photo-1506784365847-bbad939e9501?w=300&h=160&fit=crop&q=60',caption:'→ d\'abord, première étape'},
+            290:{url:'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=300&h=160&fit=crop&q=60',caption:'→ signifier, sens'},
+            291:{url:'https://images.unsplash.com/photo-1616469829581-73993eb86b02?w=300&h=160&fit=crop&q=60',caption:'→ c\'est pourquoi, conséquence'},
+            292:{url:'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=300&h=160&fit=crop&q=60',caption:'→ chiffre, nombre'},
+            293:{url:'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=300&h=160&fit=crop&q=60',caption:'→ montrer, indiquer'},
+            294:{url:'https://images.unsplash.com/photo-1543269664-647163b40b33?w=300&h=160&fit=crop&q=60',caption:'→ en face de, face à face'},
+            295:{url:'https://images.unsplash.com/photo-1519583272095-6433daf26b6e?w=300&h=160&fit=crop&q=60',caption:'→ domaine, zone'},
+            296:{url:'https://images.unsplash.com/photo-1539186607614-348f1cdf7c47?w=300&h=160&fit=crop&q=60',caption:'→ exactement, précis, cible'},
+            297:{url:'https://images.unsplash.com/photo-1519583272095-6433daf26b6e?w=300&h=160&fit=crop&q=60',caption:'→ à ça, là-dessus'},
+            298:{url:'https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=300&h=160&fit=crop&q=60',caption:'→ force, puissance'},
+            299:{url:'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=300&h=160&fit=crop&q=60',caption:'→ langue, langage'},
+            300:{url:'https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=300&h=160&fit=crop&q=60',caption:'→ cas, chute d\'automne'},
+        };
+
+        // Répétition espacée
+        let deck = [];
+        let currentCard = null;
+        const intervals = [60*1000, 10*60*1000, 24*60*60*1000, 3*24*60*60*1000, 7*24*60*60*1000, 14*24*60*60*1000, 30*24*60*60*1000];
+
+        function init() { loadDeck(); nextCard(); }
+
+        function loadDeck() {
+            const saved = localStorage.getItem("germanVocabDeck");
+            if (saved) {
+                deck = JSON.parse(saved);
+                database.forEach(w => { if (!deck.find(c => c.id === w.id)) deck.push({...w, level:0, nextReview:0}); });
+            } else {
+                deck = database.map(w => ({...w, level:0, nextReview:0}));
+            }
+            saveDeck(); updateStats();
+        }
+
+        function saveDeck() { localStorage.setItem("germanVocabDeck", JSON.stringify(deck)); }
+
+        function nextCard() {
+            const now = Date.now();
+            let due = deck.filter(c => c.nextReview > 0 && c.nextReview <= now);
+            let newCards = deck.filter(c => c.nextReview === 0);
+            let candidates = due.length > 0 ? due : newCards;
+            if (candidates.length === 0) {
+                document.getElementById("word-front").innerText = "Bravo !";
+                document.getElementById("word-back").innerText = "Toutes vos révisions sont terminées.";
+                document.getElementById("btn-show").style.display = "none";
+                document.getElementById("message").innerText = "Revenez plus tard pour de nouvelles révisions.";
+                document.getElementById("card-img").style.display = "none";
+                document.getElementById("img-caption").innerText = "";
+                currentCard = null; return;
+            }
+            currentCard = candidates[Math.floor(Math.random() * candidates.length)];
+            document.getElementById("word-front").innerText = currentCard.de;
+            document.getElementById("word-back").innerText = currentCard.fr;
+
+            const imgEl = document.getElementById("card-img");
+            const captionEl = document.getElementById("img-caption");
+            const imgData = imageMap[currentCard.id];
+            if (imgData) {
+                imgEl.classList.remove("loaded");
+                imgEl.style.display = "block";
+                imgEl.onload = () => imgEl.classList.add("loaded");
+                imgEl.onerror = () => { imgEl.style.display = "none"; captionEl.innerText = ""; };
+                imgEl.src = imgData.url;
+                imgEl.alt = currentCard.de;
+                captionEl.innerText = imgData.caption || "";
+            } else {
+                imgEl.style.display = "none";
+                imgEl.src = "";
+                captionEl.innerText = "";
+            }
+            resetCardUI(); updateStats();
+        }
+
+        function answerCard(knewIt) {
+            if (!currentCard) return;
+            currentCard.level = knewIt ? Math.min(currentCard.level + 1, intervals.length - 1) : 0;
+            currentCard.nextReview = Date.now() + intervals[currentCard.level];
+            saveDeck(); nextCard();
+        }
+
+        function updateStats() {
+            const now = Date.now();
+            document.getElementById("stat-due").innerText = deck.filter(c => c.nextReview > 0 && c.nextReview <= now).length;
+            document.getElementById("stat-new").innerText = deck.filter(c => c.nextReview === 0).length;
+        }
+
+        const flashcard = document.getElementById("flashcard");
+        const btnShow = document.getElementById("btn-show");
+        const btnWrong = document.getElementById("btn-wrong");
+        const btnCorrect = document.getElementById("btn-correct");
+
+        function revealCard() {
+            if (!currentCard) return;
+            flashcard.classList.add("is-flipped");
+            btnShow.style.display = "none";
+            btnWrong.style.display = "block";
+            btnCorrect.style.display = "block";
+        }
+
+        function resetCardUI() {
+            flashcard.classList.remove("is-flipped");
+            btnShow.style.display = "block";
+            btnWrong.style.display = "none";
+            btnCorrect.style.display = "none";
+        }
+
+        btnShow.addEventListener("click", revealCard);
+        flashcard.addEventListener("click", () => { if (btnShow.style.display !== "none") revealCard(); });
+        btnCorrect.addEventListener("click", () => answerCard(true));
+        btnWrong.addEventListener("click", () => answerCard(false));
+        document.addEventListener("keydown", e => {
+            if (e.code === "Space" && btnShow.style.display !== "none") revealCard();
+            else if (e.code === "ArrowLeft" && btnShow.style.display === "none") answerCard(false);
+            else if (e.code === "ArrowRight" && btnShow.style.display === "none") answerCard(true);
+        });
+
+        window.onload = init;
+    </script>
+</body>
+</html>

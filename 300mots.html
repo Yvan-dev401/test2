@@ -66,7 +66,7 @@
             perspective: 1000px;
             width: 100%;
             max-width: 400px;
-            height: 250px;
+            height: 340px;
             margin-bottom: 30px;
         }
         
@@ -121,10 +121,25 @@
             color: var(--primary-color);
         }
         
+        .card-img {
+            width: 100%;
+            max-height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .card-img.loaded {
+            opacity: 1;
+        }
+
         .hint {
             font-size: 0.85em;
             color: var(--text-muted);
-            margin-top: 15px;
+            margin-top: 10px;
         }
         /* Controls */
         
@@ -194,6 +209,7 @@
     <div class="flashcard-container" id="flashcard-container">
         <div class="flashcard" id="flashcard">
             <div class="card-face card-front">
+                <img id="card-img" class="card-img" src="" alt="">
                 <div class="word-de" id="word-front">...</div>
                 <div class="hint">Cliquez ou appuyez sur Espace pour retourner</div>
             </div>
@@ -1437,6 +1453,94 @@
         ];
 
         // ---------------------------------------------------------
+        // IMAGE MAP — URLs Unsplash CDN par ID de mot
+        // Seuls les mots visuellement représentables ont une image.
+        // ---------------------------------------------------------
+        const imageMap = {
+            // Verbes concrets
+            49:  'https://source.unsplash.com/300x160/?doing,making',
+            57:  'https://source.unsplash.com/300x160/?giving,gift',
+            61:  'https://source.unsplash.com/300x160/?arrival,coming',
+            69:  'https://source.unsplash.com/300x160/?walking,hiking',
+            81:  'https://source.unsplash.com/300x160/?looking,watching',
+            87:  'https://source.unsplash.com/300x160/?standing,person',
+            110: 'https://source.unsplash.com/300x160/?searching,finding',
+            112: 'https://source.unsplash.com/300x160/?staying,home',
+            118: 'https://source.unsplash.com/300x160/?lying,resting',
+            124: 'https://source.unsplash.com/300x160/?thinking,meditation',
+            136: 'https://source.unsplash.com/300x160/?writing,pen',
+            141: 'https://source.unsplash.com/300x160/?taking,picking',
+            163: 'https://source.unsplash.com/300x160/?speaking,talking',
+            171: 'https://source.unsplash.com/300x160/?reading,book',
+            199: 'https://source.unsplash.com/300x160/?running,jogging',
+            203: 'https://source.unsplash.com/300x160/?studying,learning',
+            241: 'https://source.unsplash.com/300x160/?love,heart',
+            258: 'https://source.unsplash.com/300x160/?playing,game',
+            262: 'https://source.unsplash.com/300x160/?storytelling,story',
+            278: 'https://source.unsplash.com/300x160/?creating,building',
+            // Noms concrets
+            51:  'https://source.unsplash.com/300x160/?calendar,year',
+            90:  'https://source.unsplash.com/300x160/?clock,time',
+            103: 'https://source.unsplash.com/300x160/?woman,portrait',
+            104: 'https://source.unsplash.com/300x160/?people,crowd',
+            105: 'https://source.unsplash.com/300x160/?germany,flag',
+            106: 'https://source.unsplash.com/300x160/?child,kid',
+            108: 'https://source.unsplash.com/300x160/?sunshine,morning',
+            134: 'https://source.unsplash.com/300x160/?hand',
+            135: 'https://source.unsplash.com/300x160/?man,portrait',
+            137: 'https://source.unsplash.com/300x160/?house,home',
+            144: 'https://source.unsplash.com/300x160/?forest,path',
+            148: 'https://source.unsplash.com/300x160/?question,thinking',
+            150: 'https://source.unsplash.com/300x160/?countryside,landscape',
+            154: 'https://source.unsplash.com/300x160/?office,work',
+            157: 'https://source.unsplash.com/300x160/?words,typography',
+            164: 'https://source.unsplash.com/300x160/?capitol,government',
+            173: 'https://source.unsplash.com/300x160/?globe,earth',
+            176: 'https://source.unsplash.com/300x160/?germany,berlin',
+            181: 'https://source.unsplash.com/300x160/?city,skyline',
+            187: 'https://source.unsplash.com/300x160/?chart,percentage',
+            204: 'https://source.unsplash.com/300x160/?finish,end',
+            206: 'https://source.unsplash.com/300x160/?money,million',
+            208: 'https://source.unsplash.com/300x160/?school,classroom',
+            209: 'https://source.unsplash.com/300x160/?calendar,week',
+            216: 'https://source.unsplash.com/300x160/?father,dad',
+            217: 'https://source.unsplash.com/300x160/?book,page',
+            220: 'https://source.unsplash.com/300x160/?life,nature',
+            227: 'https://source.unsplash.com/300x160/?mother,mom',
+            234: 'https://source.unsplash.com/300x160/?location,place',
+            235: 'https://source.unsplash.com/300x160/?book,library',
+            239: 'https://source.unsplash.com/300x160/?clock,watch',
+            248: 'https://source.unsplash.com/300x160/?topic,discussion',
+            250: 'https://source.unsplash.com/300x160/?problem,puzzle',
+            252: 'https://source.unsplash.com/300x160/?hourglass,time',
+            259: 'https://source.unsplash.com/300x160/?numbers,digits',
+            263: 'https://source.unsplash.com/300x160/?growth,progress',
+            269: 'https://source.unsplash.com/300x160/?nametag,identity',
+            276: 'https://source.unsplash.com/300x160/?moment,sunset',
+            280: 'https://source.unsplash.com/300x160/?task,checklist',
+            282: 'https://source.unsplash.com/300x160/?sunrise,beginning',
+            288: 'https://source.unsplash.com/300x160/?experience,wisdom',
+            292: 'https://source.unsplash.com/300x160/?numbers,statistics',
+            295: 'https://source.unsplash.com/300x160/?area,region',
+            298: 'https://source.unsplash.com/300x160/?strength,power',
+            299: 'https://source.unsplash.com/300x160/?language,speech',
+            300: 'https://source.unsplash.com/300x160/?autumn,fall',
+            // Adjectifs visuels / Nombres
+            74:  'https://source.unsplash.com/300x160/?tall,skyscraper',
+            77:  'https://source.unsplash.com/300x160/?two,pair',
+            78:  'https://source.unsplash.com/300x160/?happy,smile',
+            80:  'https://source.unsplash.com/300x160/?new,modern',
+            101: 'https://source.unsplash.com/300x160/?three,trio',
+            114: 'https://source.unsplash.com/300x160/?small,tiny,miniature',
+            116: 'https://source.unsplash.com/300x160/?elderly,grandpa',
+            121: 'https://source.unsplash.com/300x160/?today,calendar',
+            129: 'https://source.unsplash.com/300x160/?mountain,high',
+            167: 'https://source.unsplash.com/300x160/?night,late',
+            174: 'https://source.unsplash.com/300x160/?four,pattern',
+            207: 'https://source.unsplash.com/300x160/?strong,muscle',
+        };
+
+        // ---------------------------------------------------------
         // 2. LOGIQUE DE RÉPÉTITION ESPACÉE
         // ---------------------------------------------------------
         let deck = [];
@@ -1516,9 +1620,24 @@
             // Sélectionner une carte au hasard parmi les candidates
             currentCard = candidates[Math.floor(Math.random() * candidates.length)];
 
-            // Affichage
+            // Affichage du mot
             document.getElementById("word-front").innerText = currentCard.de;
             document.getElementById("word-back").innerText = currentCard.fr;
+
+            // Affichage de l'image (si disponible pour ce mot)
+            const imgEl = document.getElementById("card-img");
+            const imgUrl = imageMap[currentCard.id];
+            if (imgUrl) {
+                imgEl.classList.remove("loaded");
+                imgEl.style.display = "block";
+                imgEl.onload = () => imgEl.classList.add("loaded");
+                imgEl.onerror = () => { imgEl.style.display = "none"; };
+                imgEl.src = imgUrl;
+                imgEl.alt = currentCard.de;
+            } else {
+                imgEl.style.display = "none";
+                imgEl.src = "";
+            }
 
             resetCardUI();
             updateStats();

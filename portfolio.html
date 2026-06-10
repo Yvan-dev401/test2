@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Velomora Divno Yvan</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── DARK THEME ── */
+    [data-theme="dark"] {
+      --bg:        #0A0A0A;
+      --surface:   #111111;
+      --border:    #1E1E1E;
+      --text:      #E0E0E0;
+      --muted:     #666666;
+      --accent:    #00FF88;
+      --accent2:   #00CCFF;
+      --dim:       #333333;
+      --btn-fill:  #000;
+      --chip-hover-bg: rgba(0,255,136,0.04);
+      --shadow-accent: rgba(0,255,136,0.35);
+      --shadow-accent2: rgba(0,255,136,0.15);
+    }
+
+    /* ── LIGHT THEME ── */
+    [data-theme="light"] {
+      --bg:        #F5F0E8;
+      --surface:   #EDE8DE;
+      --border:    #D8D0C0;
+      --text:      #1A1A1A;
+      --muted:     #8A8070;
+      --accent:    #B8986A;
+      --accent2:   #A07850;
+      --dim:       #C8BEA8;
+      --btn-fill:  #fff;
+      --chip-hover-bg: rgba(184,152,106,0.07);
+      --shadow-accent: rgba(184,152,106,0.35);
+      --shadow-accent2: rgba(184,152,106,0.18);
+    }
+
+    html, body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'JetBrains Mono', 'Courier New', monospace;
+      min-height: 100vh;
+      padding: 60px 20px 80px;
+      line-height: 1.7;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .terminal {
+      width: 100%;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    /* ── Top bar ── */
+    .topbar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 40px;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; opacity: 0.6; }
+    .dot-r { background: #FF5F57; }
+    .dot-y { background: #FEBC2E; }
+    .dot-g { background: #28C840; }
+    .topbar-label { margin-left: 8px; text-transform: uppercase; letter-spacing: 0.15em; flex: 1; }
+
+    /* ── Theme toggle ── */
+    .theme-toggle {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      cursor: pointer;
+      padding: 4px 10px;
+      font-family: inherit;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+    .theme-toggle .icon { font-size: 13px; line-height: 1; }
+
+    /* ── Prompt ── */
+    .prompt {
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+      user-select: none;
+    }
+    .prompt span.sig  { color: var(--accent); }
+    .prompt span.path { color: var(--accent2); }
+
+    /* ── Name ── */
+    .name-block { margin-bottom: 36px; }
+    .name-label {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .name-main {
+      font-size: clamp(26px, 5vw, 40px);
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+    }
+    .name-main .first { color: var(--accent); }
+
+    /* ── Typewriter ── */
+    /* The block has a fixed height so separators and everything below
+       never shift while text is being typed / deleted. */
+    .typewriter-block {
+      margin-bottom: 44px;
+      /* label (11px + 10px margin) + 3 text lines (14 × 1.75 × 3 = 73.5px) */
+      min-height: 104px;
+    }
+    .typewriter-label {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .typewriter-wrap {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text);
+      /* Fixed: 3 lines × (14px × 1.75) = 73.5 → 74px */
+      height: 74px;
+      overflow: hidden;
+      line-height: 1.75;
+      letter-spacing: 0.02em;
+      overflow-wrap: break-word;
+      word-break: break-word;
+    }
+    .cursor {
+      display: inline-block;
+      width: 9px;
+      height: 16px;
+      background: var(--accent);
+      vertical-align: middle;
+      margin-left: 2px;
+      animation: blink 0.85s step-end infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    /* ── Separator ── */
+    .sep {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 36px 0;
+    }
+
+    /* ── Portfolio link ── */
+    .portfolio-block { margin-bottom: 44px; }
+    .portfolio-label {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .portfolio-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      padding: 2px 0;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+    .portfolio-link:hover { border-bottom-color: var(--accent); }
+    .portfolio-link svg { flex-shrink: 0; }
+
+    /* ── CV Buttons ── */
+    .cv-block { margin-bottom: 44px; }
+    .cv-label {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .cv-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+      border: 1px solid transparent;
+    }
+    .btn:hover  { transform: translateY(-2px); }
+    .btn:active { transform: translateY(0); }
+
+    .btn-filled {
+      background: var(--accent);
+      color: var(--btn-fill);
+      border-color: var(--accent);
+    }
+    .btn-filled:hover { box-shadow: 0 0 18px var(--shadow-accent); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+    .btn-outline:hover { background: var(--chip-hover-bg); box-shadow: 0 0 18px var(--shadow-accent2); }
+
+    /* ── Tools ── */
+    .tools-label {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .tool-category { margin-bottom: 28px; }
+    .cat-title {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .cat-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .cat-title span.bracket { color: var(--dim); }
+
+    .tools-row { display: flex; flex-wrap: wrap; gap: 10px; }
+
+    .tool-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      letter-spacing: 0.03em;
+      transition: border-color 0.2s, background 0.2s, transform 0.15s;
+      cursor: default;
+    }
+    .tool-chip:hover {
+      border-color: var(--accent);
+      background: var(--chip-hover-bg);
+      transform: translateY(-1px);
+    }
+    .tool-chip .ico {
+      width: 18px; height: 18px;
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .tool-chip .ico svg { width: 18px; height: 18px; object-fit: contain; }
+
+    /* ── Footer ── */
+    .footer-note {
+      margin-top: 56px;
+      font-size: 11px;
+      color: var(--dim);
+      letter-spacing: 0.08em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .footer-note .blip {
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.8)} }
+
+    @media (max-width: 480px) {
+      html, body { padding: 32px 16px 60px; }
+      .cv-buttons { flex-direction: column; }
+      .btn { justify-content: center; }
+      /* Let typewriter grow on small screens — no fixed height, no horizontal scroll */
+      .typewriter-block { min-height: 0; }
+      .typewriter-wrap  { height: auto; min-height: 74px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .cursor, .footer-note .blip { animation: none; }
+    }
+  </style>
+</head>
+<body>
+<main class="terminal">
+
+  <!-- Top bar -->
+  <div class="topbar">
+    <div class="dot dot-r"></div>
+    <div class="dot dot-y"></div>
+    <div class="dot dot-g"></div>
+    <span class="topbar-label">portfolio.sh — zsh</span>
+    <button class="theme-toggle" id="themeBtn" aria-label="Basculer le thème">
+      <span class="icon" id="themeIcon">☀️</span>
+      <span id="themeLabel">LIGHT</span>
+    </button>
+  </div>
+
+  <!-- Prompt -->
+  <div class="prompt"><span class="sig">divno</span><span class="path"> ~/identity</span> $</div>
+
+  <!-- Name -->
+  <div class="name-block">
+    <div class="name-label">// identity</div>
+    <div class="name-main">
+      <span class="first">Velomora</span> Divno Yvan
+    </div>
+  </div>
+
+  <hr class="sep" />
+
+  <!-- Typewriter motivation -->
+  <div class="typewriter-block">
+    <div class="typewriter-label">// motivation</div>
+    <div class="typewriter-wrap" id="tw"><span class="cursor"></span></div>
+  </div>
+
+  <hr class="sep" />
+
+  <!-- Portfolio link -->
+  <div class="portfolio-block">
+    <div class="portfolio-label">// portfolio</div>
+    <a href="https://divnoyvan.vercel.app/" class="portfolio-link" target="_blank" rel="noopener">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
+        <path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/>
+      </svg>
+      divnoyvan.vercel.app
+    </a>
+  </div>
+
+  <hr class="sep" />
+
+  <!-- CV Buttons -->
+  <div class="cv-block">
+    <div class="cv-label">// curriculum vitae</div>
+    <div class="cv-buttons">
+      <a href="#" class="btn btn-filled" download>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        CV_Dark.pdf
+      </a>
+      <a href="#" class="btn btn-outline" download>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        CV_Light.pdf
+      </a>
+    </div>
+  </div>
+
+  <hr class="sep" />
+
+  <!-- Tools -->
+  <div class="tools-block">
+    <div class="tools-label">// outils maîtrisés</div>
+
+    <!-- Gestion de projets -->
+    <div class="tool-category">
+      <div class="cat-title"><span class="bracket">[</span>&nbsp;Gestion de projets&nbsp;<span class="bracket">]</span></div>
+      <div class="tools-row">
+        <div class="tool-chip">
+          <span class="ico">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="24" height="24" rx="3" fill="#E8E8E8"/>
+              <path d="M4.99 4.49c.76.62 1.05.58 2.48.49l13.43-.8c.27 0 .04-.27-.04-.31L18.46 2.3c-.31-.22-.72-.49-1.52-.42L3.7 3.1c-.54.04-.67.31-.45.58l1.74.81zm.72 2.6v13.56c0 .72.36 1 1.17.96l14.79-.84c.81-.04.9-.49.9-1.04V6.23c0-.54-.22-.83-.71-.79l-15.43.88c-.54.04-.72.31-.72.77zm14.61 1.17c.09.4 0 .8-.4.85l-.67.13v9.78c-.58.31-1.12.49-1.57.49-.72 0-.9-.22-1.44-.89l-4.41-6.93v6.7l1.39.31s0 .8-1.12.8l-3.11.18c-.09-.18 0-.62.31-.71l.81-.22V9.68L8.69 9.5c-.09-.4.13-1 .72-1.03l3.33-.22 4.59 7.01V9.19l-1.17-.13c-.09-.49.27-.85.72-.89l3.44-.22v.53z" fill="#1C1C1C"/>
+            </svg>
+          </span>
+          Notion
+        </div>
+      </div>
+    </div>
+
+    <!-- IA -->
+    <div class="tool-category">
+      <div class="cat-title"><span class="bracket">[</span>&nbsp;Intelligence Artificielle&nbsp;<span class="bracket">]</span></div>
+      <div class="tools-row">
+        <div class="tool-chip">
+          <span class="ico">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="24" height="24" rx="3" fill="#CC9B7A"/>
+              <path d="M14.53 5.5L10.15 18.5H7.5L11.88 5.5h2.65zm2.1 0h2.52L14.77 18.5h-2.52L16.63 5.5z" fill="#1C1C1C"/>
+            </svg>
+          </span>
+          Claude
+        </div>
+      </div>
+    </div>
+
+    <!-- Design -->
+    <div class="tool-category">
+      <div class="cat-title"><span class="bracket">[</span>&nbsp;Design&nbsp;<span class="bracket">]</span></div>
+      <div class="tools-row">
+        <div class="tool-chip">
+          <span class="ico">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="24" height="24" rx="12" fill="#7D2AE8"/>
+              <path d="M12 5.5c-3.59 0-6.5 2.91-6.5 6.5s2.91 6.5 6.5 6.5c1.74 0 3.3-.65 4.49-1.73-.18-.35-.28-.74-.28-1.15 0-.63.23-1.2.61-1.64-.68-1.04-1.84-1.73-3.17-1.73-2.09 0-3.78 1.69-3.78 3.78 0 .52.1 1.01.29 1.46-.51-.78-.81-1.71-.81-2.72 0-2.75 2.22-4.97 4.97-4.97 1.33 0 2.54.52 3.44 1.37.42-.16.87-.24 1.34-.24.07 0 .14 0 .21.01C17.69 8.1 15.03 5.5 12 5.5z" fill="#fff"/>
+              <circle cx="16.5" cy="14.5" r="2" fill="#fff"/>
+            </svg>
+          </span>
+          Canva
+        </div>
+        <div class="tool-chip">
+          <span class="ico">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="24" height="24" rx="5" fill="#1A1A2E"/>
+              <path d="M6 18l3-3 8.5-8.5a1.41 1.41 0 10-2-2L7 13l-3 3 2 2z" stroke="#A78BFA" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="7.5" cy="17" r="1" fill="#A78BFA"/>
+            </svg>
+          </span>
+          Procreate
+        </div>
+        <div class="tool-chip">
+          <span class="ico">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 2h4a4 4 0 010 8H8V2z" fill="#F24E1E"/>
+              <path d="M8 10h4a4 4 0 010 8H8v-8z" fill="#A259FF"/>
+              <path d="M8 18a4 4 0 100-8 4 4 0 000 8z" fill="#0ACF83"/>
+              <path d="M16 2H8v8h8a4 4 0 000-8z" fill="#FF7262"/>
+              <circle cx="16" cy="14" r="4" fill="#1ABCFE"/>
+            </svg>
+          </span>
+          Figma
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer-note">
+    <div class="blip"></div>
+    <span>Disponible — ouvert aux opportunités</span>
+  </div>
+
+</main>
+
+<script>
+  /* ── Theme toggle ── */
+  const html = document.documentElement;
+  const btn  = document.getElementById('themeBtn');
+  const icon = document.getElementById('themeIcon');
+  const lbl  = document.getElementById('themeLabel');
+
+  function applyTheme(theme) {
+    html.setAttribute('data-theme', theme);
+    if (theme === 'dark') {
+      icon.textContent = '☀️';
+      lbl.textContent  = 'LIGHT';
+    } else {
+      icon.textContent = '🌙';
+      lbl.textContent  = 'DARK';
+    }
+    localStorage.setItem('theme', theme);
+  }
+
+  btn.addEventListener('click', () => {
+    applyTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+
+  // Restore saved preference
+  const saved = localStorage.getItem('theme');
+  if (saved) applyTheme(saved);
+
+  /* ── Typewriter ── */
+  const phrases = [
+    "Développeur d'applications & passionné de cloud, je transforme des idées complexes en solutions numériques claires et efficaces.",
+    "Chef de projet rigoureux, je pilote chaque étape avec méthode — de la conception à la livraison.",
+    "À la croisée de l'informatique et de la gestion de projet, je construis des outils qui font vraiment la différence.",
+    "Cloud, développement, pilotage de projet : je mets mes compétences au service de vos ambitions.",
+  ];
+
+  let phraseIndex = 0, charIndex = 0, deleting = false, pauseCounter = 0;
+  const PAUSE_TYPE = 60, PAUSE_DEL = 18;
+  const el     = document.getElementById('tw');
+  const cursor = el.querySelector('.cursor');
+
+  function tick() {
+    const phrase = phrases[phraseIndex];
+    if (!deleting) {
+      if (charIndex < phrase.length) {
+        el.textContent = phrase.slice(0, ++charIndex);
+        el.appendChild(cursor);
+        setTimeout(tick, 38 + Math.random() * 28);
+      } else {
+        if (++pauseCounter < PAUSE_TYPE) { setTimeout(tick, 50); }
+        else { pauseCounter = 0; deleting = true; setTimeout(tick, 80); }
+      }
+    } else {
+      if (charIndex > 0) {
+        el.textContent = phrase.slice(0, --charIndex);
+        el.appendChild(cursor);
+        setTimeout(tick, 18 + Math.random() * 12);
+      } else {
+        if (++pauseCounter < PAUSE_DEL) { setTimeout(tick, 40); }
+        else {
+          pauseCounter = 0; deleting = false;
+          phraseIndex = (phraseIndex + 1) % phrases.length;
+          setTimeout(tick, 300);
+        }
+      }
+    }
+  }
+  setTimeout(tick, 600);
+</script>
+</body>
+</html>

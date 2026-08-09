@@ -236,6 +236,45 @@
       color: #15803d;
     }
 
+    /* ── Famille Mandarin ── */
+    .fam-mandarin .card-parent {
+      border-color: #f87171;
+    }
+
+    .fam-mandarin .card-tag-parent {
+      background: #fef2f2;
+      color: #b91c1c;
+    }
+
+    .fam-mandarin .card-arrow-parent {
+      color: #b91c1c;
+    }
+
+    .fam-mandarin .connector-line {
+      background: #f87171;
+    }
+
+    .fam-mandarin .connector-label {
+      color: #f87171;
+    }
+
+    .fam-mandarin .connector-label::before {
+      color: #f87171;
+    }
+
+    .fam-mandarin .card-child {
+      border-color: #fecaca;
+    }
+
+    .fam-mandarin .card-tag-child {
+      background: #fff1f2;
+      color: #be123c;
+    }
+
+    .fam-mandarin .card-arrow-child {
+      color: #be123c;
+    }
+
     /* ── Famille Business ── */
     .fam-business .card-parent {
       border-color: #93c5fd;
@@ -410,6 +449,43 @@
         <div class="card-meta">
           <span class="card-pill">300 mots</span>
           <span class="card-pill">Flashcards</span>
+        </div>
+        <div class="card-arrow card-arrow-child">Ouvrir <span>→</span></div>
+      </a>
+    </div>
+
+    <!-- ── FAMILLE MANDARIN ── -->
+    <div class="family fam-mandarin">
+      <div class="family-label">🇨🇳 Apprentissage — Mandarin</div>
+
+      <a href="roadmap-mandarin.html" class="card card-parent">
+        <div class="card-icon">🗺️</div>
+        <span class="card-tag card-tag-parent">Roadmap principale</span>
+        <div class="card-title">Roadmap Mandarin HSK 3</div>
+        <div class="card-desc">Programme de 14 semaines jusqu'à l'examen HSK 3, avec planning jour par jour — objectif
+          600 mots et 600 caractères.</div>
+        <div class="card-meta">
+          <span class="card-pill">14 semaines</span>
+          <span class="card-pill">3–4h / jour</span>
+          <span class="card-pill">Examen nov. 2026</span>
+        </div>
+        <div class="card-arrow card-arrow-parent">Voir le plan <span>→</span></div>
+      </a>
+
+      <div class="connector">
+        <div class="connector-line"></div>
+        <span class="connector-label">Dérivé de cette roadmap</span>
+      </div>
+
+      <a href="roadmap-mandarin-grok.html" class="card card-child">
+        <div class="card-icon">🤖</div>
+        <span class="card-tag card-tag-child">Version alternative</span>
+        <div class="card-title">Roadmap Mandarin B1 (Grok)</div>
+        <div class="card-desc">Variante intensive de 8 semaines générée avec l'IA Grok — objectif B1 (≈ HSK 3–4) début
+          octobre.</div>
+        <div class="card-meta">
+          <span class="card-pill">8 semaines</span>
+          <span class="card-pill">Généré avec Grok</span>
         </div>
         <div class="card-arrow card-arrow-child">Ouvrir <span>→</span></div>
       </a>

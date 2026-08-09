@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Police -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <title>Roadmap Mandarin B1 – 8 semaines</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f3f4f6;
+      min-height: 100vh;
+
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+
+      padding: 40px 20px;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 1000px;
+
+      background: white;
+      border-radius: 24px;
+
+      padding: 32px;
+
+      box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.08);
+
+      border: 1px solid #e5e7eb;
+    }
+
+    .hdr {
+      margin-bottom: 1.5rem;
+    }
+
+    .hdr h1 {
+      font-size: 32px;
+      font-weight: 700;
+      color: #111827;
+    }
+
+    .hdr p {
+      font-size: 14px;
+      color: #6b7280;
+      margin-top: 6px;
+    }
+
+    /* Resources section */
+    .resources {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 20px 22px;
+      margin-bottom: 2rem;
+    }
+
+    .resources h2 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 10px 16px;
+    }
+
+    .res-item {
+      font-size: 13px;
+      line-height: 1.5;
+      color: #334155;
+    }
+
+    .res-item a {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .res-item a:hover {
+      text-decoration: underline;
+    }
+
+    .res-cat {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #64748b;
+      margin-bottom: 2px;
+    }
+
+    .legend {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+      align-items: center;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: #4b5563;
+    }
+
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    .phase {
+      margin-bottom: 2rem;
+    }
+
+    .phase-bar {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      padding: 6px 12px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      display: inline-block;
+    }
+
+    .phase-progress {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 12px;
+      font-size: 12px;
+      color: #6b7280;
+      font-weight: 500;
+    }
+
+    .phase-progress-track {
+      flex: 1;
+      height: 9px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: #e5e7eb;
+    }
+
+    .phase-progress-fill {
+      height: 100%;
+      width: 0;
+      border-radius: 999px;
+      background: #111827;
+      transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .phase-stats {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 0 0 18px;
+      align-items: center;
+    }
+
+    .phase-stat {
+      font-size: 12px;
+      color: #4b5563;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 999px;
+      padding: 4px 10px;
+    }
+
+    .phase-complete-badge {
+      font-size: 12px;
+      font-weight: 600;
+      color: #15803d;
+      background: #dcfce7;
+      border: 1px solid #86efac;
+      border-radius: 999px;
+      padding: 4px 12px;
+      display: none;
+    }
+
+    .phase-complete-badge.visible {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .week {
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      background: white;
+    }
+
+    .week-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .week-head:hover {
+      background: #f9fafb;
+    }
+
+    .week-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .wlevel {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    .wname {
+      font-size: 15px;
+      font-weight: 600;
+      color: #111827;
+    }
+
+    .wdates {
+      font-size: 12px;
+      color: #9ca3af;
+    }
+
+    .arrow {
+      font-size: 16px;
+      color: #9ca3af;
+      transition: transform .25s;
+      display: inline-block;
+    }
+
+    .week-body {
+      display: none;
+      border-top: 1px solid #e5e7eb;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .week-body.open {
+      display: block;
+    }
+
+    .day-row {
+      display: grid;
+      grid-template-columns: 90px 1fr auto;
+      border-bottom: 1px solid #e5e7eb;
+      min-width: 520px;
+    }
+
+    .day-row:last-child {
+      border-bottom: none;
+    }
+
+    .day-lbl {
+      padding: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #4b5563;
+      background: #f9fafb;
+      line-height: 1.4;
+    }
+
+    .day-txt {
+      padding: 12px 16px;
+      font-size: 14px;
+      color: #111827;
+      line-height: 1.7;
+    }
+
+    .week-head-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .week-check-all {
+      font-size: 11px;
+      font-weight: 500;
+      color: #6b7280;
+      background: #f3f4f6;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      padding: 3px 9px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s, color 0.15s;
+      user-select: none;
+    }
+
+    .week-check-all:hover {
+      background: #e5e7eb;
+      color: #374151;
+    }
+
+    .week-progress-count {
+      font-size: 12px;
+      font-weight: 500;
+      color: #9ca3af;
+      white-space: nowrap;
+    }
+
+    .week-progress-count.all-done {
+      color: #16a34a;
+    }
+
+    .day-check {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 12px 16px;
+    }
+
+    .day-check input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: #2563eb;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .day-row.done {
+      background: #f9fefb;
+    }
+
+    .day-row.done .day-lbl {
+      color: #86efac;
+      background: #f0fdf4;
+    }
+
+    .day-row.done .day-txt {
+      color: #9ca3af;
+      text-decoration: line-through;
+      text-decoration-color: #d1fae5;
+    }
+
+    .day-row.done .day-check input {
+      accent-color: #16a34a;
+    }
+
+    .day-row.rest.done .day-lbl {
+      background: #d1fae5;
+      color: #15803d;
+    }
+
+    .day-row.rest.done .day-txt {
+      background: #f0fdf4;
+    }
+
+    .day-row.rest .day-lbl {
+      background: #E1F5EE;
+      color: #0F6E56;
+    }
+
+    .day-row.rest .day-txt {
+      background: #F5FDF9;
+      color: #0F6E56;
+    }
+
+    .exam-row .day-txt {
+      background: #FBEAF0;
+      color: #993556;
+      font-weight: 500;
+    }
+
+    .exam-row .day-lbl {
+      background: #F4C0D1;
+      color: #72243E;
+      font-weight: 600;
+    }
+
+    .late-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      color: #b45309;
+      background: #fef3c7;
+      border: 1px solid #fcd34d;
+      border-radius: 4px;
+      padding: 1px 5px;
+      margin-top: 4px;
+      line-height: 1.4;
+      white-space: nowrap;
+    }
+
+    .day-row.overdue .day-lbl {
+      background: #fffbeb;
+    }
+
+    .day-row.overdue:not(.rest) .day-txt {
+      background: #fffbeb;
+    }
+
+    .day-row.overdue .day-lbl .day-lbl-name {
+      display: block;
+    }
+
+    .day-lbl-name {
+      display: block;
+    }
+
+    /* Objective chips inside day text */
+    .obj {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      background: #eff6ff;
+      color: #1d4ed8;
+      border-radius: 4px;
+      padding: 1px 6px;
+      margin-right: 4px;
+      margin-bottom: 2px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="wrap">
+
+    <h2 style="position:absolute;left:-9999px">
+      Roadmap mandarin B1 – 8 semaines
+    </h2>
+
+    <a href="index.html" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:#6b7280;text-decoration:none;margin-bottom:20px;padding:6px 12px;border:1px solid #e5e7eb;border-radius:8px;background:#f9fafb;transition:all 0.15s;" onmouseover="this.style.color='#111827';this.style.borderColor='#d1d5db'" onmouseout="this.style.color='#6b7280';this.style.borderColor='#e5e7eb'">← Accueil</a>
+
+    <div class="hdr">
+      <h1>Roadmap Mandarin B1 — 8 semaines</h1>
+      <p>Début : 11 août 2026 · Objectif B1 (≈ HSK 3–4) : début octobre 2026 · 3–4 h/jour intensif</p>
+    </div>
+
+    <!-- ========== RESSOURCES D'APPRENTISSAGE ========== -->
+    <div class="resources">
+      <h2>📚 Ressources d’apprentissage</h2>
+      <div class="resources-grid">
+        <div class="res-item">
+          <div class="res-cat">Dictionnaire & caractères</div>
+          <a href="https://www.pleco.com/" target="_blank" rel="noopener">Pleco</a> (indispensable, audio + écriture) · 
+          <a href="https://www.mdbg.net/chinese/dictionary" target="_blank" rel="noopener">MDBG</a> · 
+          <a href="https://www.yellowbridge.com/" target="_blank" rel="noopener">YellowBridge</a>
+        </div>
+        <div class="res-item">
+          <div class="res-cat">Apps structurées</div>
+          <a href="https://www.hellochinese.cc/" target="_blank" rel="noopener">HelloChinese</a> · 
+          <a href="https://www.chineseskill.com/" target="_blank" rel="noopener">ChineseSkill</a> · 
+          <a href="https://www.duolingo.com/" target="_blank" rel="noopener">Duolingo</a> (complément) · 
+          Anki + decks HSK
+        </div>
+        <div class="res-item">
+          <div class="res-cat">Prononciation & tons</div>
+          <a href="https://resources.allsetlearning.com/chinese/pronunciation/" target="_blank" rel="noopener">Chinese Pronunciation Wiki</a> · 
+          <a href="https://yoyochinese.com/chinese-pinyin-chart" target="_blank" rel="noopener">Yoyo Chinese Pinyin Chart</a> · 
+          Hacking Chinese Tone Training
+        </div>
+        <div class="res-item">
+          <div class="res-cat">YouTube (cours & immersion)</div>
+          <a href="https://www.youtube.com/@YoyoChinese" target="_blank" rel="noopener">Yoyo Chinese</a> · 
+          <a href="https://www.youtube.com/@MandarinCorner" target="_blank" rel="noopener">Mandarin Corner</a> · 
+          <a href="https://www.youtube.com/@ChineseZeroToHero" target="_blank" rel="noopener">Chinese Zero to Hero</a>
+        </div>
+        <div class="res-item">
+          <div class="res-cat">Podcasts & écoute</div>
+          <a href="https://chinesepod.com/" target="_blank" rel="noopener">ChinesePod</a> (Newbie → Intermediate) · 
+          Slow Chinese · Mandarin Click (YouTube) · 
+          Easy Chinese / Mandarin Corner street interviews
+        </div>
+        <div class="res-item">
+          <div class="res-cat">Grammaire & lecture</div>
+          <a href="https://resources.allsetlearning.com/chinese/grammar/" target="_blank" rel="noopener">Chinese Grammar Wiki</a> · 
+          <a href="https://www.duchinese.net/" target="_blank" rel="noopener">Du Chinese</a> (lecture graduée) · 
+          The Chairman’s Bao
+        </div>
+        <div class="res-item">
+          <div class="res-cat">Écriture & HSK</div>
+          Skritter (écriture) · 
+          Decks Anki HSK 1–4 · 
+          Tests blancs officiels HSK (chinesetest.cn) · 
+          <a href="https://www.chineseboost.com/" target="_blank" rel="noopener">Chinese Boost</a>
+        </div>
+        <div class="res-item">
+          <div class="res-cat">Pratique orale</div>
+          italki / HelloTalk / Tandem (échanges) · 
+          Speechling · 
+          Enregistre-toi quotidiennement et compare aux natifs
+        </div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#E1F5EE;border:1px solid #5DCAA5"></div>
+        Repos actif
+      </div>
+
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#f9fafb;border:1px solid #e5e7eb"></div>
+        Jour d'étude
+      </div>
+
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#FBEAF0;border:1px solid #D4537E"></div>
+        Examen / blanc
+      </div>
+      <div class="legend-item">
+        <div class="phase-progress-track" style="width:42px;flex:0 0 auto">
+          <div class="phase-progress-fill" style="width:65%;background:#2563eb"></div>
+        </div>
+        Progression phase
+      </div>
+    </div>
+
+    <div id="root"></div>
+
+  </div>
+  <script>
+    const phases = [
+      {
+        name: "Phase 1 — Fondations (Pinyin, tons, HSK 1)", bg: "#E1F5EE", color: "#0F6E56", lbg: "#E1F5EE", lc: "#0F6E56",
+        weeks: [
+          {
+            name: "Semaine 1", dates: "11–17 août", level: "Débutant", days: [
+              {d: "Mar 11", t: "<span class='obj'>Objectif</span> Installer les outils + maîtriser le pinyin et les 4 tons. Installe Pleco, Anki (deck HSK 1), HelloChinese. Regarde le Pinyin Chart Yoyo Chinese + Chinese Pronunciation Wiki. Apprends les nombres 1–100 et les salutations de base (你好, 谢谢, 再见…)."},
+              {d: "Mer 12", t: "<span class='obj'>Tons & prononciation</span> Drills intensifs des 4 tons + ton neutre. Paires de tons (tone pairs). Enregistre-toi et compare. Vocabulaire : famille de base (爸爸, 妈妈, 哥哥…). Créer 30 flashcards Anki (pinyin + audio)."},
+              {d: "Jeu 13", t: "<span class='obj'>Grammaire</span> Structure de base SVO. Verbe 是 (être) et 有 (avoir). Questions avec 吗 et 呢. Se présenter : 我叫…, 我是…, 我来自…. Écrire 10 phrases simples."},
+              {d: "Ven 14", t: "<span class='obj'>Vocabulaire</span> Corps humain + couleurs + objets de la maison (20–25 mots). Pratique d’écriture de caractères simples (一, 人, 大, 小, 口…). Utilise Pleco pour le stroke order."},
+              {d: "Sam 15", t: "<span class='obj'>Compétences</span> Écoute : leçon ChinesePod Newbie ou HelloChinese lesson 1–3. Expression orale : enregistre une présentation de 30–45 secondes. Lecture : texte très court HSK 1."},
+              {d: "Dim 16", t: "<span class='obj'>Révision</span> Révision générale semaine 1. Mini-dialogue écrit (se présenter + famille). Tester les tons avec un partenaire ou Speechling. Anki 20–30 min."},
+              {d: "Lun 17", t: "🌿 Repos actif : regarder une vidéo Mandarin Corner ou Yoyo Chinese (débutant) sous-titrée. Écoute passive, note 5 mots/expressions.", rest: true},
+            ]
+          },
+          {
+            name: "Semaine 2", dates: "18–24 août", level: "HSK 1", days: [
+              {d: "Mar 18", t: "<span class='obj'>Vocabulaire</span> Nourriture & boissons (米饭, 水, 茶, 苹果…). Commander au restaurant : 我要…, 多少钱？. Dialogue écrit + oral. 25 nouveaux mots Anki."},
+              {d: "Mer 19", t: "<span class='obj'>Grammaire</span> Mesure words de base (个, 本, 杯, 只). Adjectifs prédicatifs (很高, 很好). Négation 不 et 没. 15 phrases d’exemple."},
+              {d: "Jeu 20", t: "<span class='obj'>Temps & lieux</span> Jours de la semaine, mois, heures. Prépositions de lieu (在, 上, 下, 里). Demander l’heure et le chemin simple."},
+              {d: "Ven 21", t: "<span class='obj'>Caractères</span> 40–50 caractères HSK 1 prioritaires. Pratique d’écriture manuscrite (Skritter ou papier). Reconnaissance rapide."},
+              {d: "Sam 22", t: "<span class='obj'>Compétences intégrées</span> Écoute : 2 leçons HelloChinese ou ChinesePod. Production orale : dialogue restaurant + présentation. Lecture d’un texte HSK 1 complet."},
+              {d: "Dim 23", t: "<span class='obj'>Test & révision</span> Mini-test HSK 1 (écoute + lecture). Corriger les erreurs. Anki intensif sur les points faibles."},
+              {d: "Lun 24", t: "🌿 Repos actif : podcast ChinesePod Newbie ou vidéo Easy Chinese. Note 5–8 expressions utiles.", rest: true},
+            ]
+          },
+        ]
+      },
+      {
+        name: "Phase 2 — Structures A2 (HSK 2)", bg: "#E6F1FB", color: "#185FA5", lbg: "#E6F1FB", lc: "#185FA5",
+        weeks: [
+          {
+            name: "Semaine 3", dates: "25–31 août", level: "HSK 2", days: [
+              {d: "Mar 25", t: "<span class='obj'>Grammaire</span> Aspect progressif 正在 / 在…呢. Expérience passée 过. Verbes de direction (来, 去, 回). 12–15 phrases."},
+              {d: "Mer 26", t: "<span class='obj'>Vocabulaire</span> Voyages & transports (火车, 飞机, 出租车, 机场…). Demander son chemin détaillé. 30 mots Anki."},
+              {d: "Jeu 27", t: "<span class='obj'>Grammaire</span> Comparaison 比 et 一样. Degré avec 很, 太, 非常. Questions 怎么样 / 什么时候 / 为什么."},
+              {d: "Ven 28", t: "<span class='obj'>Écriture & lecture</span> Rédiger un petit paragraphe (80–100 caractères) sur une journée typique. Lecture : texte gradué Du Chinese (niveau débutant)."},
+              {d: "Sam 29", t: "<span class='obj'>Écoute & oral</span> 2–3 exercices d’écoute HSK 2. Enregistre-toi décrivant ton trajet domicile-travail/école. Feedback tons."},
+              {d: "Dim 30", t: "<span class='obj'>Révision</span> Tableau récapitulatif grammaire semaines 1–3. Anki + correction des erreurs d’écriture."},
+              {d: "Lun 31", t: "🌿 Repos actif : vidéo Mandarin Corner (street interview débutant/intermédiaire). Note 8 expressions.", rest: true},
+            ]
+          },
+          {
+            name: "Semaine 4", dates: "1–7 septembre", level: "HSK 2", days: [
+              {d: "Mar 1", t: "<span class='obj'>Vocabulaire</span> Santé & corps (生病, 医院, 药, 头疼…). Dialogue chez le médecin. Phrases utiles à mémoriser."},
+              {d: "Mer 2", t: "<span class='obj'>Grammaire</span> Compléments de résultat (看见, 听懂, 做完). Compléments directionnels simples. 15 transformations."},
+              {d: "Jeu 3", t: "<span class='obj'>Vocabulaire</span> Travail / école / horaires. Exprimer ses goûts et préférences (喜欢, 爱好). 30 mots."},
+              {d: "Ven 4", t: "<span class='obj'>Production</span> Écrire un email simple ou message WeChat (100–120 caractères). Auto-correction + checklist grammaire."},
+              {d: "Sam 5", t: "<span class='obj'>Test blanc partiel</span> Mini-test HSK 2 (écoute + lecture + écriture courte). Chronométré."},
+              {d: "Dim 6", t: "<span class='obj'>Correction ciblée</span> Analyser les erreurs du mini-test. Exercices ciblés sur les points faibles (tons, mesure words, aspect)."},
+              {d: "Lun 7", t: "🌿 Repos actif : épisode ChinesePod ou Slow Chinese. Écoute passive + 5 mots notés.", rest: true},
+            ]
+          },
+        ]
+      },
+      {
+        name: "Phase 3 — Montée vers B1 (HSK 3)", bg: "#FAEEDA", color: "#854F0B", lbg: "#FAEEDA", lc: "#854F0B",
+        weeks: [
+          {
+            name: "Semaine 5", dates: "8–14 septembre", level: "HSK 3", days: [
+              {d: "Mar 8", t: "<span class='obj'>Grammaire B1</span> Structures 把 et introduction au 被 (passif). Phrases avec 虽然…但是…, 因为…所以…. 12 exemples."},
+              {d: "Mer 9", t: "<span class='obj'>Vocabulaire thématique</span> Environnement & vie quotidienne (环保, 天气, 污染, 方便…). Exprimer une opinion simple : 我觉得…, 我认为…."},
+              {d: "Jeu 10", t: "<span class='obj'>Écoute</span> 2 extraits audio HSK 3 ou ChinesePod Intermediate. Répondre aux questions de compréhension. Note des structures nouvelles."},
+              {d: "Ven 11", t: "<span class='obj'>Lecture & écriture</span> Texte Du Chinese ou HSK 3. Souligner mots inconnus → Anki. Rédiger un paragraphe d’opinion (120–150 caractères)."},
+              {d: "Sam 12", t: "<span class='obj'>Oral</span> Enregistre-toi 2–3 minutes sur un sujet simple (ma ville, mon travail, un voyage). Réécoute et corrige tons + fluidité."},
+              {d: "Dim 13", t: "<span class='obj'>Révision grammaire</span> Tableau 把 / 被 / conjonctions. Exercices mixtes. Anki intensif."},
+              {d: "Lun 14", t: "🌿 Repos actif : série ou vidéo YouTube en chinois (sous-titres chinois + pinyin si besoin). Note 8–10 expressions.", rest: true},
+            ]
+          },
+          {
+            name: "Semaine 6", dates: "15–21 septembre", level: "HSK 3", days: [
+              {d: "Mar 15", t: "<span class='obj'>Vocabulaire</span> Société, médias, technologie (网络, 手机, 新闻, 社会…). Discuter pour/contre un sujet simple."},
+              {d: "Mer 16", t: "<span class='obj'>Grammaire</span> Compléments potentiels (看得懂, 买不起). Structures 越来越…, 一边…一边…. 15 phrases."},
+              {d: "Jeu 17", t: "<span class='obj'>Écoute intensive</span> 3 exercices Hören / listening HSK 3. Travail sur la vitesse et les tons en contexte."},
+              {d: "Ven 18", t: "<span class='obj'>Production écrite</span> Rédiger une lettre ou email semi-formel (150–180 caractères). Checklist : mesure words, aspect, conjonctions."},
+              {d: "Sam 19", t: "<span class='obj'>Oral format examen</span> Décrire une image + réagir à une situation (format HSKK / HSK oral). Enregistrement + auto-évaluation."},
+              {d: "Dim 20", t: "<span class='obj'>Révision complète</span> Grammaire + vocabulaire thématique des semaines 5–6. Anki + lecture d’un texte B1 court."},
+              {d: "Lun 21", t: "🌿 Repos actif : podcast ou Mandarin Corner. Bilan personnel des points fragiles.", rest: true},
+            ]
+          },
+        ]
+      },
+      {
+        name: "Phase 4 — Préparation examen & consolidation B1", bg: "#FBEAF0", color: "#993556", lbg: "#FBEAF0", lc: "#993556",
+        weeks: [
+          {
+            name: "Semaine 7", dates: "22–28 septembre", level: "Blanc", days: [
+              {d: "Mar 22", t: "Examen blanc complet HSK 3 (ou HSK 4 débutant) : écoute + lecture + écriture. Conditions réelles, chronométré.", exam: true},
+              {d: "Mer 23", t: "Correction détaillée. Classer les erreurs : vocabulaire / grammaire / compréhension / tons. Identifier 3 priorités."},
+              {d: "Jeu 24", t: "Révision ciblée grammaire (points les plus erronés du blanc). Exercices intensifs 把 / 被 / potentiels / conjonctions."},
+              {d: "Ven 25", t: "Vocabulaire manquant : nouvelles flashcards Anki + révision des 300–400 mots prioritaires HSK 3."},
+              {d: "Sam 26", t: "Entraînement écriture : 2 textes (email + opinion courte). Correction par tuteur (italki) ou auto + checklist."},
+              {d: "Dim 27", t: "Entraînement oral : simulation complète (monologue + questions). Enregistrement + feedback."},
+              {d: "Lun 28", t: "🌿 Repos actif : Anki uniquement + écoute légère. Récupération mentale.", rest: true},
+            ]
+          },
+          {
+            name: "Semaine 8 — Semaine de consolidation & examen", dates: "29 sept. – 5 oct.", level: "Final", days: [
+              {d: "Mar 29", t: "2e examen blanc complet (autre annale). Objectif : dépasser 60–70 % sur chaque épreuve.", exam: true},
+              {d: "Mer 30", t: "Correction + comparaison avec le 1er blanc. Mesurer la progression. Sprint ciblé sur la partie la plus faible."},
+              {d: "Jeu 1", t: "Révision globale : fiches grammaire + 500 mots les plus fréquents. Anki intensif."},
+              {d: "Ven 2", t: "Écoute + lecture intensives (3 exercices chacun). Expressions figées utiles à l’oral et à l’écrit."},
+              {d: "Sam 3", t: "Simulation conditions réelles (même horaire que l’examen prévu). Blanc complet + oral.", exam: true},
+              {d: "Dim 4", t: "Repos + Anki léger. Relire ses meilleures productions. Rien de nouveau."},
+              {d: "Lun 5", t: "🎯 JOUR D’EXAMEN / dernière révision légère. Tu as les bases solides pour un B1 fonctionnel (HSK 3–4). 加油！Viel Erfolg !", exam: true},
+            ]
+          },
+        ]
+      }
+    ];
+
+    const MONTH_MAP = {'jan': 0, 'janvier': 0, 'fév': 1, 'févr': 1, 'février': 1, 'mar': 2, 'mars': 2, 'avr': 3, 'avril': 3, 'mai': 4, 'juin': 5, 'juil': 6, 'juillet': 6, 'août': 7, 'sep': 8, 'sept': 8, 'sept.': 8, 'septembre': 8, 'oct': 9, 'oct.': 9, 'octobre': 9, 'nov': 10, 'novembre': 10, 'déc': 11, 'décembre': 11};
+
+    function parseDayDate(weekDates, dayLabel) {
+      const dayNum = parseInt(dayLabel.split(' ').pop());
+      if (isNaN(dayNum)) return null;
+      const parts = weekDates.split(/\s*–\s*/);
+      const startParts = parts[0].trim().split(/\s+/);
+      const endParts = parts[1] ? parts[1].trim().split(/\s+/) : [];
+      const startNum = parseInt(startParts[0]);
+      let month1 = startParts[1] ? MONTH_MAP[startParts[1].toLowerCase()] : undefined;
+      let month2 = endParts[1] ? MONTH_MAP[endParts[1].toLowerCase()] : undefined;
+      if (month1 === undefined) month1 = month2;
+      if (month2 === undefined) month2 = month1;
+      const month = (month1 !== month2 && dayNum < startNum) ? month2 : month1;
+      return new Date(2026, month, dayNum);
+    }
+
+    function build() {
+      const root = document.getElementById('root');
+      const storageKey = 'roadmap-mandarin-checklist';
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const saved = JSON.parse(localStorage.getItem(storageKey) || '{}');
+
+      phases.forEach((ph) => {
+        const phDiv = document.createElement('div');
+        phDiv.className = 'phase';
+
+        const bar = document.createElement('div');
+        bar.className = 'phase-bar';
+        bar.style.background = ph.bg;
+        bar.style.color = ph.color;
+        bar.textContent = ph.name;
+        phDiv.appendChild(bar);
+
+        const progress = document.createElement('div');
+        progress.className = 'phase-progress';
+        const progressTrack = document.createElement('div');
+        progressTrack.className = 'phase-progress-track';
+        const progressFill = document.createElement('div');
+        progressFill.className = 'phase-progress-fill';
+        progressTrack.appendChild(progressFill);
+        const progressText = document.createElement('span');
+        progress.appendChild(progressTrack);
+        progress.appendChild(progressText);
+
+        const stats = document.createElement('div');
+        stats.className = 'phase-stats';
+
+        const completeBadge = document.createElement('span');
+        completeBadge.className = 'phase-complete-badge';
+        completeBadge.innerHTML = '✓ Phase terminée !';
+
+        phDiv.appendChild(progress);
+        phDiv.appendChild(stats);
+
+        const phaseDays = ph.weeks.flatMap(wk => wk.days.map(day => ({wk, day})));
+
+        const statPercent = document.createElement('div');
+        statPercent.className = 'phase-stat';
+        const statRemaining = document.createElement('div');
+        statRemaining.className = 'phase-stat';
+        stats.appendChild(statPercent);
+        stats.appendChild(statRemaining);
+        stats.appendChild(completeBadge);
+
+        function updateProgress() {
+          const phaseState = saved[ph.name] || {};
+          const doneCount = phaseDays.filter(({day}) => phaseState[day.d]).length;
+          const total = phaseDays.length;
+          const percent = total ? Math.round((doneCount / total) * 100) : 0;
+          progressFill.style.width = percent + '%';
+          progressFill.style.background = ph.color;
+          progressText.textContent = doneCount + '/' + total + ' jours';
+
+          const remaining = total - doneCount;
+          statPercent.textContent = percent + '% complété';
+          statRemaining.textContent = remaining > 0 ? remaining + ' jour' + (remaining > 1 ? 's' : '') + ' à faire' : '';
+          statRemaining.style.display = remaining > 0 ? '' : 'none';
+
+          completeBadge.classList.toggle('visible', percent === 100);
+        }
+
+        ph.weeks.forEach((wk) => {
+          const wDiv = document.createElement('div');
+          wDiv.className = 'week';
+
+          const head = document.createElement('div');
+          head.className = 'week-head';
+          head.setAttribute('role', 'button');
+          head.setAttribute('tabindex', '0');
+
+          const left = document.createElement('div');
+          left.className = 'week-left';
+
+          const lvl = document.createElement('span');
+          lvl.className = 'wlevel';
+          lvl.style.background = ph.lbg;
+          lvl.style.color = ph.lc;
+          lvl.textContent = wk.level;
+
+          const nm = document.createElement('span');
+          nm.className = 'wname';
+          nm.textContent = wk.name;
+
+          left.appendChild(lvl);
+          left.appendChild(nm);
+
+          const right = document.createElement('div');
+          right.className = 'week-head-right';
+
+          const weekCount = document.createElement('span');
+          weekCount.className = 'week-progress-count';
+
+          const dt = document.createElement('span');
+          dt.className = 'wdates';
+          dt.textContent = wk.dates;
+
+          const checkAllBtn = document.createElement('span');
+          checkAllBtn.className = 'week-check-all';
+          checkAllBtn.textContent = 'Tout cocher';
+
+          const arr = document.createElement('span');
+          arr.className = 'arrow';
+          arr.textContent = '▾';
+
+          right.appendChild(weekCount);
+          right.appendChild(dt);
+          right.appendChild(checkAllBtn);
+          right.appendChild(arr);
+          head.appendChild(left);
+          head.appendChild(right);
+
+          const body = document.createElement('div');
+          body.className = 'week-body';
+
+          const rows = [];
+
+          function updateWeekCount() {
+            const phaseState = saved[ph.name] || {};
+            const doneInWeek = wk.days.filter(d => phaseState[d.d]).length;
+            const totalInWeek = wk.days.length;
+            weekCount.textContent = doneInWeek + '/' + totalInWeek;
+            weekCount.classList.toggle('all-done', doneInWeek === totalInWeek);
+            checkAllBtn.textContent = doneInWeek === totalInWeek ? 'Tout décocher' : 'Tout cocher';
+          }
+
+          wk.days.forEach(day => {
+            const row = document.createElement('div');
+            row.className = 'day-row' + (day.rest ? ' rest' : '') + (day.exam ? ' exam-row' : '');
+            const isDone = !!((saved[ph.name] || {})[day.d]);
+            if (isDone) row.classList.add('done');
+
+            const dayDate = parseDayDate(wk.dates, day.d);
+            const isLate = !isDone && dayDate !== null && dayDate < today;
+            if (isLate) row.classList.add('overdue');
+
+            const lateBadgeHTML = '<span class="late-badge">En retard</span>';
+            const lblContent = '<span class="day-lbl-name">' + day.d + '</span>' + (isLate ? lateBadgeHTML : '');
+
+            row.innerHTML =
+              '<div class="day-lbl">' + lblContent + '</div>' +
+              '<div class="day-txt">' + day.t + '</div>' +
+              '<div class="day-check"><input type="checkbox"' + (isDone ? ' checked' : '') + ' aria-label="Marquer ' + day.d + ' comme fait"></div>';
+
+            const cb = row.querySelector('input');
+            cb.addEventListener('click', function (e) {
+              e.stopPropagation();
+            });
+            cb.addEventListener('change', function () {
+              saved[ph.name] = saved[ph.name] || {};
+              saved[ph.name][day.d] = this.checked;
+              localStorage.setItem(storageKey, JSON.stringify(saved));
+              row.classList.toggle('done', this.checked);
+              if (this.checked) {
+                row.classList.remove('overdue');
+                const badge = row.querySelector('.late-badge');
+                if (badge) badge.remove();
+              } else if (dayDate !== null && dayDate < today) {
+                row.classList.add('overdue');
+                const lbl = row.querySelector('.day-lbl');
+                if (!lbl.querySelector('.late-badge')) {
+                  lbl.insertAdjacentHTML('beforeend', lateBadgeHTML);
+                }
+              }
+              updateWeekCount();
+              updateProgress();
+            });
+
+            rows.push({row, day, cb});
+            body.appendChild(row);
+          });
+
+          checkAllBtn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            const phaseState = saved[ph.name] || {};
+            const allDone = wk.days.every(d => phaseState[d.d]);
+            const newState = !allDone;
+            saved[ph.name] = saved[ph.name] || {};
+            rows.forEach(({row, day, cb}) => {
+              saved[ph.name][day.d] = newState;
+              cb.checked = newState;
+              row.classList.toggle('done', newState);
+              if (newState) {
+                row.classList.remove('overdue');
+                const badge = row.querySelector('.late-badge');
+                if (badge) badge.remove();
+              } else {
+                const d = parseDayDate(wk.dates, day.d);
+                if (d !== null && d < today) {
+                  row.classList.add('overdue');
+                  const lbl = row.querySelector('.day-lbl');
+                  if (!lbl.querySelector('.late-badge')) {
+                    lbl.insertAdjacentHTML('beforeend', '<span class="late-badge">En retard</span>');
+                  }
+                }
+              }
+            });
+            localStorage.setItem(storageKey, JSON.stringify(saved));
+            updateWeekCount();
+            updateProgress();
+          });
+
+          function toggle() {
+            const isOpen = body.classList.contains('open');
+            body.classList.toggle('open', !isOpen);
+            arr.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+          }
+
+          head.addEventListener('click', toggle);
+          head.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') {e.preventDefault(); toggle();}
+          });
+
+          updateWeekCount();
+          wDiv.appendChild(head);
+          wDiv.appendChild(body);
+          phDiv.appendChild(wDiv);
+        });
+
+        stats.appendChild(completeBadge);
+        updateProgress();
+        root.appendChild(phDiv);
+      });
+
+      const firstBody = document.querySelector('.week-body');
+      const firstArr = document.querySelector('.arrow');
+      if (firstBody) {firstBody.classList.add('open'); firstArr.style.transform = 'rotate(180deg)';}
+    }
+
+    build();
+  </script>
+</body>
+
+</html>

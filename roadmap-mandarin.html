@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Police -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <title>Roadmap Mandarin HSK 3 – 14 semaines</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f3f4f6;
+      min-height: 100vh;
+
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+
+      padding: 40px 20px;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 1000px;
+
+      background: white;
+      border-radius: 24px;
+
+      padding: 32px;
+
+      box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.08);
+
+      border: 1px solid #e5e7eb;
+    }
+
+    .hdr {
+      margin-bottom: 1.5rem;
+    }
+
+    .hdr h1 {
+      font-size: 32px;
+      font-weight: 700;
+      color: #111827;
+    }
+
+    .hdr p {
+      font-size: 14px;
+      color: #6b7280;
+      margin-top: 6px;
+    }
+
+    .legend {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+      align-items: center;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: #4b5563;
+    }
+
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    .phase {
+      margin-bottom: 2rem;
+    }
+
+    .phase-bar {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      padding: 6px 12px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      display: inline-block;
+    }
+
+    .phase-progress {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 12px;
+      font-size: 12px;
+      color: #6b7280;
+      font-weight: 500;
+    }
+
+    .phase-progress-track {
+      flex: 1;
+      height: 9px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: #e5e7eb;
+    }
+
+    .phase-progress-fill {
+      height: 100%;
+      width: 0;
+      border-radius: 999px;
+      background: #111827;
+      transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .phase-stats {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 0 0 18px;
+      align-items: center;
+    }
+
+    .phase-stat {
+      font-size: 12px;
+      color: #4b5563;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 999px;
+      padding: 4px 10px;
+    }
+
+    .phase-complete-badge {
+      font-size: 12px;
+      font-weight: 600;
+      color: #15803d;
+      background: #dcfce7;
+      border: 1px solid #86efac;
+      border-radius: 999px;
+      padding: 4px 12px;
+      display: none;
+    }
+
+    .phase-complete-badge.visible {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .week {
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      background: white;
+    }
+
+    .week-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .week-head:hover {
+      background: #f9fafb;
+    }
+
+    .week-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .wlevel {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    .wname {
+      font-size: 15px;
+      font-weight: 600;
+      color: #111827;
+    }
+
+    .wdates {
+      font-size: 12px;
+      color: #9ca3af;
+    }
+
+    .arrow {
+      font-size: 16px;
+      color: #9ca3af;
+      transition: transform .25s;
+      display: inline-block;
+    }
+
+    .week-body {
+      display: none;
+      border-top: 1px solid #e5e7eb;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .week-body.open {
+      display: block;
+    }
+
+    .day-row {
+      display: grid;
+      grid-template-columns: 90px 1fr auto;
+      border-bottom: 1px solid #e5e7eb;
+      min-width: 520px;
+    }
+
+    .day-row:last-child {
+      border-bottom: none;
+    }
+
+    .day-lbl {
+      padding: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #4b5563;
+      background: #f9fafb;
+      line-height: 1.4;
+    }
+
+    .day-txt {
+      padding: 12px 16px;
+      font-size: 14px;
+      color: #111827;
+      line-height: 1.7;
+    }
+
+    .week-head-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .week-check-all {
+      font-size: 11px;
+      font-weight: 500;
+      color: #6b7280;
+      background: #f3f4f6;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      padding: 3px 9px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s, color 0.15s;
+      user-select: none;
+    }
+
+    .week-check-all:hover {
+      background: #e5e7eb;
+      color: #374151;
+    }
+
+    .week-progress-count {
+      font-size: 12px;
+      font-weight: 500;
+      color: #9ca3af;
+      white-space: nowrap;
+    }
+
+    .week-progress-count.all-done {
+      color: #16a34a;
+    }
+
+    .day-check {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 12px 16px;
+    }
+
+    .day-check input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: #2563eb;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .day-row.done {
+      background: #f9fefb;
+    }
+
+    .day-row.done .day-lbl {
+      color: #86efac;
+      background: #f0fdf4;
+    }
+
+    .day-row.done .day-txt {
+      color: #9ca3af;
+      text-decoration: line-through;
+      text-decoration-color: #d1fae5;
+    }
+
+    .day-row.done .day-check input {
+      accent-color: #16a34a;
+    }
+
+    .day-row.rest.done .day-lbl {
+      background: #d1fae5;
+      color: #15803d;
+    }
+
+    .day-row.rest.done .day-txt {
+      background: #f0fdf4;
+    }
+
+    .day-row.rest .day-lbl {
+      background: #E1F5EE;
+      color: #0F6E56;
+    }
+
+    .day-row.rest .day-txt {
+      background: #F5FDF9;
+      color: #0F6E56;
+    }
+
+    .exam-row .day-txt {
+      background: #FBEAF0;
+      color: #993556;
+      font-weight: 500;
+    }
+
+    .exam-row .day-lbl {
+      background: #F4C0D1;
+      color: #72243E;
+      font-weight: 600;
+    }
+
+    .late-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      color: #b45309;
+      background: #fef3c7;
+      border: 1px solid #fcd34d;
+      border-radius: 4px;
+      padding: 1px 5px;
+      margin-top: 4px;
+      line-height: 1.4;
+      white-space: nowrap;
+    }
+
+    .day-row.overdue .day-lbl {
+      background: #fffbeb;
+    }
+
+    .day-row.overdue:not(.rest) .day-txt {
+      background: #fffbeb;
+    }
+
+    .day-row.overdue .day-lbl .day-lbl-name {
+      display: block;
+    }
+
+    .day-lbl-name {
+      display: block;
+    }
+
+    /* ===== Ressources ===== */
+    .res {
+      background: #FFFBF5;
+      border: 1px solid #FDE4C8;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 26px;
+    }
+
+    .res-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .res-head h2 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #92400e;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .res-head .res-sub {
+      font-size: 12px;
+      color: #b45309;
+      font-weight: 500;
+    }
+
+    .res-body {
+      display: none;
+      margin-top: 18px;
+    }
+
+    .res-body.open {
+      display: block;
+    }
+
+    .res-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+    }
+
+    .res-card {
+      background: white;
+      border: 1px solid #FDE4C8;
+      border-radius: 12px;
+      padding: 14px;
+    }
+
+    .res-card h3 {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: #b45309;
+      margin-bottom: 10px;
+    }
+
+    .res-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .res-card li {
+      font-size: 13px;
+      color: #374151;
+      line-height: 1.5;
+    }
+
+    .res-card a {
+      color: #0F6E56;
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1px solid #A7E0CC;
+    }
+
+    .res-card a:hover {
+      color: #0b4d3c;
+    }
+
+    .res-card .note {
+      display: block;
+      font-size: 11.5px;
+      color: #9ca3af;
+      margin-top: 1px;
+    }
+
+    .res-tips {
+      margin-top: 16px;
+      background: white;
+      border: 1px solid #FDE4C8;
+      border-radius: 12px;
+      padding: 14px;
+    }
+
+    .res-tips h3 {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: #b45309;
+      margin-bottom: 10px;
+    }
+
+    .res-tips ol {
+      padding-left: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .res-tips li {
+      font-size: 13px;
+      color: #374151;
+      line-height: 1.6;
+    }
+
+    .res-tips b {
+      color: #111827;
+    }
+
+    .daily {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+      margin-bottom: 26px;
+    }
+
+    .daily-item {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 12px 14px;
+    }
+
+    .daily-item .d-time {
+      font-size: 19px;
+      font-weight: 700;
+      color: #111827;
+    }
+
+    .daily-item .d-lbl {
+      font-size: 12px;
+      color: #6b7280;
+      margin-top: 2px;
+      line-height: 1.45;
+    }
+
+    .hanzi {
+      font-size: 15px;
+      font-weight: 600;
+      color: #b91c1c;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="wrap">
+
+    <h2 style="position:absolute;left:-9999px">
+      Roadmap mandarin HSK 3 – 14 semaines
+    </h2>
+
+    <a href="index.html" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:#6b7280;text-decoration:none;margin-bottom:20px;padding:6px 12px;border:1px solid #e5e7eb;border-radius:8px;background:#f9fafb;transition:all 0.15s;" onmouseover="this.style.color='#111827';this.style.borderColor='#d1d5db'" onmouseout="this.style.color='#6b7280';this.style.borderColor='#e5e7eb'">&larr; Accueil</a>
+
+    <div class="hdr">
+      <h1>Roadmap Mandarin HSK 3 &mdash; 14 semaines</h1>
+      <p>D&eacute;but : 20 ao&ucirc;t 2026 &middot; Examen : 25 novembre 2026 &middot; 3&ndash;4h/jour &middot; Objectif : 600 mots, 600 caract&egrave;res</p>
+    </div>
+
+    <div class="res">
+      <div class="res-head" id="resHead" role="button" tabindex="0">
+        <h2>📚 Ressources — à installer avant le Jeu 20</h2>
+        <span class="res-sub">Afficher / masquer ▾</span>
+      </div>
+
+      <div class="res-body open" id="resBody">
+        <div class="res-grid">
+
+          <div class="res-card">
+            <h3>Mémorisation (indispensable)</h3>
+            <ul>
+              <li><a href="https://apps.ankiweb.net/" target="_blank" rel="noopener">Anki</a>
+                <span class="note">Deck « HSK 1-3 Vocabulary » + deck de caractères. Cœur du système.</span></li>
+              <li><a href="https://www.pleco.com/" target="_blank" rel="noopener">Pleco</a>
+                <span class="note">LE dictionnaire chinois. Reconnaissance manuscrite + caméra OCR. Gratuit.</span></li>
+              <li><a href="https://hanzicraft.com/" target="_blank" rel="noopener">HanziCraft</a>
+                <span class="note">Décompose n'importe quel caractère en radicaux + mnémotechniques.</span></li>
+              <li><a href="https://www.skritter.com/" target="_blank" rel="noopener">Skritter</a>
+                <span class="note">Écriture des caractères au doigt, ordre des traits corrigé en direct.</span></li>
+            </ul>
+          </div>
+
+          <div class="res-card">
+            <h3>Cours structurés</h3>
+            <ul>
+              <li><a href="https://www.chinesegrammarwiki.com/" target="_blank" rel="noopener">Chinese Grammar Wiki</a>
+                <span class="note">Toute la grammaire triée par niveau HSK. Ta référence n°1.</span></li>
+              <li><a href="https://www.hellochinese.cc/" target="_blank" rel="noopener">HelloChinese</a>
+                <span class="note">Le meilleur « Duolingo du chinois ». Excellent sur les tons.</span></li>
+              <li><a href="https://www.coursera.org/learn/learn-chinese" target="_blank" rel="noopener">Coursera – Chinese for Beginners</a>
+                <span class="note">Université de Pékin, gratuit en audit.</span></li>
+              <li><a href="https://www.digmandarin.com/" target="_blank" rel="noopener">DigMandarin</a>
+                <span class="note">Fiches de grammaire claires + exercices gratuits.</span></li>
+            </ul>
+          </div>
+
+          <div class="res-card">
+            <h3>Écoute &amp; compréhension</h3>
+            <ul>
+              <li><a href="https://www.chinesepod.com/" target="_blank" rel="noopener">ChinesePod</a>
+                <span class="note">Dialogues par niveau, du Newbie à l'Advanced.</span></li>
+              <li><a href="https://www.youtube.com/@MandarinCorner" target="_blank" rel="noopener">Mandarin Corner (YT)</a>
+                <span class="note">Vidéos réelles, sous-titrées pinyin + hanzi + anglais. Gratuit.</span></li>
+              <li><a href="https://www.youtube.com/@Chineseclass101" target="_blank" rel="noopener">ChineseClass101 (YT)</a>
+                <span class="note">Leçons courtes thématiques, très bon pour le vocabulaire.</span></li>
+              <li><a href="https://www.youtube.com/@ShuoshuoChinese" target="_blank" rel="noopener">Shuoshuo Chinese (YT)</a>
+                <span class="note">Chinois lent 100 % en mandarin — parfait dès la semaine 4.</span></li>
+            </ul>
+          </div>
+
+          <div class="res-card">
+            <h3>Lecture graduée</h3>
+            <ul>
+              <li><a href="https://duchinese.net/" target="_blank" rel="noopener">DuChinese</a>
+                <span class="note">Textes gradués avec audio + pinyin au tap. Le meilleur outil de lecture.</span></li>
+              <li><a href="https://www.thechairmansbao.com/" target="_blank" rel="noopener">The Chairman's Bao</a>
+                <span class="note">Actualité réécrite par niveau HSK.</span></li>
+              <li><a href="https://mandarinbean.com/" target="_blank" rel="noopener">Mandarin Bean</a>
+                <span class="note">Textes gratuits HSK1→HSK6 avec audio.</span></li>
+            </ul>
+          </div>
+
+          <div class="res-card">
+            <h3>Parler &amp; corriger</h3>
+            <ul>
+              <li><a href="https://www.italki.com/" target="_blank" rel="noopener">italki</a>
+                <span class="note">Tuteurs à partir de ~5 €/h. Objectif : 1 session/semaine dès la semaine 5.</span></li>
+              <li><a href="https://www.hellotalk.com/" target="_blank" rel="noopener">HelloTalk</a>
+                <span class="note">Échange linguistique gratuit avec des natifs.</span></li>
+              <li><a href="https://www.tandem.net/" target="_blank" rel="noopener">Tandem</a>
+                <span class="note">Alternative à HelloTalk, bonne fonction appel vocal.</span></li>
+            </ul>
+          </div>
+
+          <div class="res-card">
+            <h3>Examen HSK — officiel</h3>
+            <ul>
+              <li><a href="https://www.chinesetest.cn/" target="_blank" rel="noopener">Chinesetest.cn</a>
+                <span class="note">Site officiel : inscription, dates, annales gratuites.</span></li>
+              <li><a href="https://www.hsk.academy/" target="_blank" rel="noopener">HSK Academy</a>
+                <span class="note">Listes de vocabulaire officielles HSK 1→6 + tests blancs.</span></li>
+              <li><a href="http://www.hanyuguoji.cn/" target="_blank" rel="noopener">Centre HSK</a>
+                <span class="note">Vérifie le centre d'examen le plus proche et les dates de session.</span></li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="res-tips">
+          <h3>⚡ Les 8 accélérateurs (à lire avant de commencer)</h3>
+          <ol>
+            <li><b>Les tons d'abord, tout le reste ensuite.</b> Ne passe pas la semaine 1 sans maîtriser les 4 tons + le ton neutre. Un mot appris avec le mauvais ton devra être réappris deux fois.</li>
+            <li><b>Toujours apprendre par mot, jamais par caractère isolé.</b> 好 seul ne veut presque rien dire ; 你好 / 好吃 / 好看 oui. Ton Anki doit contenir des mots et des phrases.</li>
+            <li><b>Les radicaux sont le vrai raccourci.</b> 214 radicaux composent tous les caractères. En connaître 100 divise par trois le temps de mémorisation.</li>
+            <li><b>Anki tous les jours, même 10 minutes.</b> Sauter 3 jours crée un mur de 300 cartes. La régularité bat l'intensité.</li>
+            <li><b>Shadowing quotidien 10 min.</b> Répète par-dessus un audio natif en imitant le rythme. C'est l'exercice qui fait le plus progresser la prononciation.</li>
+            <li><b>Écris à la main les 300 premiers caractères.</b> Ensuite, tape en pinyin. L'écriture manuelle ancre la mémoire visuelle au début, puis devient un coût.</li>
+            <li><b>Le pinyin est un échafaudage, pas une béquille.</b> À partir de la semaine 6, lis en hanzi et ne consulte le pinyin qu'en cas de blocage.</li>
+            <li><b>Parle dès la semaine 3, même mal.</b> Attendre d'être « prêt » est le piège n°1. 30 phrases mal prononcées valent mieux que 300 lues en silence.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div class="daily">
+      <div class="daily-item">
+        <div class="d-time">30 min</div>
+        <div class="d-lbl">Anki — révisions + nouvelles cartes</div>
+      </div>
+      <div class="daily-item">
+        <div class="d-time">45 min</div>
+        <div class="d-lbl">Leçon du jour (grammaire / vocabulaire)</div>
+      </div>
+      <div class="daily-item">
+        <div class="d-time">30 min</div>
+        <div class="d-lbl">Écriture des caractères</div>
+      </div>
+      <div class="daily-item">
+        <div class="d-time">30 min</div>
+        <div class="d-lbl">Écoute active + shadowing</div>
+      </div>
+      <div class="daily-item">
+        <div class="d-time">30 min</div>
+        <div class="d-lbl">Lecture graduée (DuChinese)</div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#E1F5EE;border:1px solid #5DCAA5"></div>
+        Repos actif
+      </div>
+
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#f9fafb;border:1px solid #e5e7eb"></div>
+        Jour d'&eacute;tude
+      </div>
+
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#FBEAF0;border:1px solid #D4537E"></div>
+        Examen / blanc
+      </div>
+      <div class="legend-item">
+        <div class="phase-progress-track" style="width:42px;flex:0 0 auto">
+          <div class="phase-progress-fill" style="width:65%;background:#2563eb"></div>
+        </div>
+        Progression phase
+      </div>
+    </div>
+
+    <div id="root"></div>
+
+  </div>
+  <script>
+
+    const phases = [
+      {
+        name: "Phase 1 — Fondations HSK 1", bg: "#E1F5EE", color: "#0F6E56", lbg: "#E1F5EE", lc: "#0F6E56",
+        weeks: [
+          {
+            name: "Semaine 1", dates: "20–26 août", level: "HSK 1", days: [
+              {d: "Jeu 20", t: "Installe Anki + Pleco + HelloChinese. Système du pinyin : initiales, finales. Les <b>4 tons + ton neutre</b> — mā má mǎ mà ma. Écoute et répète 30 min."},
+              {d: "Ven 21", t: "Tons : exercices de discrimination (paires minimales). Salutations : 你好 nǐ hǎo (bonjour), 早上好 zǎoshang hǎo (bonjour matin), 再见 zàijiàn (au revoir), 谢谢 xièxie (merci), 不客气 bú kèqi (de rien)."},
+              {d: "Sam 22", t: "Le verbe 是 shì (être) : 我是学生 wǒ shì xuéshēng (je suis étudiant). Pronoms : 我 wǒ / 你 nǐ / 他 tā / 她 tā / 我们 wǒmen / 你们 nǐmen / 他们 tāmen."},
+              {d: "Dim 23", t: "Le verbe 有 yǒu (avoir) + sa négation irrégulière 没有 méiyǒu. 我有一本书 wǒ yǒu yì běn shū (j'ai un livre). Écris 10 phrases avec 是 et 有."},
+              {d: "Lun 24", t: "Se présenter : 我叫… wǒ jiào (je m'appelle), 我是… wǒ shì, 我来自… wǒ láizì (je viens de), 我住在… wǒ zhù zài (j'habite à). Nombres 1–100."},
+              {d: "Mar 25", t: "Introduction aux caractères : les 20 radicaux les plus fréquents (人 口 女 心 手 水 火 木 日 月…). Ordre des traits : les 8 règles de base. Crée les cartes Anki."},
+              {d: "Mer 26", t: "🌿 Repos actif : regarde une vidéo Mandarin Corner sous-titrée. Écoute sans pression, note 5 mots.", rest: true},
+            ]
+          },
+          {
+            name: "Semaine 2", dates: "27 août – 2 sept", level: "HSK 1", days: [
+              {d: "Jeu 27", t: "Structure de base <b>Sujet + Verbe + Objet</b> (identique au français !). Verbes courants : 吃 chī (manger), 喝 hē (boire), 看 kàn (regarder), 学 xué (apprendre), 做 zuò (faire). ⚠️ Le chinois ne conjugue jamais."},
+              {d: "Ven 28", t: "La particule 的 de — possession et qualification : 我的书 wǒ de shū (mon livre), 好看的电影 hǎokàn de diànyǐng (un beau film). 15 phrases exemples."},
+              {d: "Sam 29", t: "<b>Classificateurs (量词)</b> : 个 gè (général), 本 běn (livres), 张 zhāng (plats), 只 zhī (animaux), 杯 bēi (verres). Structure : Nombre + classificateur + nom. 20 exemples Anki."},
+              {d: "Dim 30", t: "Vocabulaire maison : 家 jiā, 房间 fángjiān, 厨房 chúfáng, 门 mén, 窗户 chuānghu + les couleurs 红 hóng, 蓝 lán, 白 bái, 黑 hēi. 25 mots Anki."},
+              {d: "Lun 31", t: "Vocabulaire nourriture + boissons : 米饭 mǐfàn, 面条 miàntiáo, 鸡肉 jīròu, 水 shuǐ, 茶 chá, 咖啡 kāfēi. Dialogue écrit : commander au restaurant."},
+              {d: "Mar 1", t: "<b>Négation : 不 bù vs 没 méi.</b> 不 = présent/futur/habitude ; 没 = passé et avec 有. 我不吃肉 / 我没吃饭. Écris 10 phrases de négation."},
+              {d: "Mer 2", t: "🌿 Repos actif : épisode ChinesePod niveau Newbie. Écoute d'un épisode complet, sans prendre de notes.", rest: true},
+            ]
+          },
+          {
+            name: "Semaine 3", dates: "3–9 septembre", level: "HSK 1→2", days: [
+              {d: "Jeu 3", t: "<b>Les questions</b> : particule 吗 ma (oui/non) et question par répétition A-不-A (你去不去？). 20 questions à formuler."},
+              {d: "Ven 4", t: "Mots interrogatifs : 谁 shéi (qui), 什么 shénme (quoi), 哪儿 nǎr (où), 什么时候 shénme shíhou (quand), 为什么 wèishénme (pourquoi), 怎么 zěnme (comment). ⚠️ Ils restent à la place du mot cherché."},
+              {d: "Sam 5", t: "Le temps et les dates : 今天 jīntiān, 明天 míngtiān, 昨天 zuótiān, les jours 星期一…, les mois 一月…. Structure du <b>général au particulier</b> : année → mois → jour → heure."},
+              {d: "Dim 6", t: "Vocabulaire ville + transports : 车站 chēzhàn, 机场 jīchǎng, 地铁 dìtiě, 公共汽车 gōnggòng qìchē. Demander son chemin : 车站在哪儿？ / 我怎么去…？"},
+              {d: "Lun 7", t: "Révision complète HSK 1. Fais un test blanc HSK 1 gratuit sur chinesetest.cn ou hsk.academy."},
+              {d: "Mar 8", t: "Correction du test. Identifie tes 3 points faibles (tons ? caractères ? classificateurs ?) → exercices ciblés."},
+              {d: "Mer 9", t: "🌿 Repos actif : dessin animé chinois court (Peppa Pig 小猪佩奇 en mandarin). Note 5 mots inconnus.", rest: true},
+            ]
+          },
+        ]
+      },
+      {
+        name: "Phase 2 — Structure grammaticale HSK 2", bg: "#E6F1FB", color: "#185FA5", lbg: "#E6F1FB", lc: "#185FA5",
+        weeks: [
+          {
+            name: "Semaine 4", dates: "10–16 septembre", level: "HSK 2", days: [
+              {d: "Jeu 10", t: "<b>在 zài</b> — trois emplois : verbe de localisation (我在家), préposition de lieu (我在家吃饭), marqueur d'action en cours (我在吃饭 = je suis en train de manger)."},
+              {d: "Ven 11", t: "Mots de position : 上面 shàngmiàn, 下面 xiàmiàn, 里面 lǐmiàn, 外面 wàimiàn, 前面 qiánmiàn, 后面 hòumiàn, 旁边 pángbiān. 15 phrases avec 在."},
+              {d: "Sam 12", t: "<b>La particule 了 le (1/2)</b> — action accomplie : 我吃了饭 (j'ai mangé). Différence entre 了 verbal et 了 de fin de phrase (changement d'état)."},
+              {d: "Dim 13", t: "Verbes séparables (离合词) : 见面 jiànmiàn, 睡觉 shuìjiào, 帮忙 bāngmáng, 结婚 jiéhūn. Règle : l'objet s'insère au milieu → 见一面, 睡了三个小时的觉."},
+              {d: "Lun 14", t: "Vocabulaire travail + bureau : 工作 gōngzuò, 公司 gōngsī, 老板 lǎobǎn, 同事 tóngshì, 会议 huìyì, 电脑 diànnǎo. <b>40 mots Anki.</b> Dialogue : se présenter en contexte professionnel."},
+              {d: "Mar 15", t: "Les adjectifs en chinois : pas besoin de 是 ! 她很漂亮 (elle est belle). Le rôle de 很 hěn comme lien obligatoire. 20 adjectifs courants."},
+              {d: "Mer 16", t: "🌿 Repos actif : chanson en mandarin (周杰伦 Jay Chou) avec paroles + pinyin. Chante par-dessus.", rest: true},
+            ]
+          },
+          {
+            name: "Semaine 5", dates: "17–23 septembre", level: "HSK 2", days: [
+              {d: "Jeu 17", t: "<b>La particule 了 le (2/2)</b> — les cas pièges : négation avec 没 supprime 了, 了 + 就 pour la séquence. 15 phrases."},
+              {d: "Ven 18", t: "<b>过 guo</b> — l'expérience vécue : 我去过中国 (je suis déjà allé en Chine). Différence 了 vs 过. Négation : 没…过."},
+              {d: "Sam 19", t: "<b>正在…呢</b> — l'action en cours. 着 zhe — l'état continu (他站着 = il est debout). Distinction 在 / 正在 / 着."},
+              {d: "Dim 20", t: "<b>Le comparatif avec 比 bǐ</b> : A 比 B + adjectif. 我比他高 (je suis plus grand que lui). Le superlatif avec 最 zuì. 20 adjectifs comparés."},
+              {d: "Lun 21", t: "Comparaisons d'égalité : 跟…一样 gēn…yíyàng, 没有…那么 méiyǒu…nàme. 15 phrases de comparaison."},
+              {d: "Mar 22", t: "Vocabulaire santé + corps : 头 tóu, 肚子 dùzi, 发烧 fāshāo, 感冒 gǎnmào, 医生 yīshēng, 药 yào. Dialogue : chez le médecin. Phrases utiles à mémoriser."},
+              {d: "Mer 23", t: "🌿 Repos actif : 30 min de DuChinese en lecture libre, niveau Beginner. Sans dictionnaire.", rest: true},
+            ]
+          },
+          {
+            name: "Semaine 6", dates: "24–30 septembre", level: "HSK 2→3", days: [
+              {d: "Jeu 24", t: "<b>Verbes modaux</b> : 会 huì (savoir faire / futur), 能 néng (pouvoir physiquement), 可以 kěyǐ (avoir la permission), 要 yào (vouloir/devoir), 想 xiǎng (avoir envie). Distinction fine + 20 phrases."},
+              {d: "Ven 25", t: "<b>Le futur</b> : 要…了, 快…了, 就要…了. + adverbes de temps 明天 míngtiān, 以后 yǐhòu, 马上 mǎshàng. Le chinois n'a pas de temps grammatical — tout passe par le contexte."},
+              {d: "Sam 26", t: "<b>Complément de degré 得 de</b> : 他跑得很快 (il court vite). Structure V + 得 + adjectif. Négation : V + 得不 + adj."},
+              {d: "Dim 27", t: "<b>Les compléments directionnels</b> : 来 lái / 去 qù, 进来 jìnlái, 出去 chūqù, 回来 huílái, 上去 shàngqù. 15 phrases."},
+              {d: "Lun 28", t: "Vocabulaire voyages + hôtel + aéroport : 旅行 lǚxíng, 护照 hùzhào, 飞机 fēijī, 酒店 jiǔdiàn, 房间 fángjiān, 行李 xíngli. <b>40 mots Anki.</b> Dialogue : check-in à l'hôtel."},
+              {d: "Mar 29", t: "Test blanc HSK 2 complet, en conditions réelles (chrono). Corrige et note ton score."},
+              {d: "Mer 30", t: "🌿 Repos actif : vidéo Shuoshuo Chinese, 100 % en mandarin. Objectif : comprendre le sens général, pas chaque mot.", rest: true},
+            ]
+          },
+        ]
+      },
+      {
+        name: "Phase 3 — Consolidation HSK 3", bg: "#FFF4E5", color: "#B45309", lbg: "#FFF4E5", lc: "#B45309",
+        weeks: [
+          {
+            name: "Semaine 7", dates: "1–7 octobre", level: "HSK 3", days: [
+              {d: "Jeu 1", t: "<b>因为…所以…</b> (parce que… donc…) — la cause. ⚠️ Les deux moitiés s'emploient ensemble en chinois, contrairement au français. 15 phrases."},
+              {d: "Ven 2", t: "<b>虽然…但是…</b> (bien que… cependant…) — la concession. + 不但…而且… (non seulement… mais aussi…). 15 phrases."},
+              {d: "Sam 3", t: "<b>如果…就…</b> (si… alors…) — la condition. + 只要…就… (il suffit que…) et 只有…才… (seulement si…). Exercices mixtes."},
+              {d: "Dim 4", t: "<b>La structure 把 bǎ</b> — la plus importante du HSK 3. Sujet + 把 + objet + verbe + complément. 我把书放在桌子上. 20 phrases d'entraînement."},
+              {d: "Lun 5", t: "Suite de 把 : les cas où elle est obligatoire, ceux où elle est interdite. Exercices de transformation phrase normale ↔ phrase en 把."},
+              {d: "Mar 6", t: "<b>La voix passive avec 被 bèi</b> : 书被他拿走了 (le livre a été emporté par lui). Différence avec 把. 15 phrases."},
+              {d: "Mer 7", t: "🌿 Repos actif : film chinois avec sous-titres chinois (pas français !). 我不是药神 ou 你好，李焕英.", rest: true},
+            ]
+          },
+          {
+            name: "Semaine 8", dates: "8–14 octobre", level: "HSK 3", days: [
+              {d: "Jeu 8", t: "<b>Compléments de résultat</b> : 完 wán (fini), 好 hǎo (bien), 到 dào (atteint), 见 jiàn (perçu), 懂 dǒng (compris). 看完 / 听懂 / 找到. 20 combinaisons."},
+              {d: "Ven 9", t: "<b>Compléments de potentiel</b> : V + 得/不 + résultat. 听得懂 (je peux comprendre) vs 听不懂 (je n'y arrive pas). Très fréquent à l'oral."},
+              {d: "Sam 10", t: "<b>Compléments de durée et de fréquence</b> : 我学了三年中文 / 我去过两次. Position par rapport à l'objet — la règle de la répétition du verbe."},
+              {d: "Dim 11", t: "<b>是…的</b> — mettre l'accent sur le moment, le lieu ou la manière d'une action passée. 我是昨天来的. 15 phrases."},
+              {d: "Lun 12", t: "Vocabulaire études + école : 学校 xuéxiào, 老师 lǎoshī, 考试 kǎoshì, 成绩 chéngjì, 作业 zuòyè. 40 mots Anki. Rédaction : décrire ta journée type."},
+              {d: "Mar 13", t: "Révision massive : reprends toutes les structures des semaines 4–8 dans un tableau récapitulatif d'une page. Le fabriquer toi-même est l'exercice."},
+              {d: "Mer 14", t: "🌿 Repos actif : podcast chinois en fond sonore pendant 1h (cuisine, marche…). Écoute passive.", rest: true},
+            ]
+          },
+          {
+            name: "Semaine 9", dates: "15–21 octobre", level: "HSK 3", days: [
+              {d: "Jeu 15", t: "<b>Expression écrite</b> : structure d'un paragraphe chinois. Connecteurs 首先 shǒuxiān, 然后 ránhòu, 最后 zuìhòu, 另外 lìngwài. Rédige 150 caractères sur ta ville."},
+              {d: "Ven 16", t: "<b>Expression orale</b> : première session italki (30 min) ou HelloTalk. Présente-toi et raconte ta semaine. Enregistre-toi."},
+              {d: "Sam 17", t: "Réécoute ton enregistrement. Note tes 10 erreurs récurrentes (tons ? ordre des mots ? classificateurs ?). Corrige-les une par une."},
+              {d: "Dim 18", t: "Vocabulaire loisirs + sport + météo : 运动 yùndòng, 跑步 pǎobù, 天气 tiānqì, 下雨 xiàyǔ, 晴天 qíngtiān. 40 mots Anki."},
+              {d: "Lun 19", t: "Caractères : atteins les 600 caractères reconnus. Session d'écriture longue — les 50 caractères que tu confonds le plus."},
+              {d: "Mar 20", t: "Test blanc HSK 3 complet en conditions réelles. Chronomètre chaque section."},
+              {d: "Mer 21", t: "🌿 Repos actif : série chinoise courte sur YouTube, sous-titres chinois uniquement.", rest: true},
+            ]
+          },
+          {
+            name: "Semaine 10", dates: "22–28 octobre", level: "HSK 3", days: [
+              {d: "Jeu 22", t: "Correction détaillée du test HSK 3. Analyse par section : écoute / lecture / écriture. Où perds-tu le plus de points ?"},
+              {d: "Ven 23", t: "Section faible n°1 : entraînement ciblé 2h. Refais uniquement ce type d'exercice."},
+              {d: "Sam 24", t: "<b>Compréhension orale intensive</b> : 10 exercices type HSK 3. Technique : lire les questions avant l'audio."},
+              {d: "Dim 25", t: "<b>Compréhension écrite intensive</b> : 10 textes HSK 3. Technique du survol — repérer les mots-clés avant de lire en détail."},
+              {d: "Lun 26", t: "<b>Expression écrite HSK 3</b> : réordonner des mots en phrase + écrire une phrase avec un caractère donné. 20 exercices."},
+              {d: "Mar 27", t: "Session italki n°2. Thème imposé : raconter un souvenir au passé (utilise 了 / 过 / 是…的)."},
+              {d: "Mer 28", t: "🌿 Repos actif : cuisine chinoise en suivant une recette en mandarin sur YouTube. Apprentissage par le contexte.", rest: true},
+            ]
+          },
+        ]
+      },
+      {
+        name: "Phase 4 — Préparation examen", bg: "#FBEAF0", color: "#993556", lbg: "#FBEAF0", lc: "#993556",
+        weeks: [
+          {
+            name: "Semaine 11", dates: "29 oct – 4 nov", level: "HSK 3", days: [
+              {d: "Jeu 29", t: "Inscris-toi officiellement au HSK 3 sur chinesetest.cn. Vérifie la date, le centre et les documents requis."},
+              {d: "Ven 30", t: "Révision du vocabulaire HSK 1 (150 mots) — passage rapide, tout doit être automatique."},
+              {d: "Sam 31", t: "Révision du vocabulaire HSK 2 (150 mots). Marque en rouge tout ce qui hésite encore."},
+              {d: "Dim 1", t: "Révision du vocabulaire HSK 3 (300 mots), partie 1/2. Anki en mode intensif."},
+              {d: "Lun 2", t: "Révision du vocabulaire HSK 3, partie 2/2. Total attendu : 600 mots actifs."},
+              {d: "Mar 3", t: "Test blanc HSK 3 n°2 en conditions réelles. Compare ton score au test de la semaine 9."},
+              {d: "Mer 4", t: "🌿 Repos actif : écoute libre, aucune prise de notes. Laisse le cerveau consolider.", rest: true},
+            ]
+          },
+          {
+            name: "Semaine 12", dates: "5–11 novembre", level: "HSK 3", days: [
+              {d: "Jeu 5", t: "Correction du test n°2. Liste les erreurs qui reviennent depuis la semaine 9 — ce sont tes vraies faiblesses."},
+              {d: "Ven 6", t: "Grammaire : révision des structures 把 / 被 / 是…的 / compléments. Une page de synthèse par structure."},
+              {d: "Sam 7", t: "Caractères : les 100 caractères les plus piégeux (paires visuellement proches : 找/我, 千/干, 未/末). Écriture manuscrite."},
+              {d: "Dim 8", t: "Écoute : 15 exercices HSK 3 d'affilée. Objectif : tenir la concentration sur la durée réelle de l'épreuve."},
+              {d: "Lun 9", t: "Lecture : 15 exercices HSK 3 chronométrés. Vise 20 % de temps en moins que le temps imparti."},
+              {d: "Mar 10", t: "Session italki n°3. Demande une correction stricte de ta prononciation, ton par ton."},
+              {d: "Mer 11", t: "🌿 Repos actif : film en mandarin, sous-titres chinois. Détends-toi vraiment.", rest: true},
+            ]
+          },
+          {
+            name: "Semaine 13", dates: "12–18 novembre", level: "HSK 3", days: [
+              {d: "Jeu 12", t: "Test blanc HSK 3 n°3, matin, conditions strictes. C'est ton test de référence final."},
+              {d: "Ven 13", t: "Correction complète + plan de révision pour les 10 derniers jours basé uniquement sur les erreurs."},
+              {d: "Sam 14", t: "Révision ciblée bloc 1 (ta section la plus faible). Rien d'autre aujourd'hui."},
+              {d: "Dim 15", t: "Révision ciblée bloc 2. Anki complet + relecture des synthèses grammaticales."},
+              {d: "Lun 16", t: "Simulation de la seule section d'écoute, 3 fois de suite. L'endurance auditive se travaille."},
+              {d: "Mar 17", t: "Simulation lecture + écriture. Vérifie ta gestion du temps."},
+              {d: "Mer 18", t: "🌿 Repos actif : journée légère. Anki 20 min et c'est tout.", rest: true},
+            ]
+          },
+          {
+            name: "Semaine 14", dates: "19–25 novembre", level: "🎯 Examen", days: [
+              {d: "Jeu 19", t: "Révision légère : relis uniquement tes fiches de synthèse. Ne découvre plus rien de nouveau."},
+              {d: "Ven 20", t: "Anki uniquement (45 min). Révise les 100 mots que tu rates le plus souvent."},
+              {d: "Sam 21", t: "Dernière session italki : conversation détendue, 30 min, pour rester en confiance à l'oral."},
+              {d: "Dim 22", t: "Relecture des structures grammaticales clés. Mini-exercices sans pression."},
+              {d: "Lun 23", t: "Repos. Prépare tes affaires : pièce d'identité, confirmation d'inscription, crayons 2B, gomme."},
+              {d: "Mar 24", t: "Dernier jour léger : Anki 20 min, relecture des formules. Couche-toi tôt."},
+              {d: "Mer 25", t: "🎯 EXAMEN HSK 3 — Tu es prêt(e). 加油！ Jiāyóu !", exam: true},
+            ]
+          },
+        ]
+      }
+    ];
+
+    const MONTH_MAP = {'jan': 0, 'janvier': 0, 'fév': 1, 'févr': 1, 'février': 1, 'mar': 2, 'mars': 2, 'avr': 3, 'avril': 3, 'mai': 4, 'juin': 5, 'juil': 6, 'juillet': 6, 'août': 7, 'sep': 8, 'sept': 8, 'sept.': 8, 'septembre': 8, 'oct': 9, 'oct.': 9, 'octobre': 9, 'nov': 10, 'novembre': 10, 'déc': 11, 'décembre': 11};
+
+    function parseDayDate(weekDates, dayLabel) {
+      const dayNum = parseInt(dayLabel.split(' ').pop());
+      if (isNaN(dayNum)) return null;
+      const parts = weekDates.split(/\s*–\s*/);
+      const startParts = parts[0].trim().split(/\s+/);
+      const endParts = parts[1] ? parts[1].trim().split(/\s+/) : [];
+      const startNum = parseInt(startParts[0]);
+      let month1 = startParts[1] ? MONTH_MAP[startParts[1].toLowerCase()] : undefined;
+      let month2 = endParts[1] ? MONTH_MAP[endParts[1].toLowerCase()] : undefined;
+      if (month1 === undefined) month1 = month2;
+      if (month2 === undefined) month2 = month1;
+      const month = (month1 !== month2 && dayNum < startNum) ? month2 : month1;
+      return new Date(2026, month, dayNum);
+    }
+
+    function build() {
+      const root = document.getElementById('root');
+      const storageKey = 'roadmap-mandarin-checklist';
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const saved = JSON.parse(localStorage.getItem(storageKey) || '{}');
+
+      phases.forEach((ph) => {
+        const phDiv = document.createElement('div');
+        phDiv.className = 'phase';
+
+        const bar = document.createElement('div');
+        bar.className = 'phase-bar';
+        bar.style.background = ph.bg;
+        bar.style.color = ph.color;
+        bar.textContent = ph.name;
+        phDiv.appendChild(bar);
+
+        const progress = document.createElement('div');
+        progress.className = 'phase-progress';
+        const progressTrack = document.createElement('div');
+        progressTrack.className = 'phase-progress-track';
+        const progressFill = document.createElement('div');
+        progressFill.className = 'phase-progress-fill';
+        progressTrack.appendChild(progressFill);
+        const progressText = document.createElement('span');
+        progress.appendChild(progressTrack);
+        progress.appendChild(progressText);
+
+        const stats = document.createElement('div');
+        stats.className = 'phase-stats';
+
+        const completeBadge = document.createElement('span');
+        completeBadge.className = 'phase-complete-badge';
+        completeBadge.innerHTML = '✓ Phase terminée !';
+
+        phDiv.appendChild(progress);
+        phDiv.appendChild(stats);
+
+        const phaseDays = ph.weeks.flatMap(wk => wk.days.map(day => ({wk, day})));
+
+        const statPercent = document.createElement('div');
+        statPercent.className = 'phase-stat';
+        const statRemaining = document.createElement('div');
+        statRemaining.className = 'phase-stat';
+        stats.appendChild(statPercent);
+        stats.appendChild(statRemaining);
+        stats.appendChild(completeBadge);
+
+        function updateProgress() {
+          const phaseState = saved[ph.name] || {};
+          const doneCount = phaseDays.filter(({day}) => phaseState[day.d]).length;
+          const total = phaseDays.length;
+          const percent = total ? Math.round((doneCount / total) * 100) : 0;
+          progressFill.style.width = percent + '%';
+          progressFill.style.background = ph.color;
+          progressText.textContent = doneCount + '/' + total + ' jours';
+
+          const remaining = total - doneCount;
+          statPercent.textContent = percent + '% complété';
+          statRemaining.textContent = remaining > 0 ? remaining + ' jour' + (remaining > 1 ? 's' : '') + ' à faire' : '';
+          statRemaining.style.display = remaining > 0 ? '' : 'none';
+
+          completeBadge.classList.toggle('visible', percent === 100);
+        }
+
+        ph.weeks.forEach((wk) => {
+          const wDiv = document.createElement('div');
+          wDiv.className = 'week';
+
+          const head = document.createElement('div');
+          head.className = 'week-head';
+          head.setAttribute('role', 'button');
+          head.setAttribute('tabindex', '0');
+
+          const left = document.createElement('div');
+          left.className = 'week-left';
+
+          const lvl = document.createElement('span');
+          lvl.className = 'wlevel';
+          lvl.style.background = ph.lbg;
+          lvl.style.color = ph.lc;
+          lvl.textContent = wk.level;
+
+          const nm = document.createElement('span');
+          nm.className = 'wname';
+          nm.textContent = wk.name;
+
+          left.appendChild(lvl);
+          left.appendChild(nm);
+
+          const right = document.createElement('div');
+          right.className = 'week-head-right';
+
+          const weekCount = document.createElement('span');
+          weekCount.className = 'week-progress-count';
+
+          const dt = document.createElement('span');
+          dt.className = 'wdates';
+          dt.textContent = wk.dates;
+
+          const checkAllBtn = document.createElement('span');
+          checkAllBtn.className = 'week-check-all';
+          checkAllBtn.textContent = 'Tout cocher';
+
+          const arr = document.createElement('span');
+          arr.className = 'arrow';
+          arr.textContent = '▾';
+
+          right.appendChild(weekCount);
+          right.appendChild(dt);
+          right.appendChild(checkAllBtn);
+          right.appendChild(arr);
+          head.appendChild(left);
+          head.appendChild(right);
+
+          const body = document.createElement('div');
+          body.className = 'week-body';
+
+          const rows = [];
+
+          function updateWeekCount() {
+            const phaseState = saved[ph.name] || {};
+            const doneInWeek = wk.days.filter(d => phaseState[d.d]).length;
+            const totalInWeek = wk.days.length;
+            weekCount.textContent = doneInWeek + '/' + totalInWeek;
+            weekCount.classList.toggle('all-done', doneInWeek === totalInWeek);
+            checkAllBtn.textContent = doneInWeek === totalInWeek ? 'Tout décocher' : 'Tout cocher';
+          }
+
+          wk.days.forEach(day => {
+            const row = document.createElement('div');
+            row.className = 'day-row' + (day.rest ? ' rest' : '') + (day.exam ? ' exam-row' : '');
+            const isDone = !!((saved[ph.name] || {})[day.d]);
+            if (isDone) row.classList.add('done');
+
+            const dayDate = parseDayDate(wk.dates, day.d);
+            const isLate = !isDone && dayDate !== null && dayDate < today;
+            if (isLate) row.classList.add('overdue');
+
+            const lateBadgeHTML = '<span class="late-badge">En retard</span>';
+            const lblContent = '<span class="day-lbl-name">' + day.d + '</span>' + (isLate ? lateBadgeHTML : '');
+
+            row.innerHTML =
+              '<div class="day-lbl">' + lblContent + '</div>' +
+              '<div class="day-txt">' + day.t + '</div>' +
+              '<div class="day-check"><input type="checkbox"' + (isDone ? ' checked' : '') + ' aria-label="Marquer ' + day.d + ' comme fait"></div>';
+
+            const cb = row.querySelector('input');
+            cb.addEventListener('click', function (e) {
+              e.stopPropagation();
+            });
+            cb.addEventListener('change', function () {
+              saved[ph.name] = saved[ph.name] || {};
+              saved[ph.name][day.d] = this.checked;
+              localStorage.setItem(storageKey, JSON.stringify(saved));
+              row.classList.toggle('done', this.checked);
+              if (this.checked) {
+                row.classList.remove('overdue');
+                const badge = row.querySelector('.late-badge');
+                if (badge) badge.remove();
+              } else if (dayDate !== null && dayDate < today) {
+                row.classList.add('overdue');
+                const lbl = row.querySelector('.day-lbl');
+                if (!lbl.querySelector('.late-badge')) {
+                  lbl.insertAdjacentHTML('beforeend', lateBadgeHTML);
+                }
+              }
+              updateWeekCount();
+              updateProgress();
+            });
+
+            rows.push({row, day, cb});
+            body.appendChild(row);
+          });
+
+          checkAllBtn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            const phaseState = saved[ph.name] || {};
+            const allDone = wk.days.every(d => phaseState[d.d]);
+            const newState = !allDone;
+            saved[ph.name] = saved[ph.name] || {};
+            rows.forEach(({row, day, cb}) => {
+              saved[ph.name][day.d] = newState;
+              cb.checked = newState;
+              row.classList.toggle('done', newState);
+              if (newState) {
+                row.classList.remove('overdue');
+                const badge = row.querySelector('.late-badge');
+                if (badge) badge.remove();
+              } else {
+                const d = parseDayDate(wk.dates, day.d);
+                if (d !== null && d < today) {
+                  row.classList.add('overdue');
+                  const lbl = row.querySelector('.day-lbl');
+                  if (!lbl.querySelector('.late-badge')) {
+                    lbl.insertAdjacentHTML('beforeend', '<span class="late-badge">En retard</span>');
+                  }
+                }
+              }
+            });
+            localStorage.setItem(storageKey, JSON.stringify(saved));
+            updateWeekCount();
+            updateProgress();
+          });
+
+          function toggle() {
+            const isOpen = body.classList.contains('open');
+            body.classList.toggle('open', !isOpen);
+            arr.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+          }
+
+          head.addEventListener('click', toggle);
+          head.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') {e.preventDefault(); toggle();}
+          });
+
+          updateWeekCount();
+          wDiv.appendChild(head);
+          wDiv.appendChild(body);
+          phDiv.appendChild(wDiv);
+        });
+
+        stats.appendChild(completeBadge);
+        updateProgress();
+        root.appendChild(phDiv);
+      });
+
+      const firstBody = document.querySelector('.week-body');
+      const firstArr = document.querySelector('.arrow');
+      if (firstBody) {firstBody.classList.add('open'); firstArr.style.transform = 'rotate(180deg)';}
+    }
+
+    build();
+
+    const resHead = document.getElementById('resHead');
+    const resBody = document.getElementById('resBody');
+    function toggleRes() { resBody.classList.toggle('open'); }
+    resHead.addEventListener('click', toggleRes);
+    resHead.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleRes(); }
+    });
+  </script>
+</body>
+
+</html>

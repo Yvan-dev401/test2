@@ -314,6 +314,45 @@
       color: #0369a1;
     }
 
+    /* ── Famille App Ideas ── */
+    .fam-appideas .card-parent {
+      border-color: #fb923c;
+    }
+
+    .fam-appideas .card-tag-parent {
+      background: #fff7ed;
+      color: #c2410c;
+    }
+
+    .fam-appideas .card-arrow-parent {
+      color: #c2410c;
+    }
+
+    .fam-appideas .connector-line {
+      background: #fb923c;
+    }
+
+    .fam-appideas .connector-label {
+      color: #fb923c;
+    }
+
+    .fam-appideas .connector-label::before {
+      color: #fb923c;
+    }
+
+    .fam-appideas .card-child {
+      border-color: #fed7aa;
+    }
+
+    .fam-appideas .card-tag-child {
+      background: #fff7ed;
+      color: #9a3412;
+    }
+
+    .fam-appideas .card-arrow-child {
+      color: #9a3412;
+    }
+
     /* ── Projet ── */
     .fam-project .card-parent {
       border-color: #c4b5fd;
@@ -523,6 +562,63 @@
         <div class="card-meta">
           <span class="card-pill">0€ de départ</span>
           <span class="card-pill">6 modèles</span>
+        </div>
+        <div class="card-arrow card-arrow-child">Ouvrir <span>→</span></div>
+      </a>
+    </div>
+
+    <!-- ── FAMILLE APP IDEAS ── -->
+    <div class="family fam-appideas">
+      <div class="family-label">💡 Pratique — Idées d'applications</div>
+
+      <a href="app-ideas.html" class="card card-parent">
+        <div class="card-icon">💡</div>
+        <span class="card-tag card-tag-parent">Catalogue de projets</span>
+        <div class="card-title">App Ideas</div>
+        <div class="card-desc">91 projets à coder, du plus simple au plus ambitieux — chaque fiche liste les user
+          stories à implémenter, avec suivi de progression.</div>
+        <div class="card-meta">
+          <span class="card-pill">91 projets</span>
+          <span class="card-pill">3 niveaux</span>
+          <span class="card-pill">Progression suivie</span>
+        </div>
+        <div class="card-arrow card-arrow-parent">Voir le catalogue <span>→</span></div>
+      </a>
+
+      <div class="connector">
+        <div class="connector-line"></div>
+        <span class="connector-label">3 niveaux de difficulté</span>
+      </div>
+
+      <a href="app-ideas-debutant.html" class="card card-child">
+        <div class="card-icon">🌱</div>
+        <span class="card-tag card-tag-child">Niveau 1</span>
+        <div class="card-title">Débutant</div>
+        <div class="card-desc">Premières applications côté utilisateur : DOM, formulaires, logique de base.</div>
+        <div class="card-meta">
+          <span class="card-pill">37 projets</span>
+        </div>
+        <div class="card-arrow card-arrow-child">Ouvrir <span>→</span></div>
+      </a>
+
+      <a href="app-ideas-intermediaire.html" class="card card-child">
+        <div class="card-icon">⚙️</div>
+        <span class="card-tag card-tag-child">Niveau 2</span>
+        <div class="card-title">Intermédiaire</div>
+        <div class="card-desc">Consommation d'APIs, état applicatif et interactions riches.</div>
+        <div class="card-meta">
+          <span class="card-pill">33 projets</span>
+        </div>
+        <div class="card-arrow card-arrow-child">Ouvrir <span>→</span></div>
+      </a>
+
+      <a href="app-ideas-avance.html" class="card card-child">
+        <div class="card-icon">🚀</div>
+        <span class="card-tag card-tag-child">Niveau 3</span>
+        <div class="card-title">Avancé</div>
+        <div class="card-desc">Backend, persistance en base de données, moteurs de jeu et intégrations.</div>
+        <div class="card-meta">
+          <span class="card-pill">21 projets</span>
         </div>
         <div class="card-arrow card-arrow-child">Ouvrir <span>→</span></div>
       </a>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="app-ideas.css">
+  <title>App Ideas — 91 projets pour progresser en code</title>
+</head>
+
+<body data-page="hub">
+
+  <div class="wrap">
+
+    <div class="crumbs">
+      <a href="index.html" class="crumb">← Accueil</a>
+    </div>
+
+    <div class="hdr">
+      <h1>App Ideas</h1>
+      <p>91 projets à coder, classés par difficulté. Chaque fiche liste les <em>user stories</em> à
+        implémenter : coche-les au fur et à mesure, ta progression est enregistrée dans ce navigateur.</p>
+      <p class="attrib">Contenu adapté de
+        <a href="https://github.com/florinpop17/app-ideas" target="_blank" rel="noopener">florinpop17/app-ideas</a>
+        — licence MIT, © 2018 Florin Pop. Les fiches sont conservées en anglais, comme dans la source.
+      </p>
+    </div>
+
+    <div class="stats" id="stats"></div>
+
+    <div class="toolbar">
+      <input type="search" id="search" class="search" placeholder="Rechercher un projet…"
+        aria-label="Rechercher un projet">
+      <div class="chips" id="chips"></div>
+    </div>
+
+    <div id="root"></div>
+
+    <div class="foot">
+      Comment s'en servir : choisis un projet à ton niveau, ouvre sa fiche, et implémente les user
+      stories une par une dans ton propre dépôt. Les « bonus » sont là quand tu veux pousser plus loin.<br>
+      Données générées depuis
+      <a href="https://github.com/florinpop17/app-ideas" target="_blank" rel="noopener">le dépôt source</a>
+      par <code>tools/build-app-ideas.py</code>.
+    </div>
+
+  </div>
+
+  <script src="app-ideas-data.js"></script>
+  <script src="app-ideas.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="app-ideas.css">
+  <title>App Ideas — Intermédiaire (33 projets)</title>
+</head>
+
+<body data-page="tier" data-tier="intermediaire">
+
+  <div class="wrap">
+
+    <div class="crumbs">
+      <a href="index.html" class="crumb">← Accueil</a>
+      <a href="app-ideas.html" class="crumb">← Toutes les idées</a>
+    </div>
+
+    <div class="hdr">
+      <h1>Intermédiaire <span class="tier-tag">33 projets</span></h1>
+      <p id="tier-desc"></p>
+      <p class="attrib">Fiches en anglais, adaptées de
+        <a href="https://github.com/florinpop17/app-ideas" target="_blank" rel="noopener">florinpop17/app-ideas</a>
+        (licence MIT). Coche les user stories au fur et à mesure : la progression est enregistrée
+        dans ce navigateur et partagée avec les autres pages App Ideas.
+      </p>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-val" id="tier-count">—</div>
+        <div class="stat-lbl">Progression du niveau</div>
+      </div>
+    </div>
+    <div class="bar bar-lg" id="tier-bar">
+      <div class="bar-fill"></div>
+    </div>
+
+    <div class="toolbar">
+      <input type="search" id="search" class="search" placeholder="Rechercher un projet…"
+        aria-label="Rechercher un projet">
+      <div class="chips" id="chips"></div>
+    </div>
+
+    <div class="toc" id="toc"></div>
+
+    <div id="root"></div>
+
+    <div class="foot">
+      Clique sur le titre d'un projet pour déplier sa fiche complète : contexte, user stories,
+      bonus, ressources et exemples de réalisations.<br>
+      <a href="app-ideas.html">← Revenir à la vue d'ensemble</a>
+    </div>
+
+  </div>
+
+  <script src="app-ideas-data.js"></script>
+  <script src="app-ideas.js"></script>
+</body>
+
+</html>

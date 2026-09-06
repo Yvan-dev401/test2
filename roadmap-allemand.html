@@ -380,6 +380,55 @@
     .day-lbl-name {
       display: block;
     }
+    /* ── Mobile : l'en-tête de semaine passe sur deux lignes ──────────────────
+       Sans cela, la barre est comprimée sous ~560 px : le nom et les dates se
+       cassent au milieu et « Tout cocher » se fait rogner par .week. */
+    @media (max-width: 560px) {
+      body {
+        padding: 20px 12px;
+      }
+
+      .wrap {
+        padding: 20px 16px;
+        border-radius: 18px;
+      }
+
+      .hdr h1 {
+        font-size: 24px;
+      }
+
+      .week-head {
+        position: relative;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 8px 10px;
+        padding-right: 40px;
+      }
+
+      /* ligne 1 : niveau + nom de la semaine */
+      .week-left {
+        flex: 1 1 100%;
+        flex-wrap: wrap;
+      }
+
+      /* ligne 2 : compteur, dates et « Tout cocher » */
+      .week-head-right {
+        flex: 1 1 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+      }
+
+      /* le chevron reste accroché à la première ligne */
+      .arrow {
+        position: absolute;
+        top: 14px;
+        right: 16px;
+      }
+
+      .wdates {
+        white-space: nowrap;
+      }
+    }
   </style>
 </head>
 

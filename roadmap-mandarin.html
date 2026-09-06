@@ -11,6 +11,7 @@
 
   <title>Roadmap Mandarin HSK 3 – 14 semaines</title>
 
+  <link rel="stylesheet" href="roadmap-dates.css">
   <style>
     * {
       box-sizing: border-box;
@@ -556,12 +557,14 @@
 
     <div class="hdr">
       <h1>Roadmap Mandarin HSK 3 &mdash; 14 semaines</h1>
-      <p>D&eacute;but : 20 ao&ucirc;t 2026 &middot; Examen : 25 novembre 2026 &middot; 3&ndash;4h/jour &middot; Objectif : 600 mots, 600 caract&egrave;res</p>
+      <p>D&eacute;but : <span id="hdrStart">20 ao&ucirc;t 2026</span> &middot; Examen : <span id="hdrEnd">25 novembre 2026</span> &middot; 3&ndash;4h/jour &middot; Objectif : 600 mots, 600 caract&egrave;res</p>
     </div>
+
+    <div id="resched"></div>
 
     <div class="res">
       <div class="res-head" id="resHead" role="button" tabindex="0">
-        <h2>📚 Ressources — à installer avant le Jeu 20</h2>
+        <h2>📚 Ressources — à installer avant le <span id="hdrDay1">Jeu 20</span></h2>
         <span class="res-sub">Afficher / masquer ▾</span>
       </div>
 
@@ -713,6 +716,7 @@
     <div id="root"></div>
 
   </div>
+  <script src="roadmap-dates.js"></script>
   <script>
 
     const phases = [
@@ -892,23 +896,6 @@
       }
     ];
 
-    const MONTH_MAP = {'jan': 0, 'janvier': 0, 'fév': 1, 'févr': 1, 'février': 1, 'mar': 2, 'mars': 2, 'avr': 3, 'avril': 3, 'mai': 4, 'juin': 5, 'juil': 6, 'juillet': 6, 'août': 7, 'sep': 8, 'sept': 8, 'sept.': 8, 'septembre': 8, 'oct': 9, 'oct.': 9, 'octobre': 9, 'nov': 10, 'novembre': 10, 'déc': 11, 'décembre': 11};
-
-    function parseDayDate(weekDates, dayLabel) {
-      const dayNum = parseInt(dayLabel.split(' ').pop());
-      if (isNaN(dayNum)) return null;
-      const parts = weekDates.split(/\s*–\s*/);
-      const startParts = parts[0].trim().split(/\s+/);
-      const endParts = parts[1] ? parts[1].trim().split(/\s+/) : [];
-      const startNum = parseInt(startParts[0]);
-      let month1 = startParts[1] ? MONTH_MAP[startParts[1].toLowerCase()] : undefined;
-      let month2 = endParts[1] ? MONTH_MAP[endParts[1].toLowerCase()] : undefined;
-      if (month1 === undefined) month1 = month2;
-      if (month2 === undefined) month2 = month1;
-      const month = (month1 !== month2 && dayNum < startNum) ? month2 : month1;
-      return new Date(2026, month, dayNum);
-    }
-
     function build() {
       const root = document.getElementById('root');
       const storageKey = 'roadmap-mandarin-checklist';
@@ -1008,7 +995,7 @@
 
           const dt = document.createElement('span');
           dt.className = 'wdates';
-          dt.textContent = wk.dates;
+          dt.textContent = weekRange(wk);
 
           const checkAllBtn = document.createElement('span');
           checkAllBtn.className = 'week-check-all';
@@ -1045,17 +1032,18 @@
             const isDone = !!((saved[ph.name] || {})[day.d]);
             if (isDone) row.classList.add('done');
 
-            const dayDate = parseDayDate(wk.dates, day.d);
+            const dayDate = RoadmapDates.dateFor(day._i);
+            const dayLabel = RoadmapDates.dayLabel(dayDate);
             const isLate = !isDone && dayDate !== null && dayDate < today;
             if (isLate) row.classList.add('overdue');
 
             const lateBadgeHTML = '<span class="late-badge">En retard</span>';
-            const lblContent = '<span class="day-lbl-name">' + day.d + '</span>' + (isLate ? lateBadgeHTML : '');
+            const lblContent = '<span class="day-lbl-name">' + dayLabel + '</span>' + (isLate ? lateBadgeHTML : '');
 
             row.innerHTML =
               '<div class="day-lbl">' + lblContent + '</div>' +
               '<div class="day-txt">' + day.t + '</div>' +
-              '<div class="day-check"><input type="checkbox"' + (isDone ? ' checked' : '') + ' aria-label="Marquer ' + day.d + ' comme fait"></div>';
+              '<div class="day-check"><input type="checkbox"' + (isDone ? ' checked' : '') + ' aria-label="Marquer ' + dayLabel + ' comme fait"></div>';
 
             const cb = row.querySelector('input');
             cb.addEventListener('click', function (e) {
@@ -1100,7 +1088,7 @@
                 const badge = row.querySelector('.late-badge');
                 if (badge) badge.remove();
               } else {
-                const d = parseDayDate(wk.dates, day.d);
+                const d = RoadmapDates.dateFor(day._i);
                 if (d !== null && d < today) {
                   row.classList.add('overdue');
                   const lbl = row.querySelector('.day-lbl');
@@ -1142,7 +1130,40 @@
       if (firstBody) {firstBody.classList.add('open'); firstArr.style.transform = 'rotate(180deg)';}
     }
 
-    build();
+    /* Rang global de chaque jour : c'est lui qui porte la date, une fois le départ choisi.
+       Le libellé d'origine (day.d) reste la clé de progression dans localStorage. */
+    let dayCount = 0;
+    phases.forEach(ph => ph.weeks.forEach(wk => wk.days.forEach(day => {day._i = dayCount++;})));
+
+    function weekRange(wk) {
+      return RoadmapDates.weekRange(
+        RoadmapDates.dateFor(wk.days[0]._i),
+        RoadmapDates.dateFor(wk.days[wk.days.length - 1]._i)
+      );
+    }
+
+    RoadmapDates.init({
+      key: 'roadmap-mandarin-start',
+      progressKey: 'roadmap-mandarin-checklist',
+      phaseNames: phases.map(ph => ph.name),
+      defaultStart: '2026-08-20',
+      totalDays: dayCount
+    });
+
+    function refreshHeader() {
+      document.getElementById('hdrStart').textContent = RoadmapDates.formatLong(RoadmapDates.start());
+      document.getElementById('hdrEnd').textContent = RoadmapDates.formatLong(RoadmapDates.lastDate());
+      document.getElementById('hdrDay1').textContent = RoadmapDates.dayLabel(RoadmapDates.dateFor(0));
+    }
+
+    function render() {
+      document.getElementById('root').innerHTML = '';
+      refreshHeader();
+      build();
+    }
+
+    RoadmapDates.mountPanel(document.getElementById('resched'), {onApply: render});
+    render();
 
     const resHead = document.getElementById('resHead');
     const resBody = document.getElementById('resBody');

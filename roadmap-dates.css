@@ -1,0 +1,153 @@
+/* Barre de replanification des dates, partagée par les pages roadmap.
+   Reprend les codes visuels des pages : bordures #e5e7eb, fonds #f9fafb, rayons 8px. */
+
+.resched {
+  margin-bottom: 1.5rem;
+}
+
+.resched-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: #f9fafb;
+}
+
+.resched-bar.resched-custom {
+  border-color: #c7d2fe;
+  background: #eef2ff;
+}
+
+.resched-info {
+  font-size: 13px;
+  color: #4b5563;
+  flex: 1 1 260px;
+  line-height: 1.5;
+}
+
+.resched-strong {
+  font-weight: 600;
+  color: #111827;
+}
+
+.resched-muted {
+  color: #9ca3af;
+}
+
+.resched-btn {
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  color: #4b5563;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 7px 13px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+
+.resched-btn:hover {
+  border-color: #d1d5db;
+  color: #111827;
+}
+
+.resched-btn-main {
+  background: #111827;
+  border-color: #111827;
+  color: white;
+}
+
+.resched-btn-main:hover {
+  background: #374151;
+  border-color: #374151;
+  color: white;
+}
+
+.resched-btn-ghost {
+  background: transparent;
+  border-color: transparent;
+}
+
+.resched-panel {
+  margin-top: 10px;
+  padding: 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: white;
+}
+
+.resched-help {
+  font-size: 13px;
+  color: #6b7280;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.resched-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.resched-date {
+  font-family: inherit;
+  font-size: 14px;
+  padding: 8px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #f9fafb;
+  color: #111827;
+}
+
+.resched-date:focus {
+  outline: none;
+  border-color: #9ca3af;
+  background: white;
+}
+
+.resched-keep {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #4b5563;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+
+.resched-keep input {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.resched-preview {
+  font-size: 12.5px;
+  color: #6b7280;
+  line-height: 1.6;
+  background: #f9fafb;
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-bottom: 14px;
+}
+
+.resched-row:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 480px) {
+  .resched-bar {
+    align-items: flex-start;
+  }
+
+  .resched-btn,
+  .resched-date {
+    flex: 1 1 auto;
+  }
+}

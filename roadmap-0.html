@@ -6,6 +6,7 @@
 <title>Roadmap 0€ — 90 Jours</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="roadmap-dates.css">
 <style>
 :root {
   --bg: #f3f4f6;
@@ -804,6 +805,8 @@ header {
     <button class="btn-ghost" onclick="resetProg()">Réinitialiser</button>
   </div>
 
+  <div id="resched"></div>
+
   <div class="phases" id="phases-wrap"></div>
   <div class="mkt-box" style="display:none;" id="mkt-box">
     <div class="mkt-label">Leviers d'acquisition & monétisation</div>
@@ -813,6 +816,7 @@ header {
 
 </div><!-- /app -->
 
+<script src="roadmap-dates.js"></script>
 <script>
 const MODELS = [
   {
@@ -1740,6 +1744,35 @@ const MODELS = [
 let selected = null;
 let checked = {};
 
+/* ── Dates : le plan est relatif par défaut, une date de départ le rend calendaire ── */
+
+RoadmapDates.init({
+  key: 'roadmap-0-start',
+  defaultStart: null,
+  totalDays: 90
+});
+
+/** « Jours 1–30 » → [1, 30] · « Semaine 1–2 · Cadrage » → jours [1, 14]. */
+function periodDays(text) {
+  const days = /^Jours?\s+(\d+)\s*[–-]\s*(\d+)/.exec(text);
+  if (days) return [Number(days[1]), Number(days[2])];
+  const weeks = /^Semaines?\s+(\d+)(?:\s*[–-]\s*(\d+))?/.exec(text);
+  if (weeks) {
+    const first = Number(weeks[1]);
+    const last = Number(weeks[2] || weeks[1]);
+    return [(first - 1) * 7 + 1, last * 7];
+  }
+  return null;
+}
+
+/** Suffixe daté à accoler à un libellé de phase ou de semaine, vide si aucune date. */
+function dateSuffix(text) {
+  if (!RoadmapDates.hasStart()) return '';
+  const range = periodDays(text);
+  if (!range) return '';
+  return ' · ' + RoadmapDates.dayRange(range[0], range[1]);
+}
+
 function renderModels() {
   const list = document.getElementById('models-list');
   list.innerHTML = MODELS.map((m, i) => {
@@ -1817,12 +1850,12 @@ function renderRoadmap(model) {
         <div class="phase-num">0${pi+1}</div>
         <div>
           <div class="phase-title">Phase ${pi+1} — ${phase.name}</div>
-          <div class="phase-period">${phase.period}</div>
+          <div class="phase-period">${phase.period}${dateSuffix(phase.period)}</div>
         </div>
         <div class="phase-pct" id="ppct-${pi}">0%</div>
       </div>
       ${phase.weeks.map((week, wi) => `
-        <div class="week-head">${week.label}</div>
+        <div class="week-head">${week.label}${dateSuffix(week.label)}</div>
         ${week.tasks.map((task, ti) => {
           const key = `${selected}-${pi}-${wi}-${ti}`;
           const done = checked[key] || false;
@@ -1904,6 +1937,16 @@ function resetProg() {
 }
 
 renderModels();
+RoadmapDates.mountPanel(document.getElementById('resched'), {
+  keepOption: false,
+  emptyText: 'Aucune date de départ : le plan est affiché en jours relatifs.',
+  openEmptyLabel: 'Planifier les dates',
+  resetLabel: 'Retirer les dates',
+  onApply: function () {
+    const model = MODELS.find(m => m.id === selected);
+    if (model) renderRoadmap(model);
+  }
+});
 </script>
 </body>
 </html>

@@ -51,24 +51,37 @@
       this.key = options.key;
       this.progressKey = options.progressKey;
       this.phaseNames = options.phaseNames || [];
-      this.defaultStart = fromIso(options.defaultStart);
+      // defaultStart absent : la roadmap est purement relative tant qu'aucune date n'est choisie.
+      this.defaultStart = options.defaultStart ? fromIso(options.defaultStart) : null;
       this.totalDays = options.totalDays;
       return this;
     },
 
-    /** Date de départ courante : l'ancre enregistrée, sinon celle d'origine. */
+    /** Date de départ courante : l'ancre enregistrée, sinon celle d'origine (parfois nulle). */
     start: function () {
       var saved = null;
       try { saved = fromIso(localStorage.getItem(this.key)); } catch (e) { /* mode privé */ }
       return saved || this.defaultStart;
     },
 
+    hasStart: function () {
+      return this.start() !== null;
+    },
+
     isCustom: function () {
-      return iso(this.start()) !== iso(this.defaultStart);
+      var current = this.start();
+      if (!current) return false;
+      return !this.defaultStart || iso(current) !== iso(this.defaultStart);
     },
 
     dateFor: function (index) {
-      return addDays(this.start(), index);
+      var current = this.start();
+      return current ? addDays(current, index) : null;
+    },
+
+    /** Intervalle de jours 1-based → « 7–20 septembre ». */
+    dayRange: function (fromDay, toDay) {
+      return this.weekRange(this.dateFor(fromDay - 1), this.dateFor(toDay - 1));
     },
 
     lastDate: function () {
@@ -114,6 +127,7 @@
     /** N'efface que les phases de cette roadmap, pour ne pas toucher à une autre page
      *  qui partagerait la même clé de progression. */
     clearProgress: function () {
+      if (!this.progressKey) return;
       try {
         var saved = JSON.parse(localStorage.getItem(this.progressKey) || '{}');
         this.phaseNames.forEach(function (name) { delete saved[name]; });
@@ -129,20 +143,22 @@
      *  onApply() est appelé après chaque changement d'ancre pour reconstruire la page. */
     mountPanel: function (container, handlers) {
       var self = this;
+      var opts = handlers || {};
+      var texts = {
+        empty: opts.emptyText || 'Aucune date de départ : le plan est affiché en jours relatifs.',
+        openEmpty: opts.openEmptyLabel || 'Planifier les dates',
+        open: opts.openLabel || 'Replanifier',
+        reset: opts.resetLabel || "Dates d'origine"
+      };
       container.innerHTML = '';
       container.className = 'resched';
 
       // ── barre de résumé
       var summary = el('div', 'resched-bar');
       var info = el('div', 'resched-info');
-      var startTxt = el('span', 'resched-strong');
-      var endTxt = el('span', 'resched-muted');
-      info.appendChild(document.createTextNode('🗓️ Départ : '));
-      info.appendChild(startTxt);
-      info.appendChild(endTxt);
       summary.appendChild(info);
 
-      var openBtn = el('button', 'resched-btn resched-btn-main', 'Replanifier');
+      var openBtn = el('button', 'resched-btn resched-btn-main', texts.open);
       openBtn.type = 'button';
       summary.appendChild(openBtn);
       container.appendChild(summary);
@@ -173,7 +189,8 @@
       keep.checked = true;
       keepLabel.appendChild(keep);
       keepLabel.appendChild(document.createTextNode(' Conserver ma progression (jours déjà cochés)'));
-      panel.appendChild(keepLabel);
+      // Sans progression enregistrée (roadmaps 90 jours), l'option n'aurait aucun effet.
+      if (opts.keepOption !== false) panel.appendChild(keepLabel);
 
       var preview = el('p', 'resched-preview');
       panel.appendChild(preview);
@@ -181,7 +198,7 @@
       var actions = el('div', 'resched-row');
       var apply = el('button', 'resched-btn resched-btn-main', 'Appliquer');
       apply.type = 'button';
-      var reset = el('button', 'resched-btn', "Dates d'origine");
+      var reset = el('button', 'resched-btn', texts.reset);
       reset.type = 'button';
       var cancel = el('button', 'resched-btn resched-btn-ghost', 'Annuler');
       cancel.type = 'button';
@@ -204,17 +221,28 @@
       }
 
       function refreshSummary() {
-        startTxt.textContent = self.formatFull(self.start());
-        endTxt.textContent = ' — fin : ' + self.formatFull(self.lastDate());
+        info.innerHTML = '';
+        if (self.hasStart()) {
+          info.appendChild(document.createTextNode('🗓️ Départ : '));
+          info.appendChild(el('span', 'resched-strong', self.formatFull(self.start())));
+          info.appendChild(el('span', 'resched-muted',
+            ' — fin : ' + self.formatFull(self.lastDate())));
+        } else {
+          info.appendChild(document.createTextNode('🗓️ ' + texts.empty));
+        }
         reset.hidden = !self.isCustom();
         summary.classList.toggle('resched-custom', self.isCustom());
+        if (panel.hidden) {
+          openBtn.textContent = self.hasStart() ? texts.open : texts.openEmpty;
+        }
       }
 
       function openPanel(open) {
         panel.hidden = !open;
-        openBtn.textContent = open ? 'Fermer' : 'Replanifier';
+        openBtn.textContent = open ? 'Fermer'
+          : (self.hasStart() ? texts.open : texts.openEmpty);
         if (open) {
-          input.value = iso(self.isCustom() ? self.start() : midnight(new Date()));
+          input.value = iso(self.isCustom() && self.start() ? self.start() : midnight(new Date()));
           keep.checked = true;
           updatePreview();
           input.focus();
@@ -222,7 +250,7 @@
       }
 
       function commit(date) {
-        if (!keep.checked) self.clearProgress();
+        if (opts.keepOption !== false && !keep.checked) self.clearProgress();
         self.setStart(date);
         refreshSummary();
         openPanel(false);
@@ -245,14 +273,17 @@
         var message = 'Replanifier la roadmap ?\n\n' +
           'Jour 1 : ' + self.formatFull(date) + '\n' +
           'Dernier jour : ' + self.formatFull(end) + '\n\n' +
-          (keep.checked ? 'Ta progression est conservée.'
-            : '⚠️ Tous les jours cochés seront remis à zéro.');
-        if (window.confirm(message)) commit(date);
+          (opts.keepOption === false ? ''
+            : (keep.checked ? 'Ta progression est conservée.'
+              : '⚠️ Tous les jours cochés seront remis à zéro.'));
+        if (window.confirm(message.trim())) commit(date);
       });
 
       reset.addEventListener('click', function () {
-        if (window.confirm('Revenir aux dates d’origine (jour 1 le ' +
-          self.formatFull(self.defaultStart) + ') ?')) {
+        var question = self.defaultStart
+          ? 'Revenir aux dates d’origine (jour 1 le ' + self.formatFull(self.defaultStart) + ') ?'
+          : 'Retirer les dates ? Le plan repassera en jours relatifs.';
+        if (window.confirm(question)) {
           self.setStart(null);
           refreshSummary();
           openPanel(false);

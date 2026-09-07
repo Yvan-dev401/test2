@@ -99,15 +99,6 @@
       border-width: 1.5px;
     }
 
-    /* Child card — slightly smaller, indented feel */
-    .card-child {
-      background: #fafafa;
-      border-style: dashed;
-    }
-
-    .card-child:hover {
-      background: white;
-    }
 
     .card-icon {
       font-size: 28px;
@@ -366,16 +357,24 @@
       color: #5DCAA5;
     }
 
-    .fam-allemand .card-child {
+
+
+
+    .fam-allemand .level {
       border-color: #A7E3D0;
     }
 
-    .fam-allemand .card-tag-child {
-      background: #f0fdf4;
-      color: #15803d;
+    .fam-allemand .level:hover {
+      border-color: #5DCAA5;
     }
 
-    .fam-allemand .card-arrow-child {
+    .fam-allemand .level-count {
+      background: #f0fdf4;
+      color: #15803d;
+      border: 1px solid #A7E3D0;
+    }
+
+    .fam-allemand .level-arrow {
       color: #15803d;
     }
 
@@ -405,16 +404,24 @@
       color: #f87171;
     }
 
-    .fam-mandarin .card-child {
+
+
+
+    .fam-mandarin .level {
       border-color: #fecaca;
     }
 
-    .fam-mandarin .card-tag-child {
-      background: #fff1f2;
-      color: #be123c;
+    .fam-mandarin .level:hover {
+      border-color: #f87171;
     }
 
-    .fam-mandarin .card-arrow-child {
+    .fam-mandarin .level-count {
+      background: #fff1f2;
+      color: #be123c;
+      border: 1px solid #fecaca;
+    }
+
+    .fam-mandarin .level-arrow {
       color: #be123c;
     }
 
@@ -444,16 +451,24 @@
       color: #93c5fd;
     }
 
-    .fam-business .card-child {
+
+
+
+    .fam-business .level {
       border-color: #bfdbfe;
     }
 
-    .fam-business .card-tag-child {
-      background: #f0f9ff;
-      color: #0369a1;
+    .fam-business .level:hover {
+      border-color: #93c5fd;
     }
 
-    .fam-business .card-arrow-child {
+    .fam-business .level-count {
+      background: #f0f9ff;
+      color: #0369a1;
+      border: 1px solid #bfdbfe;
+    }
+
+    .fam-business .level-arrow {
       color: #0369a1;
     }
 
@@ -483,18 +498,8 @@
       color: #22d3ee;
     }
 
-    .fam-atlas .card-child {
-      border-color: #a5f3fc;
-    }
 
-    .fam-atlas .card-tag-child {
-      background: #ecfeff;
-      color: #155e75;
-    }
 
-    .fam-atlas .card-arrow-child {
-      color: #155e75;
-    }
 
     /* ── Famille App Ideas ── */
     .fam-appideas .card-parent {
@@ -522,18 +527,8 @@
       color: #fb923c;
     }
 
-    .fam-appideas .card-child {
-      border-color: #fed7aa;
-    }
 
-    .fam-appideas .card-tag-child {
-      background: #fff7ed;
-      color: #9a3412;
-    }
 
-    .fam-appideas .card-arrow-child {
-      color: #9a3412;
-    }
 
     .fam-appideas .level {
       border-color: #fed7aa;
@@ -579,18 +574,8 @@
       color: #c4b5fd;
     }
 
-    .fam-project .card-child {
-      border-color: #ddd6fe;
-    }
 
-    .fam-project .card-tag-child {
-      background: #faf5ff;
-      color: #6d28d9;
-    }
 
-    .fam-project .card-arrow-child {
-      color: #6d28d9;
-    }
 
     /* ── Portfolio ── */
 .fam-portfolio .card-parent {
@@ -618,18 +603,8 @@
   color: #fcd34d;
 }
 
-.fam-portfolio .card-child {
-  border-color: #fde68a;
-}
 
-.fam-portfolio .card-tag-child {
-  background: #fefce8;
-  color: #a16207;
-}
 
-.fam-portfolio .card-arrow-child {
-  color: #a16207;
-}
 
     @media (max-width: 480px) {
       .header h1 {
@@ -696,23 +671,26 @@
         <div class="card-arrow card-arrow-parent">Voir le plan <span>→</span></div>
       </a>
 
-      <div class="connector">
-        <div class="connector-line"></div>
+      <button type="button" class="connector connector-toggle" aria-expanded="false"
+        aria-controls="allemand-levels">
+        <span class="connector-line"></span>
         <span class="connector-label">Dérivé de cette roadmap</span>
-      </div>
+        <span class="connector-chevron" aria-hidden="true">▾</span>
+      </button>
 
-      <a href="300mots.html" class="card card-child">
-        <div class="card-icon">📖</div>
-        <span class="card-tag card-tag-child">Outil complémentaire</span>
-        <div class="card-title">300 Mots Essentiels</div>
-        <div class="card-desc">Flashcards des 300 mots allemands les plus fréquents — apprentissage par répétition
-          espacée.</div>
-        <div class="card-meta">
-          <span class="card-pill">300 mots</span>
-          <span class="card-pill">Flashcards</span>
+      <div class="levels" id="allemand-levels">
+        <div class="levels-inner">
+          <a href="300mots.html" class="level">
+            <span class="level-icon">📖</span>
+            <span class="level-text">
+              <span class="level-name">300 Mots Essentiels</span>
+              <span class="level-desc">Flashcards, répétition espacée</span>
+            </span>
+            <span class="level-count">300 mots</span>
+            <span class="level-arrow">→</span>
+          </a>
         </div>
-        <div class="card-arrow card-arrow-child">Ouvrir <span>→</span></div>
-      </a>
+      </div>
     </div>
 
     <!-- ── FAMILLE MANDARIN ── -->
@@ -733,23 +711,26 @@
         <div class="card-arrow card-arrow-parent">Voir le plan <span>→</span></div>
       </a>
 
-      <div class="connector">
-        <div class="connector-line"></div>
+      <button type="button" class="connector connector-toggle" aria-expanded="false"
+        aria-controls="mandarin-levels">
+        <span class="connector-line"></span>
         <span class="connector-label">Dérivé de cette roadmap</span>
-      </div>
+        <span class="connector-chevron" aria-hidden="true">▾</span>
+      </button>
 
-      <a href="roadmap-mandarin-grok.html" class="card card-child">
-        <div class="card-icon">🤖</div>
-        <span class="card-tag card-tag-child">Version alternative</span>
-        <div class="card-title">Roadmap Mandarin B1 (Grok)</div>
-        <div class="card-desc">Variante intensive de 8 semaines générée avec l'IA Grok — objectif B1 (≈ HSK 3–4) début
-          octobre.</div>
-        <div class="card-meta">
-          <span class="card-pill">8 semaines</span>
-          <span class="card-pill">Généré avec Grok</span>
+      <div class="levels" id="mandarin-levels">
+        <div class="levels-inner">
+          <a href="roadmap-mandarin-grok.html" class="level">
+            <span class="level-icon">🤖</span>
+            <span class="level-text">
+              <span class="level-name">Roadmap Mandarin B1 (Grok)</span>
+              <span class="level-desc">Variante intensive de 8 semaines</span>
+            </span>
+            <span class="level-count">8 sem.</span>
+            <span class="level-arrow">→</span>
+          </a>
         </div>
-        <div class="card-arrow card-arrow-child">Ouvrir <span>→</span></div>
-      </a>
+      </div>
     </div>
 
     <!-- ── FAMILLE BUSINESS ── -->
@@ -770,23 +751,26 @@
         <div class="card-arrow card-arrow-parent">Voir le plan <span>→</span></div>
       </a>
 
-      <div class="connector">
-        <div class="connector-line"></div>
+      <button type="button" class="connector connector-toggle" aria-expanded="false"
+        aria-controls="business-levels">
+        <span class="connector-line"></span>
         <span class="connector-label">Dérivé de cette roadmap</span>
-      </div>
+        <span class="connector-chevron" aria-hidden="true">▾</span>
+      </button>
 
-      <a href="roadmap-0.html" class="card card-child">
-        <div class="card-icon">🚀</div>
-        <span class="card-tag card-tag-child">Outil complémentaire</span>
-        <div class="card-title">Roadmap 0€</div>
-        <div class="card-desc">Lance un business sans capital — 6 modèles adaptés au marché malgache, 90 jours d'actions
-          concrètes.</div>
-        <div class="card-meta">
-          <span class="card-pill">0€ de départ</span>
-          <span class="card-pill">6 modèles</span>
+      <div class="levels" id="business-levels">
+        <div class="levels-inner">
+          <a href="roadmap-0.html" class="level">
+            <span class="level-icon">🚀</span>
+            <span class="level-text">
+              <span class="level-name">Roadmap 0€</span>
+              <span class="level-desc">Business sans capital, marché malgache</span>
+            </span>
+            <span class="level-count">6 modèles</span>
+            <span class="level-arrow">→</span>
+          </a>
         </div>
-        <div class="card-arrow card-arrow-child">Ouvrir <span>→</span></div>
-      </a>
+      </div>
     </div>
 
     <!-- ── FAMILLE ATLAS DES COMPÉTENCES ── -->

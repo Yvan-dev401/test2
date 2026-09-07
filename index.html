@@ -198,6 +198,148 @@
       color: #d1d5db;
     }
 
+    /* ── Connecteur cliquable : déplie une liste de niveaux ── */
+    .connector-toggle {
+      font-family: inherit;
+      background: none;
+      border: none;
+      width: 100%;
+      text-align: left;
+      color: inherit;
+      cursor: pointer;
+      border-radius: 8px;
+    }
+
+    .connector-chevron {
+      font-size: 12px;
+      color: #d1d5db;
+      margin-left: 2px;
+      transition: transform 0.25s ease, color 0.15s ease;
+    }
+
+    .connector-toggle:hover .connector-chevron {
+      color: #6b7280;
+    }
+
+    .connector-toggle[aria-expanded="true"] .connector-chevron {
+      transform: rotate(180deg);
+    }
+
+    /* ── Liste de niveaux dépliable ── */
+    .levels {
+      display: grid;
+      grid-template-rows: 1fr;
+      transition: grid-template-rows 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .connector-toggle[aria-expanded="false"]+.levels {
+      grid-template-rows: 0fr;
+    }
+
+    .levels-inner {
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      visibility: visible;
+      transition: visibility 0s;
+    }
+
+    /* replié : masqué après l'animation, pour sortir les liens du parcours clavier */
+    .connector-toggle[aria-expanded="false"]+.levels .levels-inner {
+      visibility: hidden;
+      transition-delay: 0.35s;
+    }
+
+    .level {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      background: #fafafa;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      text-decoration: none;
+      color: inherit;
+      transition: opacity 0.3s ease, transform 0.3s ease,
+        background 0.15s ease, border-color 0.15s ease;
+    }
+
+    /* apparition en cascade à l'ouverture ; fermeture immédiate */
+    .level:nth-child(1) {
+      transition-delay: 0.05s;
+    }
+
+    .level:nth-child(2) {
+      transition-delay: 0.12s;
+    }
+
+    .level:nth-child(3) {
+      transition-delay: 0.19s;
+    }
+
+    .connector-toggle[aria-expanded="false"]+.levels .level {
+      opacity: 0;
+      transform: translateY(-6px);
+      transition-delay: 0s;
+    }
+
+    .level:hover {
+      background: white;
+    }
+
+    .level-icon {
+      font-size: 20px;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .level-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .level-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #111827;
+    }
+
+    .level-desc {
+      font-size: 12px;
+      color: #6b7280;
+      line-height: 1.45;
+    }
+
+    .level-count {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 9px;
+      border-radius: 999px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .level-arrow {
+      font-size: 14px;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .levels,
+      .levels-inner,
+      .level,
+      .connector-chevron {
+        transition-duration: 0.01ms;
+        transition-delay: 0s;
+      }
+    }
+
     /* ── Famille Allemand ── */
     .fam-allemand .card-parent {
       border-color: #5DCAA5;
@@ -393,6 +535,24 @@
       color: #9a3412;
     }
 
+    .fam-appideas .level {
+      border-color: #fed7aa;
+    }
+
+    .fam-appideas .level:hover {
+      border-color: #fb923c;
+    }
+
+    .fam-appideas .level-count {
+      background: #fff7ed;
+      color: #9a3412;
+      border: 1px solid #fed7aa;
+    }
+
+    .fam-appideas .level-arrow {
+      color: #c2410c;
+    }
+
     /* ── Projet ── */
     .fam-project .card-parent {
       border-color: #c4b5fd;
@@ -485,6 +645,28 @@
       }
     }
   </style>
+
+  <noscript>
+    <style>
+      /* sans JS le bouton ne bascule rien : les niveaux restent accessibles */
+      .connector-toggle[aria-expanded="false"]+.levels {
+        grid-template-rows: 1fr;
+      }
+
+      .connector-toggle[aria-expanded="false"]+.levels .levels-inner {
+        visibility: visible;
+      }
+
+      .connector-toggle[aria-expanded="false"]+.levels .level {
+        opacity: 1;
+        transform: none;
+      }
+
+      .connector-chevron {
+        display: none;
+      }
+    </style>
+  </noscript>
 </head>
 
 <body>
@@ -644,43 +826,46 @@
         <div class="card-arrow card-arrow-parent">Voir le catalogue <span>→</span></div>
       </a>
 
-      <div class="connector">
-        <div class="connector-line"></div>
+      <button type="button" class="connector connector-toggle" aria-expanded="false"
+        aria-controls="appideas-levels">
+        <span class="connector-line"></span>
         <span class="connector-label">3 niveaux de difficulté</span>
+        <span class="connector-chevron" aria-hidden="true">▾</span>
+      </button>
+
+      <div class="levels" id="appideas-levels">
+        <div class="levels-inner">
+          <a href="app-ideas-debutant.html" class="level">
+            <span class="level-icon">🌱</span>
+            <span class="level-text">
+              <span class="level-name">Débutant</span>
+              <span class="level-desc">DOM, formulaires, logique de base</span>
+            </span>
+            <span class="level-count">37</span>
+            <span class="level-arrow">→</span>
+          </a>
+
+          <a href="app-ideas-intermediaire.html" class="level">
+            <span class="level-icon">⚙️</span>
+            <span class="level-text">
+              <span class="level-name">Intermédiaire</span>
+              <span class="level-desc">APIs, état applicatif, interactions riches</span>
+            </span>
+            <span class="level-count">33</span>
+            <span class="level-arrow">→</span>
+          </a>
+
+          <a href="app-ideas-avance.html" class="level">
+            <span class="level-icon">🚀</span>
+            <span class="level-text">
+              <span class="level-name">Avancé</span>
+              <span class="level-desc">Backend, bases de données, intégrations</span>
+            </span>
+            <span class="level-count">21</span>
+            <span class="level-arrow">→</span>
+          </a>
+        </div>
       </div>
-
-      <a href="app-ideas-debutant.html" class="card card-child">
-        <div class="card-icon">🌱</div>
-        <span class="card-tag card-tag-child">Niveau 1</span>
-        <div class="card-title">Débutant</div>
-        <div class="card-desc">Premières applications côté utilisateur : DOM, formulaires, logique de base.</div>
-        <div class="card-meta">
-          <span class="card-pill">37 projets</span>
-        </div>
-        <div class="card-arrow card-arrow-child">Ouvrir <span>→</span></div>
-      </a>
-
-      <a href="app-ideas-intermediaire.html" class="card card-child">
-        <div class="card-icon">⚙️</div>
-        <span class="card-tag card-tag-child">Niveau 2</span>
-        <div class="card-title">Intermédiaire</div>
-        <div class="card-desc">Consommation d'APIs, état applicatif et interactions riches.</div>
-        <div class="card-meta">
-          <span class="card-pill">33 projets</span>
-        </div>
-        <div class="card-arrow card-arrow-child">Ouvrir <span>→</span></div>
-      </a>
-
-      <a href="app-ideas-avance.html" class="card card-child">
-        <div class="card-icon">🚀</div>
-        <span class="card-tag card-tag-child">Niveau 3</span>
-        <div class="card-title">Avancé</div>
-        <div class="card-desc">Backend, persistance en base de données, moteurs de jeu et intégrations.</div>
-        <div class="card-meta">
-          <span class="card-pill">21 projets</span>
-        </div>
-        <div class="card-arrow card-arrow-child">Ouvrir <span>→</span></div>
-      </a>
     </div>
 
     <!-- ── Project ── -->
@@ -722,6 +907,16 @@
 
   </div>
 
+  <script>
+    document.querySelectorAll('.connector-toggle').forEach(function (toggle) {
+      toggle.addEventListener('click', function () {
+        var open = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', open ? 'false' : 'true');
+      });
+    });
+  </script>
+
 </body>
+
 
 </html>

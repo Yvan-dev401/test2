@@ -12,6 +12,7 @@
   <title>Roadmap Allemand B1 – 14 semaines</title>
 
   <link rel="stylesheet" href="roadmap-dates.css">
+  <link rel="stylesheet" href="roadmap-timer.css">
   <style>
     * {
       box-sizing: border-box;
@@ -449,6 +450,8 @@
 
     <div id="resched"></div>
 
+    <div id="timer"></div>
+
     <div class="legend">
       <div class="legend-item">
         <div class="legend-dot" style="background:#E1F5EE;border:1px solid #5DCAA5"></div>
@@ -476,6 +479,7 @@
 
   </div>
   <script src="roadmap-dates.js"></script>
+  <script src="roadmap-timer.js"></script>
   <script>
     const phases = [
       {
@@ -917,6 +921,12 @@
       refreshHeader();
       build();
     }
+
+    /* ── Minuteur : objectif de 3 h par jour, réglable, tout est enregistré par jour ── */
+    RoadmapTimer.init({
+      key: 'roadmap-allemand-timer',
+      defaultGoal: 3 * 3600
+    }).mount(document.getElementById('timer'));
 
     RoadmapDates.mountPanel(document.getElementById('resched'), {onApply: render});
     render();

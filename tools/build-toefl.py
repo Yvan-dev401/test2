@@ -27,8 +27,8 @@ R, E = 'rest', 'exam'              # marqueurs de jour
 PHASES = [
  ("Phase 1 — Diagnostic & socle académique", "#DBEAFE", "#1D4ED8", [
   ("Semaine 1 — Diagnostic & format", "Diagnostic", [
-   ("<b>Test diagnostic complet</b> : un TOEFL iBT entier en conditions réelles (ETS TOEFL Practice Test, gratuit). Note le score des 4 sections séparément. C'est ta ligne de base — mesure-la, ne la juge pas.", E),
-   ("Dépouillement du diagnostic : pour chaque section, classe tes erreurs par <b>type</b> (vocabulaire, inférence, détail manqué, temps). L'écart à combler vers 28/30 se lit là, pas dans le score global.", None),
+   ("🎯 <b>Test diagnostic complet.</b> Va sur <a href=\"https://www.ets.org/toefl\" target=\"_blank\" rel=\"noopener\">ets.org/toefl</a> → <i>Prepare for the TOEFL iBT Test</i> → <i>Free Practice Test</i> (compte ETS gratuit à créer). Fais-le d'une traite, environ 2 h, sans dictionnaire et sans pause hors celle prévue. <b>Relève les 4 scores sur 30 et le total sur 120.</b> Reading et Listening sont corrigés automatiquement ; Speaking et Writing ne le sont pas — tu les auto-évalueras demain avec les grilles officielles, ne cherche pas un score qui n'existe pas. Si le test gratuit n'est pas accessible, fais aujourd'hui les questions d'exemple officielles et décale le blanc complet.", E),
+   ("<b>Dépouillement du diagnostic</b> — la marche à suivre est dans le bloc <i>Méthode</i> en haut de page. Reading et Listening : une ligne de tableau par erreur, avec sa <b>cause</b> (vocabulaire, compréhension, inférence, inattention, temps). Speaking et Writing : auto-note-toi sur les grilles ETS et relève les 2 critères les plus faibles. <b>Sortie attendue : 3 priorités écrites</b> — ce sont elles qui orientent les semaines 2 et 3, pas le score global.", None),
    ("<b>Format Reading</b> : 2 passages, 20 questions, 35 min. Apprends les 10 types de questions et ce que chacun teste réellement. Guide officiel ETS, gratuit.", None),
    ("<b>Format Listening</b> : 3 cours + 2 conversations, 36 min. Mets en place ton système de prise de notes (symboles, abréviations, deux colonnes). Teste-le sur 1 cours.", None),
    ("<b>Format Speaking</b> : les 4 tâches et leur chronométrage exact (15–30 s de préparation, 45–60 s de réponse). Enregistre-toi sur une Task 1 — la première réécoute pique, c'est normal.", None),
@@ -115,7 +115,7 @@ PHASES = [
  ("Phase 4 — Intégration & tests blancs", "#FEF3C7", "#B45309", [
   ("Semaine 10 — Premier blanc complet", "Blancs", [
    ("🎯 <b>TOEFL blanc n° 1</b>, complet et en conditions réelles : même heure que ton examen, sans pause hors celle prévue, sans dictionnaire.", E),
-   ("Correction intégrale du blanc n° 1. Pour chaque erreur : le type, la cause, et l'action qui l'évitera. Un tableau, pas une impression.", None),
+   ("Correction intégrale du blanc n° 1, avec le tableau du bloc <i>Méthode</i> : pour chaque erreur, le type, la cause et l'action qui l'évitera. Un tableau, pas une impression.", None),
    ("Travail ciblé n° 1 : la faiblesse la plus coûteuse identifiée hier. Des exercices uniquement sur elle.", None),
    ("Travail ciblé n° 2 : la deuxième faiblesse, même méthode.", None),
    ("Speaking : 4 tâches enregistrées, puis réécoute critique avec la grille ETS.", None),
@@ -124,7 +124,7 @@ PHASES = [
   ]),
   ("Semaine 11 — Deuxième blanc", "Blancs", [
    ("🎯 <b>TOEFL blanc n° 2</b>, complet, conditions réelles. Objectif : dépasser le blanc n° 1 d'au moins 5 points.", E),
-   ("Correction du blanc n° 2 et comparaison avec le n° 1, section par section : ce qui a progressé, ce qui stagne.", None),
+   ("Correction du blanc n° 2 (même tableau) et comparaison avec le n° 1, section par section : ce qui a progressé, ce qui stagne, et quelle cause d'erreur domine encore.", None),
    ("Writing : 2 tâches complètes, en soignant particulièrement la relecture finale.", None),
    ("Speaking : 4 tâches, puis travail sur la faiblesse qui persiste depuis la phase 3.", None),
    ("Reading : 2 passages chronométrés. Puis révision des 100 mots AWL les moins sûrs.", None),
@@ -196,12 +196,12 @@ RES_MARKUP = '''    <div class="res">
           <div class="res-card">
             <h3>Officiel ETS (à utiliser en priorité)</h3>
             <ul>
-              <li><a href="https://www.ets.org/toefl/test-takers/ibt/prepare.html" target="_blank" rel="noopener">TOEFL iBT Free Practice Test</a>
-                <span class="note">Le test blanc officiel gratuit. Sert de diagnostic et de référence.</span></li>
-              <li><a href="https://www.ets.org/toefl/test-takers/ibt/prepare/test-prep-course.html" target="_blank" rel="noopener">TOEFL Test Ready</a>
-                <span class="note">Plateforme officielle : exercices et blancs supplémentaires.</span></li>
-              <li><a href="https://www.ets.org/pdfs/toefl/toefl-ibt-free-practice-test.pdf" target="_blank" rel="noopener">Guide officiel (PDF)</a>
-                <span class="note">Format exact, barèmes et grilles de notation Speaking / Writing.</span></li>
+              <li><a href="https://www.ets.org/toefl" target="_blank" rel="noopener">ets.org/toefl</a> → <i>Prepare</i> → <i>Free Practice Test</i>
+                <span class="note">Le blanc officiel gratuit, compte ETS à créer. C'est le test du jour 1.</span></li>
+              <li><a href="https://www.ets.org/toefl" target="_blank" rel="noopener">ets.org/toefl</a> → <i>Prepare</i> → <i>TOEFL Test Ready</i>
+                <span class="note">Exercices et blancs supplémentaires, dont une partie gratuite.</span></li>
+              <li><a href="https://www.ets.org/toefl" target="_blank" rel="noopener">ets.org/toefl</a> → <i>Prepare</i> → guide et grilles de notation
+                <span class="note">Format exact, barèmes, et les grilles Speaking / Writing utilisées au jour 2.</span></li>
             </ul>
           </div>
 
@@ -271,13 +271,96 @@ RES_MARKUP = '''    <div class="res">
     </div>
 '''
 
+METHOD_MARKUP = '''
+    <div class="res">
+      <div class="res-head" role="button" tabindex="0">
+        <h2>📐 Méthode — analyser une section</h2>
+        <span class="res-sub">Afficher / masquer ▾</span>
+      </div>
+
+      <div class="res-body">
+        <p style="font-size:13px;color:#374151;line-height:1.6;margin-bottom:14px">
+          À lire une fois, à réutiliser à chaque section corrigée du plan. Un score ne dit pas quoi
+          travailler — la <b>cause</b> de chaque erreur, si.
+        </p>
+
+        <div class="res-grid">
+
+          <div class="res-card">
+            <h3>1. Le tableau à créer</h3>
+            <ul>
+              <li>Une ligne par erreur, six colonnes :</li>
+              <li>n° de question · section · type de question · ma réponse · bonne réponse · <b>cause</b>
+                <span class="note">Exemple : « Q7 · Reading · Inference · B · D · inférence — la réponse n'était pas écrite, je l'ai cherchée mot à mot. »</span></li>
+            </ul>
+          </div>
+
+          <div class="res-card">
+            <h3>2. Les cinq causes</h3>
+            <ul>
+              <li><b>Vocabulaire</b> — un mot clé m'était inconnu.
+                <span class="note">→ il part dans Anki le soir même.</span></li>
+              <li><b>Compréhension</b> — je connaissais les mots, j'ai raté le lien logique.
+                <span class="note">→ travailler la paraphrase et Sentence Simplification.</span></li>
+              <li><b>Inférence</b> — la réponse n'était pas écrite, il fallait la déduire.
+                <span class="note">→ questions Inference et Rhetorical Purpose.</span></li>
+              <li><b>Inattention</b> — je savais, j'ai mal lu la consigne.
+                <span class="note">→ ralentir sur l'énoncé, pas sur le texte.</span></li>
+              <li><b>Temps</b> — non terminé, ou répondu au hasard.
+                <span class="note">→ travailler le rythme, pas le fond.</span></li>
+            </ul>
+          </div>
+
+          <div class="res-card">
+            <h3>3. Ce que tu en conclus</h3>
+            <ul>
+              <li>Compte les erreurs <b>par cause</b>, pas par section.</li>
+              <li>La cause qui domine est ton levier de la semaine : c'est elle qui fait gagner le plus de points pour le moins d'heures.</li>
+              <li>Le score global ne sert qu'à mesurer la progression d'un blanc à l'autre. Il n'indique jamais quoi travailler.</li>
+            </ul>
+          </div>
+
+          <div class="res-card">
+            <h3>4. Speaking & Writing</h3>
+            <ul>
+              <li>Pas de tableau : ces sections n'ont pas de bonne réponse.</li>
+              <li>Auto-note-toi sur les <b>grilles officielles ETS</b> — Speaking sur 4, Writing sur 5.
+                <span class="note">Speaking : Delivery, Language Use, Topic Development. Writing : développement, organisation, langue.</span></li>
+              <li>Relève les <b>2 critères les plus faibles</b> et rien d'autre. Ce sont eux que tu travailles.</li>
+            </ul>
+          </div>
+
+          <div class="res-card">
+            <h3>5. Où garder tout ça</h3>
+            <ul>
+              <li>Une seule feuille ou un seul carnet, tenu sur les 12 semaines.</li>
+              <li>Les comparaisons des semaines 6, 10, 11 et 12 s'appuient dessus : sans trace écrite, elles n'ont rien à comparer.</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="res-tips">
+          <h3>La sortie attendue, à chaque fois</h3>
+          <ol>
+            <li><b>Trois priorités écrites</b>, pas dix. Formulées en actions : « refaire 20 Inference », pas « améliorer le Reading ».</li>
+            <li><b>Une par section faible au maximum</b> — travailler quatre fronts à la fois ne fait avancer aucun.</li>
+            <li><b>Relues au bilan de phase</b> (semaines 3, 6, 9) : si une priorité revient trois fois, la méthode employée est à changer, pas l'effort à doubler.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+'''
+
 RES_SCRIPT = '''
-    const resHead = document.getElementById('resHead');
-    const resBody = document.getElementById('resBody');
-    function toggleRes() { resBody.classList.toggle('open'); }
-    resHead.addEventListener('click', toggleRes);
-    resHead.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleRes(); }
+    /* Ressources et Méthode : même en-tête, même bascule, replis indépendants. */
+    document.querySelectorAll('.res-head').forEach(function (head) {
+      const body = head.nextElementSibling;
+      function toggle() { body.classList.toggle('open'); }
+      head.addEventListener('click', toggle);
+      head.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+      });
     });
 '''
 
@@ -318,8 +401,9 @@ def main():
                'Niveau de départ B2 · Objectif 110+</p>', 'sous-titre')
 
     # le bloc ressources se place entre le minuteur et la légende
-    src = once(src, '    <div class="legend">', RES_MARKUP + '\n    <div class="legend">',
-               'markup ressources')
+    src = once(src, '    <div class="legend">',
+               RES_MARKUP + METHOD_MARKUP + '\n    <div class="legend">',
+               'markup ressources et méthode')
 
     # données
     start = src.index('    const phases = [')

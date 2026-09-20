@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Police -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <title>Roadmap TOEFL iBT – 12 semaines</title>
+
+  <link rel="stylesheet" href="roadmap-dates.css">
+  <link rel="stylesheet" href="roadmap-timer.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f3f4f6;
+      min-height: 100vh;
+
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+
+      padding: 40px 20px;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 1000px;
+
+      background: white;
+      border-radius: 24px;
+
+      padding: 32px;
+
+      box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.08);
+
+      border: 1px solid #e5e7eb;
+    }
+
+    .res {
+      background: #FFFBF5;
+      border: 1px solid #FDE4C8;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 26px;
+    }
+
+    .res-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .res-head h2 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #92400e;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .res-head .res-sub {
+      font-size: 12px;
+      color: #b45309;
+      font-weight: 500;
+    }
+
+    .res-body {
+      display: none;
+      margin-top: 18px;
+    }
+
+    .res-body.open {
+      display: block;
+    }
+
+    .res-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+      gap: 14px;
+    }
+
+    .res-card {
+      background: white;
+      border: 1px solid #FDE4C8;
+      border-radius: 12px;
+      padding: 14px;
+    }
+
+    .res-card h3 {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: #b45309;
+      margin-bottom: 10px;
+    }
+
+    .res-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .res-card li {
+      font-size: 13px;
+      color: #374151;
+      line-height: 1.5;
+    }
+
+    .res-card a {
+      color: #0F6E56;
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1px solid #A7E0CC;
+    }
+
+    .res-card a:hover {
+      color: #0b4d3c;
+    }
+
+    .res-card .note {
+      display: block;
+      font-size: 11.5px;
+      color: #9ca3af;
+      margin-top: 1px;
+    }
+
+    .res-tips {
+      margin-top: 16px;
+      background: white;
+      border: 1px solid #FDE4C8;
+      border-radius: 12px;
+      padding: 14px;
+    }
+
+    .res-tips h3 {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: #b45309;
+      margin-bottom: 10px;
+    }
+
+    .res-tips ol {
+      padding-left: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .res-tips li {
+      font-size: 13px;
+      color: #374151;
+      line-height: 1.6;
+    }
+
+    .res-tips b {
+      color: #111827;
+    }
+
+    .hdr {
+      margin-bottom: 1.5rem;
+    }
+
+    .hdr h1 {
+      font-size: 32px;
+      font-weight: 700;
+      color: #111827;
+    }
+
+    .hdr p {
+      font-size: 14px;
+      color: #6b7280;
+      margin-top: 6px;
+    }
+
+    .legend {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+      align-items: center;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: #4b5563;
+    }
+
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    .phase {
+      margin-bottom: 2rem;
+    }
+
+    .phase-bar {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      padding: 6px 12px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      display: inline-block;
+    }
+
+    .phase-progress {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 12px;
+      font-size: 12px;
+      color: #6b7280;
+      font-weight: 500;
+    }
+
+    .phase-progress-track {
+      flex: 1;
+      height: 9px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: #e5e7eb;
+    }
+
+    .phase-progress-fill {
+      height: 100%;
+      width: 0;
+      border-radius: 999px;
+      background: #111827;
+      transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .phase-stats {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 0 0 18px;
+      align-items: center;
+    }
+
+    .phase-stat {
+      font-size: 12px;
+      color: #4b5563;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 999px;
+      padding: 4px 10px;
+    }
+
+    .phase-complete-badge {
+      font-size: 12px;
+      font-weight: 600;
+      color: #15803d;
+      background: #dcfce7;
+      border: 1px solid #86efac;
+      border-radius: 999px;
+      padding: 4px 12px;
+      display: none;
+    }
+
+    .phase-complete-badge.visible {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .week {
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      background: white;
+    }
+
+    .week-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .week-head:hover {
+      background: #f9fafb;
+    }
+
+    .week-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .wlevel {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    .wname {
+      font-size: 15px;
+      font-weight: 600;
+      color: #111827;
+    }
+
+    .wdates {
+      font-size: 12px;
+      color: #9ca3af;
+    }
+
+    .arrow {
+      font-size: 16px;
+      color: #9ca3af;
+      transition: transform .25s;
+      display: inline-block;
+    }
+
+    .week-body {
+      display: none;
+      border-top: 1px solid #e5e7eb;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .week-body.open {
+      display: block;
+    }
+
+    .day-row {
+      display: grid;
+      grid-template-columns: 90px 1fr auto;
+      border-bottom: 1px solid #e5e7eb;
+      min-width: 520px;
+    }
+
+    .day-row:last-child {
+      border-bottom: none;
+    }
+
+    .day-lbl {
+      padding: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #4b5563;
+      background: #f9fafb;
+      line-height: 1.4;
+    }
+
+    .day-txt {
+      padding: 12px 16px;
+      font-size: 14px;
+      color: #111827;
+      line-height: 1.7;
+    }
+
+    .week-head-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .week-check-all {
+      font-size: 11px;
+      font-weight: 500;
+      color: #6b7280;
+      background: #f3f4f6;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      padding: 3px 9px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s, color 0.15s;
+      user-select: none;
+    }
+
+    .week-check-all:hover {
+      background: #e5e7eb;
+      color: #374151;
+    }
+
+    .week-progress-count {
+      font-size: 12px;
+      font-weight: 500;
+      color: #9ca3af;
+      white-space: nowrap;
+    }
+
+    .week-progress-count.all-done {
+      color: #16a34a;
+    }
+
+    .day-check {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 12px 16px;
+    }
+
+    .day-check input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: #2563eb;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .day-row.done {
+      background: #f9fefb;
+    }
+
+    .day-row.done .day-lbl {
+      color: #86efac;
+      background: #f0fdf4;
+    }
+
+    .day-row.done .day-txt {
+      color: #9ca3af;
+      text-decoration: line-through;
+      text-decoration-color: #d1fae5;
+    }
+
+    .day-row.done .day-check input {
+      accent-color: #16a34a;
+    }
+
+    .day-row.rest.done .day-lbl {
+      background: #d1fae5;
+      color: #15803d;
+    }
+
+    .day-row.rest.done .day-txt {
+      background: #f0fdf4;
+    }
+
+    .day-row.rest .day-lbl {
+      background: #E1F5EE;
+      color: #0F6E56;
+    }
+
+    .day-row.rest .day-txt {
+      background: #F5FDF9;
+      color: #0F6E56;
+    }
+
+    .exam-row .day-txt {
+      background: #FBEAF0;
+      color: #993556;
+      font-weight: 500;
+    }
+
+    .exam-row .day-lbl {
+      background: #F4C0D1;
+      color: #72243E;
+      font-weight: 600;
+    }
+
+    .late-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      color: #b45309;
+      background: #fef3c7;
+      border: 1px solid #fcd34d;
+      border-radius: 4px;
+      padding: 1px 5px;
+      margin-top: 4px;
+      line-height: 1.4;
+      white-space: nowrap;
+    }
+
+    .day-row.overdue .day-lbl {
+      background: #fffbeb;
+    }
+
+    .day-row.overdue:not(.rest) .day-txt {
+      background: #fffbeb;
+    }
+
+    .day-row.overdue .day-lbl .day-lbl-name {
+      display: block;
+    }
+
+    .day-lbl-name {
+      display: block;
+    }
+    /* ── Mobile : l'en-tête de semaine passe sur deux lignes ──────────────────
+       Sans cela, la barre est comprimée sous ~560 px : le nom et les dates se
+       cassent au milieu et « Tout cocher » se fait rogner par .week. */
+    @media (max-width: 560px) {
+      body {
+        padding: 20px 12px;
+      }
+
+      .wrap {
+        padding: 20px 16px;
+        border-radius: 18px;
+      }
+
+      .hdr h1 {
+        font-size: 24px;
+      }
+
+      .week-head {
+        position: relative;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 8px 10px;
+        padding-right: 40px;
+      }
+
+      /* ligne 1 : niveau + nom de la semaine */
+      .week-left {
+        flex: 1 1 100%;
+        flex-wrap: wrap;
+      }
+
+      /* ligne 2 : compteur, dates et « Tout cocher » */
+      .week-head-right {
+        flex: 1 1 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+      }
+
+      /* le chevron reste accroché à la première ligne */
+      .arrow {
+        position: absolute;
+        top: 14px;
+        right: 16px;
+      }
+
+      .wdates {
+        white-space: nowrap;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="wrap">
+
+    <h2 style="position:absolute;left:-9999px">
+      Roadmap TOEFL iBT – 12 semaines, objectif 110+
+    </h2>
+
+    <a href="index.html" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:#6b7280;text-decoration:none;margin-bottom:20px;padding:6px 12px;border:1px solid #e5e7eb;border-radius:8px;background:#f9fafb;transition:all 0.15s;" onmouseover="this.style.color='#111827';this.style.borderColor='#d1d5db'" onmouseout="this.style.color='#6b7280';this.style.borderColor='#e5e7eb'">← Accueil</a>
+
+    <div class="hdr">
+      <h1>Roadmap TOEFL iBT — 12 semaines</h1>
+      <p>Début : <span id="hdrStart">20 septembre 2026</span> · Examen : <span id="hdrEnd">12 décembre 2026</span> · 2h/jour · Niveau de départ B2 · Objectif 110+</p>
+    </div>
+
+    <div id="resched"></div>
+
+    <div id="timer"></div>
+
+    <div class="res">
+      <div class="res-head" id="resHead" role="button" tabindex="0">
+        <h2>📚 Ressources — à installer avant le <span id="hdrDay1">Dim 20</span></h2>
+        <span class="res-sub">Afficher / masquer ▾</span>
+      </div>
+
+      <div class="res-body open" id="resBody">
+        <div class="res-grid">
+
+          <div class="res-card">
+            <h3>Officiel ETS (à utiliser en priorité)</h3>
+            <ul>
+              <li><a href="https://www.ets.org/toefl/test-takers/ibt/prepare.html" target="_blank" rel="noopener">TOEFL iBT Free Practice Test</a>
+                <span class="note">Le test blanc officiel gratuit. Sert de diagnostic et de référence.</span></li>
+              <li><a href="https://www.ets.org/toefl/test-takers/ibt/prepare/test-prep-course.html" target="_blank" rel="noopener">TOEFL Test Ready</a>
+                <span class="note">Plateforme officielle : exercices et blancs supplémentaires.</span></li>
+              <li><a href="https://www.ets.org/pdfs/toefl/toefl-ibt-free-practice-test.pdf" target="_blank" rel="noopener">Guide officiel (PDF)</a>
+                <span class="note">Format exact, barèmes et grilles de notation Speaking / Writing.</span></li>
+            </ul>
+          </div>
+
+          <div class="res-card">
+            <h3>Vocabulaire (tous les jours)</h3>
+            <ul>
+              <li><a href="https://apps.ankiweb.net/" target="_blank" rel="noopener">Anki</a> + deck Academic Word List
+                <span class="note">570 familles de mots. 25 par jour, hors des 2 h comptabilisées.</span></li>
+              <li><a href="https://www.wgtn.ac.nz/lals/resources/academicwordlist" target="_blank" rel="noopener">Academic Word List (source)</a>
+                <span class="note">La liste de référence, par sous-listes de fréquence.</span></li>
+            </ul>
+          </div>
+
+          <div class="res-card">
+            <h3>Listening & écoute longue</h3>
+            <ul>
+              <li><a href="https://www.ted.com/talks" target="_blank" rel="noopener">TED Talks</a>
+                <span class="note">Transcripts disponibles : idéal pour vérifier ses notes.</span></li>
+              <li><a href="https://www.sciencefriday.com/" target="_blank" rel="noopener">Science Friday</a>
+                <span class="note">Registre académique, exactement celui des cours du test.</span></li>
+              <li><a href="https://ocw.mit.edu/" target="_blank" rel="noopener">MIT OpenCourseWare</a>
+                <span class="note">De vrais cours universitaires, le format des lectures TOEFL.</span></li>
+            </ul>
+          </div>
+
+          <div class="res-card">
+            <h3>Speaking</h3>
+            <ul>
+              <li>Enregistreur vocal du téléphone
+                <span class="note">Le seul outil indispensable. Réécouter est ce qui fait progresser.</span></li>
+              <li><a href="https://www.italki.com/" target="_blank" rel="noopener">italki</a>
+                <span class="note">Un tuteur une fois par semaine si le budget le permet — le retour humain est décisif à 110+.</span></li>
+            </ul>
+          </div>
+
+          <div class="res-card">
+            <h3>Writing</h3>
+            <ul>
+              <li><a href="https://www.deepl.com/write" target="_blank" rel="noopener">DeepL Write</a> · <a href="https://languagetool.org/" target="_blank" rel="noopener">LanguageTool</a>
+                <span class="note">Pour la correction de surface. Ne remplace pas une relecture humaine.</span></li>
+              <li>Grilles ETS Writing (dans le guide officiel)
+                <span class="note">Auto-évalue chaque production sur 5 — c'est le barème réel.</span></li>
+            </ul>
+          </div>
+
+          <div class="res-card">
+            <h3>Reading</h3>
+            <ul>
+              <li><a href="https://aeon.co/" target="_blank" rel="noopener">Aeon</a> · <a href="https://www.theatlantic.com/" target="_blank" rel="noopener">The Atlantic</a>
+                <span class="note">Articles longs et argumentés, proches des passages du test.</span></li>
+              <li><a href="https://www.nature.com/news" target="_blank" rel="noopener">Nature News</a>
+                <span class="note">Vulgarisation scientifique dense, très proche des passages de biologie.</span></li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="res-tips">
+          <h3>Trois règles pour tenir les 12 semaines</h3>
+          <ol>
+            <li><b>Les jours de blanc dépassent les 2 h</b> — un test complet fait déjà 2 h sans la correction. Le minuteur compte au-delà de l'objectif, c'est prévu.</li>
+            <li><b>Speaking et Writing tous les jours</b> — ce sont les sections les plus lentes à bouger depuis un B2, et celles qui bloquent un 110.</li>
+            <li><b>Analyser vaut plus que refaire</b> — une section corrigée en profondeur apprend plus que trois sections enchaînées sans relecture.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#E1F5EE;border:1px solid #5DCAA5"></div>
+        Repos actif
+      </div>
+
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#f9fafb;border:1px solid #e5e7eb"></div>
+        Jour d'étude
+      </div>
+
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#FBEAF0;border:1px solid #D4537E"></div>
+        Examen / blanc
+      </div>
+      <div class="legend-item">
+        <div class="phase-progress-track" style="width:42px;flex:0 0 auto">
+          <div class="phase-progress-fill" style="width:65%;background:#2563eb"></div>
+        </div>
+        Progression phase
+      </div>
+    </div>
+
+    <div id="root"></div>
+
+  </div>
+  <script src="roadmap-dates.js"></script>
+  <script src="roadmap-timer.js"></script>
+  <script>
+    const phases = [
+      {
+        name: "Phase 1 — Diagnostic & socle académique", bg: "#DBEAFE", color: "#1D4ED8", lbg: "#DBEAFE", lc: "#1D4ED8",
+        weeks: [
+          {
+            name: "Semaine 1 — Diagnostic & format", dates: "20–26 septembre", level: "Diagnostic", days: [
+              {d: "Dim 20", t: "<b>Test diagnostic complet</b> : un TOEFL iBT entier en conditions réelles (ETS TOEFL Practice Test, gratuit). Note le score des 4 sections séparément. C'est ta ligne de base — mesure-la, ne la juge pas.", exam: true},
+              {d: "Lun 21", t: "Dépouillement du diagnostic : pour chaque section, classe tes erreurs par <b>type</b> (vocabulaire, inférence, détail manqué, temps). L'écart à combler vers 28/30 se lit là, pas dans le score global."},
+              {d: "Mar 22", t: "<b>Format Reading</b> : 2 passages, 20 questions, 35 min. Apprends les 10 types de questions et ce que chacun teste réellement. Guide officiel ETS, gratuit."},
+              {d: "Mer 23", t: "<b>Format Listening</b> : 3 cours + 2 conversations, 36 min. Mets en place ton système de prise de notes (symboles, abréviations, deux colonnes). Teste-le sur 1 cours."},
+              {d: "Jeu 24", t: "<b>Format Speaking</b> : les 4 tâches et leur chronométrage exact (15–30 s de préparation, 45–60 s de réponse). Enregistre-toi sur une Task 1 — la première réécoute pique, c'est normal."},
+              {d: "Ven 25", t: "<b>Format Writing</b> : Integrated (20 min) puis Academic Discussion (10 min). Écris une Academic Discussion en 10 min chrono, sans t'arrêter pour corriger."},
+              {d: "Sam 26", t: "🌿 Repos actif : un épisode de podcast académique (TED Talks Daily, Science Friday) en écoute libre, sans notes.", rest: true},
+            ]
+          },
+          {
+            name: "Semaine 2 — Vocabulaire académique & notes", dates: "27 septembre – 3 octobre", level: "Socle", days: [
+              {d: "Dim 27", t: "Installe un deck Anki de l'<b>Academic Word List</b> (570 familles). À partir d'aujourd'hui : 25 nouveaux mots par jour, tous les jours, en dehors des 2 h. C'est le socle des 4 sections."},
+              {d: "Lun 28", t: "Reading : 1 passage chronométré (18 min). Chaque mot inconnu part dans Anki. Analyse : combien d'erreurs viennent du vocabulaire, combien de la logique ?"},
+              {d: "Mar 29", t: "Listening : 2 cours avec prise de notes. Compare ensuite tes notes au transcript et souligne tout ce que tu n'as pas capté — c'est ta liste de travail."},
+              {d: "Mer 30", t: "Speaking Task 1 : 5 réponses enregistrées sur des sujets variés. Réécoute et compte les hésitations. Objectif de la semaine : passer sous 5 par réponse."},
+              {d: "Jeu 1", t: "Writing Integrated : 1 sujet complet. Structure imposée : la thèse du texte, puis les 3 objections de l'audio, une par paragraphe."},
+              {d: "Ven 2", t: "<b>Section Reading complète chronométrée</b> (35 min, 2 passages). Score, puis classement des erreurs par type de question."},
+              {d: "Sam 3", t: "🌿 Repos actif : une série ou un film en anglais, sous-titres anglais. Note 5 expressions idiomatiques, rien de plus.", rest: true},
+            ]
+          },
+          {
+            name: "Semaine 3 — Premiers automatismes", dates: "4–10 octobre", level: "Socle", days: [
+              {d: "Dim 4", t: "Reading ciblé : questions <b>Vocabulary in Context</b> et <b>Reference</b>. 20 questions de chaque type, sans chrono — la précision avant la vitesse."},
+              {d: "Lun 5", t: "Listening : 2 conversations de campus. Repère la structure type — problème, options, décision. Ces questions se jouent sur l'intention, pas sur le détail."},
+              {d: "Mar 6", t: "Speaking Task 2 (Campus Announcement) : lecture 45 s, écoute, réponse 60 s. 3 passages enregistrés. Travaille la transition « The man/woman thinks… because… »."},
+              {d: "Mer 7", t: "Writing Academic Discussion : 3 réponses de 10 min. Objectif : 100 mots minimum, une position claire, un exemple concret à chaque fois."},
+              {d: "Jeu 8", t: "Reading ciblé : questions <b>Inference</b> et <b>Rhetorical Purpose</b>, les deux plus discriminantes du test. 20 de chaque."},
+              {d: "Ven 9", t: "<b>Section Listening complète chronométrée</b> (36 min). Compare le score à celui du diagnostic."},
+              {d: "Sam 10", t: "🌿 Repos actif : Anki et un TED Talk. Bilan de la phase 1 — tes 3 points faibles sont-ils les mêmes qu'au jour 1 ?", rest: true},
+            ]
+          },
+        ]
+      },
+      {
+        name: "Phase 2 — Reading & Listening vers 28+", bg: "#D1FAE5", color: "#047857", lbg: "#D1FAE5", lc: "#047857",
+        weeks: [
+          {
+            name: "Semaine 4 — Reading en profondeur", dates: "11–17 octobre", level: "R & L", days: [
+              {d: "Dim 11", t: "Reading : <b>Sentence Simplification</b>. La règle est de garder la relation logique, pas les mots. 15 questions, puis réécris chaque phrase à ta façon."},
+              {d: "Lun 12", t: "Listening : 2 cours scientifiques (biologie, astronomie). Le vocabulaire technique est toujours expliqué dans l'audio — entraîne-toi à le capter au vol."},
+              {d: "Mar 13", t: "Reading : <b>Insert Text</b> et <b>Prose Summary</b>, 10 de chaque. Le Prose Summary vaut 2 points à lui seul : ne le bâcle jamais."},
+              {d: "Mer 14", t: "Speaking Task 3 (Reading + Lecture) : 3 réponses. La structure est fixe — le concept, puis les 2 exemples du cours. Chronomètre à 60 s pile."},
+              {d: "Jeu 15", t: "Listening : 2 cours d'histoire de l'art ou de littérature. Ces sujets tombent souvent et leur lexique est le plus dense."},
+              {d: "Ven 16", t: "<b>Section Reading complète</b> (35 min). Objectif : 17/20 minimum. En dessous, reprends demain les types d'erreurs dominants."},
+              {d: "Sam 17", t: "🌿 Repos actif : lecture plaisir en anglais (un article long, Aeon ou The Atlantic). Sans dictionnaire.", rest: true},
+            ]
+          },
+          {
+            name: "Semaine 5 — Listening en profondeur", dates: "18–24 octobre", level: "R & L", days: [
+              {d: "Dim 18", t: "Listening : questions <b>Attitude</b> et <b>Function</b>. Elles portent sur le ton, pas sur le contenu. 15 questions, puis réécoute les extraits ratés."},
+              {d: "Lun 19", t: "Reading : 2 passages chronométrés à 17 min chacun — plus serré que l'examen. S'entraîner sous pression rend le jour J confortable."},
+              {d: "Mar 20", t: "Speaking Task 4 (Academic Lecture) : 3 réponses. Résumer un cours de 2 min en 60 s : la densité prime sur l'élégance."},
+              {d: "Mer 21", t: "Writing Integrated : 2 sujets. Chronomètre la lecture (3 min) séparément de la rédaction (17 min)."},
+              {d: "Jeu 22", t: "Listening : 1 section complète en une seule écoute, sans pause. Puis analyse des notes — ce qui manque est exactement ce qu'il faut travailler."},
+              {d: "Ven 23", t: "<b>Section Listening complète</b> (36 min). Objectif : 24/28 minimum."},
+              {d: "Sam 24", t: "🌿 Repos actif : un podcast au choix et la révision Anki. Rien d'autre.", rest: true},
+            ]
+          },
+          {
+            name: "Semaine 6 — Consolidation R & L", dates: "25–31 octobre", level: "R & L", days: [
+              {d: "Dim 25", t: "Reading puis Listening enchaînés (35 + 36 min) sans pause entre les deux. L'endurance est une compétence à part entière."},
+              {d: "Lun 26", t: "Analyse de l'enchaînement d'hier : le score de la 2e section baisse-t-il ? Si oui, c'est la fatigue qu'il faut entraîner, pas la technique."},
+              {d: "Mar 27", t: "Speaking : les 4 tâches d'affilée, enregistrées, en conditions réelles (16 min au total)."},
+              {d: "Mer 28", t: "Writing : les 2 tâches d'affilée (29 min). Garde 2 min de relecture à la fin — les fautes d'accord coûtent cher."},
+              {d: "Jeu 29", t: "Reading : reprends les 20 questions les plus ratées depuis la semaine 1 et refais-les. Ce qui résiste encore devient ta priorité."},
+              {d: "Ven 30", t: "<b>Sections Reading + Listening chronométrées</b>. Compare au diagnostic : l'écart doit être net."},
+              {d: "Sam 31", t: "🌿 Repos actif. Bilan de la phase 2 — Reading et Listening sont-ils au niveau visé ?", rest: true},
+            ]
+          },
+        ]
+      },
+      {
+        name: "Phase 3 — Speaking & Writing vers 28+", bg: "#EDE9FE", color: "#5B21B6", lbg: "#EDE9FE", lc: "#5B21B6",
+        weeks: [
+          {
+            name: "Semaine 7 — Speaking : la fluidité", dates: "1–7 novembre", level: "S & W", days: [
+              {d: "Dim 1", t: "Speaking Task 1 : 8 réponses enregistrées. Un seul critère aujourd'hui — <b>aucun silence de plus de 2 s</b>. Le contenu passe après."},
+              {d: "Lun 2", t: "Construis ta banque de transitions (First of all, What's more, The reason being…). 15 formules apprises par cœur, réutilisables partout."},
+              {d: "Mar 3", t: "Speaking Task 2 : 5 réponses. Travaille la prise de notes pendant les 45 s de lecture — c'est là que la réponse se gagne."},
+              {d: "Mer 4", t: "Reading : 1 passage d'entretien. Puis Speaking Task 1 : 5 réponses. Une section entretenue ne redescend pas."},
+              {d: "Jeu 5", t: "Réécoute 10 de tes enregistrements de la semaine. Note les 3 tics qui reviennent le plus souvent, et traque-les à partir de demain."},
+              {d: "Ven 6", t: "<b>Section Speaking complète chronométrée</b> (4 tâches, 16 min). Auto-évalue avec la grille officielle ETS, 0 à 4 par tâche."},
+              {d: "Sam 7", t: "🌿 Repos actif : shadowing détendu sur un TED Talk de 10 min — répète en même temps que l'orateur.", rest: true},
+            ]
+          },
+          {
+            name: "Semaine 8 — Writing : structure et densité", dates: "8–14 novembre", level: "S & W", days: [
+              {d: "Dim 8", t: "Writing Integrated : 2 sujets. Le piège est de résumer le texte : c'est le <b>contraste</b> entre texte et audio qui est noté. Chaque paragraphe doit opposer les deux."},
+              {d: "Lun 9", t: "Academic Discussion : 3 réponses de 10 min. Objectif porté à 150 mots, avec une position nuancée (« While X argues…, I'd add that… »)."},
+              {d: "Mar 10", t: "Listening : 1 section d'entretien. Puis Writing Integrated : 1 sujet complet."},
+              {d: "Mer 11", t: "Travail de la langue écrite : réécris 3 de tes paragraphes en remplaçant chaque mot générique par un mot de l'AWL. La densité lexicale fait le score."},
+              {d: "Jeu 12", t: "Speaking Tasks 3 et 4 : 3 réponses chacune. Ce sont les tâches intégrées, les plus dures — elles méritent le double de temps."},
+              {d: "Ven 13", t: "<b>Section Writing complète chronométrée</b> (29 min). Relis-toi à froid demain, pas aujourd'hui."},
+              {d: "Sam 14", t: "🌿 Repos actif : lecture en anglais et Anki. Relis les productions d'hier à froid et corrige-les.", rest: true},
+            ]
+          },
+          {
+            name: "Semaine 9 — Consolidation S & W", dates: "15–21 novembre", level: "S & W", days: [
+              {d: "Dim 15", t: "Speaking : les 4 tâches en conditions réelles. Compare à ton enregistrement de la semaine 7 — la différence doit s'entendre."},
+              {d: "Lun 16", t: "Writing : les 2 tâches en conditions réelles (29 min). Fais relire ton Academic Discussion par quelqu'un, ou passe-le à un correcteur."},
+              {d: "Mar 17", t: "Reading et Listening d'entretien, 1 section chacune. Puis 5 réponses Speaking Task 1."},
+              {d: "Mer 18", t: "Travail ciblé sur ta section la plus faible des 4 — celle que le dernier test désigne, pas celle que tu crois."},
+              {d: "Jeu 19", t: "Speaking : 10 réponses courtes sur des sujets tirés au hasard. L'improvisation se travaille comme le reste."},
+              {d: "Ven 20", t: "<b>Sections Speaking + Writing chronométrées</b> d'affilée (45 min)."},
+              {d: "Sam 21", t: "🌿 Repos actif. Bilan de la phase 3 — les 4 sections sont-elles au-dessus de 26 ?", rest: true},
+            ]
+          },
+        ]
+      },
+      {
+        name: "Phase 4 — Intégration & tests blancs", bg: "#FEF3C7", color: "#B45309", lbg: "#FEF3C7", lc: "#B45309",
+        weeks: [
+          {
+            name: "Semaine 10 — Premier blanc complet", dates: "22–28 novembre", level: "Blancs", days: [
+              {d: "Dim 22", t: "🎯 <b>TOEFL blanc n° 1</b>, complet et en conditions réelles : même heure que ton examen, sans pause hors celle prévue, sans dictionnaire.", exam: true},
+              {d: "Lun 23", t: "Correction intégrale du blanc n° 1. Pour chaque erreur : le type, la cause, et l'action qui l'évitera. Un tableau, pas une impression."},
+              {d: "Mar 24", t: "Travail ciblé n° 1 : la faiblesse la plus coûteuse identifiée hier. Des exercices uniquement sur elle."},
+              {d: "Mer 25", t: "Travail ciblé n° 2 : la deuxième faiblesse, même méthode."},
+              {d: "Jeu 26", t: "Speaking : 4 tâches enregistrées, puis réécoute critique avec la grille ETS."},
+              {d: "Ven 27", t: "<b>Sections Reading + Listening chronométrées</b>. Vérifie que le travail ciblé a payé."},
+              {d: "Sam 28", t: "🌿 Repos actif : Anki et écoute libre. La récupération fait partie du plan, elle n'est pas du temps perdu.", rest: true},
+            ]
+          },
+          {
+            name: "Semaine 11 — Deuxième blanc", dates: "29 novembre – 5 décembre", level: "Blancs", days: [
+              {d: "Dim 29", t: "🎯 <b>TOEFL blanc n° 2</b>, complet, conditions réelles. Objectif : dépasser le blanc n° 1 d'au moins 5 points.", exam: true},
+              {d: "Lun 30", t: "Correction du blanc n° 2 et comparaison avec le n° 1, section par section : ce qui a progressé, ce qui stagne."},
+              {d: "Mar 1", t: "Writing : 2 tâches complètes, en soignant particulièrement la relecture finale."},
+              {d: "Mer 2", t: "Speaking : 4 tâches, puis travail sur la faiblesse qui persiste depuis la phase 3."},
+              {d: "Jeu 3", t: "Reading : 2 passages chronométrés. Puis révision des 100 mots AWL les moins sûrs."},
+              {d: "Ven 4", t: "<b>Ta section la plus faible</b>, complète et chronométrée. Une dernière passe technique dessus."},
+              {d: "Sam 5", t: "🌿 Repos actif. Prépare la logistique : lieu d'examen, pièce d'identité, trajet, horaire de convocation.", rest: true},
+            ]
+          },
+          {
+            name: "Semaine 12 — Dernier blanc & examen", dates: "6–12 décembre", level: "🎯 Examen", days: [
+              {d: "Dim 6", t: "🎯 <b>TOEFL blanc n° 3</b>, complet, à l'horaire exact de ton examen. C'est la répétition générale.", exam: true},
+              {d: "Lun 7", t: "Correction légère du blanc n° 3. Ne t'attaque qu'aux erreurs corrigeables en 5 jours — le reste attendra l'après-examen."},
+              {d: "Mar 8", t: "Révision : tes formules de transition Speaking, tes structures Writing, et tes 50 mots AWL les plus fragiles."},
+              {d: "Mer 9", t: "Une section de chaque, à mi-régime. Entretien, pas performance."},
+              {d: "Jeu 10", t: "Speaking et Writing légers : 2 tâches chacune. Relis tes meilleures productions pour te rappeler ton niveau réel."},
+              {d: "Ven 11", t: "Révision très légère, 30 min au maximum, puis arrêt. Prépare tes affaires et couche-toi tôt : le sommeil vaut plus que la révision."},
+              {d: "Sam 12", t: "🎯 <b>JOUR D'EXAMEN — TOEFL iBT.</b> 84 jours de travail pour ce moment. Good luck!", exam: true},
+            ]
+          },
+        ]
+      },
+    ];
+    function build() {
+      const root = document.getElementById('root');
+      const storageKey = 'roadmap-toefl-checklist';
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const saved = JSON.parse(localStorage.getItem(storageKey) || '{}');
+
+      phases.forEach((ph) => {
+        const phDiv = document.createElement('div');
+        phDiv.className = 'phase';
+
+        const bar = document.createElement('div');
+        bar.className = 'phase-bar';
+        bar.style.background = ph.bg;
+        bar.style.color = ph.color;
+        bar.textContent = ph.name;
+        phDiv.appendChild(bar);
+
+        const progress = document.createElement('div');
+        progress.className = 'phase-progress';
+        const progressTrack = document.createElement('div');
+        progressTrack.className = 'phase-progress-track';
+        const progressFill = document.createElement('div');
+        progressFill.className = 'phase-progress-fill';
+        progressTrack.appendChild(progressFill);
+        const progressText = document.createElement('span');
+        progress.appendChild(progressTrack);
+        progress.appendChild(progressText);
+
+        const stats = document.createElement('div');
+        stats.className = 'phase-stats';
+
+        const completeBadge = document.createElement('span');
+        completeBadge.className = 'phase-complete-badge';
+        completeBadge.innerHTML = '✓ Phase terminée !';
+
+        phDiv.appendChild(progress);
+        phDiv.appendChild(stats);
+
+        const phaseDays = ph.weeks.flatMap(wk => wk.days.map(day => ({wk, day})));
+
+        const statPercent = document.createElement('div');
+        statPercent.className = 'phase-stat';
+        const statRemaining = document.createElement('div');
+        statRemaining.className = 'phase-stat';
+        stats.appendChild(statPercent);
+        stats.appendChild(statRemaining);
+        stats.appendChild(completeBadge);
+
+        function updateProgress() {
+          const phaseState = saved[ph.name] || {};
+          const doneCount = phaseDays.filter(({day}) => phaseState[day.d]).length;
+          const total = phaseDays.length;
+          const percent = total ? Math.round((doneCount / total) * 100) : 0;
+          progressFill.style.width = percent + '%';
+          progressFill.style.background = ph.color;
+          progressText.textContent = doneCount + '/' + total + ' jours';
+
+          const remaining = total - doneCount;
+          statPercent.textContent = percent + '% complété';
+          statRemaining.textContent = remaining > 0 ? remaining + ' jour' + (remaining > 1 ? 's' : '') + ' à faire' : '';
+          statRemaining.style.display = remaining > 0 ? '' : 'none';
+
+          completeBadge.classList.toggle('visible', percent === 100);
+        }
+
+        ph.weeks.forEach((wk) => {
+          const wDiv = document.createElement('div');
+          wDiv.className = 'week';
+
+          const head = document.createElement('div');
+          head.className = 'week-head';
+          head.setAttribute('role', 'button');
+          head.setAttribute('tabindex', '0');
+
+          const left = document.createElement('div');
+          left.className = 'week-left';
+
+          const lvl = document.createElement('span');
+          lvl.className = 'wlevel';
+          lvl.style.background = ph.lbg;
+          lvl.style.color = ph.lc;
+          lvl.textContent = wk.level;
+
+          const nm = document.createElement('span');
+          nm.className = 'wname';
+          nm.textContent = wk.name;
+
+          left.appendChild(lvl);
+          left.appendChild(nm);
+
+          const right = document.createElement('div');
+          right.className = 'week-head-right';
+
+          const weekCount = document.createElement('span');
+          weekCount.className = 'week-progress-count';
+
+          const dt = document.createElement('span');
+          dt.className = 'wdates';
+          dt.textContent = weekRange(wk);
+
+          const checkAllBtn = document.createElement('span');
+          checkAllBtn.className = 'week-check-all';
+          checkAllBtn.textContent = 'Tout cocher';
+
+          const arr = document.createElement('span');
+          arr.className = 'arrow';
+          arr.textContent = '▾';
+
+          right.appendChild(weekCount);
+          right.appendChild(dt);
+          right.appendChild(checkAllBtn);
+          right.appendChild(arr);
+          head.appendChild(left);
+          head.appendChild(right);
+
+          const body = document.createElement('div');
+          body.className = 'week-body';
+
+          const rows = [];
+
+          function updateWeekCount() {
+            const phaseState = saved[ph.name] || {};
+            const doneInWeek = wk.days.filter(d => phaseState[d.d]).length;
+            const totalInWeek = wk.days.length;
+            weekCount.textContent = doneInWeek + '/' + totalInWeek;
+            weekCount.classList.toggle('all-done', doneInWeek === totalInWeek);
+            checkAllBtn.textContent = doneInWeek === totalInWeek ? 'Tout décocher' : 'Tout cocher';
+          }
+
+          wk.days.forEach(day => {
+            const row = document.createElement('div');
+            row.className = 'day-row' + (day.rest ? ' rest' : '') + (day.exam ? ' exam-row' : '');
+            const isDone = !!((saved[ph.name] || {})[day.d]);
+            if (isDone) row.classList.add('done');
+
+            const dayDate = RoadmapDates.dateFor(day._i);
+            const dayLabel = RoadmapDates.dayLabel(dayDate);
+            const isLate = !isDone && dayDate !== null && dayDate < today;
+            if (isLate) row.classList.add('overdue');
+
+            const lateBadgeHTML = '<span class="late-badge">En retard</span>';
+            const lblContent = '<span class="day-lbl-name">' + dayLabel + '</span>' + (isLate ? lateBadgeHTML : '');
+
+            row.innerHTML =
+              '<div class="day-lbl">' + lblContent + '</div>' +
+              '<div class="day-txt">' + day.t + '</div>' +
+              '<div class="day-check"><input type="checkbox"' + (isDone ? ' checked' : '') + ' aria-label="Marquer ' + dayLabel + ' comme fait"></div>';
+
+            const cb = row.querySelector('input');
+            cb.addEventListener('click', function (e) {
+              e.stopPropagation();
+            });
+            cb.addEventListener('change', function () {
+              saved[ph.name] = saved[ph.name] || {};
+              saved[ph.name][day.d] = this.checked;
+              localStorage.setItem(storageKey, JSON.stringify(saved));
+              row.classList.toggle('done', this.checked);
+              if (this.checked) {
+                row.classList.remove('overdue');
+                const badge = row.querySelector('.late-badge');
+                if (badge) badge.remove();
+              } else if (dayDate !== null && dayDate < today) {
+                row.classList.add('overdue');
+                const lbl = row.querySelector('.day-lbl');
+                if (!lbl.querySelector('.late-badge')) {
+                  lbl.insertAdjacentHTML('beforeend', lateBadgeHTML);
+                }
+              }
+              updateWeekCount();
+              updateProgress();
+            });
+
+            rows.push({row, day, cb});
+            body.appendChild(row);
+          });
+
+          checkAllBtn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            const phaseState = saved[ph.name] || {};
+            const allDone = wk.days.every(d => phaseState[d.d]);
+            const newState = !allDone;
+            saved[ph.name] = saved[ph.name] || {};
+            rows.forEach(({row, day, cb}) => {
+              saved[ph.name][day.d] = newState;
+              cb.checked = newState;
+              row.classList.toggle('done', newState);
+              if (newState) {
+                row.classList.remove('overdue');
+                const badge = row.querySelector('.late-badge');
+                if (badge) badge.remove();
+              } else {
+                const d = RoadmapDates.dateFor(day._i);
+                if (d !== null && d < today) {
+                  row.classList.add('overdue');
+                  const lbl = row.querySelector('.day-lbl');
+                  if (!lbl.querySelector('.late-badge')) {
+                    lbl.insertAdjacentHTML('beforeend', '<span class="late-badge">En retard</span>');
+                  }
+                }
+              }
+            });
+            localStorage.setItem(storageKey, JSON.stringify(saved));
+            updateWeekCount();
+            updateProgress();
+          });
+
+          function toggle() {
+            const isOpen = body.classList.contains('open');
+            body.classList.toggle('open', !isOpen);
+            arr.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+          }
+
+          head.addEventListener('click', toggle);
+          head.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') {e.preventDefault(); toggle();}
+          });
+
+          updateWeekCount();
+          wDiv.appendChild(head);
+          wDiv.appendChild(body);
+          phDiv.appendChild(wDiv);
+        });
+
+        stats.appendChild(completeBadge);
+        updateProgress();
+        root.appendChild(phDiv);
+      });
+
+      const firstBody = document.querySelector('.week-body');
+      const firstArr = document.querySelector('.arrow');
+      if (firstBody) {firstBody.classList.add('open'); firstArr.style.transform = 'rotate(180deg)';}
+    }
+
+    /* Rang global de chaque jour : c'est lui qui porte la date, une fois le départ choisi.
+       Le libellé d'origine (day.d) reste la clé de progression dans localStorage. */
+    let dayCount = 0;
+    phases.forEach(ph => ph.weeks.forEach(wk => wk.days.forEach(day => {day._i = dayCount++;})));
+
+    function weekRange(wk) {
+      return RoadmapDates.weekRange(
+        RoadmapDates.dateFor(wk.days[0]._i),
+        RoadmapDates.dateFor(wk.days[wk.days.length - 1]._i)
+      );
+    }
+
+    RoadmapDates.init({
+      key: 'roadmap-toefl-start',
+      progressKey: 'roadmap-b1-checklist',
+      phaseNames: phases.map(ph => ph.name),
+      defaultStart: '2026-09-20',
+      totalDays: dayCount
+    });
+
+    function refreshHeader() {
+      document.getElementById('hdrStart').textContent = RoadmapDates.formatLong(RoadmapDates.start());
+      document.getElementById('hdrEnd').textContent = RoadmapDates.formatLong(RoadmapDates.lastDate());
+      document.getElementById('hdrDay1').textContent = RoadmapDates.dayLabel(RoadmapDates.dateFor(0));
+    }
+
+    function render() {
+      document.getElementById('root').innerHTML = '';
+      refreshHeader();
+      build();
+    }
+
+    /* ── Minuteur : objectif de 3 h par jour, réglable, tout est enregistré par jour ── */
+    RoadmapTimer.init({
+      key: 'roadmap-toefl-timer',
+      defaultGoal: 2 * 3600
+    }).mount(document.getElementById('timer'));
+
+    RoadmapDates.mountPanel(document.getElementById('resched'), {onApply: render});
+    render();
+    const resHead = document.getElementById('resHead');
+    const resBody = document.getElementById('resBody');
+    function toggleRes() { resBody.classList.toggle('open'); }
+    resHead.addEventListener('click', toggleRes);
+    resHead.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleRes(); }
+    });
+  </script>
+</body>
+
+</html>

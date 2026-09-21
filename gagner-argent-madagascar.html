@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <title>Gagner sa vie en ligne depuis Madagascar — 10 métiers, 200 000 Ar max</title>
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f3f4f6;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px 20px;
+      color: #111827;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 1000px;
+      background: white;
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      border: 1px solid #e5e7eb;
+    }
+
+    .back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #6b7280;
+      text-decoration: none;
+      margin-bottom: 20px;
+      padding: 6px 12px;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      background: #f9fafb;
+      transition: color .15s, border-color .15s;
+    }
+
+    .back:hover {
+      color: #111827;
+      border-color: #d1d5db;
+    }
+
+    .hdr {
+      margin-bottom: 1.25rem;
+    }
+
+    .hdr h1 {
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+
+    .hdr p {
+      font-size: 14px;
+      color: #6b7280;
+      margin-top: 8px;
+      line-height: 1.6;
+    }
+
+    /* progression globale */
+    .global {
+      border: 1px solid #e5e7eb;
+      background: #f9fafb;
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+
+    .global-top {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .global-top strong {
+      font-size: 15px;
+    }
+
+    .global-top span {
+      font-size: 13px;
+      color: #6b7280;
+      white-space: nowrap;
+    }
+
+    .track {
+      height: 9px;
+      border-radius: 999px;
+      background: #e5e7eb;
+      overflow: hidden;
+    }
+
+    .fill {
+      height: 100%;
+      width: 0;
+      border-radius: 999px;
+      background: #334155;
+      transition: width .4s ease;
+    }
+
+    .global-note {
+      font-size: 12px;
+      color: #6b7280;
+      margin-top: 10px;
+      line-height: 1.6;
+    }
+
+    /* sommaire */
+    .toc {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 26px;
+    }
+
+    .toc a {
+      font-size: 13px;
+      font-weight: 500;
+      color: #4b5563;
+      text-decoration: none;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 7px 12px;
+      transition: .15s;
+    }
+
+    .toc a:hover {
+      color: #111827;
+      border-color: #d1d5db;
+      background: #f3f4f6;
+    }
+
+    /* sections */
+    .sec {
+      margin: 0 0 42px;
+      scroll-margin-top: 16px;
+    }
+
+    .sec-h {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .sec-p {
+      font-size: 14px;
+      color: #6b7280;
+      margin-bottom: 18px;
+      max-width: 72ch;
+      line-height: 1.65;
+    }
+
+    /* citation */
+    .quote {
+      border-left: 3px solid #cbd5e1;
+      background: #f8fafc;
+      border-radius: 0 12px 12px 0;
+      padding: 16px 18px;
+      margin: 22px 0;
+    }
+
+    .quote p {
+      font-size: 15px;
+      line-height: 1.65;
+      color: #1e293b;
+      font-style: italic;
+    }
+
+    .quote cite {
+      display: block;
+      font-size: 12.5px;
+      color: #64748b;
+      font-style: normal;
+      font-weight: 600;
+      margin-top: 8px;
+    }
+
+    .quote-big {
+      border-left-color: #334155;
+      background: #f1f5f9;
+    }
+
+    .quote-big p {
+      font-size: 17px;
+    }
+
+    /* lignes à cocher */
+    .step {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 12px 14px;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      background: white;
+      transition: background .12s, border-color .12s;
+    }
+
+    .step:hover {
+      background: #f9fafb;
+    }
+
+    .step input {
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      flex-shrink: 0;
+      accent-color: #334155;
+      cursor: pointer;
+    }
+
+    .step-body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .step-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #111827;
+      line-height: 1.4;
+    }
+
+    .step-desc {
+      font-size: 13px;
+      color: #6b7280;
+      line-height: 1.6;
+      margin-top: 3px;
+    }
+
+    .step.done {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+    }
+
+    .step.done .step-title {
+      color: #9ca3af;
+      text-decoration: line-through;
+      text-decoration-color: #cbd5e1;
+    }
+
+    .step.done .step-desc {
+      color: #9ca3af;
+    }
+
+    .step-tag {
+      display: inline-block;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #f1f5f9;
+      color: #475569;
+      margin-bottom: 5px;
+    }
+
+    /* paliers */
+    .palier .step-title {
+      font-size: 15px;
+    }
+
+    .palier-amount {
+      font-variant-numeric: tabular-nums;
+      font-weight: 700;
+      color: #334155;
+    }
+
+    .palier.key {
+      border-color: #94a3b8;
+      border-width: 1.5px;
+    }
+
+    /* phases du plan */
+    .phase-bar {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      padding: 6px 12px;
+      border-radius: 6px;
+      margin: 26px 0 10px;
+      display: inline-block;
+      background: #f1f5f9;
+      color: #334155;
+    }
+
+    /* cartes métier */
+    .jobs {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+      gap: 14px;
+    }
+
+    .job {
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      padding: 16px;
+      background: white;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .job-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .job h3 {
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .job-speed {
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 999px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .s-fast {
+      background: #dcfce7;
+      color: #15803d;
+    }
+
+    .s-mid {
+      background: #fef3c7;
+      color: #b45309;
+    }
+
+    .s-slow {
+      background: #e0e7ff;
+      color: #4338ca;
+    }
+
+    .job p {
+      font-size: 13px;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    .job dl {
+      font-size: 12.5px;
+      line-height: 1.6;
+      margin-top: auto;
+      padding-top: 8px;
+      border-top: 1px solid #f3f4f6;
+    }
+
+    .job dt {
+      color: #9ca3af;
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      margin-top: 7px;
+    }
+
+    .job dd {
+      color: #374151;
+    }
+
+    .job dd b {
+      color: #111827;
+    }
+
+    /* tableau */
+    .tbl-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      padding: 4px 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+      min-width: 560px;
+    }
+
+    th {
+      text-align: left;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: #6b7280;
+      padding: 10px;
+      border-bottom: 1px solid #e5e7eb;
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 10px;
+      border-bottom: 1px solid #f3f4f6;
+      vertical-align: top;
+      color: #374151;
+      line-height: 1.55;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    td b {
+      color: #111827;
+    }
+
+    /* encadrés */
+    .box {
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      padding: 16px 18px;
+      margin-bottom: 14px;
+      background: white;
+    }
+
+    .box h3 {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .box ul,
+    .box ol {
+      padding-left: 20px;
+      font-size: 13.5px;
+      color: #374151;
+      line-height: 1.7;
+    }
+
+    .box li {
+      margin-bottom: 6px;
+    }
+
+    .box li:last-child {
+      margin-bottom: 0;
+    }
+
+    .box b {
+      color: #111827;
+    }
+
+    .box-warn {
+      background: #fffbeb;
+      border-color: #fde68a;
+    }
+
+    .box-warn h3 {
+      color: #b45309;
+    }
+
+    .box-good {
+      background: #f0fdf4;
+      border-color: #86efac;
+    }
+
+    .box-good h3 {
+      color: #15803d;
+    }
+
+    .box-bad {
+      background: #fef2f2;
+      border-color: #fecaca;
+    }
+
+    .box-bad h3 {
+      color: #b91c1c;
+    }
+
+    a.lnk {
+      color: #1d4ed8;
+      font-weight: 500;
+    }
+
+    .foot {
+      font-size: 13px;
+      color: #6b7280;
+      line-height: 1.7;
+      border-top: 1px solid #e5e7eb;
+      padding-top: 18px;
+      margin-top: 8px;
+    }
+
+    .foot a {
+      color: #4b5563;
+    }
+
+    @media (max-width: 560px) {
+      body {
+        padding: 20px 12px;
+      }
+
+      .wrap {
+        padding: 20px 16px;
+        border-radius: 18px;
+      }
+
+      .hdr h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <a href="index.html" class="back">← Accueil</a>
+
+    <div class="hdr">
+      <h1>Gagner sa vie en ligne depuis Madagascar</h1>
+      <p>Un ordinateur, une connexion, 200 000 Ar maximum. Dix métiers vendables sans diplôme ni
+        expérience, la question du paiement réglée en premier, et un plan de 90 jours jusqu'au
+        moment où tu ne demandes plus rien à personne.</p>
+    </div>
+
+    <div class="global">
+      <div class="global-top">
+        <strong id="gtitle">Progression</strong>
+        <span id="gcount">0/0</span>
+      </div>
+      <div class="track">
+        <div class="fill" id="gfill"></div>
+      </div>
+      <p class="global-note">Coche une étape quand elle est réellement faite, pas quand tu l'as
+        comprise. La différence entre les deux est exactement ce qui sépare ceux qui y arrivent de
+        ceux qui abandonnent.</p>
+    </div>
+
+    <div class="toc">
+      <a href="#cadre">Le cadre honnête</a>
+      <a href="#paliers">Les paliers d'indépendance</a>
+      <a href="#paiement">Être payé</a>
+      <a href="#metiers">Les 10 métiers</a>
+      <a href="#budget">Les 200 000 Ar</a>
+      <a href="#plan">Le plan 90 jours</a>
+      <a href="#pieges">Les 7 pièges</a>
+    </div>
+
+    <!-- ─────────────────────────── CADRE ─────────────────────────── -->
+    <section class="sec" id="cadre">
+      <h2 class="sec-h">Le cadre honnête</h2>
+      <p class="sec-p">Avant tout le reste, ce que cette page promet et ce qu'elle ne promet pas.
+        Une page qui te promet l'argent facile te vole ton temps ; celle-ci te dit d'abord ce que
+        ça coûte.</p>
+
+      <div class="box box-good">
+        <h3>Ce qui est vrai</h3>
+        <ul>
+          <li>Ton <b>français</b> est un actif que la plupart des freelances du monde n'ont pas. Il
+            ouvre des clients en France, Belgique, Suisse et au Canada, qui paient en euros.</li>
+          <li>Un euro vaut plusieurs milliers d'ariary. <b>100 € par mois ≈ 450 000 Ar</b> :
+            au-dessus de ton objectif, pour un volume de travail modeste.</li>
+          <li>Les outils dont tu as besoin sont <b>gratuits</b>. Aucun des dix métiers listés plus
+            bas ne demande d'acheter un logiciel.</li>
+        </ul>
+      </div>
+
+      <div class="box box-bad">
+        <h3>Ce qui est faux</h3>
+        <ul>
+          <li>« Gagner de l'argent en ligne sans rien faire ». Tout ce qui suit est du
+            <b>travail</b>, payé à sa juste valeur, pas un raccourci.</li>
+          <li>« Résultats en 7 jours ». Compte <b>4 à 8 semaines</b> avant ton premier paiement
+            réel, et 3 mois avant une régularité.</li>
+          <li>« Il faut investir pour gagner ». Tes 200 000 Ar ne sont <b>pas</b> un capital de
+            départ : ce sont deux mois de connexion. On y revient plus bas.</li>
+        </ul>
+      </div>
+
+      <div class="quote quote-big">
+        <p>« Il n'y a pas d'ascenseur pour le succès. Il faut prendre l'escalier. »</p>
+        <cite>— Zig Ziglar</cite>
+      </div>
+
+      <div class="box box-warn">
+        <h3>Une précaution sur les chiffres de cette page</h3>
+        <p style="font-size:13.5px;color:#374151;line-height:1.7">Les tarifs, délais et montants
+          donnés sont des <b>ordres de grandeur</b>, pas des garanties : ils varient selon le
+          client, ton niveau et le moment. Les règles des services de paiement changent
+          régulièrement et n'ont pas pu être vérifiées au moment d'écrire cette page. C'est
+          exactement pourquoi la première action du plan est de les <b>vérifier toi-même</b>.</p>
+      </div>
+    </section>
+
+    <!-- ─────────────────────────── PALIERS ─────────────────────────── -->
+    <section class="sec" id="paliers">
+      <h2 class="sec-h">Les paliers d'indépendance</h2>
+      <p class="sec-p">« Être indépendant » n'est pas un sentiment, c'est un montant. Voici les
+        cinq paliers, du premier ariary gagné jusqu'au moment où tu peux vivre seul. Coche-les au
+        fur et à mesure — c'est la mesure la plus honnête de ta progression.</p>
+
+      <div id="paliers-list"></div>
+
+      <div class="quote">
+        <p>« Fais ce que tu peux, avec ce que tu as, là où tu es. »</p>
+        <cite>— Theodore Roosevelt</cite>
+      </div>
+    </section>
+
+    <!-- ─────────────────────────── PAIEMENT ─────────────────────────── -->
+    <section class="sec" id="paiement">
+      <h2 class="sec-h">Avant tout : comment être payé</h2>
+      <p class="sec-p">C'est la section la plus importante de la page, et c'est pour ça qu'elle
+        passe <b>avant</b> le catalogue des métiers. L'échec le plus fréquent n'est pas de ne pas
+        trouver de client : c'est de travailler un mois, puis de découvrir qu'on ne peut pas
+        encaisser ce qu'on a gagné. Règle : <b>ton moyen d'encaissement existe et fonctionne avant
+          ton premier client.</b></p>
+
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Moyen</th>
+              <th>Pour quel client</th>
+              <th>À vérifier avant de compter dessus</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>Payoneer</b></td>
+              <td>Clients étrangers, plateformes (Upwork, Fiverr, ComeUp)</td>
+              <td>Que l'ouverture depuis Madagascar aboutit, et par quel chemin l'argent arrive
+                jusqu'à toi (compte bancaire local, retrait).</td>
+            </tr>
+            <tr>
+              <td><b>Mobile money</b><br>MVola · Orange Money · Airtel Money</td>
+              <td>Clients <b>malgaches</b> uniquement</td>
+              <td>Rien : ça marche déjà et tout le monde l'a. C'est ton moyen le plus fiable pour
+                le marché local — ne le néglige pas sous prétexte qu'il est « local ».</td>
+            </tr>
+            <tr>
+              <td><b>Virement bancaire</b><br>BNI · BOA · BFV-SG</td>
+              <td>Clients étrangers sérieux, gros montants</td>
+              <td>Les frais fixes et le délai. Sur 50 €, des frais de 20 € changent tout — demande
+                le détail à ta banque <i>avant</i>.</td>
+            </tr>
+            <tr>
+              <td><b>Western Union · RIA</b></td>
+              <td>Client qui te fait confiance, paiement ponctuel</td>
+              <td>Qui paie les frais. À négocier avant, jamais après.</td>
+            </tr>
+            <tr>
+              <td><b>PayPal</b></td>
+              <td>Très répandu chez les clients… mais</td>
+              <td>⚠️ <b>Le point à vérifier en priorité.</b> Pouvoir <i>recevoir</i> de l'argent et
+                pouvoir le <i>sortir</i> vers un compte malgache sont deux choses différentes. Ne
+                promets jamais « paie-moi sur PayPal » avant d'avoir testé un retrait réel.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="box box-warn" style="margin-top:16px">
+        <h3>Le test des 5 000 Ar</h3>
+        <p style="font-size:13.5px;color:#374151;line-height:1.7">Avant ton premier vrai client,
+          fais-toi envoyer <b>une toute petite somme</b> par un proche à l'étranger, ou fais un
+          micro-travail à 5 € sur une plateforme. Puis va jusqu'au bout : jusqu'à l'argent dans ta
+          main. Tant que tu n'as pas fait ce trajet complet une fois, tu ne sais pas si ta chaîne
+          de paiement fonctionne — tu l'espères.</p>
+      </div>
+    </section>
+
+    <!-- ─────────────────────────── MÉTIERS ─────────────────────────── -->
+    <section class="sec" id="metiers">
+      <h2 class="sec-h">Les 10 métiers</h2>
+      <p class="sec-p">Classés du plus rapide au plus lent à rapporter. Aucun ne demande de
+        diplôme. Les trois premiers sont ceux par lesquels commencer quand on part de zéro :
+        ils s'apprennent en quelques semaines et le marché francophone y est demandeur.
+        <b>Choisis-en un seul</b> — la section « pièges » explique pourquoi.
+      </p>
+
+      <div class="jobs" id="jobs"></div>
+
+      <div class="quote">
+        <p>« Un voyage de mille lieues commence toujours par un premier pas. »</p>
+        <cite>— Lao Tseu</cite>
+      </div>
+    </section>
+
+    <!-- ─────────────────────────── BUDGET ─────────────────────────── -->
+    <section class="sec" id="budget">
+      <h2 class="sec-h">Les 200 000 Ar : où les mettre</h2>
+      <p class="sec-p">La réponse va à contre-courant de tout ce qu'on te dira, et c'est peut-être
+        le conseil le plus utile de cette page.</p>
+
+      <div class="box box-good">
+        <h3>✅ Où les mettre</h3>
+        <ul>
+          <li><b>Ta connexion, pendant deux mois (~100–150 000 Ar).</b> C'est tout. Pouvoir
+            travailler sans compter ses mégaoctets pendant huit semaines est ce qui te permet
+            d'aller jusqu'au premier client sans craquer.</li>
+          <li><b>Le reste : une réserve, intacte.</b> Elle sert à une chose — pouvoir dire non à un
+            client qui te propose un tarif humiliant parce que tu as besoin d'argent
+            <i>aujourd'hui</i>.
+          </li>
+        </ul>
+      </div>
+
+      <div class="box box-bad">
+        <h3>❌ Où ne surtout pas les mettre</h3>
+        <ul>
+          <li><b>Une formation payante.</b> Tout ce qu'il te faut pour ces dix métiers est gratuit
+            sur YouTube, en français. Une formation à 150 000 Ar t'achète surtout la sensation
+            d'avoir commencé.</li>
+          <li><b>Un logiciel.</b> Canva, CapCut, DaVinci Resolve, Google Docs, LibreOffice : les
+            versions gratuites suffisent à livrer du travail payé.</li>
+          <li><b>Un « pack » ou un « accès VIP » vendu sur Facebook.</b> Si quelqu'un te fait payer
+            pour te donner du travail, ce n'est pas un employeur.</li>
+          <li><b>Une mise en avant payante sur une plateforme.</b> Sans avis clients, elle ne
+            convertit pas. Les avis viennent du travail livré, pas du budget.</li>
+        </ul>
+      </div>
+
+      <div class="quote">
+        <p>« Le meilleur moment pour planter un arbre était il y a vingt ans. Le deuxième meilleur
+          moment, c'est maintenant. »</p>
+        <cite>— Proverbe</cite>
+      </div>
+    </section>
+
+    <!-- ─────────────────────────── PLAN ─────────────────────────── -->
+    <section class="sec" id="plan">
+      <h2 class="sec-h">Le plan en 90 jours</h2>
+      <p class="sec-p">Quatre phases. Chacune a une sortie vérifiable : si elle n'est pas atteinte,
+        on ne passe pas à la suivante, on recommence la précédente autrement.</p>
+
+      <div id="plan-list"></div>
+
+      <div class="quote quote-big">
+        <p>« Ce n'est pas parce que les choses sont difficiles que nous n'osons pas, c'est parce
+          que nous n'osons pas qu'elles sont difficiles. »</p>
+        <cite>— Sénèque</cite>
+      </div>
+    </section>
+
+    <!-- ─────────────────────────── PIÈGES ─────────────────────────── -->
+    <section class="sec" id="pieges">
+      <h2 class="sec-h">Les 7 pièges qui font abandonner</h2>
+      <p class="sec-p">Presque personne n'échoue par manque de talent. On échoue sur ces sept
+        points, presque toujours dans cet ordre.</p>
+
+      <div class="box">
+        <ol>
+          <li><b>L'arnaque au « travail à domicile ».</b> Un vrai client ne te demande jamais de
+            payer pour travailler, ni tes identifiants, ni de « débloquer tes gains ». La règle est
+            absolue : <b>l'argent va du client vers toi, jamais l'inverse.</b></li>
+          <li><b>Rester au tarif de débutant.</b> Le premier prix bas est un investissement pour
+            obtenir un avis. Après trois clients satisfaits, tu augmentes. Si tu ne le fais jamais,
+            tu travailleras dix fois plus pour le même revenu.</li>
+          <li><b>Changer de voie tous les quinze jours.</b> Trois métiers essayés trois semaines
+            chacun donnent zéro. Un métier tenu trois mois donne un revenu. Le talent ici, c'est de
+            rester.</li>
+          <li><b>Travailler sans acompte.</b> Sur une première mission avec un inconnu :
+            <b>50 % avant, 50 % à la livraison.</b> Un client qui refuse ce principe t'annonce déjà
+            comment ça va finir.
+          </li>
+          <li><b>Ignorer les coupures.</b> Panne de courant, coupure de connexion : ça arrivera
+            pendant une livraison. Prévois-le — batterie chargée, fichiers sauvegardés en ligne,
+            l'adresse d'un cyber de secours, et des délais annoncés avec de la marge.</li>
+          <li><b>Comparer ton mois 1 au mois 30 d'un autre.</b> Celui qui affiche ses revenus sur
+            TikTok ne montre pas ses deux premières années. Ta seule comparaison utile, c'est
+            toi-même le mois dernier.</li>
+          <li><b>Attendre d'être prêt.</b> Tu ne le seras jamais. Le premier client arrive toujours
+            avant que tu te sentes légitime — c'est le signe que tu avances, pas que tu triches.
+          </li>
+        </ol>
+      </div>
+
+      <div class="quote">
+        <p>« Je n'ai pas échoué. J'ai simplement trouvé dix mille solutions qui ne fonctionnent
+          pas. »</p>
+        <cite>— Thomas Edison</cite>
+      </div>
+
+      <div class="quote">
+        <p>« L'échec est simplement l'occasion de recommencer, cette fois plus intelligemment. »</p>
+        <cite>— Henry Ford</cite>
+      </div>
+
+      <div class="quote quote-big">
+        <p>« Celui qui déplace une montagne commence par déplacer de petites pierres. »</p>
+        <cite>— Confucius</cite>
+      </div>
+    </section>
+
+    <p class="foot">
+      Cette page répond à la question « quel travail puis-je vendre dès maintenant ». Si tu cherches
+      plutôt à <b>construire un business</b> — clipping, sites vitrines, affiliation, print on
+      demand — la <a href="roadmap-0.html">Roadmap 0€</a> couvre six modèles sans capital adaptés au
+      marché malgache, et le <a href="roadmap-business.html">Plan d'Action 90 Jours</a> en couvre dix
+      autres. Les deux approches se complètent : on vend son travail pour manger, on construit un
+      actif pour ne plus avoir à le vendre.
+    </p>
+  </div>
+
+  <script>
+    /* ── Données ─────────────────────────────────────────────────────────── */
+
+    const PALIERS = [
+      {
+        id: 'p1', montant: '50 000 Ar / mois', titre: 'Ton téléphone et ta connexion',
+        desc: 'Le premier palier, et le plus symbolique : tu ne demandes plus d\'argent pour recharger ton forfait. Atteignable avec un seul petit client.'
+      },
+      {
+        id: 'p2', montant: '150 000 Ar / mois', titre: '+ ton transport et tes sorties',
+        desc: 'Tes déplacements et tes sorties ne passent plus par une demande. Deux à trois clients réguliers, ou un client mensuel.'
+      },
+      {
+        id: 'p3', montant: '300 000 Ar / mois', titre: 'Tu ne demandes plus rien', key: true,
+        desc: 'Vêtements, dépenses personnelles, imprévus : tout est couvert. C\'est l\'objectif que tu t\'es fixé, et c\'est le palier qui change la relation avec tes parents.'
+      },
+      {
+        id: 'p4', montant: '500 000 Ar / mois', titre: 'Tu contribues à la maison',
+        desc: 'Tu passes de celui qui reçoit à celui qui participe. Le basculement est plus psychologique que financier, et il compte énormément.'
+      },
+      {
+        id: 'p5', montant: '1 000 000 Ar / mois', titre: 'Tu peux vivre seul',
+        desc: 'Loyer, nourriture, charges, avec une marge. Ce n\'est plus un objectif à 90 jours mais à 12–18 mois — il se construit en augmentant tes tarifs, pas tes heures.'
+      }
+    ];
+
+    const JOBS = [
+      {
+        n: 'Rédaction web en français', v: 'fast', s: 'Premier revenu : 2 à 4 semaines',
+        p: 'Écrire des articles pour des sites français : blogs d\'entreprise, fiches produit, pages de services. Le métier le plus accessible quand on écrit correctement le français.',
+        apprendre: 'Structurer un article et écrire sans fautes. 2 semaines en t\'entraînant tous les jours.',
+        revenu: '150 000 à 500 000 Ar / mois au 3ᵉ mois',
+        clients: 'ComeUp, Fiverr, groupes Facebook de rédacteurs francophones, agences SEO françaises contactées directement',
+        cout: '0 Ar'
+      },
+      {
+        n: 'Community management local', v: 'fast', s: 'Premier revenu : 2 à 6 semaines',
+        p: 'Gérer les pages Facebook et Instagram de commerces malgaches : restaurants, salons, boutiques. Beaucoup ont une page morte et savent qu\'elle leur coûte des clients.',
+        apprendre: 'Canva et un calendrier de publication. 1 à 2 semaines.',
+        revenu: '100 000 à 300 000 Ar par client et par mois',
+        clients: 'À pied ou par message, dans ton quartier. Le démarchage direct marche mieux ici que n\'importe quelle plateforme.',
+        cout: '0 Ar'
+      },
+      {
+        n: 'Montage vidéo court', v: 'fast', s: 'Premier revenu : 3 à 6 semaines',
+        p: 'Découper des vidéos longues en formats TikTok, Reels et Shorts, sous-titres compris. Demande énorme et régulière, côté créateurs comme côté commerces.',
+        apprendre: 'CapCut ou DaVinci Resolve, gratuits. 2 à 3 semaines de pratique quotidienne.',
+        revenu: '200 000 à 600 000 Ar / mois',
+        clients: 'Créateurs francophones sur YouTube et TikTok, contactés en message direct. Montre ton travail, ne demande rien.',
+        cout: '0 Ar'
+      },
+      {
+        n: 'Assistance virtuelle', v: 'mid', s: 'Premier revenu : 4 à 8 semaines',
+        p: 'Gérer la boîte mail, l\'agenda, la relance client et les tâches répétitives d\'un entrepreneur francophone. Peu spectaculaire, mais c\'est le métier qui fidélise le plus.',
+        apprendre: 'Google Workspace et de la rigueur. 1 semaine.',
+        revenu: '250 000 à 700 000 Ar / mois avec un ou deux clients fixes',
+        clients: 'ComeUp, LinkedIn, groupes Facebook d\'entrepreneurs français',
+        cout: '0 Ar'
+      },
+      {
+        n: 'Transcription et sous-titrage', v: 'mid', s: 'Premier revenu : 3 à 6 semaines',
+        p: 'Transformer des audios et vidéos en texte : interviews, podcasts, réunions, cours. Ton oreille pour le français est un avantage direct.',
+        apprendre: 'Un outil de transcription automatique, puis la correction. C\'est la correction qui est payée. 1 semaine.',
+        revenu: '150 000 à 400 000 Ar / mois',
+        clients: 'ComeUp, Fiverr, podcasteurs et chaînes YouTube francophones',
+        cout: '0 Ar'
+      },
+      {
+        n: 'Design graphique simple', v: 'mid', s: 'Premier revenu : 4 à 8 semaines',
+        p: 'Logos, flyers, menus, visuels de réseaux sociaux pour des commerces. Le marché local en manque cruellement et paie correctement.',
+        apprendre: 'Canva sérieusement, plus les bases de mise en page. 3 à 4 semaines.',
+        revenu: '150 000 à 450 000 Ar / mois',
+        clients: 'Commerces de ton quartier, puis ComeUp pour les clients étrangers',
+        cout: '0 Ar'
+      },
+      {
+        n: 'Traduction FR · EN · MG', v: 'mid', s: 'Premier revenu : 4 à 10 semaines',
+        p: 'Traduire des documents, sites et sous-titres. Le couple malgache–français est une niche où tu as très peu de concurrence mondiale.',
+        apprendre: 'Rien de nouveau si tu maîtrises deux langues. Tout est dans la rigueur.',
+        revenu: '200 000 à 600 000 Ar / mois',
+        clients: 'ONG et associations présentes à Madagascar, ComeUp, agences de traduction',
+        cout: '0 Ar'
+      },
+      {
+        n: 'Cours particuliers en ligne', v: 'mid', s: 'Premier revenu : 3 à 8 semaines',
+        p: 'Enseigner le français à des étrangers, ou aider des élèves malgaches en maths, physique ou anglais par visioconférence.',
+        apprendre: 'Savoir expliquer. Prépare 5 séances types avant de démarcher.',
+        revenu: '200 000 à 500 000 Ar / mois',
+        clients: 'Plateformes de tutorat en ligne, groupes Facebook de parents',
+        cout: '0 Ar'
+      },
+      {
+        n: 'Saisie et annotation de données', v: 'fast', s: 'Premier revenu : 1 à 3 semaines',
+        p: 'Saisir, trier, étiqueter des données. Le plus rapide à décrocher, et le moins bien payé — à prendre comme un dépannage, pas comme une destination.',
+        apprendre: 'Rien. C\'est là son seul vrai avantage.',
+        revenu: '80 000 à 250 000 Ar / mois, pour beaucoup d\'heures',
+        clients: '⚠️ Terrain à arnaques. N\'accepte que des plateformes établies, jamais un « recruteur » rencontré en message privé.',
+        cout: '0 Ar'
+      },
+      {
+        n: 'Développement web', v: 'slow', s: 'Premier revenu : 4 à 8 mois',
+        p: 'Créer des sites et applications. C\'est la voie longue, mais c\'est celle qui mène le plus sûrement au-delà du million d\'ariary par mois.',
+        apprendre: 'HTML, CSS, JavaScript puis un framework. 4 à 6 mois sérieux, gratuitement.',
+        revenu: '500 000 à 3 000 000 Ar / mois une fois installé',
+        clients: 'Malt, Upwork, agences, puis le bouche-à-oreille',
+        cout: '0 Ar'
+      }
+    ];
+
+    const PLAN = [
+      {
+        phase: 'Semaine 1 — Les fondations invisibles',
+        sortie: 'Sortie : ton moyen de paiement est testé, et tu as choisi un seul métier.',
+        etapes: [
+          { id: 'a1', t: 'Régler la question du paiement', d: 'Ouvre et teste ton moyen d\'encaissement. Fais le test des 5 000 Ar jusqu\'au bout. Tant que l\'argent n\'est pas arrivé dans ta main, cette étape n\'est pas faite.' },
+          { id: 'a2', t: 'Choisir UN métier', d: 'Un seul, dans la liste plus haut. Écris-le sur un papier et affiche-le. Tu n\'as pas le droit d\'en changer avant 90 jours.' },
+          { id: 'a3', t: 'Préparer ton plan B technique', d: 'Batterie chargée, travaux sauvegardés en ligne, l\'adresse d\'un cyber de secours repérée. Les coupures ne doivent jamais être une excuse.' },
+          { id: 'a4', t: 'Bloquer tes heures de travail', d: 'Choisis 2 à 3 h par jour, aux mêmes heures, et écris-les. Un horaire flou donne un revenu flou.' }
+        ]
+      },
+      {
+        phase: 'Semaines 2 à 4 — La compétence minimale vendable',
+        sortie: 'Sortie : trois travaux terminés que tu peux montrer, et tes profils en ligne.',
+        etapes: [
+          { id: 'b1', t: 'Apprendre le strict nécessaire', d: 'Juste assez pour livrer, pas plus. Deux semaines de tutoriels gratuits en français, appliqués immédiatement. Regarder sans faire ne compte pas.' },
+          { id: 'b2', t: 'Réaliser 3 travaux d\'exemple', d: 'Pour toi, pour un proche, pour un commerce que tu aimes bien — gratuitement et sans le dire. Ce sont eux qui remplaceront l\'expérience que tu n\'as pas.' },
+          { id: 'b3', t: 'Créer tes profils', d: 'ComeUp ou Fiverr, plus une page Facebook professionnelle et un profil LinkedIn. Photo nette, description claire, tes 3 exemples visibles.' },
+          { id: 'b4', t: 'Fixer ton premier tarif', d: 'Bas volontairement, et pour les 3 premiers clients seulement. Écris dès maintenant la date à laquelle tu l\'augmenteras.' }
+        ]
+      },
+      {
+        phase: 'Semaines 5 à 8 — Le premier client',
+        sortie: 'Sortie : un travail payé, encaissé, et un avis client écrit.',
+        etapes: [
+          { id: 'c1', t: 'Contacter 5 prospects par jour', d: 'Tous les jours ouvrés, sans exception. Message court, personnalisé, avec un exemple joint. 100 messages sur le mois, et c\'est un jeu de nombres.' },
+          { id: 'c2', t: 'Décrocher le premier oui', d: 'Il viendra plus tard que tu ne l\'espères et plus tôt que tu ne le crains. Accepte même si le montant te paraît ridicule : tu n\'achètes pas de l\'argent, tu achètes un avis.' },
+          { id: 'c3', t: 'Livrer mieux que promis', d: 'En avance, avec un détail en plus que personne n\'a demandé. C\'est la seule technique marketing qui fonctionne à coup sûr.' },
+          { id: 'c4', t: 'Demander l\'avis, puis le suivant', d: 'Demande un avis écrit le jour même. Puis demande si le client connaît quelqu\'un d\'autre. Le deuxième client vient presque toujours du premier.' }
+        ]
+      },
+      {
+        phase: 'Semaines 9 à 12 — La régularité',
+        sortie: 'Sortie : 300 000 Ar encaissés sur le mois, et au moins un client qui revient.',
+        etapes: [
+          { id: 'd1', t: 'Transformer un client en client récurrent', d: 'Propose un forfait mensuel à celui qui est le plus satisfait. Un client à 150 000 Ar par mois vaut mieux que cinq missions à courir après.' },
+          { id: 'd2', t: 'Augmenter tes tarifs de 30 à 50 %', d: 'Sur les nouveaux clients uniquement, sans t\'excuser et sans explication. Tu as trois avis, tu n\'es plus débutant.' },
+          { id: 'd3', t: 'Tenir tes comptes', d: 'Un tableau : date, client, montant, encaissé oui/non. Sans ça, tu ne sauras jamais si tu progresses et tu oublieras de te faire payer.' },
+          { id: 'd4', t: 'Atteindre le palier des 300 000 Ar', d: 'Le mois où tu ne demandes plus rien à personne. Coche-le en haut de page — et prends une minute pour mesurer ce que ça représente.' }
+        ]
+      }
+    ];
+
+    /* ── État ────────────────────────────────────────────────────────────── */
+
+    const KEY = 'gagner-argent-mada:v1';
+    let done = {};
+
+    function load() {
+      try {
+        const raw = localStorage.getItem(KEY);
+        if (raw) done = JSON.parse(raw) || {};
+      } catch (e) { /* mode privé ou données illisibles */ }
+    }
+
+    function save() {
+      try { localStorage.setItem(KEY, JSON.stringify(done)); }
+      catch (e) { /* quota : la page reste utilisable pour la session */ }
+    }
+
+    const $ = s => document.querySelector(s);
+    const allIds = () => PALIERS.map(p => p.id).concat(
+      PLAN.reduce((acc, ph) => acc.concat(ph.etapes.map(e => e.id)), []));
+
+    /* ── Rendu ───────────────────────────────────────────────────────────── */
+
+    function stepNode(id, tagHtml, titre, desc, extraClass) {
+      const label = document.createElement('label');
+      label.className = 'step' + (extraClass ? ' ' + extraClass : '') + (done[id] ? ' done' : '');
+      const box = document.createElement('input');
+      box.type = 'checkbox';
+      box.checked = !!done[id];
+      const body = document.createElement('div');
+      body.className = 'step-body';
+      body.innerHTML = (tagHtml || '') +
+        '<div class="step-title">' + titre + '</div>' +
+        '<div class="step-desc">' + desc + '</div>';
+      label.appendChild(box);
+      label.appendChild(body);
+      box.addEventListener('change', function () {
+        done[id] = this.checked;
+        if (!this.checked) delete done[id];
+        label.classList.toggle('done', this.checked);
+        save();
+        updateGlobal();
+      });
+      return label;
+    }
+
+    function renderPaliers() {
+      const root = $('#paliers-list');
+      PALIERS.forEach(p => {
+        root.appendChild(stepNode(
+          p.id,
+          '<span class="step-tag">' + p.montant + '</span>',
+          p.titre, p.desc,
+          'palier' + (p.key ? ' key' : '')
+        ));
+      });
+    }
+
+    function renderJobs() {
+      const speeds = { fast: 's-fast', mid: 's-mid', slow: 's-slow' };
+      $('#jobs').innerHTML = JOBS.map(j => `
+        <div class="job">
+          <div class="job-head">
+            <h3>${j.n}</h3>
+            <span class="job-speed ${speeds[j.v]}">${j.v === 'fast' ? 'Rapide' : j.v === 'mid' ? 'Moyen' : 'Long'}</span>
+          </div>
+          <p>${j.p}</p>
+          <dl>
+            <dt>Délai avant le 1er revenu</dt><dd><b>${j.s.replace('Premier revenu : ', '')}</b></dd>
+            <dt>À apprendre</dt><dd>${j.apprendre}</dd>
+            <dt>Revenu réaliste</dt><dd><b>${j.revenu}</b></dd>
+            <dt>Où trouver les clients</dt><dd>${j.clients}</dd>
+            <dt>Coût de départ</dt><dd><b>${j.cout}</b></dd>
+          </dl>
+        </div>`).join('');
+    }
+
+    function renderPlan() {
+      const root = $('#plan-list');
+      PLAN.forEach(ph => {
+        const bar = document.createElement('div');
+        bar.className = 'phase-bar';
+        bar.textContent = ph.phase;
+        root.appendChild(bar);
+
+        const sortie = document.createElement('p');
+        sortie.className = 'sec-p';
+        sortie.style.marginBottom = '12px';
+        sortie.innerHTML = '<b>' + ph.sortie + '</b>';
+        root.appendChild(sortie);
+
+        ph.etapes.forEach(e => root.appendChild(stepNode(e.id, '', e.t, e.d)));
+      });
+    }
+
+    function updateGlobal() {
+      const ids = allIds();
+      const n = ids.filter(id => done[id]).length;
+      const pct = ids.length ? Math.round(n / ids.length * 100) : 0;
+      $('#gfill').style.width = pct + '%';
+      $('#gcount').textContent = n + '/' + ids.length + ' étapes · ' + pct + '%';
+
+      const paliersFaits = PALIERS.filter(p => done[p.id]).length;
+      $('#gtitle').textContent = paliersFaits === 0
+        ? 'Progression'
+        : paliersFaits + ' palier' + (paliersFaits > 1 ? 's' : '') + ' d\'indépendance atteint' +
+        (paliersFaits > 1 ? 's' : '') + ' sur ' + PALIERS.length;
+    }
+
+    load();
+    renderPaliers();
+    renderJobs();
+    renderPlan();
+    updateGlobal();
+  </script>
+</body>
+
+</html>

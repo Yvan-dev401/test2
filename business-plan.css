@@ -1,0 +1,1042 @@
+/* Feuille partagée des deux pages business (Madagascar / Chine).
+   Reprend les codes visuels du site : fond #f3f4f6, carte blanche rayon 24px,
+   bordures #e5e7eb, texte #111827, gris #6b7280, police Inter.
+
+   La couleur d'accent est une variable : chaque page la redéfinit sur :root.
+   Tout le bloc @media print est en bas de ce fichier — c'est lui qui fait
+   réellement l'export PDF. */
+
+:root {
+  --accent: #b45309;
+  --accent-dark: #92400e;
+  --accent-soft: #fffbeb;
+  --accent-line: #fde68a;
+  --ink: #111827;
+  --muted: #6b7280;
+  --faint: #9ca3af;
+  --line: #e5e7eb;
+  --paper: #f9fafb;
+  --ok: #15803d;
+  --ok-soft: #dcfce7;
+  --ko: #b91c1c;
+  --ko-soft: #fee2e2;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: #f3f4f6;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 20px;
+  color: var(--ink);
+  -webkit-text-size-adjust: 100%;
+}
+
+.wrap {
+  width: 100%;
+  max-width: 1040px;
+  background: white;
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--line);
+}
+
+/* ── barre du haut : retour + export ── */
+.topbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 7px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+  transition: color .15s, border-color .15s;
+}
+
+.back:hover {
+  color: var(--ink);
+  border-color: #d1d5db;
+}
+
+.export {
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  color: white;
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: background .15s, border-color .15s;
+}
+
+.export:hover {
+  background: var(--accent-dark);
+  border-color: var(--accent-dark);
+}
+
+/* ── en-tête ── */
+.hdr {
+  margin-bottom: 1.25rem;
+}
+
+.hdr .eyebrow {
+  display: inline-block;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-line);
+  border-radius: 999px;
+  padding: 4px 11px;
+  margin-bottom: 12px;
+}
+
+.hdr h1 {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.hdr p {
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 10px;
+  line-height: 1.65;
+  max-width: 70ch;
+}
+
+/* ── sommaire ── */
+.toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  border-radius: 14px;
+  margin-bottom: 26px;
+}
+
+.toc a {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 6px 11px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: white;
+  transition: color .15s, border-color .15s;
+}
+
+.toc a:hover {
+  color: var(--accent);
+  border-color: var(--accent-line);
+}
+
+/* ── sections ── */
+.sec {
+  margin-bottom: 36px;
+  scroll-margin-top: 20px;
+}
+
+.sec-h {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--ink);
+  margin-bottom: 16px;
+}
+
+.sec-h h2 {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.sec-h .sec-n {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--faint);
+  font-variant-numeric: tabular-nums;
+}
+
+.lead {
+  font-size: 14.5px;
+  line-height: 1.75;
+  color: #374151;
+  margin-bottom: 16px;
+  max-width: 72ch;
+}
+
+.lead + .lead {
+  margin-top: -6px;
+}
+
+.lead strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+h3.sub {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 22px 0 10px;
+}
+
+/* ── tableaux ── */
+.table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  margin-bottom: 14px;
+  -webkit-overflow-scrolling: touch;
+}
+
+table.tbl {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  min-width: 560px;
+}
+
+table.tbl th,
+table.tbl td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+  line-height: 1.5;
+}
+
+table.tbl thead th {
+  background: var(--paper);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+table.tbl tbody tr:last-child td {
+  border-bottom: none;
+}
+
+table.tbl td.num,
+table.tbl th.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+table.tbl tbody tr.total td {
+  background: var(--accent-soft);
+  font-weight: 700;
+  border-top: 2px solid var(--accent-line);
+}
+
+table.tbl .mdl {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.scroll-hint {
+  font-size: 11.5px;
+  color: var(--faint);
+  margin: -6px 0 16px;
+}
+
+/* ── fiche modèle ── */
+.model {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 22px;
+  margin-bottom: 22px;
+  background: white;
+}
+
+.model-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 12px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 16px;
+}
+
+.model-n {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--accent);
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.model-id {
+  flex: 1 1 260px;
+  min-width: 0;
+}
+
+.model-id h3 {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.model-id p {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 4px;
+  line-height: 1.6;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.tag {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.tag.risk-low {
+  background: var(--ok-soft);
+  border-color: #86efac;
+  color: var(--ok);
+}
+
+.tag.risk-mid {
+  background: var(--accent-soft);
+  border-color: var(--accent-line);
+  color: var(--accent-dark);
+}
+
+.tag.risk-high {
+  background: var(--ko-soft);
+  border-color: #fca5a5;
+  color: var(--ko);
+}
+
+/* ── indicateurs clés ── */
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(140px, 100%), 1fr));
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.kpi {
+  border: 1px solid var(--line);
+  background: var(--paper);
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.kpi-lbl {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.kpi-val {
+  font-size: 19px;
+  font-weight: 700;
+  margin-top: 5px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
+}
+
+.kpi-sub {
+  font-size: 11.5px;
+  color: var(--muted);
+  margin-top: 3px;
+  line-height: 1.45;
+}
+
+/* ── blocs internes ── */
+.cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+  gap: 16px;
+  align-items: start;
+}
+
+.block {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 16px;
+  background: white;
+}
+
+.block-h {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+/* lignes chiffrées avec points de conduite */
+.lines {
+  list-style: none;
+  font-size: 13px;
+}
+
+.lines li {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 5px 0;
+  line-height: 1.5;
+}
+
+.lines li .lbl {
+  color: #374151;
+}
+
+.lines li .dots {
+  flex: 1 1 auto;
+  border-bottom: 1px dotted #d1d5db;
+  min-width: 12px;
+  transform: translateY(-3px);
+}
+
+.lines li .amt {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.lines li.sum {
+  margin-top: 8px;
+  padding-top: 10px;
+  border-top: 2px solid var(--accent-line);
+  font-weight: 700;
+}
+
+.lines li.sum .lbl {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.lines li.sum .amt {
+  color: var(--accent-dark);
+}
+
+/* listes à puce carrée */
+ul.bullets {
+  list-style: none;
+  font-size: 13.5px;
+  line-height: 1.7;
+}
+
+ul.bullets li {
+  position: relative;
+  padding-left: 18px;
+  margin-bottom: 7px;
+  color: #374151;
+}
+
+ul.bullets li::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 9px;
+  width: 6px;
+  height: 6px;
+  border-radius: 2px;
+  background: var(--accent);
+}
+
+ul.bullets li strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* ── risques / parades ── */
+.risk {
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--ko);
+  border-radius: 10px;
+  padding: 11px 13px;
+  margin-bottom: 9px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.risk b {
+  display: block;
+  font-size: 13px;
+  color: var(--ko);
+  margin-bottom: 3px;
+}
+
+.risk .parade {
+  color: #374151;
+}
+
+.risk .parade::before {
+  content: 'Parade — ';
+  font-weight: 700;
+  color: var(--ok);
+}
+
+/* ── phases ── */
+.phases {
+  counter-reset: ph;
+}
+
+.phase {
+  position: relative;
+  padding: 0 0 18px 34px;
+  border-left: 2px solid var(--line);
+  margin-left: 12px;
+}
+
+.phase:last-child {
+  border-left-color: transparent;
+  padding-bottom: 0;
+}
+
+.phase::before {
+  counter-increment: ph;
+  content: counter(ph);
+  position: absolute;
+  left: -13px;
+  top: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.phase h4 {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.phase .when {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  margin-bottom: 3px;
+}
+
+.phase p {
+  font-size: 13px;
+  color: #374151;
+  line-height: 1.65;
+  margin-top: 5px;
+}
+
+.phase .out {
+  display: inline-block;
+  font-size: 12px;
+  color: var(--ok);
+  background: var(--ok-soft);
+  border: 1px solid #86efac;
+  border-radius: 8px;
+  padding: 5px 10px;
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+.phase .out::before {
+  content: 'Sortie vérifiable — ';
+  font-weight: 700;
+}
+
+/* ── encadrés ── */
+.note,
+.warn,
+.key {
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-size: 13.5px;
+  line-height: 1.7;
+  margin: 16px 0;
+}
+
+.note {
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: #374151;
+}
+
+.warn {
+  border: 1px solid var(--accent-line);
+  background: var(--accent-soft);
+  color: #78350f;
+}
+
+.key {
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: #f9fafb;
+}
+
+.note b,
+.warn b,
+.key b {
+  font-weight: 700;
+}
+
+.key b {
+  color: white;
+}
+
+.note .t,
+.warn .t,
+.key .t {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  opacity: .85;
+}
+
+/* ── figures SVG ── */
+.fig {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--paper);
+  padding: 16px;
+  margin: 16px 0;
+}
+
+.fig svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+
+/* un graphique seul : on le borne pour que le texte du SVG reste lisible,
+   ni minuscule sur mobile ni démesuré sur grand écran */
+.fig-chart {
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+/* un anneau à gauche, sa légende chiffrée à droite */
+.fig-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  align-items: center;
+}
+
+.fig-row .chart {
+  flex: 0 0 168px;
+  max-width: 168px;
+}
+
+.fig-row .legend-col {
+  flex: 1 1 260px;
+  min-width: 0;
+}
+
+.legend-list {
+  list-style: none;
+}
+
+.legend-list li {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.legend-list li:last-child {
+  border-bottom: none;
+}
+
+.legend-list i {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  flex: none;
+  transform: translateY(1px);
+}
+
+.legend-list .ll-lbl {
+  flex: 1 1 auto;
+  color: #374151;
+}
+
+.legend-list .ll-amt {
+  flex: none;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.legend-list .ll-amt em {
+  font-style: normal;
+  font-weight: 500;
+  color: var(--faint);
+  margin-left: 7px;
+}
+
+.fig-cap {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+}
+
+.fig-cap b {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin-top: 12px;
+}
+
+.legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  color: #374151;
+  line-height: 1.4;
+}
+
+.legend i {
+  width: 11px;
+  height: 11px;
+  border-radius: 3px;
+  flex: none;
+}
+
+/* ── renvois de bas de page ── */
+.crosslinks {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+  gap: 12px;
+  margin-top: 28px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+}
+
+.crosslink {
+  display: block;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 16px;
+  text-decoration: none;
+  background: var(--paper);
+  transition: border-color .15s, background .15s;
+}
+
+.crosslink:hover {
+  border-color: var(--accent-line);
+  background: var(--accent-soft);
+}
+
+.crosslink .cl-t {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.crosslink .cl-d {
+  font-size: 12.5px;
+  color: var(--muted);
+  margin-top: 4px;
+  line-height: 1.55;
+}
+
+.foot {
+  font-size: 12px;
+  color: var(--faint);
+  line-height: 1.7;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+/* en-tête visible seulement sur papier */
+.print-head {
+  display: none;
+}
+
+/* ── mobile ── */
+@media (max-width: 640px) {
+  body {
+    padding: 20px 12px;
+  }
+
+  .wrap {
+    padding: 20px 16px;
+    border-radius: 18px;
+  }
+
+  .hdr h1 {
+    font-size: 25px;
+  }
+
+  .model {
+    padding: 16px;
+  }
+
+  .kpi-val {
+    font-size: 17px;
+  }
+
+  .export,
+  .back {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 380px) {
+  .hdr h1 {
+    font-size: 22px;
+  }
+
+  .sec-h h2 {
+    font-size: 17px;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   IMPRESSION — c'est ce bloc qui produit réellement le PDF.
+   « Imprimer / Exporter PDF » puis, dans la boîte d'impression,
+   « Enregistrer au format PDF ».
+   ───────────────────────────────────────────────────────────── */
+@media print {
+  @page {
+    margin: 15mm;
+  }
+
+  *,
+  *::before,
+  *::after {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  html,
+  body {
+    background: white !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: block !important;
+    font-size: 10.5pt;
+  }
+
+  .wrap {
+    max-width: none;
+    width: auto;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+
+  /* tout ce qui n'a aucun sens sur papier */
+  .topbar,
+  .back,
+  .export,
+  .toc,
+  .scroll-hint,
+  .no-print {
+    display: none !important;
+  }
+
+  /* bandeau de rappel, uniquement à l'impression */
+  .print-head {
+    display: block;
+    border-bottom: 2px solid #111827;
+    padding-bottom: 6px;
+    margin-bottom: 14px;
+    font-size: 9pt;
+    color: #4b5563;
+  }
+
+  .print-head strong {
+    color: #111827;
+  }
+
+  .hdr h1 {
+    font-size: 20pt;
+  }
+
+  .sec {
+    margin-bottom: 18pt;
+  }
+
+  .sec-h {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  .sec-h h2 {
+    font-size: 13pt;
+  }
+
+  h3.sub,
+  .block-h,
+  .kpi-lbl {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  /* Les cinq fiches de la page Madagascar font chacune deux à trois pages :
+     leur demander de ne pas être coupées n'a aucun sens, le navigateur ne peut
+     pas l'honorer et coupe alors n'importe où. On leur fait donc commencer une
+     page, et ce sont leurs blocs internes qui restent insécables. */
+  #modeles>.model+.model {
+    break-before: page;
+    page-break-before: always;
+  }
+
+  .model-head {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  /* les fiches de la page Chine, elles, tiennent sur une page */
+  #pistes .model {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* rien ne doit être coupé en deux */
+  .fig,
+  .kpi,
+  .block,
+  .risk,
+  .phase,
+  .note,
+  .warn,
+  .key,
+  .crosslink,
+  .table-wrap,
+  tr {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* les tableaux ne défilent plus : ils s'impriment en entier */
+  .table-wrap {
+    overflow: visible !important;
+  }
+
+  table.tbl {
+    min-width: 0 !important;
+    width: 100% !important;
+    font-size: 8.5pt;
+    table-layout: fixed;
+  }
+
+  table.tbl th,
+  table.tbl td {
+    padding: 5px 6px;
+    word-break: break-word;
+  }
+
+  /* l'en-tête se répète en haut de chaque page */
+  table.tbl thead {
+    display: table-header-group;
+  }
+
+  table.tbl tbody {
+    display: table-row-group;
+  }
+
+  /* chaque grande section commence sur une nouvelle page */
+  .page-break {
+    break-before: page;
+    page-break-before: always;
+  }
+
+  .fig svg {
+    max-height: 105mm;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .crosslinks {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}

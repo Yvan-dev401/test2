@@ -137,6 +137,214 @@ body {
   max-width: 70ch;
 }
 
+/* ─────────────────────────────────────────────────────────────
+   Panneau « Tes chiffres » — les valeurs que la page ne peut pas
+   connaître à ta place. Construit par business-chine.js : sans
+   JavaScript il n'existe pas, et la page garde ses valeurs de
+   référence, ce qui reste juste.
+   ───────────────────────────────────────────────────────────── */
+.params {
+  border: 1px solid var(--accent-line);
+  background: var(--accent-soft);
+  border-radius: 14px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.params:empty {
+  display: none;
+}
+
+.params-toggle {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  width: 100%;
+  font-family: inherit;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 14px 16px;
+  cursor: pointer;
+  color: inherit;
+}
+
+.params-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent-dark);
+}
+
+.params-sub {
+  flex: 1 1 auto;
+  font-size: 12.5px;
+  color: var(--accent);
+}
+
+.params-custom .params-sub {
+  font-weight: 600;
+}
+
+.params-chevron {
+  flex: none;
+  font-size: 12px;
+  color: var(--accent);
+  transition: transform .25s ease;
+}
+
+.params-toggle[aria-expanded="true"] .params-chevron {
+  transform: rotate(180deg);
+}
+
+.params-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows .3s ease;
+}
+
+.params-body.open {
+  grid-template-rows: 1fr;
+}
+
+/* replié, le contenu est retiré du parcours au clavier — même traitement que
+   les cartes dépliables de la page d'accueil */
+.params-inner {
+  overflow: hidden;
+  min-height: 0;
+  visibility: hidden;
+  transition: visibility 0s linear .3s;
+}
+
+.params-body.open .params-inner {
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+.params-intro {
+  font-size: 13px;
+  line-height: 1.65;
+  color: #78350f;
+  padding: 0 16px 14px;
+}
+
+.params-grp {
+  border: none;
+  border-top: 1px solid var(--accent-line);
+  padding: 14px 16px;
+}
+
+.params-grp legend {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--accent-dark);
+  padding: 0;
+}
+
+.params-note {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.55;
+  margin: 6px 0 12px;
+  max-width: 68ch;
+}
+
+.params-fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+  gap: 10px;
+}
+
+.params-f {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.pf-l {
+  font-size: 12px;
+  color: #374151;
+  line-height: 1.4;
+}
+
+.pf-i {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: white;
+  overflow: hidden;
+}
+
+.pf-i:focus-within {
+  border-color: var(--accent);
+}
+
+.pf-i input {
+  font-family: inherit;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: var(--ink);
+  width: 100%;
+  min-width: 0;
+  border: none;
+  background: none;
+  padding: 8px 10px;
+}
+
+.pf-i input:focus {
+  outline: none;
+}
+
+.pf-i em {
+  flex: none;
+  display: flex;
+  align-items: center;
+  font-style: normal;
+  font-size: 11.5px;
+  color: var(--muted);
+  background: var(--paper);
+  border-left: 1px solid var(--line);
+  padding: 0 9px;
+  white-space: nowrap;
+}
+
+.params-actions {
+  border-top: 1px solid var(--accent-line);
+  padding: 12px 16px;
+}
+
+.params-reset {
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-dark);
+  background: white;
+  border: 1px solid var(--accent-line);
+  border-radius: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
+}
+
+.params-reset:hover {
+  border-color: var(--accent);
+}
+
+/* le récapitulatif des hypothèses : uniquement sur papier */
+.params-print {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .params-body,
+  .params-chevron {
+    transition-duration: .01ms;
+  }
+}
+
 /* ── sommaire ── */
 .toc {
   display: flex;
@@ -915,8 +1123,61 @@ ul.bullets li strong {
   .export,
   .toc,
   .scroll-hint,
+  .params-toggle,
+  .params-body,
   .no-print {
     display: none !important;
+  }
+
+  /* les champs de saisie cèdent la place au récapitulatif des valeurs
+     réellement utilisées : le PDF porte ainsi ses propres hypothèses */
+  .params {
+    border: none;
+    background: none;
+    margin-bottom: 10pt;
+  }
+
+  .params-print {
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 8.5pt;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .params-print caption {
+    caption-side: top;
+    text-align: left;
+    font-size: 9.5pt;
+    font-weight: 700;
+    padding-bottom: 5px;
+    border-bottom: 1.5px solid #111827;
+    margin-bottom: 5px;
+  }
+
+  .params-print th,
+  .params-print td {
+    text-align: left;
+    padding: 3px 6px;
+    border-bottom: 1px solid #e5e7eb;
+    font-weight: 400;
+  }
+
+  .params-print td:nth-child(2) {
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    font-weight: 600;
+  }
+
+  .params-print td:nth-child(3) {
+    color: #9ca3af;
+    white-space: nowrap;
+  }
+
+  .params-print .pp-mod td:nth-child(3) {
+    color: #b45309;
+    font-weight: 600;
   }
 
   /* bandeau de rappel, uniquement à l'impression */

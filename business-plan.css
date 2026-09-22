@@ -990,6 +990,148 @@ ul.bullets li strong {
   flex: none;
 }
 
+/* ─────────────────────────────────────────────────────────────
+   Lexique — le terme dans le texte, l'explication qui s'ouvre
+   dessous, et le lexique complet en fin de page.
+   Le lexique est la source unique : business-lexique.js y lit
+   les définitions. Sans JavaScript, les termes restent de
+   simples liens d'ancre vers leur entrée.
+   ───────────────────────────────────────────────────────────── */
+a.lex {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px dotted var(--accent);
+}
+
+a.lex:hover {
+  color: var(--accent-dark);
+  border-bottom-style: solid;
+}
+
+.lex-q {
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-line);
+  border-radius: 999px;
+  width: 15px;
+  height: 15px;
+  padding: 0;
+  margin-left: 3px;
+  cursor: pointer;
+  vertical-align: super;
+  transition: background .15s, color .15s;
+}
+
+.lex-q:hover,
+.lex-q[aria-expanded="true"] {
+  background: var(--accent);
+  color: white;
+}
+
+.lex-panel {
+  border: 1px solid var(--accent-line);
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin: 10px 0;
+  font-size: 13px;
+  line-height: 1.65;
+  color: #78350f;
+}
+
+.lex-panel p {
+  margin-bottom: 7px;
+}
+
+.lex-panel p:last-of-type {
+  margin-bottom: 0;
+}
+
+.lex-titre {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  color: var(--accent-dark);
+}
+
+.lex-voir {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-dark);
+  text-decoration: none;
+  margin-top: 8px;
+  border-bottom: 1px solid var(--accent-line);
+}
+
+.lex-voir:hover {
+  border-bottom-color: var(--accent-dark);
+}
+
+/* ── le lexique en fin de page ── */
+.lex-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+  gap: 14px;
+}
+
+.lex-entry {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px;
+  background: white;
+  scroll-margin-top: 20px;
+}
+
+.lex-entry:target {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.lex-entry h3 {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+
+.lex-entry p {
+  font-size: 13px;
+  line-height: 1.65;
+  color: #374151;
+  margin-bottom: 7px;
+}
+
+.lex-entry p:last-child {
+  margin-bottom: 0;
+}
+
+.lex-entry .lex-calc,
+.lex-entry .lex-ex,
+.lex-entry .lex-piege {
+  padding-left: 11px;
+  border-left: 2px solid var(--line);
+}
+
+.lex-entry .lex-piege {
+  border-left-color: var(--ko);
+}
+
+.lex-entry .lex-ex {
+  border-left-color: var(--ok);
+}
+
+.lex-entry b {
+  color: var(--ink);
+  font-weight: 600;
+}
+
 /* ── renvois de bas de page ── */
 .crosslinks {
   display: grid;
@@ -1125,8 +1267,27 @@ ul.bullets li strong {
   .scroll-hint,
   .params-toggle,
   .params-body,
+  .lex-q,
+  .lex-panel,
+  .lex-voir,
   .no-print {
     display: none !important;
+  }
+
+  /* le lexique s'imprime en entier : c'est lui qui rend le PDF autonome */
+  a.lex {
+    border-bottom: none;
+    font-weight: 600;
+  }
+
+  .lex-list {
+    display: block;
+  }
+
+  .lex-entry {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    margin-bottom: 8pt;
   }
 
   /* les champs de saisie cèdent la place au récapitulatif des valeurs

@@ -134,6 +134,7 @@
     d.pvMargeUnit = p.prixVente - d.pvRevientUnit;
     d.pvCoef = p.prixVente / d.pvRevientUnit;
     d.pvPartUsinePct = Math.round(100 * d.pvMarchandise / d.pvRevient);
+    d.pvCoefUsine = p.prixVente / d.puAr;   // le coefficient illusoire, calculé sur le prix usine
     d.pvMargeBrute = d.pvMargeUnit * p.qte;
     var vendues = Math.round(p.qte * 0.9);
     var ca = vendues * p.prixVente;
@@ -245,6 +246,7 @@
     v.pvMargeUnit = ar(d.pvMargeUnit);
     v.pvCoef = coefTxt(d.pvCoef);
     v.pvCoefNu = dec(d.pvCoef, 2);
+    v.pvCoefUsine = coefTxt(d.pvCoefUsine);
     v.pvPartUsinePct = pct(d.pvPartUsinePct);
     v.pvMargeBrute = ar(d.pvMargeBrute);
     v.pvVendues = String(d.pvVendues);

@@ -542,6 +542,50 @@
       color: #be185d;
     }
 
+    /* ── Famille Investir / Business chiffré ── */
+    .fam-invest .card-parent {
+      border-color: #b45309;
+    }
+
+    .fam-invest .card-tag-parent {
+      background: #fffbeb;
+      color: #92400e;
+    }
+
+    .fam-invest .card-arrow-parent {
+      color: #92400e;
+    }
+
+    .fam-invest .connector-line {
+      background: #b45309;
+    }
+
+    .fam-invest .connector-label {
+      color: #b45309;
+    }
+
+    .fam-invest .connector-label::before {
+      color: #b45309;
+    }
+
+    .fam-invest .level {
+      border-color: #fde68a;
+    }
+
+    .fam-invest .level:hover {
+      border-color: #b45309;
+      background: #fffbeb;
+    }
+
+    .fam-invest .level-count {
+      background: #fffbeb;
+      color: #92400e;
+    }
+
+    .fam-invest .level-arrow {
+      color: #b45309;
+    }
+
     .fam-atlas .connector-line {
       background: #22d3ee;
     }
@@ -982,6 +1026,46 @@
         </div>
         <div class="card-arrow card-arrow-parent">Voir le plan <span>→</span></div>
       </a>
+    </div>
+
+    <!-- ── FAMILLE INVESTIR / BUSINESS CHIFFRÉ ── -->
+    <div class="family fam-invest">
+      <div class="family-label">📊 Investir — Business chiffrés</div>
+
+      <a href="business-madagascar.html" class="card card-parent">
+        <div class="card-icon">📊</div>
+        <span class="card-tag card-tag-parent">Business plan complet</span>
+        <div class="card-title">Lancer un business avec 10 M Ar</div>
+        <div class="card-desc">Cinq modèles bâtis sur le web, le design et la vidéo — investissement
+          poste par poste, seuil de rentabilité, ROI à 12 mois, risques, financement. Exportable en
+          PDF.</div>
+        <div class="card-meta">
+          <span class="card-pill">5 modèles</span>
+          <span class="card-pill">10M Ar max</span>
+          <span class="card-pill">Export PDF</span>
+        </div>
+        <div class="card-arrow card-arrow-parent">Voir les modèles <span>→</span></div>
+      </a>
+
+      <button type="button" class="connector connector-toggle" aria-expanded="false" aria-controls="invest-levels">
+        <span class="connector-line"></span>
+        <span class="connector-label">Le business dérivé</span>
+        <span class="connector-chevron" aria-hidden="true">▾</span>
+      </button>
+
+      <div class="levels" id="invest-levels">
+        <div class="levels-inner">
+          <a href="business-chine.html" class="level">
+            <span class="level-icon">🚢</span>
+            <span class="level-text">
+              <span class="level-name">Importer depuis la Chine</span>
+              <span class="level-desc">Le voyage chiffré, le prix de revient réel, 7 pistes</span>
+            </span>
+            <span class="level-count">7 pistes</span>
+            <span class="level-arrow">→</span>
+          </a>
+        </div>
+      </div>
     </div>
 
     <!-- ── FAMILLE JEUX ── -->

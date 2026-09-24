@@ -420,6 +420,8 @@ def main():
     src = once(src, "      key: 'roadmap-allemand-timer',",
                "      key: 'roadmap-toefl-timer',", 'clé minuteur')
     src = once(src, '      defaultGoal: 3 * 3600', '      defaultGoal: 2 * 3600', 'objectif')
+    src = once(src, "      slug: 'allemand',", "      slug: 'toefl',", 'slug agenda')
+    src = once(src, "      label: 'Allemand',", "      label: 'TOEFL',", 'libellé agenda')
 
     # l'examen tombe un jour précis : date complète plutôt que mois seul
     src = once(src,

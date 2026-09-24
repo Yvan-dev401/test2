@@ -1,0 +1,164 @@
+/* Barre « Rappels sur ton téléphone », partagée par les pages roadmap.
+   Reprend les codes de roadmap-dates.css — bordures #e5e7eb, fonds #f9fafb, rayons 8–10px —
+   et réutilise ses boutons .resched-btn plutôt que d'en redéfinir. */
+
+.agenda {
+  margin-bottom: 1.5rem;
+}
+
+.agenda-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: #f9fafb;
+}
+
+.agenda-info {
+  font-size: 13px;
+  color: #4b5563;
+  flex: 1 1 260px;
+  line-height: 1.5;
+}
+
+.agenda-btn-off {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.agenda-panel {
+  margin-top: 10px;
+  padding: 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: white;
+}
+
+.agenda-help {
+  font-size: 13px;
+  color: #6b7280;
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+
+.agenda-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.agenda-lab {
+  font-size: 13px;
+  color: #4b5563;
+}
+
+.agenda-lab-bloc {
+  display: block;
+  font-weight: 600;
+  color: #111827;
+  margin: 16px 0 8px;
+}
+
+.agenda-fixe {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #4b5563;
+  margin-bottom: 12px;
+}
+
+.agenda-puce {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  border-radius: 4px;
+  background: #111827;
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+/* les <select> et <input type="time"> empruntent .resched-date : on corrige seulement
+   ce que le navigateur impose aux listes déroulantes */
+.agenda-panel select.resched-date {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 30px;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%236b7280' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 11px center;
+  cursor: pointer;
+  max-width: 100%;
+}
+
+.agenda-mode {
+  margin-top: 16px;
+  padding: 14px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: #f9fafb;
+}
+
+.agenda-mode-t {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #6b7280;
+  margin-bottom: 10px;
+}
+
+.agenda-mode ul {
+  margin: 0 0 10px;
+  padding-left: 18px;
+}
+
+.agenda-mode li {
+  font-size: 13px;
+  color: #4b5563;
+  line-height: 1.6;
+  margin-bottom: 5px;
+}
+
+.agenda-mode b {
+  color: #111827;
+}
+
+.agenda-mode-n {
+  font-size: 12.5px;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+.agenda-row:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 480px) {
+  .agenda-bar {
+    align-items: flex-start;
+  }
+
+  .agenda-row {
+    gap: 6px;
+  }
+
+  .agenda-row .resched-btn {
+    flex: 1 1 auto;
+  }
+
+  .agenda-panel select.resched-date,
+  .agenda-panel input.resched-date {
+    flex: 1 1 120px;
+    min-width: 0;
+  }
+}

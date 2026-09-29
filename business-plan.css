@@ -30,6 +30,21 @@
   padding: 0;
 }
 
+/* La remise à zéro ci-dessus supprime toutes les marges, y compris celles des
+   paragraphes : deux <p> qui se suivent se retrouvaient collés, sans que rien ne le
+   signale. Cette règle rétablit la respiration partout où elle manque, et reste sans
+   effet là où les paragraphes portent déjà une classe espacée. */
+p + p {
+  margin-top: 10px;
+}
+
+/* texte secondaire d'une cellule ou d'une légende */
+.muted {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
 body {
   font-family: 'Inter', system-ui, sans-serif;
   background: #f3f4f6;
@@ -626,6 +641,12 @@ table.tbl .mdl {
   border-radius: 12px;
   padding: 14px 16px;
   background: white;
+  /* comme .note, .warn et .key : la taille se pose sur le conteneur et descend par
+     héritage, de sorte qu'un enfant qui porte sa propre classe garde la sienne. Sans
+     elle, un paragraphe nu retombait à 16px au milieu d'un texte à 13,5. */
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: #374151;
 }
 
 .block-h {

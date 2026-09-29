@@ -794,22 +794,28 @@
       + 'Relève les vrais chiffres, saisis-les ici : <strong>tout le document se recalcule</strong>, '
       + 'tableaux et schémas compris.</p>';
 
+    /* Le balisage suit exactement le contrat de business-plan.css : fieldset + legend,
+       et surtout l'input à l'intérieur de .pf-i — hors de ce cadre il perd son style et
+       retombe sur la police du navigateur. inputmode ouvre le pavé numérique sur mobile. */
     GROUPES.forEach(function (g) {
-      html += '<div class="params-grp"><div class="params-grp-t">' + esc(g[1]) + '</div>'
-        + '<p class="params-grp-d">' + esc(g[2]) + '</p><div class="params-fields">';
+      html += '<fieldset class="params-grp"><legend>' + esc(g[1]) + '</legend>'
+        + '<p class="params-note">' + esc(g[2]) + '</p><div class="params-fields">';
       PARAMS.filter(function (x) { return x[7] === g[0]; }).forEach(function (x) {
-        html += '<label class="params-f" for="pf-' + x[0] + '">'
-          + '<span class="params-lab">' + esc(x[1]) + '</span>'
-          + '<span class="params-in"><input type="number" id="pf-' + x[0] + '" data-p="' + x[0]
-          + '" step="' + x[6] + '" min="' + x[4] + '" max="' + x[5] + '" value="' + p[x[0]] + '">'
-          + '<span class="params-u">' + esc(x[3]) + '</span></span></label>';
+        html += '<label class="params-f"><span class="pf-l">' + esc(x[1]) + '</span>'
+          + '<span class="pf-i"><input type="number" id="pf-' + x[0] + '" data-p="' + x[0]
+          + '" inputmode="decimal" step="' + x[6] + '" min="' + x[4] + '" max="' + x[5]
+          + '" value="' + p[x[0]] + '"><em>' + esc(x[3]) + '</em></span></label>';
       });
-      html += '</div></div>';
+      html += '</div></fieldset>';
     });
 
     html += '<div class="params-actions">'
       + '<button type="button" class="params-reset" id="params-reset">Revenir aux hypothèses d’origine</button>'
-      + '</div></div></div>';
+      + '</div></div></div>'
+      /* sur papier seulement : sans lui, un PDF exporté après modification ne dirait pas
+         sur quelles hypothèses il a été calculé */
+      + '<table class="params-print"><caption>Hypothèses retenues</caption>'
+      + '<tbody id="params-print-body"></tbody></table>';
     host.innerHTML = html;
 
     var toggle = document.getElementById('params-toggle');
@@ -839,10 +845,26 @@
       var n = modifies(p);
       var c = document.getElementById('params-count');
       if (c) {
-        c.textContent = n === 0 ? 'hypothèses d’origine'
+        c.textContent = n === 0 ? PARAMS.length + ' hypothèses, toutes modifiables'
           : (n === 1 ? '1 hypothèse modifiée' : n + ' hypothèses modifiées');
       }
       host.classList.toggle('params-custom', n > 0);
+
+      /* le récapitulatif qui part dans le PDF : chaque hypothèse, et lesquelles ont été
+         remplacées par un chiffre relevé sur le terrain */
+      var rows = '';
+      PARAMS.forEach(function (x) {
+        var s = SPEC[x[0]], val = p[x[0]];
+        var nombre = function (v) {
+          return s.unite === 'Ar' ? ar(v) : dec(v, 2).replace(/,00$/, '');
+        };
+        rows += '<tr' + (val !== s.def ? ' class="pp-mod"' : '') + '>'
+          + '<th>' + esc(s.lab) + '</th>'
+          + '<td>' + esc(nombre(val) + NB + s.unite) + '</td>'
+          + '<td>' + (val !== s.def ? esc('relevé — défaut ' + nombre(s.def)) : '') + '</td></tr>';
+      });
+      var corps = document.getElementById('params-print-body');
+      if (corps) corps.innerHTML = rows;
     }
 
     Array.prototype.forEach.call(host.querySelectorAll('input[data-p]'), function (input) {

@@ -331,19 +331,26 @@ def kpis(f, d):
 
 
 def risques(f):
+    """Contrat de business-plan.css : <b> pour le titre, puis .parade — la feuille
+       ajoute elle-même le préfixe « Parade — », qu'il ne faut donc pas réécrire."""
     out = []
     for titre, quoi, parade in f["risques"]:
-        out.append(f'<div class="risk"><div class="risk-h">{esc(titre)}</div>'
-                   f'<p>{quoi}</p>'
-                   f'<p class="risk-p"><b>La parade —</b> {parade}</p></div>')
+        out.append(f'<div class="risk"><b>{esc(titre)}</b>{quoi} '
+                   f'<span class="parade">{parade}</span></div>')
     return "".join(out)
 
 
 def phases(f):
+    """Contrat : .when pour le moment, <h4> pour ce qu'on y fait."""
     out = ['<div class="phases">']
     for quand, quoi in f["phases"]:
-        out.append(f'<div class="phase"><div class="phase-q">{esc(quand)}</div>'
-                   f'<p>{quoi}</p></div>')
+        titre, sep, suite = quoi.partition(". ")
+        # sans séparateur, partition renvoie la phrase entière : elle porte déjà son point
+        if sep:
+            titre += "."
+        out.append(f'<div class="phase"><div class="when">{esc(quand)}</div>'
+                   f'<h4>{titre}</h4>'
+                   + (f'<p>{suite}</p>' if suite else "") + '</div>')
     out.append("</div>")
     return "".join(out)
 

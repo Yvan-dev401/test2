@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="favicon.png">
+  <link rel="stylesheet" href="business-plan.css">
+  <title>Produire ici ce que Madagascar importe — cinq business, quatre paliers de capital</title>
+  <style>
+    :root {
+      --accent: #15803d;
+      --accent-dark: #166534;
+      --accent-soft: #f0fdf4;
+      --accent-line: #bbf7d0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <div class="topbar">
+      <a href="index.html" class="back">← Accueil</a>
+      <button type="button" class="export" id="pdf">🖨️ Imprimer / Exporter en PDF</button>
+      <noscript>
+        <style>
+          .export {
+            display: none
+          }
+        </style>
+        <span class="back">Ctrl + P pour imprimer ou enregistrer en PDF</span>
+      </noscript>
+    </div>
+
+    <div class="print-head">
+      <strong>Produire ici ce que Madagascar importe</strong> — quatre paliers de capital, cinq
+      business chiffrés, dix pistes · business-produire-local.html
+    </div>
+
+    <div class="hdr">
+      <span class="eyebrow">Substitution aux importations · du comptoir à l'usine</span>
+      <h1>Produire ici ce que Madagascar achète dehors</h1>
+      <p>Aliko Dangote n'a pas inventé le ciment. Il a remarqué qu'au Nigeria il était
+        <strong>rare, cher et importé</strong> — puis il a fini par le produire sur place. La
+        phrase qui résume tout : <strong>produire en Afrique ce que l'Afrique importe.</strong>
+        Cette page applique la même grille à Madagascar : ce que le pays achète dehors, ce que
+        coûterait de le fabriquer ici, et l'échelle de capital qu'il faut gravir pour y arriver —
+        depuis le dépôt à dix millions d'ariary jusqu'à l'unité de production.</p>
+    </div>
+
+    <div class="params" id="params"></div>
+
+    <div class="toc">
+      <a href="#cadre">Ce que cette page sait</a>
+      <a href="#dangote">La leçon Dangote</a>
+      <a href="#imports">Ce qu'on achète dehors</a>
+      <a href="#plancher">Le prix plancher de l'import</a>
+      <a href="#grille">Les cinq questions</a>
+      <a href="#paliers">Les quatre paliers</a>
+      <a href="#comparer">Comparer</a>
+      <a href="#business">Les cinq business</a>
+      <a href="#pistes">Dix pistes de plus</a>
+      <a href="#chaine">Remonter la chaîne</a>
+      <a href="#financement">Financement</a>
+      <a href="#erreurs">Les erreurs</a>
+      <a href="#lexique">Lexique</a>
+    </div>
+
+    <!-- ═══════════════════ 01 CADRE ═══════════════════ -->
+    <section class="sec" id="cadre">
+      <div class="sec-h">
+        <div class="sec-n">01</div>
+        <h2>Ce que cette page sait, et ce qu'elle ne sait pas</h2>
+      </div>
+
+      <div class="warn">
+        <div class="block-h">Aucun chiffre de cette page n'est un relevé</div>
+        <p>Ce document n'a pas été écrit devant les statistiques de la douane ni devant les prix
+          d'un fournisseur. Personne ici ne connaît le prix du sac de ciment à Toamasina cette
+          semaine, ni le droit de douane exact sur l'engrais, ni ce que ton électricien facturera
+          le raccordement. <b>Inventer ces chiffres et les présenter comme des faits rendrait tout
+            le reste suspect</b> — et c'est le genre de document qu'on finit par montrer à un
+          banquier.</p>
+        <p>Alors la page fait l'inverse : elle pose ses hypothèses <b>à découvert</b>, en haut, dans
+          le panneau « Tes chiffres ». Quinze valeurs, toutes modifiables. Tu relèves les vrais
+          prix chez ton fournisseur, à la douane, au centre fiscal ; tu les saisis ; et
+          <b>l'intégralité du document se recalcule</b> — les tableaux, les totaux, les seuils, les
+          schémas.</p>
+      </div>
+
+      <div class="block">
+        <div class="block-h">Ce qui est solide</div>
+        <p>La <b>structure</b>. Que Madagascar cultive le riz et en importe pourtant chaque année.
+          Que l'engrais minéral vienne presque entièrement de l'extérieur. Que tout producteur
+          local achète son emballage à l'étranger. Que le fret et la douane ajoutent une part
+          considérable au prix de n'importe quel produit débarqué. Ces faits-là ne bougent pas d'une
+          semaine à l'autre, et ce sont eux qui portent le raisonnement.</p>
+        <p>Ce qui est fragile, ce sont les <b>montants en ariary</b>. Ils sont des hypothèses de
+          travail, affichées comme telles, et faites pour être remplacées.</p>
+      </div>
+
+      <div class="block">
+        <div class="block-h">Ce que cette page ne traite pas</div>
+        <ul>
+          <li><b>Le statut juridique et la fiscalité.</b> Entreprise individuelle, SARL, régime
+            réel ou simplifié, assujettissement à la <a href="#lex-droits" class="lex"
+              data-lex="droits">TVA</a> : cela dépend de ton chiffre d'affaires et se décide avec
+            un comptable, pas avec une page web. Les lignes « statut », « agrément » et « analyses »
+            des investissements portent la mention <em>estimation</em> pour cette raison.</li>
+          <li><b>Les autorisations sectorielles.</b> Un engrais s'homologue, un aliment pour animaux
+            se déclare, une denrée alimentaire demande un agrément sanitaire. Les délais et les
+            coûts se demandent au ministère concerné, en personne.</li>
+          <li><b>Le foncier.</b> Rien n'est plus long ni plus risqué à Madagascar qu'un terrain mal
+            titré. Aucun montant de cette page ne couvre un litige foncier.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ 02 DANGOTE ═══════════════════ -->
+    <section class="sec" id="dangote">
+      <div class="sec-h">
+        <div class="sec-n">02</div>
+        <h2>La leçon Dangote — ce qui se transpose, et ce qui ne se transpose pas</h2>
+      </div>
+
+      <p>L'histoire est belle et elle circule beaucoup, souvent déformée. Ce qui compte n'est pas
+        la somme de départ mais <b>l'ordre des étapes</b>, et cet ordre est reproductible.</p>
+
+      <div class="fig"><div class="fig-chart"><svg viewBox="0 0 460 274" role="img"><line x1="26" y1="18" x2="26" y2="248" stroke="#e5e7eb" stroke-width="2"/><circle cx="26" cy="18" r="11" fill="#b45309"/><text x="26" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="white">1</text><text x="48" y="17" font-size="11.5" font-weight="700" fill="#111827">Fin des années 1970 — le négoce</text><text x="48" y="31" font-size="10" fill="#6b7280">Un prêt familial, des camions, du ciment importé revendu au détail.</text><circle cx="26" cy="70" r="11" fill="#0f766e"/><text x="26" y="74" text-anchor="middle" font-size="11" font-weight="700" fill="white">2</text><text x="48" y="69" font-size="11.5" font-weight="700" fill="#111827">Les années 1980 — l’échelle</text><text x="48" y="83" font-size="10" fill="#6b7280">Sucre, farine, sel : il élargit ce qu’il distribue et accumule du capital.</text><circle cx="26" cy="122" r="11" fill="#4338ca"/><text x="26" y="126" text-anchor="middle" font-size="11" font-weight="700" fill="white">3</text><text x="48" y="121" font-size="11.5" font-weight="700" fill="#111827">Les années 1990 — le basculement</text><text x="48" y="135" font-size="10" fill="#6b7280">Il arrête de revendre ce qu’il importe et construit ses propres unités.</text><circle cx="26" cy="174" r="11" fill="#be123c"/><text x="26" y="178" text-anchor="middle" font-size="11" font-weight="700" fill="white">4</text><text x="48" y="173" font-size="11.5" font-weight="700" fill="#111827">Les années 2000 — le ciment</text><text x="48" y="187" font-size="10" fill="#6b7280">Cimenteries au Nigeria, puis dans une quinzaine de pays africains.</text><circle cx="26" cy="226" r="11" fill="#a16207"/><text x="26" y="230" text-anchor="middle" font-size="11" font-weight="700" fill="white">5</text><text x="48" y="225" font-size="11.5" font-weight="700" fill="#111827">Aujourd’hui — la position</text><text x="48" y="239" font-size="10" fill="#6b7280">Premier producteur de ciment du continent : il fixe le prix au lieu de le subir.</text></svg></div><p class="fig-cap"><b>Le parcours, et non le montant.</b> Les sommes de départ qui circulent sur les réseaux se contredisent d’une version à l’autre, et la plupart viennent d’une conversion malmenée de nairas des années 1970 : elles ne valent pas la peine d’être répétées. Ce qui est solide, c’est la <b>forme</b> — revendre d’abord ce qui est importé, apprendre le marché en le faisant, puis remonter jusqu’à produire la matière. C’est reproductible ; un chiffre de départ ne l’est pas.</p></div>
+
+      <div class="key">
+        <div class="block-h">Les trois choses qui se transposent</div>
+        <ul>
+          <li><b>Il a commencé par revendre ce qu'il importait.</b> Pas par construire. Le négoce
+            lui a appris qui achète, quand, à quel prix — un renseignement que personne ne vend et
+            qu'aucune étude de marché ne remplace.</li>
+          <li><b>Il a choisi un produit lourd, banal et très importé.</b> Le ciment est cher à
+            transporter précisément parce qu'il est pondéreux : le fret et la douane y pèsent lourd,
+            et c'est cette lourdeur qui fait la place du producteur local. Un produit léger et cher
+            ne laisse pas cet espace.</li>
+          <li><b>Il est remonté vers la matière.</b> Distribuer, puis conditionner, puis
+            transformer, puis produire — dans cet ordre, chaque étage finançant le suivant.</li>
+        </ul>
+      </div>
+
+      <div class="warn">
+        <div class="block-h">Et ce qui ne se transpose pas</div>
+        <p>Le Nigeria compte plus de deux cents millions d'habitants et du pétrole. Madagascar a un
+          marché intérieur bien plus étroit et une logistique intérieure difficile — ce qui ferme
+          certaines portes et en ouvre d'autres : <b>plus le transport intérieur est cher, plus
+            produire près du client devient un avantage</b>. Une unité régionale qui sert sa
+          province peut battre un géant installé à l'autre bout de l'île.</p>
+        <p>Les circonstances politiques du récit ne se transposent pas non plus, et il n'y a rien
+          à en tirer d'utile.</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ 03 IMPORTS ═══════════════════ -->
+    <section class="sec page-break" id="imports">
+      <div class="sec-h">
+        <div class="sec-n">03</div>
+        <h2>Ce que Madagascar achète dehors</h2>
+      </div>
+
+      <p>Toute la démarche commence par une liste : qu'est-ce qui entre dans le pays ? Puis par un
+        tri, car tout ne se substitue pas.</p>
+
+      <div class="fig"><div class="fig-chart"><svg viewBox="0 0 460 338" role="img" aria-label="Ce que Madagascar achète à l’étranger, en parts relatives"><text x="0" y="24" font-size="10.5" fill="#111827">Produits pétroliers</text><rect x="158" y="11" width="192.0" height="18" fill="#9ca3af" rx="2"/><text x="357.0" y="24" font-size="9.5" fill="#6b7280">incompressible</text><text x="0" y="54" font-size="10.5" fill="#111827">Riz et céréales</text><rect x="158" y="41" width="119.0" height="18" fill="#15803d" rx="2"/><text x="284.0" y="54" font-size="9.5" fill="#6b7280">attaquable</text><text x="0" y="84" font-size="10.5" fill="#111827">Machines et véhicules</text><rect x="158" y="71" width="111.4" height="18" fill="#9ca3af" rx="2"/><text x="276.4" y="84" font-size="9.5" fill="#6b7280">hors de portée</text><text x="0" y="114" font-size="10.5" fill="#111827">Médicaments</text><rect x="158" y="101" width="84.5" height="18" fill="#b45309" rx="2"/><text x="249.5" y="114" font-size="9.5" fill="#6b7280">très encadré</text><text x="0" y="144" font-size="10.5" fill="#111827">Huiles alimentaires</text><rect x="158" y="131" width="73.0" height="18" fill="#15803d" rx="2"/><text x="238.0" y="144" font-size="9.5" fill="#6b7280">attaquable</text><text x="0" y="174" font-size="10.5" fill="#111827">Engrais et intrants</text><rect x="158" y="161" width="63.4" height="18" fill="#15803d" rx="2"/><text x="228.4" y="174" font-size="9.5" fill="#6b7280">attaquable</text><text x="0" y="204" font-size="10.5" fill="#111827">Fer, acier, ciment</text><rect x="158" y="191" width="59.5" height="18" fill="#0f766e" rx="2"/><text x="224.5" y="204" font-size="9.5" fill="#6b7280">en partie</text><text x="0" y="234" font-size="10.5" fill="#111827">Plastiques et emballages</text><rect x="158" y="221" width="53.8" height="18" fill="#15803d" rx="2"/><text x="218.8" y="234" font-size="9.5" fill="#6b7280">attaquable</text><text x="0" y="264" font-size="10.5" fill="#111827">Sucre</text><rect x="158" y="251" width="42.2" height="18" fill="#15803d" rx="2"/><text x="207.2" y="264" font-size="9.5" fill="#6b7280">attaquable</text><text x="0" y="294" font-size="10.5" fill="#111827">Lait et produits laitiers</text><rect x="158" y="281" width="34.6" height="18" fill="#15803d" rx="2"/><text x="199.6" y="294" font-size="9.5" fill="#6b7280">attaquable</text><text x="0" y="324" font-size="10.5" fill="#111827">Friperie et textile</text><rect x="158" y="311" width="28.8" height="18" fill="#15803d" rx="2"/><text x="193.8" y="324" font-size="9.5" fill="#6b7280">attaquable</text></svg></div><p class="fig-cap"><b>Les familles de produits que Madagascar achète dehors</b>, en parts relatives et non en valeur — cette page ne dispose pas des relevés de la douane et ne fera pas semblant. Ce qui compte ici est le <b>tri</b> : le pétrole et les machines ne se substituent pas, le médicament est trop encadré pour ce document, mais le riz, l’huile, l’engrais, l’emballage, le sucre et le lait sont à portée d’un atelier ou d’une petite usine. Vérifie l’ordre auprès de l’INSTAT avant d’engager quoi que ce soit.</p></div>
+
+      <div class="block">
+        <div class="block-h">Le tri, en trois tas</div>
+        <ul>
+          <li><b>Ce qu'on ne remplacera pas.</b> Les produits pétroliers, les machines, les
+            véhicules, l'électronique. Ils demandent des gisements ou des industries lourdes qui
+            n'existent pas ici, et il n'y a aucune honte à les importer.</li>
+          <li><b>Ce qui est trop encadré pour ce document.</b> Le médicament d'abord : la demande
+            est là, la barrière réglementaire aussi, et elle est légitime.</li>
+          <li><b>Ce qui est à portée.</b> Le riz, l'huile alimentaire, l'engrais, l'emballage, le
+            sucre, le lait, l'aliment du bétail, le savon, les matériaux de construction. Tous
+            partagent trois traits : <b>la matière première est ici</b>, <b>le produit est lourd ou
+              encombrant</b> donc coûteux à transporter, et <b>le procédé est accessible</b> à un
+            atelier bien équipé.</li>
+        </ul>
+      </div>
+
+      <div class="note">
+        <p><b>Où vérifier.</b> L'INSTAT publie les comptes du commerce extérieur ; la direction
+          générale des douanes détaille les entrées par position tarifaire ; les chambres de
+          commerce connaissent les importateurs de chaque famille de produits. Ces trois sources
+          diront en une matinée ce que cette page ne peut qu'ordonner.</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ 04 PLANCHER ═══════════════════ -->
+    <section class="sec" id="plancher">
+      <div class="sec-h">
+        <div class="sec-n">04</div>
+        <h2>Le prix plancher de l'import, et l'espace qu'il te laisse</h2>
+      </div>
+
+      <p>Voici le calcul qui décide de tout. Un produit importé ne coûte pas son prix d'usine : il
+        coûte son prix d'usine <b>plus tout ce que le voyage lui ajoute</b>. Le transport et
+        l'assurance en font la <a href="#lex-valeur-caf" class="lex" data-lex="valeur-caf">valeur
+          CAF</a>, sur laquelle la douane calcule ; une fois les taxes payées, l'importateur
+        connaît son <a href="#lex-prix-revient" class="lex" data-lex="prix-revient">prix de
+          revient</a>. Et ce supplément, le producteur local ne le paie pas.</p>
+
+      <div class="fig"><div class="fig-chart" data-fig="cascade"><svg viewBox="0 0 460 300" role="img" aria-label="Décomposition du prix d’un sac d’engrais importé"><rect x="22.8" y="153.4" width="44.4" height="88.6" fill="#15803d" rx="2"/><text x="45.0" y="148.4" text-anchor="middle" font-size="9.5" font-weight="700" fill="#111827">99 000</text><text x="45.0" y="257" text-anchor="middle" font-size="9.5" fill="#6b7280">Prix</text><text x="45.0" y="268" text-anchor="middle" font-size="9.5" fill="#6b7280">usine</text><rect x="96.8" y="142.8" width="44.4" height="10.6" fill="#b45309" rx="2"/><text x="119.0" y="137.8" text-anchor="middle" font-size="9.5" font-weight="700" fill="#111827">11 880</text><text x="119.0" y="257" text-anchor="middle" font-size="9.5" fill="#6b7280">Fret</text><rect x="170.8" y="123.0" width="44.4" height="19.8" fill="#b45309" rx="2"/><text x="193.0" y="118.0" text-anchor="middle" font-size="9.5" font-weight="700" fill="#111827">22 176</text><text x="193.0" y="257" text-anchor="middle" font-size="9.5" fill="#6b7280">Douane</text><rect x="244.8" y="99.1" width="44.4" height="23.8" fill="#b45309" rx="2"/><text x="267.0" y="94.1" text-anchor="middle" font-size="9.5" font-weight="700" fill="#111827">26 611</text><text x="267.0" y="257" text-anchor="middle" font-size="9.5" fill="#6b7280">TVA</text><rect x="318.8" y="49.1" width="44.4" height="50.0" fill="#b45309" rx="2"/><text x="341.0" y="44.1" text-anchor="middle" font-size="9.5" font-weight="700" fill="#111827">55 883</text><text x="341.0" y="257" text-anchor="middle" font-size="9.5" fill="#6b7280">Marge</text><text x="341.0" y="268" text-anchor="middle" font-size="9.5" fill="#6b7280">réseau</text><rect x="392.8" y="49.1" width="44.4" height="192.9" fill="#111827" rx="2"/><text x="415.0" y="44.1" text-anchor="middle" font-size="9.5" font-weight="700" fill="#111827">215 550</text><text x="415.0" y="257" text-anchor="middle" font-size="9.5" fill="#6b7280">Prix</text><text x="415.0" y="268" text-anchor="middle" font-size="9.5" fill="#6b7280">au marché</text><line x1="8" y1="242" x2="452" y2="242" stroke="#e5e7eb" stroke-width="1.5"/><text x="8" y="14" font-size="10" fill="#6b7280">Un sac d’engrais de 50 kg, en ariary</text></svg></div><p class="fig-cap"><b>Un sac d’engrais de 50 kg, de l’usine étrangère au marché.</b> Parti à <span data-v="fobAr">99 000</span> Ar, il arrive à <span data-v="rayon">215 550</span> Ar — soit <b><span data-v="coefImport">2,18</span> fois</b> son prix de départ. Le producteur local ne paie ni le fret ni les droits de douane : <span data-v="evite">34 056</span> Ar par sac, <b><span data-v="evitePct">16 %</span> du prix final</b>, acquis avant d’avoir produit la moindre unité. C’est dans cet espace que tout ce document travaille. La TVA, elle, dépend de ton régime fiscal : à vérifier auprès du centre fiscal, c’est l’une des hypothèses modifiables.</p></div>
+
+      <div class="key">
+        <div class="block-h">Ce que dit ce schéma</div>
+        <p>Entre l'usine étrangère et le marché, le prix est multiplié par
+          <span data-v="coefImport">2,18</span> — c'est le
+          <a href="#lex-coefficient" class="lex" data-lex="coefficient">coefficient</a> de
+          l'import. Une partie de cet écart est la marge de
+          l'importateur et de son réseau — elle se mérite, ils prennent un risque et immobilisent
+          de l'argent. Mais <b><span data-v="evitePct">16 %</span> du prix final</b> n'est ni de la
+          marchandise ni de la marge : c'est du transport international et de la douane, soit
+          <span data-v="evite">34 056</span> Ar par sac.</p>
+        <p>Ce montant est ton <b>avance de départ</b>. Tu l'as avant d'avoir produit la moindre
+          unité, simplement parce que tu es ici. Tout le travail consiste ensuite à ne pas la
+          dilapider en inefficacité.</p>
+      </div>
+
+      <div class="warn">
+        <div class="block-h">Le piège de ce raisonnement</div>
+        <p>Cette avance n'est pas un bénéfice acquis. L'importateur, lui, achète à une usine qui
+          produit un million de sacs par mois avec une électricité fiable. Toi, tu produiras mille
+          sacs avec un groupe électrogène. <b>Son coût de production est plus bas que le tien</b>,
+          et parfois de beaucoup.</p>
+        <p>La substitution ne gagne donc pas partout : elle gagne là où <b>le transport et la
+            douane pèsent plus lourd que ton handicap d'échelle</b>. C'est exactement pourquoi ça
+          marche sur le ciment, l'engrais, l'aliment du bétail et le riz — des produits pondéreux,
+          à faible valeur au kilo — et pourquoi ça échoue sur l'électronique.</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ 05 GRILLE ═══════════════════ -->
+    <section class="sec" id="grille">
+      <div class="sec-h">
+        <div class="sec-n">05</div>
+        <h2>Les cinq questions à poser devant n'importe quel produit importé</h2>
+      </div>
+
+      <div class="fig"><div class="fig-chart"><svg viewBox="0 0 460 286" role="img" aria-label="Les cinq questions avant de se lancer"><line x1="24" y1="18" x2="24" y2="256" stroke="#e5e7eb" stroke-width="2"/><circle cx="24" cy="20" r="11" fill="#15803d"/><text x="24" y="24" text-anchor="middle" font-size="11" font-weight="700" fill="white">1</text><text x="46" y="19" font-size="11.5" font-weight="700" fill="#111827">Est-il vraiment importé, et en quantité ?</text><text x="46" y="34" font-size="10" fill="#6b7280">Si personne ne l’importe, il n’y a pas de marché à reprendre.</text><circle cx="24" cy="74" r="11" fill="#15803d"/><text x="24" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="white">2</text><text x="46" y="73" font-size="11.5" font-weight="700" fill="#111827">La matière première est-elle ici ?</text><text x="46" y="88" font-size="10" fill="#6b7280">Sinon tu importes la matière : tu déplaces le problème, tu ne le résous pas.</text><circle cx="24" cy="128" r="11" fill="#15803d"/><text x="24" y="132" text-anchor="middle" font-size="11" font-weight="700" fill="white">3</text><text x="46" y="127" font-size="11.5" font-weight="700" fill="#111827">Le fret et la douane pèsent-ils lourd ?</text><text x="46" y="142" font-size="10" fill="#6b7280">C’est ton avance de départ. Un produit léger et cher ne t’en donne aucune.</text><circle cx="24" cy="182" r="11" fill="#15803d"/><text x="24" y="186" text-anchor="middle" font-size="11" font-weight="700" fill="white">4</text><text x="46" y="181" font-size="11.5" font-weight="700" fill="#111827">Sais-tu le faire à qualité constante ?</text><text x="46" y="196" font-size="10" fill="#6b7280">Moins cher ne suffit jamais. Irrégulier, le client revient à l’import.</text><circle cx="24" cy="236" r="11" fill="#15803d"/><text x="24" y="240" text-anchor="middle" font-size="11" font-weight="700" fill="white">5</text><text x="46" y="235" font-size="11.5" font-weight="700" fill="#111827">Peux-tu tenir le prix si le cours baisse ?</text><text x="46" y="250" font-size="10" fill="#6b7280">Le jour où l’import casse ses prix, il faut pouvoir encaisser.</text><text x="6" y="278" font-size="9.5" fill="#6b7280">Cinq oui : c’est une piste. Un seul non : passe au produit suivant.</text></svg></div><p class="fig-cap"><b>La grille à passer avant de s’enthousiasmer.</b> La question 2 élimine le plus de fausses bonnes idées : assembler ici des composants importés, ce n’est pas substituer un import, c’est en créer un autre. Et la question 5 est celle qu’on oublie — le jour où l’importateur casse ses prix pour te sortir du marché, il faut pouvoir tenir.</p></div>
+
+      <div class="note">
+        <p>Applique-la à une idée qui te vient : elle en élimine la plupart en deux minutes, et
+          c'est le meilleur usage qu'on puisse en faire. Les cinq business qui suivent passent les
+          cinq questions — c'est le seul critère qui les a fait retenir.</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ 06 PALIERS ═══════════════════ -->
+    <section class="sec page-break" id="paliers">
+      <div class="sec-h">
+        <div class="sec-n">06</div>
+        <h2>Les quatre paliers : on ne saute pas de marche</h2>
+      </div>
+
+      <p>C'est la partie la plus utile du document, et la plus ignorée. On regarde une usine et on
+        se dit « il faudrait des milliards » — puis on ne fait rien. Or personne ne démarre en
+        haut : <b>chaque marche finance la suivante</b>.</p>
+
+      <div class="fig"><div class="fig-chart"><svg viewBox="0 0 460 300" role="img" aria-label="Les quatre paliers de capital"><rect x="6.0" y="194.0" width="105.5" height="60.0" fill="#15803d" opacity="0.12" rx="3"/><rect x="6.0" y="194.0" width="105.5" height="3" fill="#15803d" rx="1.5"/><text x="58.8" y="214.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#15803d">Revendre</text><text x="58.8" y="229.0" text-anchor="middle" font-size="9.5" fill="#6b7280">3 M – 15 M</text><circle cx="58.8" cy="270" r="10" fill="#15803d"/><text x="58.8" y="274" text-anchor="middle" font-size="10.5" font-weight="700" fill="white">1</text><rect x="117.5" y="134.0" width="105.5" height="120.0" fill="#0f766e" opacity="0.12" rx="3"/><rect x="117.5" y="134.0" width="105.5" height="3" fill="#0f766e" rx="1.5"/><text x="170.2" y="154.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#0f766e">Conditionner</text><text x="170.2" y="169.0" text-anchor="middle" font-size="9.5" fill="#6b7280">15 M – 80 M</text><circle cx="170.2" cy="270" r="10" fill="#0f766e"/><text x="170.2" y="274" text-anchor="middle" font-size="10.5" font-weight="700" fill="white">2</text><rect x="229.0" y="74.0" width="105.5" height="180.0" fill="#4338ca" opacity="0.12" rx="3"/><rect x="229.0" y="74.0" width="105.5" height="3" fill="#4338ca" rx="1.5"/><text x="281.8" y="94.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#4338ca">Transformer</text><text x="281.8" y="109.0" text-anchor="middle" font-size="9.5" fill="#6b7280">80 M – 300 M</text><circle cx="281.8" cy="270" r="10" fill="#4338ca"/><text x="281.8" y="274" text-anchor="middle" font-size="10.5" font-weight="700" fill="white">3</text><rect x="340.5" y="14.0" width="105.5" height="240.0" fill="#b45309" opacity="0.12" rx="3"/><rect x="340.5" y="14.0" width="105.5" height="3" fill="#b45309" rx="1.5"/><text x="393.2" y="34.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#b45309">Produire la matière</text><text x="393.2" y="49.0" text-anchor="middle" font-size="9.5" fill="#6b7280">300 M – 2 Md</text><circle cx="393.2" cy="270" r="10" fill="#b45309"/><text x="393.2" y="274" text-anchor="middle" font-size="10.5" font-weight="700" fill="white">4</text><line x1="6" y1="254" x2="452" y2="254" stroke="#e5e7eb" stroke-width="1.5"/><text x="6" y="292" font-size="9.5" fill="#6b7280">La marge monte à chaque marche — et le capital aussi</text></svg></div><p class="fig-cap"><b>Chaque marche finance la suivante.</b> C’est le seul chemin qu’a réellement emprunté Dangote, et c’est celui que ce document décrit : on ne saute pas du palier 1 au palier 4. On revend, on apprend qui achète quoi, on accumule, puis on produit.</p></div>
+
+      <div class="table-wrap"><table class="tbl"><thead><tr><th>Palier</th><th>Le geste</th><th class="num">Capital</th><th>Ce que tu y gagnes</th></tr></thead><tbody><tr><td><b>1</b></td><td><b>Revendre</b><br><span class="muted">Tu achètes ce qui est importé et tu le revends. Aucune machine, aucun procédé : du stock, un local, et la connaissance du terrain.</span></td><td class="num">3 M – 15 M Ar</td><td>Tu découvres qui achète quoi, quand, et à quel prix — le renseignement que personne ne peut te vendre.</td></tr><tr><td><b>2</b></td><td><b>Conditionner</b><br><span class="muted">Tu transformes peu mais tu transformes : tu composes, tu ensaches, tu mets en forme sous ta marque.</span></td><td class="num">15 M – 80 M Ar</td><td>La marge cesse d’être une commission et devient une vraie valeur ajoutée.</td></tr><tr><td><b>3</b></td><td><b>Transformer</b><br><span class="muted">Un procédé, des machines, une équipe, une formule. Le produit sortant n’a plus la forme du produit entrant.</span></td><td class="num">80 M – 300 M Ar</td><td>Tu n’es plus substituable : le client revient pour ce que toi seul fais dans la zone.</td></tr><tr><td><b>4</b></td><td><b>Produire la matière</b><br><span class="muted">Tu remontes jusqu’à la matière première elle-même. C’est le barreau de Dangote, celui des cimenteries.</span></td><td class="num">300 M – 2 Md Ar</td><td>Tu fixes le prix au lieu de le subir, et tout ce qui est en aval dépend de toi.</td></tr></tbody></table></div>
+
+      <div class="key">
+        <div class="block-h">Ce que change chaque marche</div>
+        <p>En montant, trois choses se produisent en même temps. <b>La marge s'élargit</b>, parce
+          qu'on vend un travail et plus une commission. <b>Le capital immobilisé explose</b>, et
+          avec lui le temps qu'il faut pour le récupérer. Et <b>on devient plus difficile à
+            remplacer</b> : un revendeur se contourne en une semaine, une unité de production qui
+          fournit toute une province ne se contourne pas.</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ 07 COMPARER ═══════════════════ -->
+    <section class="sec page-break" id="comparer">
+      <div class="sec-h">
+        <div class="sec-n">07</div>
+        <h2>Comparer les cinq business</h2>
+      </div>
+
+      <div class="table-wrap"><table class="tbl"><thead><tr><th>Business</th><th>Palier</th><th class="num">Investissement</th><th class="num"><a href="#lex-seuil" class="lex" data-lex="seuil">Seuil</a></th><th class="num"><a href="#lex-point-mort" class="lex" data-lex="point-mort">Retour</a></th><th class="num"><a href="#lex-plafond" class="lex" data-lex="plafond">Au plafond</a></th><th class="num"><a href="#lex-rendement" class="lex" data-lex="rendement">Rendement / an</a></th></tr></thead><tbody><tr><td><b>Dépôt d’intrants</b></td><td>1 — revendre</td><td class="num"><span data-v="f1_inv">9 858 510</span> Ar</td><td class="num"><span data-v="f1_seuil">29</span> sacs / mois</td><td class="num"><span data-v="f1_retour">8 mois</span></td><td class="num"><span data-v="f1_plafond">2 255 920</span> Ar</td><td class="num"><span data-v="f1_rendement">275 %</span></td></tr><tr><td><b>Engrais organique</b></td><td>2 — conditionner</td><td class="num"><span data-v="f2_inv">69 000 000</span> Ar</td><td class="num"><span data-v="f2_seuil">142</span> sacs / mois</td><td class="num"><span data-v="f2_retour">15 mois</span></td><td class="num"><span data-v="f2_plafond">7 051 742</span> Ar</td><td class="num"><span data-v="f2_rendement">125 %</span></td></tr><tr><td><b>Parpaings et pavés</b></td><td>2 — conditionner</td><td class="num"><span data-v="f3_inv">72 040 000</span> Ar</td><td class="num"><span data-v="f3_seuil">11 120</span> parpaings / mois</td><td class="num"><span data-v="f3_retour">3,3 ans</span></td><td class="num"><span data-v="f3_plafond">2 305 000</span> Ar</td><td class="num"><span data-v="f3_rendement">40 %</span></td></tr><tr><td><b>Provende</b></td><td>3 — transformer</td><td class="num"><span data-v="f4_inv">190 000 000</span> Ar</td><td class="num"><span data-v="f4_seuil">346</span> sacs / mois</td><td class="num"><span data-v="f4_retour">1,8 ans</span></td><td class="num"><span data-v="f4_plafond">11 505 000</span> Ar</td><td class="num"><span data-v="f4_rendement">75 %</span></td></tr><tr><td><b>Rizerie</b></td><td>4 — produire la matière</td><td class="num"><span data-v="f5_inv">727 000 000</span> Ar</td><td class="num"><span data-v="f5_seuil">2 019</span> sacs de 25 kg / mois</td><td class="num"><span data-v="f5_retour">2,3 ans</span></td><td class="num"><span data-v="f5_plafond">34 590 000</span> Ar</td><td class="num"><span data-v="f5_rendement">55 %</span></td></tr></tbody></table></div>
+
+      <div class="fig"><div class="fig-chart" data-fig="capital"><svg viewBox="0 0 460 178" role="img" aria-label="Capital de départ de chaque business"><text x="0" y="25" font-size="10.5" fill="#111827">Dépôt d’intrants</text><rect x="158" y="12" width="2.8" height="18" fill="#15803d" rx="2"/><text x="167.8" y="25" font-size="10" font-weight="700" fill="#111827">9,9 M Ar</text><text x="0" y="59" font-size="10.5" fill="#111827">Engrais organique</text><rect x="158" y="46" width="19.6" height="18" fill="#0f766e" rx="2"/><text x="184.6" y="59" font-size="10" font-weight="700" fill="#111827">69 M Ar</text><text x="0" y="93" font-size="10.5" fill="#111827">Parpaings et pavés</text><rect x="158" y="80" width="20.4" height="18" fill="#4338ca" rx="2"/><text x="185.4" y="93" font-size="10" font-weight="700" fill="#111827">72 M Ar</text><text x="0" y="127" font-size="10.5" fill="#111827">Provende</text><rect x="158" y="114" width="53.8" height="18" fill="#b45309" rx="2"/><text x="218.8" y="127" font-size="10" font-weight="700" fill="#111827">190 M Ar</text><text x="0" y="161" font-size="10.5" fill="#111827">Rizerie</text><rect x="158" y="148" width="206.0" height="18" fill="#be123c" rx="2"/><text x="371.0" y="161" font-size="10" font-weight="700" fill="#111827">727 M Ar</text></svg></div><p class="fig-cap"><b>Ce que chaque business immobilise avant le premier ariary encaissé.</b> De <span data-v="investMin">9,9 M</span> Ar à <span data-v="investMax">727 M</span> Ar : un rapport de plus de soixante entre le premier barreau et le dernier. Ces montants suivent tes hypothèses — change le prix du ciment ou du paddy et les barres se redessinent.</p></div>
+
+      <div class="fig"><div class="fig-chart" data-fig="marges"><svg viewBox="0 0 460 178" role="img" aria-label="Part de la marge dans le prix de vente"><text x="0" y="25" font-size="10.5" fill="#111827">Dépôt d’intrants</text><rect x="158" y="12" width="206" height="18" fill="#f3f4f6" rx="2"/><rect x="158" y="12" width="26.4" height="18" fill="#15803d" rx="2"/><text x="371" y="25" font-size="10" font-weight="700" fill="#111827">13 %</text><text x="0" y="59" font-size="10.5" fill="#111827">Engrais organique</text><rect x="158" y="46" width="206" height="18" fill="#f3f4f6" rx="2"/><rect x="158" y="46" width="80.5" height="18" fill="#0f766e" rx="2"/><text x="371" y="59" font-size="10" font-weight="700" fill="#111827">39 %</text><text x="0" y="93" font-size="10.5" fill="#111827">Parpaings et pavés</text><rect x="158" y="80" width="206" height="18" fill="#f3f4f6" rx="2"/><rect x="158" y="80" width="34.5" height="18" fill="#4338ca" rx="2"/><text x="371" y="93" font-size="10" font-weight="700" fill="#111827">17 %</text><text x="0" y="127" font-size="10.5" fill="#111827">Provende</text><rect x="158" y="114" width="206" height="18" fill="#f3f4f6" rx="2"/><rect x="158" y="114" width="25.9" height="18" fill="#b45309" rx="2"/><text x="371" y="127" font-size="10" font-weight="700" fill="#111827">13 %</text><text x="0" y="161" font-size="10.5" fill="#111827">Rizerie</text><rect x="158" y="148" width="206" height="18" fill="#f3f4f6" rx="2"/><rect x="158" y="148" width="25.2" height="18" fill="#be123c" rx="2"/><text x="371" y="161" font-size="10" font-weight="700" fill="#111827">12 %</text></svg></div><p class="fig-cap"><b>La part de la marge dans le prix de vente.</b> Elle dit à quel point l’affaire supporte un imprévu. L’engrais organique respire à <span data-v="f2_margePct">39 %</span> ; les parpaings vivent à <span data-v="f3_margePct">17 %</span>, ce qui veut dire qu’une hausse du ciment de dix pour cent efface la moitié du bénéfice. Ce n’est pas un défaut du métier : c’est ce qui oblige à faire du volume et à tenir ses coûts au gramme.</p></div>
+
+      <div class="fig"><div class="fig-chart"><svg viewBox="0 0 460 300" role="img" aria-label="Capital engagé et rendement annuel"><rect x="46" y="16" width="400" height="244" fill="#f9fafb" stroke="#e5e7eb"/><line x1="146.0" y1="16" x2="146.0" y2="260" stroke="#e5e7eb" stroke-dasharray="3 4"/><line x1="46" y1="77.0" x2="446" y2="77.0" stroke="#e5e7eb" stroke-dasharray="3 4"/><line x1="246.0" y1="16" x2="246.0" y2="260" stroke="#e5e7eb" stroke-dasharray="3 4"/><line x1="46" y1="138.0" x2="446" y2="138.0" stroke="#e5e7eb" stroke-dasharray="3 4"/><line x1="346.0" y1="16" x2="346.0" y2="260" stroke="#e5e7eb" stroke-dasharray="3 4"/><line x1="46" y1="199.0" x2="446" y2="199.0" stroke="#e5e7eb" stroke-dasharray="3 4"/><circle cx="50.7" cy="47.8" r="7" fill="#15803d"/><text x="61.7" y="51.8" text-anchor="start" font-size="10" font-weight="600" fill="#111827">Dépôt d’intrants</text><circle cx="79.0" cy="165.2" r="7" fill="#0f766e"/><text x="90.0" y="169.2" text-anchor="start" font-size="10" font-weight="600" fill="#111827">Engrais organique</text><circle cx="80.5" cy="230.3" r="7" fill="#4338ca"/><text x="91.5" y="234.3" text-anchor="start" font-size="10" font-weight="600" fill="#111827">Parpaings et pavés</text><circle cx="136.9" cy="203.9" r="7" fill="#b45309"/><text x="147.9" y="207.9" text-anchor="start" font-size="10" font-weight="600" fill="#111827">Provende</text><circle cx="393.8" cy="215.9" r="7" fill="#be123c"/><text x="382.8" y="219.9" text-anchor="end" font-size="10" font-weight="600" fill="#111827">Rizerie</text><text x="246.0" y="288" text-anchor="middle" font-size="10" fill="#6b7280">Capital engagé →</text><text transform="translate(13,138.0) rotate(-90)" text-anchor="middle" font-size="10" fill="#6b7280">Rendement annuel →</text></svg></div><p class="fig-cap"><b>Capital engagé contre rendement annuel.</b> La pente est nette et c’est la leçon principale du document : <b>plus on monte l’échelle, moins chaque ariary rapporte — et plus le gain total est grand</b>. Le dépôt d’intrants affiche le meilleur rendement de tous, <span data-v="f1_rendement">275 %</span>, et ne dégagera jamais plus de <span data-v="f1_plafond">2 255 920</span> Ar par mois. La rizerie rend <span data-v="f5_rendement">55 %</span> et rapporte <span data-v="f5_plafond">34 590 000</span> Ar. Choisir, c’est décider lequel des deux on cherche.</p></div>
+
+      <div class="note">
+        <p><b>Lis les deux dernières colonnes ensemble, jamais l'une sans l'autre.</b> Le dépôt
+          d'intrants a le meilleur <a href="#lex-rendement" class="lex"
+            data-lex="rendement">rendement</a> du lot — et il ne dépassera jamais
+          <span data-v="f1_plafond">2 255 920</span> Ar par mois, parce qu'il bute sur le nombre de
+          paysans à portée. La rizerie rend moins par ariary investi et rapporte
+          <span data-v="f5_plafond">34 590 000</span> Ar. Le premier est un bon placement ; la
+          seconde est une entreprise.</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ 08 LES CINQ BUSINESS ═══════════════════ -->
+    <section class="sec page-break" id="business">
+      <div class="sec-h">
+        <div class="sec-n">08</div>
+        <h2>Les cinq business en détail</h2>
+      </div>
+
+      <p>Les deux premiers visent <b>le même client</b> : on revend d'abord l'engrais importé, on le
+        fabrique ensuite. La progression des paliers n'est pas une idée abstraite — elle se lit sur
+        deux fiches qui se suivent.</p>
+
+      <!-- ─────────── 1 ─────────── -->
+      <article class="model">
+        <div class="model-head">
+          <div class="model-n">1</div>
+          <div class="model-id">
+            <h3>Dépôt d’intrants agricoles</h3>
+            <p>Acheter l’engrais importé par palettes auprès du grossiste, le revendre au sac aux riziculteurs et maraîchers de ta zone. Tu ne produis rien encore : tu apprends le marché, tu te constitues un carnet de clients et une trésorerie.</p>
+            <div class="tags"><span class="tag risk-low">Risque faible</span><span class="tag ">Négoce</span><span class="tag ">Le premier barreau</span></div>
+          </div>
+        </div>
+
+        <div class="kpis"><div class="kpi"><div class="kpi-lbl">Investissement</div><div class="kpi-val"><span data-v="f1_inv">9 858 510</span> Ar</div><div class="kpi-sub">Palier 1 — revendre</div></div><div class="kpi"><div class="kpi-lbl"><a href="#lex-point-mort" class="lex" data-lex="point-mort">Retour sur la mise</a></div><div class="kpi-val"><span data-v="f1_retour">8 mois</span></div><div class="kpi-sub">En scénario prudent : <span data-v="f1_retourp">1,6 ans</span></div></div><div class="kpi"><div class="kpi-lbl"><a href="#lex-plafond" class="lex" data-lex="plafond">Bénéfice mensuel au plafond</a></div><div class="kpi-val"><span data-v="f1_plafond">2 255 920</span> Ar</div><div class="kpi-sub">Une fois la montée en charge finie</div></div><div class="kpi"><div class="kpi-lbl"><a href="#lex-rendement" class="lex" data-lex="rendement">Rendement annuel</a></div><div class="kpi-val"><span data-v="f1_rendement">275 %</span></div><div class="kpi-sub">Par ariary investi, au rythme de croisière</div></div></div>
+
+        <div class="block">
+          <div class="block-h">Investissement</div>
+          <div class="table-wrap"><table class="tbl"><tbody><tr><td>Stock de départ : 30 sacs d’engrais</td><td class="num"><span data-v="f1_i0">5 508 510</span> Ar</td></tr><tr><td>Caution et aménagement du local de stockage</td><td class="num"><span data-v="f1_i1">1 800 000</span> Ar</td></tr><tr><td>Bascule, brouette, palettes, bâches</td><td class="num"><span data-v="f1_i2">900 000</span> Ar</td></tr><tr><td>Patente, enregistrement, agrément revendeur <em>(estimation)</em></td><td class="num"><span data-v="f1_i3">450 000</span> Ar</td></tr><tr><td>Réserve de trésorerie</td><td class="num"><span data-v="f1_i4">1 200 000</span> Ar</td></tr><tr class="total"><td>Total à engager</td><td class="num"><span data-v="f1_inv">9 858 510</span> Ar</td></tr></tbody></table></div>
+        </div>
+
+        <div class="fig"><div class="fig-chart"><div class="fig-row"><div class="chart">
+<svg viewBox="0 0 156 156" role="img" aria-label="Investissement — Dépôt d’intrants agricoles">
+<title>Investissement — Dépôt d’intrants agricoles</title>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#e5e7eb" stroke-width="24"/>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#b45309" stroke-width="24" stroke-dasharray="203.62 160.80" stroke-dashoffset="-0.00" transform="rotate(-90 78 78)"/>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#0f766e" stroke-width="24" stroke-dasharray="66.54 297.89" stroke-dashoffset="-203.62" transform="rotate(-90 78 78)"/>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#4338ca" stroke-width="24" stroke-dasharray="33.27 331.16" stroke-dashoffset="-270.16" transform="rotate(-90 78 78)"/>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#be123c" stroke-width="24" stroke-dasharray="16.63 347.79" stroke-dashoffset="-303.43" transform="rotate(-90 78 78)"/>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#a16207" stroke-width="24" stroke-dasharray="44.36 320.07" stroke-dashoffset="-320.07" transform="rotate(-90 78 78)"/>
+<text x="78" y="74" text-anchor="middle" font-size="9" font-weight="600" fill="#6b7280">TOTAL</text><text x="78" y="92" text-anchor="middle" font-size="17" font-weight="700" fill="#111827">9,9 M</text><text x="78" y="106" text-anchor="middle" font-size="9" fill="#9ca3af">ariary</text>
+</svg></div>
+<div class="legend-col"><ul class="legend-list">
+<li><i style="background:#b45309"></i><span class="ll-lbl">Stock de départ</span><span class="ll-amt">5 508 510 Ar<em>56 %</em></span></li>
+<li><i style="background:#0f766e"></i><span class="ll-lbl">Caution et aménagement du local de stockage</span><span class="ll-amt">1 800 000 Ar<em>18 %</em></span></li>
+<li><i style="background:#4338ca"></i><span class="ll-lbl">Bascule, brouette, palettes, bâches</span><span class="ll-amt">900 000 Ar<em>9 %</em></span></li>
+<li><i style="background:#be123c"></i><span class="ll-lbl">Patente, enregistrement, agrément revendeur (estimation)</span><span class="ll-amt">450 000 Ar<em>5 %</em></span></li>
+<li><i style="background:#a16207"></i><span class="ll-lbl">Réserve de trésorerie</span><span class="ll-amt">1 200 000 Ar<em>12 %</em></span></li>
+</ul></div></div></div><p class="fig-cap"><b>Où part la mise.</b> <span data-v="f1_inv">9 858 510</span> Ar au total.</p></div>
+
+        <div class="block">
+          <div class="block-h"><a href="#lex-charges-fixes" class="lex"
+              data-lex="charges-fixes">Charges fixes mensuelles</a></div>
+          <div class="table-wrap"><table class="tbl"><tbody><tr><td>Loyer du local</td><td class="num"><span data-v="f1_x0">202 500</span> Ar</td></tr><tr><td>Gardiennage</td><td class="num"><span data-v="f1_x1">210 000</span> Ar</td></tr><tr><td>Transport et livraisons</td><td class="num"><span data-v="f1_x2">250 000</span> Ar</td></tr><tr><td>Divers, imprévus</td><td class="num"><span data-v="f1_x3">120 000</span> Ar</td></tr><tr class="total"><td>Total par mois</td><td class="num"><span data-v="f1_fixes">782 500</span> Ar</td></tr></tbody></table></div>
+        </div>
+
+        <div class="block">
+          <div class="block-h">L'économie d'un sac</div>
+          <p>Tu l'achètes au grossiste <span data-v="achatDepot">183 617</span> Ar et tu le revends
+            <span data-v="f1_prix">215 550</span> Ar. Il te reste
+            <span data-v="f1_marge">27 622</span> Ar de <a href="#lex-marge" class="lex"
+              data-lex="marge">marge</a>, soit <span data-v="f1_margePct">13 %</span> du prix — une
+            marge de négoce, normale pour ce métier. Il t'en faut
+            <span data-v="f1_seuil">29</span> par mois pour couvrir tes charges.</p>
+        </div>
+
+        <div class="block">
+          <div class="block-h">Prévisionnel sur douze mois</div>
+          <div class="table-wrap"><table class="tbl"><thead><tr><th>Mois</th><th class="num">Sacs</th><th class="num"><a href="#lex-chiffre-affaires" class="lex" data-lex="chiffre-affaires">Chiffre d’affaires</a></th><th class="num"><a href="#lex-cout-variable" class="lex" data-lex="cout-variable">Coût variable</a></th><th class="num"><a href="#lex-charges-fixes" class="lex" data-lex="charges-fixes">Charges fixes</a></th><th class="num">Net du mois</th><th class="num"><a href="#lex-tresorerie" class="lex" data-lex="tresorerie">Trésorerie cumulée</a></th></tr></thead><tbody><tr><td>1 — ouverture, premiers clients</td><td class="num"><span data-v="f1_m1_q">20</span></td><td class="num"><span data-v="f1_m1_ca">4 224 780</span></td><td class="num"><span data-v="f1_m1_cv">3 672 340</span></td><td class="num"><span data-v="f1_m1_fx">782 500</span></td><td class="num"><span data-v="f1_m1_net">− 230 060</span></td><td class="num"><span data-v="f1_m1_cum">− 10 088 570</span></td></tr><tr><td>2</td><td class="num"><span data-v="f1_m2_q">40</span></td><td class="num"><span data-v="f1_m2_ca">8 449 560</span></td><td class="num"><span data-v="f1_m2_cv">7 344 680</span></td><td class="num"><span data-v="f1_m2_fx">782 500</span></td><td class="num"><span data-v="f1_m2_net">+ 322 380</span></td><td class="num"><span data-v="f1_m2_cum">− 9 766 190</span></td></tr><tr><td>3</td><td class="num"><span data-v="f1_m3_q">60</span></td><td class="num"><span data-v="f1_m3_ca">12 674 340</span></td><td class="num"><span data-v="f1_m3_cv">11 017 020</span></td><td class="num"><span data-v="f1_m3_fx">782 500</span></td><td class="num"><span data-v="f1_m3_net">+ 874 820</span></td><td class="num"><span data-v="f1_m3_cum">− 8 891 370</span></td></tr><tr><td>4 — point mort</td><td class="num"><span data-v="f1_m4_q">75</span></td><td class="num"><span data-v="f1_m4_ca">15 842 925</span></td><td class="num"><span data-v="f1_m4_cv">13 771 275</span></td><td class="num"><span data-v="f1_m4_fx">782 500</span></td><td class="num"><span data-v="f1_m4_net">+ 1 289 150</span></td><td class="num"><span data-v="f1_m4_cum">− 7 602 220</span></td></tr><tr><td>5</td><td class="num"><span data-v="f1_m5_q">90</span></td><td class="num"><span data-v="f1_m5_ca">19 011 510</span></td><td class="num"><span data-v="f1_m5_cv">16 525 530</span></td><td class="num"><span data-v="f1_m5_fx">782 500</span></td><td class="num"><span data-v="f1_m5_net">+ 1 703 480</span></td><td class="num"><span data-v="f1_m5_cum">− 5 898 740</span></td></tr><tr><td>6</td><td class="num"><span data-v="f1_m6_q">100</span></td><td class="num"><span data-v="f1_m6_ca">21 123 900</span></td><td class="num"><span data-v="f1_m6_cv">18 361 700</span></td><td class="num"><span data-v="f1_m6_fx">782 500</span></td><td class="num"><span data-v="f1_m6_net">+ 1 979 700</span></td><td class="num"><span data-v="f1_m6_cum">− 3 919 040</span></td></tr><tr><td>7</td><td class="num"><span data-v="f1_m7_q">110</span></td><td class="num"><span data-v="f1_m7_ca">23 236 290</span></td><td class="num"><span data-v="f1_m7_cv">20 197 870</span></td><td class="num"><span data-v="f1_m7_fx">782 500</span></td><td class="num"><span data-v="f1_m7_net">+ 2 255 920</span></td><td class="num"><span data-v="f1_m7_cum">− 1 663 120</span></td></tr><tr><td>8</td><td class="num"><span data-v="f1_m8_q">110</span></td><td class="num"><span data-v="f1_m8_ca">23 236 290</span></td><td class="num"><span data-v="f1_m8_cv">20 197 870</span></td><td class="num"><span data-v="f1_m8_fx">782 500</span></td><td class="num"><span data-v="f1_m8_net">+ 2 255 920</span></td><td class="num"><span data-v="f1_m8_cum">+ 592 800</span></td></tr><tr><td>9</td><td class="num"><span data-v="f1_m9_q">110</span></td><td class="num"><span data-v="f1_m9_ca">23 236 290</span></td><td class="num"><span data-v="f1_m9_cv">20 197 870</span></td><td class="num"><span data-v="f1_m9_fx">782 500</span></td><td class="num"><span data-v="f1_m9_net">+ 2 255 920</span></td><td class="num"><span data-v="f1_m9_cum">+ 2 848 720</span></td></tr><tr><td>10</td><td class="num"><span data-v="f1_m10_q">110</span></td><td class="num"><span data-v="f1_m10_ca">23 236 290</span></td><td class="num"><span data-v="f1_m10_cv">20 197 870</span></td><td class="num"><span data-v="f1_m10_fx">782 500</span></td><td class="num"><span data-v="f1_m10_net">+ 2 255 920</span></td><td class="num"><span data-v="f1_m10_cum">+ 5 104 640</span></td></tr><tr><td>11</td><td class="num"><span data-v="f1_m11_q">110</span></td><td class="num"><span data-v="f1_m11_ca">23 236 290</span></td><td class="num"><span data-v="f1_m11_cv">20 197 870</span></td><td class="num"><span data-v="f1_m11_fx">782 500</span></td><td class="num"><span data-v="f1_m11_net">+ 2 255 920</span></td><td class="num"><span data-v="f1_m11_cum">+ 7 360 560</span></td></tr><tr><td>12</td><td class="num"><span data-v="f1_m12_q">110</span></td><td class="num"><span data-v="f1_m12_ca">23 236 290</span></td><td class="num"><span data-v="f1_m12_cv">20 197 870</span></td><td class="num"><span data-v="f1_m12_fx">782 500</span></td><td class="num"><span data-v="f1_m12_net">+ 2 255 920</span></td><td class="num"><span data-v="f1_m12_cum">+ 9 616 480</span></td></tr><tr class="total"><td>Total 12 mois</td><td class="num"><span data-v="f1_tq">1 045</span></td><td class="num"><span data-v="f1_tca">220 744 755</span></td><td class="num"><span data-v="f1_tcv">191 879 765</span></td><td class="num"><span data-v="f1_tfx">9 390 000</span></td><td class="num"><span data-v="f1_tnet">+ 19 474 990</span></td><td class="num"><span data-v="f1_tcum">+ 9 616 480</span></td></tr></tbody></table></div>
+        </div>
+
+        <div class="fig"><div class="fig-chart"><svg viewBox="0 0 460 270" role="img"><line x1="52" y1="215.1" x2="448" y2="215.1" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="218.6" text-anchor="end" font-size="9.5" fill="#9ca3af">-10 M</text><line x1="52" y1="120.4" x2="448" y2="120.4" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="123.9" text-anchor="end" font-size="9.5" fill="#9ca3af">0</text><line x1="52" y1="25.7" x2="448" y2="25.7" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="29.2" text-anchor="end" font-size="9.5" fill="#9ca3af">10 M</text><line x1="52" y1="120.4" x2="448" y2="120.4" stroke="#111827" stroke-width="1.5"/><text x="52.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">1</text><text x="88.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">2</text><text x="124.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">3</text><text x="160.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">4</text><text x="196.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">5</text><text x="232.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">6</text><text x="268.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">7</text><text x="304.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">8</text><text x="340.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">9</text><text x="376.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">10</text><text x="412.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">11</text><text x="448.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">12</text><text x="250.0" y="267" text-anchor="middle" font-size="9.5" fill="#6b7280">mois d’activité</text><polyline points="52.0,215.9 88.0,212.8 124.0,204.6 160.0,192.4 196.0,176.2 232.0,157.5 268.0,136.1 304.0,114.8 340.0,93.4 376.0,72.0 412.0,50.7 448.0,29.3" fill="none" stroke="#b45309" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="304.0" cy="114.8" r="4" fill="white" stroke="#b45309" stroke-width="2.2"/><polyline points="52.0,218.5 88.0,220.7 124.0,220.3 160.0,217.7 196.0,213.4 232.0,207.7 268.0,200.7 304.0,193.7 340.0,186.8 376.0,179.8 412.0,172.8 448.0,165.8" fill="none" stroke="#0f766e" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/></svg></div><p class="fig-cap"><b>La trésorerie cumulée, mois par mois.</b> Elle démarre à − <span data-v="f1_inv">9 858 510</span> Ar. Le retour sur la mise tombe à <span data-v="f1_retour">8 mois</span> au rythme prévu, <span data-v="f1_retourp">1,6 ans</span> si les volumes sont deux fois plus lents.</p></div>
+
+        <div class="block">
+          <div class="block-h">Ce qui bloque la croissance</div>
+          <p>La trésorerie immobilisée dans le stock, et le nombre de paysans à portée de brouette</p>
+        </div>
+
+        <div class="block">
+          <div class="block-h">Risques et parades</div>
+          <div class="risk"><div class="risk-h">Le stock dort</div><p>Trente sacs immobilisent la moitié de ta mise. Si la campagne agricole décale d’un mois, ton argent est couché dans le hangar.</p><p class="risk-p"><b>La parade —</b> N’achète jamais plus de six semaines de vente. Commande petit et souvent, même si le prix unitaire est un peu moins bon.</p></div><div class="risk"><div class="risk-h">Le prix bouge sous toi</div><p>Le prix du sac suit le dollar et la douane. Un stock acheté cher se revend mal si le cours redescend.</p><p class="risk-p"><b>La parade —</b> Répercute vite à la baisse, plus lentement à la hausse, et garde une marge d’un cran au-dessus de la concurrence plutôt que de brader.</p></div><div class="risk"><div class="risk-h">Le crédit aux paysans</div><p>On te demandera de livrer avant la récolte. C’est ainsi que meurent la plupart des dépôts.</p><p class="risk-p"><b>La parade —</b> Pas de crédit la première année. Ensuite, un plafond par client, jamais plus d’un sac, et seulement pour ceux qui ont déjà payé comptant trois fois.</p></div>
+        </div>
+
+        <div class="block">
+          <div class="block-h">Plan de lancement</div>
+          <div class="phases"><div class="phase"><div class="phase-q">Mois 1</div><p>Local, patente, premier stock. Tu visites les fokontany et tu notes qui cultive quoi, sur combien d’ares.</p></div><div class="phase"><div class="phase-q">Mois 2 – 3</div><p>Tu vends, et surtout tu écoutes : quel engrais, à quelle période, à quel prix chez le concurrent.</p></div><div class="phase"><div class="phase-q">Mois 4 – 6</div><p>Tu élargis à la semence et au petit outillage. Le point mort est passé.</p></div><div class="phase"><div class="phase-q">Mois 7 – 12</div><p>Tu constitues la réserve du palier suivant, et tu sais désormais ce que ta zone consomme.</p></div></div>
+        </div>
+      </article>
+
+      <!-- ─────────── 2 ─────────── -->
+      <article class="model">
+        <div class="model-head">
+          <div class="model-n">2</div>
+          <div class="model-id">
+            <h3>Engrais organique conditionné</h3>
+            <p>Le même client que le dépôt, mais tu ne revends plus : tu fabriques. Fumier de zébu, balle de riz, déchets de marché — compostés, criblés, ensachés sous ta marque, vendus à une fraction du prix de l’engrais importé.</p>
+            <div class="tags"><span class="tag risk-mid">Risque moyen</span><span class="tag ">Agro-industrie légère</span><span class="tag ">La matière ne coûte presque rien</span></div>
+          </div>
+        </div>
+
+        <div class="kpis"><div class="kpi"><div class="kpi-lbl">Investissement</div><div class="kpi-val"><span data-v="f2_inv">69 000 000</span> Ar</div><div class="kpi-sub">Palier 2 — conditionner</div></div><div class="kpi"><div class="kpi-lbl"><a href="#lex-point-mort" class="lex" data-lex="point-mort">Retour sur la mise</a></div><div class="kpi-val"><span data-v="f2_retour">15 mois</span></div><div class="kpi-sub">En scénario prudent : <span data-v="f2_retourp">4,1 ans</span></div></div><div class="kpi"><div class="kpi-lbl"><a href="#lex-plafond" class="lex" data-lex="plafond">Bénéfice mensuel au plafond</a></div><div class="kpi-val"><span data-v="f2_plafond">7 051 742</span> Ar</div><div class="kpi-sub">Une fois la montée en charge finie</div></div><div class="kpi"><div class="kpi-lbl"><a href="#lex-rendement" class="lex" data-lex="rendement">Rendement annuel</a></div><div class="kpi-val"><span data-v="f2_rendement">125 %</span></div><div class="kpi-sub">Par ariary investi, au rythme de croisière</div></div></div>
+
+        <div class="key">
+          <div class="block-h">Le même client, un métier différent</div>
+          <p>Le dépôt gagnait <span data-v="f1_marge">27 622</span> Ar par sac en revendant. Ici tu
+            produis : le sac se vend moins cher — <span data-v="f2_prix">64 665</span> Ar contre
+            <span data-v="f1_prix">215 550</span> Ar, parce qu'un sac de compost ne porte pas
+            autant d'éléments fertilisants qu'un sac de NPK — mais il ne te coûte que
+            <span data-v="f2_var">35 500</span> Ar à fabriquer. La marge passe de
+            <span data-v="f1_margePct">13 %</span> à
+            <span data-v="f2_margePct">39 %</span> du prix. <b>C'est exactement ce qu'on gagne en
+              montant d'une marche.</b></p>
+        </div>
+
+        <div class="block">
+          <div class="block-h">Investissement</div>
+          <div class="table-wrap"><table class="tbl"><tbody><tr><td>Hangar et aire de compostage bétonnée</td><td class="num"><span data-v="f2_i0">18 000 000</span> Ar</td></tr><tr><td>Camionnette d’occasion pour la collecte</td><td class="num"><span data-v="f2_i1">15 000 000</span> Ar</td></tr><tr><td>Broyeur de biomasse</td><td class="num"><span data-v="f2_i2">12 000 000</span> Ar</td></tr><tr><td>Retourneur et malaxeur</td><td class="num"><span data-v="f2_i3">6 500 000</span> Ar</td></tr><tr><td>Ensacheuse et couseuse de sacs</td><td class="num"><span data-v="f2_i4">4 200 000</span> Ar</td></tr><tr><td>Premier cycle de biomasse : 50 t</td><td class="num"><span data-v="f2_i5">4 500 000</span> Ar</td></tr><tr><td>Analyses, homologation, agrément <em>(estimation)</em></td><td class="num"><span data-v="f2_i6">2 500 000</span> Ar</td></tr><tr><td>Bascule et petit outillage</td><td class="num"><span data-v="f2_i7">1 300 000</span> Ar</td></tr><tr><td>Réserve de trésorerie</td><td class="num"><span data-v="f2_i8">5 000 000</span> Ar</td></tr><tr class="total"><td>Total à engager</td><td class="num"><span data-v="f2_inv">69 000 000</span> Ar</td></tr></tbody></table></div>
+        </div>
+
+        <div class="fig"><div class="fig-chart"><div class="fig-row"><div class="chart">
+<svg viewBox="0 0 156 156" role="img" aria-label="Investissement — Engrais organique conditionné">
+<title>Investissement — Engrais organique conditionné</title>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#e5e7eb" stroke-width="24"/>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#b45309" stroke-width="24" stroke-dasharray="95.07 269.36" stroke-dashoffset="-0.00" transform="rotate(-90 78 78)"/>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#0f766e" stroke-width="24" stroke-dasharray="79.22 285.20" stroke-dashoffset="-95.07" transform="rotate(-90 78 78)"/>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#4338ca" stroke-width="24" stroke-dasharray="63.38 301.05" stroke-dashoffset="-174.29" transform="rotate(-90 78 78)"/>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#be123c" stroke-width="24" stroke-dasharray="34.33 330.09" stroke-dashoffset="-237.67" transform="rotate(-90 78 78)"/>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#a16207" stroke-width="24" stroke-dasharray="22.18 342.24" stroke-dashoffset="-272.00" transform="rotate(-90 78 78)"/>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#475569" stroke-width="24" stroke-dasharray="23.77 340.66" stroke-dashoffset="-294.18" transform="rotate(-90 78 78)"/>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#0891b2" stroke-width="24" stroke-dasharray="13.20 351.22" stroke-dashoffset="-317.95" transform="rotate(-90 78 78)"/>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#7c3aed" stroke-width="24" stroke-dasharray="6.87 357.56" stroke-dashoffset="-331.15" transform="rotate(-90 78 78)"/>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#65a30d" stroke-width="24" stroke-dasharray="26.41 338.02" stroke-dashoffset="-338.02" transform="rotate(-90 78 78)"/>
+<text x="78" y="74" text-anchor="middle" font-size="9" font-weight="600" fill="#6b7280">TOTAL</text><text x="78" y="92" text-anchor="middle" font-size="17" font-weight="700" fill="#111827">69 M</text><text x="78" y="106" text-anchor="middle" font-size="9" fill="#9ca3af">ariary</text>
+</svg></div>
+<div class="legend-col"><ul class="legend-list">
+<li><i style="background:#b45309"></i><span class="ll-lbl">Hangar et aire de compostage bétonnée</span><span class="ll-amt">18 000 000 Ar<em>26 %</em></span></li>
+<li><i style="background:#0f766e"></i><span class="ll-lbl">Camionnette d’occasion pour la collecte</span><span class="ll-amt">15 000 000 Ar<em>22 %</em></span></li>
+<li><i style="background:#4338ca"></i><span class="ll-lbl">Broyeur de biomasse</span><span class="ll-amt">12 000 000 Ar<em>17 %</em></span></li>
+<li><i style="background:#be123c"></i><span class="ll-lbl">Retourneur et malaxeur</span><span class="ll-amt">6 500 000 Ar<em>9 %</em></span></li>
+<li><i style="background:#a16207"></i><span class="ll-lbl">Ensacheuse et couseuse de sacs</span><span class="ll-amt">4 200 000 Ar<em>6 %</em></span></li>
+<li><i style="background:#475569"></i><span class="ll-lbl">Premier cycle de biomasse</span><span class="ll-amt">4 500 000 Ar<em>7 %</em></span></li>
+<li><i style="background:#0891b2"></i><span class="ll-lbl">Analyses, homologation, agrément (estimation)</span><span class="ll-amt">2 500 000 Ar<em>4 %</em></span></li>
+<li><i style="background:#7c3aed"></i><span class="ll-lbl">Bascule et petit outillage</span><span class="ll-amt">1 300 000 Ar<em>2 %</em></span></li>
+<li><i style="background:#65a30d"></i><span class="ll-lbl">Réserve de trésorerie</span><span class="ll-amt">5 000 000 Ar<em>7 %</em></span></li>
+</ul></div></div></div><p class="fig-cap"><b>Où part la mise.</b> <span data-v="f2_inv">69 000 000</span> Ar au total.</p></div>
+
+        <div class="block">
+          <div class="block-h"><a href="#lex-charges-fixes" class="lex"
+              data-lex="charges-fixes">Charges fixes mensuelles</a></div>
+          <div class="table-wrap"><table class="tbl"><tbody><tr><td>Carburant de collecte : 220 L</td><td class="num"><span data-v="f2_x0">1 188 000</span> Ar</td></tr><tr><td>Trois ouvriers</td><td class="num"><span data-v="f2_x1">1 050 000</span> Ar</td></tr><tr><td>Un commercial</td><td class="num"><span data-v="f2_x2">350 000</span> Ar</td></tr><tr><td>Terrain</td><td class="num"><span data-v="f2_x3">450 000</span> Ar</td></tr><tr><td>Entretien du matériel</td><td class="num"><span data-v="f2_x4">200 000</span> Ar</td></tr><tr><td>Électricité</td><td class="num"><span data-v="f2_x5">180 000</span> Ar</td></tr><tr><td>Divers, imprévus</td><td class="num"><span data-v="f2_x6">150 000</span> Ar</td></tr><tr class="total"><td>Total par mois</td><td class="num"><span data-v="f2_fixes">3 568 000</span> Ar</td></tr></tbody></table></div>
+        </div>
+
+        <div class="block">
+          <div class="block-h">Prévisionnel sur douze mois</div>
+          <p>Le premier mois ne vend rien : le compost mûrit entre six et dix semaines avant d'être
+            criblé et ensaché. Cette attente est dans le tableau, et c'est elle qui creuse le trou
+            de trésorerie du départ.</p>
+          <div class="table-wrap"><table class="tbl"><thead><tr><th>Mois</th><th class="num">Sacs</th><th class="num"><a href="#lex-chiffre-affaires" class="lex" data-lex="chiffre-affaires">Chiffre d’affaires</a></th><th class="num"><a href="#lex-cout-variable" class="lex" data-lex="cout-variable">Coût variable</a></th><th class="num"><a href="#lex-charges-fixes" class="lex" data-lex="charges-fixes">Charges fixes</a></th><th class="num">Net du mois</th><th class="num"><a href="#lex-tresorerie" class="lex" data-lex="tresorerie">Trésorerie cumulée</a></th></tr></thead><tbody><tr><td>1 — premier compost en maturation</td><td class="num"><span data-v="f2_m1_q">0</span></td><td class="num"><span data-v="f2_m1_ca">0</span></td><td class="num"><span data-v="f2_m1_cv">0</span></td><td class="num"><span data-v="f2_m1_fx">3 568 000</span></td><td class="num"><span data-v="f2_m1_net">− 3 568 000</span></td><td class="num"><span data-v="f2_m1_cum">− 72 568 000</span></td></tr><tr><td>2</td><td class="num"><span data-v="f2_m2_q">120</span></td><td class="num"><span data-v="f2_m2_ca">7 294 212</span></td><td class="num"><span data-v="f2_m2_cv">4 260 000</span></td><td class="num"><span data-v="f2_m2_fx">3 568 000</span></td><td class="num"><span data-v="f2_m2_net">− 533 788</span></td><td class="num"><span data-v="f2_m2_cum">− 73 101 788</span></td></tr><tr><td>3</td><td class="num"><span data-v="f2_m3_q">200</span></td><td class="num"><span data-v="f2_m3_ca">12 157 020</span></td><td class="num"><span data-v="f2_m3_cv">7 100 000</span></td><td class="num"><span data-v="f2_m3_fx">3 568 000</span></td><td class="num"><span data-v="f2_m3_net">+ 1 489 020</span></td><td class="num"><span data-v="f2_m3_cum">− 71 612 768</span></td></tr><tr><td>4</td><td class="num"><span data-v="f2_m4_q">280</span></td><td class="num"><span data-v="f2_m4_ca">17 019 828</span></td><td class="num"><span data-v="f2_m4_cv">9 940 000</span></td><td class="num"><span data-v="f2_m4_fx">3 568 000</span></td><td class="num"><span data-v="f2_m4_net">+ 3 511 828</span></td><td class="num"><span data-v="f2_m4_cum">− 68 100 940</span></td></tr><tr><td>5 — point mort</td><td class="num"><span data-v="f2_m5_q">340</span></td><td class="num"><span data-v="f2_m5_ca">20 666 934</span></td><td class="num"><span data-v="f2_m5_cv">12 070 000</span></td><td class="num"><span data-v="f2_m5_fx">3 568 000</span></td><td class="num"><span data-v="f2_m5_net">+ 5 028 934</span></td><td class="num"><span data-v="f2_m5_cum">− 63 072 006</span></td></tr><tr><td>6</td><td class="num"><span data-v="f2_m6_q">390</span></td><td class="num"><span data-v="f2_m6_ca">23 706 189</span></td><td class="num"><span data-v="f2_m6_cv">13 845 000</span></td><td class="num"><span data-v="f2_m6_fx">3 568 000</span></td><td class="num"><span data-v="f2_m6_net">+ 6 293 189</span></td><td class="num"><span data-v="f2_m6_cum">− 56 778 817</span></td></tr><tr><td>7</td><td class="num"><span data-v="f2_m7_q">420</span></td><td class="num"><span data-v="f2_m7_ca">25 529 742</span></td><td class="num"><span data-v="f2_m7_cv">14 910 000</span></td><td class="num"><span data-v="f2_m7_fx">3 568 000</span></td><td class="num"><span data-v="f2_m7_net">+ 7 051 742</span></td><td class="num"><span data-v="f2_m7_cum">− 49 727 075</span></td></tr><tr><td>8</td><td class="num"><span data-v="f2_m8_q">420</span></td><td class="num"><span data-v="f2_m8_ca">25 529 742</span></td><td class="num"><span data-v="f2_m8_cv">14 910 000</span></td><td class="num"><span data-v="f2_m8_fx">3 568 000</span></td><td class="num"><span data-v="f2_m8_net">+ 7 051 742</span></td><td class="num"><span data-v="f2_m8_cum">− 42 675 333</span></td></tr><tr><td>9</td><td class="num"><span data-v="f2_m9_q">420</span></td><td class="num"><span data-v="f2_m9_ca">25 529 742</span></td><td class="num"><span data-v="f2_m9_cv">14 910 000</span></td><td class="num"><span data-v="f2_m9_fx">3 568 000</span></td><td class="num"><span data-v="f2_m9_net">+ 7 051 742</span></td><td class="num"><span data-v="f2_m9_cum">− 35 623 591</span></td></tr><tr><td>10</td><td class="num"><span data-v="f2_m10_q">420</span></td><td class="num"><span data-v="f2_m10_ca">25 529 742</span></td><td class="num"><span data-v="f2_m10_cv">14 910 000</span></td><td class="num"><span data-v="f2_m10_fx">3 568 000</span></td><td class="num"><span data-v="f2_m10_net">+ 7 051 742</span></td><td class="num"><span data-v="f2_m10_cum">− 28 571 849</span></td></tr><tr><td>11</td><td class="num"><span data-v="f2_m11_q">420</span></td><td class="num"><span data-v="f2_m11_ca">25 529 742</span></td><td class="num"><span data-v="f2_m11_cv">14 910 000</span></td><td class="num"><span data-v="f2_m11_fx">3 568 000</span></td><td class="num"><span data-v="f2_m11_net">+ 7 051 742</span></td><td class="num"><span data-v="f2_m11_cum">− 21 520 107</span></td></tr><tr><td>12</td><td class="num"><span data-v="f2_m12_q">420</span></td><td class="num"><span data-v="f2_m12_ca">25 529 742</span></td><td class="num"><span data-v="f2_m12_cv">14 910 000</span></td><td class="num"><span data-v="f2_m12_fx">3 568 000</span></td><td class="num"><span data-v="f2_m12_net">+ 7 051 742</span></td><td class="num"><span data-v="f2_m12_cum">− 14 468 365</span></td></tr><tr class="total"><td>Total 12 mois</td><td class="num"><span data-v="f2_tq">3 850</span></td><td class="num"><span data-v="f2_tca">234 022 635</span></td><td class="num"><span data-v="f2_tcv">136 675 000</span></td><td class="num"><span data-v="f2_tfx">42 816 000</span></td><td class="num"><span data-v="f2_tnet">+ 54 531 635</span></td><td class="num"><span data-v="f2_tcum">− 14 468 365</span></td></tr></tbody></table></div>
+        </div>
+
+        <div class="fig"><div class="fig-chart"><svg viewBox="0 0 460 270" role="img"><line x1="52" y1="231.6" x2="448" y2="231.6" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="235.1" text-anchor="end" font-size="9.5" fill="#9ca3af">-80 M</text><line x1="52" y1="206.3" x2="448" y2="206.3" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="209.8" text-anchor="end" font-size="9.5" fill="#9ca3af">-70 M</text><line x1="52" y1="181.0" x2="448" y2="181.0" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="184.5" text-anchor="end" font-size="9.5" fill="#9ca3af">-60 M</text><line x1="52" y1="155.7" x2="448" y2="155.7" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="159.2" text-anchor="end" font-size="9.5" fill="#9ca3af">-50 M</text><line x1="52" y1="130.5" x2="448" y2="130.5" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="134.0" text-anchor="end" font-size="9.5" fill="#9ca3af">-40 M</text><line x1="52" y1="105.2" x2="448" y2="105.2" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="108.7" text-anchor="end" font-size="9.5" fill="#9ca3af">-30 M</text><line x1="52" y1="79.9" x2="448" y2="79.9" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="83.4" text-anchor="end" font-size="9.5" fill="#9ca3af">-20 M</text><line x1="52" y1="54.6" x2="448" y2="54.6" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="58.1" text-anchor="end" font-size="9.5" fill="#9ca3af">-10 M</text><line x1="52" y1="29.3" x2="448" y2="29.3" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="32.8" text-anchor="end" font-size="9.5" fill="#9ca3af">0</text><line x1="52" y1="29.3" x2="448" y2="29.3" stroke="#111827" stroke-width="1.5"/><text x="52.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">1</text><text x="88.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">2</text><text x="124.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">3</text><text x="160.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">4</text><text x="196.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">5</text><text x="232.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">6</text><text x="268.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">7</text><text x="304.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">8</text><text x="340.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">9</text><text x="376.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">10</text><text x="412.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">11</text><text x="448.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">12</text><text x="250.0" y="267" text-anchor="middle" font-size="9.5" fill="#6b7280">mois d’activité</text><polyline points="52.0,212.8 88.0,214.2 124.0,210.4 160.0,201.5 196.0,188.8 232.0,172.9 268.0,155.0 304.0,137.2 340.0,119.4 376.0,101.6 412.0,83.7 448.0,65.9" fill="none" stroke="#b45309" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><polyline points="52.0,212.8 88.0,218.0 124.0,220.6 160.0,220.7 196.0,218.8 232.0,215.4 268.0,211.0 304.0,206.6 340.0,202.2 376.0,197.8 412.0,193.4 448.0,189.0" fill="none" stroke="#0f766e" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/></svg></div><p class="fig-cap"><b>La trésorerie cumulée, mois par mois.</b> Elle démarre à − <span data-v="f2_inv">69 000 000</span> Ar. Le retour sur la mise tombe à <span data-v="f2_retour">15 mois</span> au rythme prévu, <span data-v="f2_retourp">4,1 ans</span> si les volumes sont deux fois plus lents.</p></div>
+
+        <div class="block">
+          <div class="block-h">Ce qui bloque la croissance</div>
+          <p>Le volume de biomasse que tu sais collecter et retourner, pas la demande</p>
+        </div>
+
+        <div class="block">
+          <div class="block-h">Risques et parades</div>
+          <div class="risk"><div class="risk-h">L’engrais importé est parfois subventionné</div><p>Quand une campagne d’appui distribue du NPK à prix cassé, ton produit devient cher du jour au lendemain.</p><p class="risk-p"><b>La parade —</b> Ne vends jamais sur le seul prix. Vends l’effet sur la terre au bout de trois saisons, et garde les maraîchers — qui achètent sans subvention — comme socle.</p></div><div class="risk"><div class="risk-h">La matière première est gratuite mais lourde</div><p>Le fumier ne coûte rien ; le transporter coûte tout. C’est le poste qui tue les composteurs.</p><p class="risk-p"><b>La parade —</b> Installe-toi à moins de 15 km des parcs à zébus et des rizeries. Négocie l’enlèvement gratuit contre le débarras.</p></div><div class="risk"><div class="risk-h">La qualité n’est pas visible à l’œil</div><p>Un compost mal mûri brûle les cultures. Une seule mauvaise saison et ta réputation est faite.</p><p class="risk-p"><b>La parade —</b> Un thermomètre à compost, un registre de retournement par andain, et une analyse par trimestre. C’est peu cher et c’est ton assurance.</p></div><div class="risk"><div class="risk-h">Le paysan n’a pas d’argent avant la récolte</div><p>La demande existe, la trésorerie du client non.</p><p class="risk-p"><b>La parade —</b> Vends aux coopératives et aux gros maraîchers, qui paient comptant, avant de descendre au petit producteur.</p></div>
+        </div>
+
+        <div class="block">
+          <div class="block-h">Plan de lancement</div>
+          <div class="phases"><div class="phase"><div class="phase-q">Mois 1</div><p>Aire bétonnée, premiers andains. Rien ne se vend : le compost mûrit entre six et dix semaines.</p></div><div class="phase"><div class="phase-q">Mois 2 – 4</div><p>Premières ventes aux maraîchers. Tu ajustes la formule et le temps de maturation.</p></div><div class="phase"><div class="phase-q">Mois 5 – 8</div><p>Le point mort est passé. Tu signes avec deux coopératives et tu fiabilises la collecte.</p></div><div class="phase"><div class="phase-q">Mois 9 – 12</div><p>Homologation obtenue, marque installée. Tu sais ce que coûte vraiment une tonne collectée.</p></div></div>
+        </div>
+      </article>
+
+      <!-- ─────────── 3 ─────────── -->
+      <article class="model">
+        <div class="model-head">
+          <div class="model-n">3</div>
+          <div class="model-id">
+            <h3>Parpaings et pavés en béton</h3>
+            <p>Tu ne fabriques pas le ciment — c’est une usine à plusieurs dizaines de millions de dollars. Tu fabriques ce qu’on en fait : blocs creux, pavés autobloquants, bordures, hourdis. La valeur ajoutée est petite par pièce, énorme au volume.</p>
+            <div class="tags"><span class="tag risk-mid">Risque moyen</span><span class="tag ">Matériaux</span><span class="tag ">Marge fine, volume gros</span></div>
+          </div>
+        </div>
+
+        <div class="kpis"><div class="kpi"><div class="kpi-lbl">Investissement</div><div class="kpi-val"><span data-v="f3_inv">72 040 000</span> Ar</div><div class="kpi-sub">Palier 2 — conditionner</div></div><div class="kpi"><div class="kpi-lbl"><a href="#lex-point-mort" class="lex" data-lex="point-mort">Retour sur la mise</a></div><div class="kpi-val"><span data-v="f3_retour">3,3 ans</span></div><div class="kpi-sub">En scénario prudent : <span data-v="f3_retourp">jamais</span></div></div><div class="kpi"><div class="kpi-lbl"><a href="#lex-plafond" class="lex" data-lex="plafond">Bénéfice mensuel au plafond</a></div><div class="kpi-val"><span data-v="f3_plafond">2 305 000</span> Ar</div><div class="kpi-sub">Une fois la montée en charge finie</div></div><div class="kpi"><div class="kpi-lbl"><a href="#lex-rendement" class="lex" data-lex="rendement">Rendement annuel</a></div><div class="kpi-val"><span data-v="f3_rendement">40 %</span></div><div class="kpi-sub">Par ariary investi, au rythme de croisière</div></div></div>
+
+        <div class="warn">
+          <div class="block-h">La fiche la plus tendue du document — et c'est instructif</div>
+          <p>Un parpaing rapporte <span data-v="f3_marge">335</span> Ar, soit
+            <span data-v="f3_margePct">17 %</span> de son prix. Il en faut
+            <span data-v="f3_seuil">11 120</span> par mois pour simplement couvrir les charges.
+            Dans le scénario prudent — moitié moins de volume — cette affaire
+            <b><span data-v="f3_retourp">jamais</span></b> ne rembourse sa mise : elle perd de
+            l'argent tous les mois.</p>
+          <p>Ce n'est pas une raison de l'écarter, c'est une raison de la regarder en face. Les
+            métiers de matériaux sont des <b>métiers de volume et de discipline</b>, pas des coups.
+            Si tu n'es pas sûr d'écouler quinze mille pièces par mois, ne mets pas
+            <span data-v="f3_inv">72 040 000</span> Ar dedans.</p>
+        </div>
+
+        <div class="block">
+          <div class="block-h">Investissement</div>
+          <div class="table-wrap"><table class="tbl"><tbody><tr><td>Pondeuse à parpaings</td><td class="num"><span data-v="f3_i0">22 000 000</span> Ar</td></tr><tr><td>Aire de séchage bétonnée</td><td class="num"><span data-v="f3_i1">12 000 000</span> Ar</td></tr><tr><td>Bétonnière</td><td class="num"><span data-v="f3_i2">9 000 000</span> Ar</td></tr><tr><td>Stock de départ : 120 sacs de ciment, sable, gravillon</td><td class="num"><span data-v="f3_i3">8 040 000</span> Ar</td></tr><tr><td>Jeux de moules : blocs, pavés, bordures</td><td class="num"><span data-v="f3_i4">6 000 000</span> Ar</td></tr><tr><td>Terrain : caution et viabilisation</td><td class="num"><span data-v="f3_i5">6 000 000</span> Ar</td></tr><tr><td>Vibreur, brouettes, pelles, seaux</td><td class="num"><span data-v="f3_i6">3 000 000</span> Ar</td></tr><tr><td>Réserve de trésorerie</td><td class="num"><span data-v="f3_i7">6 000 000</span> Ar</td></tr><tr class="total"><td>Total à engager</td><td class="num"><span data-v="f3_inv">72 040 000</span> Ar</td></tr></tbody></table></div>
+        </div>
+
+        <div class="fig"><div class="fig-chart"><div class="fig-row"><div class="chart">
+<svg viewBox="0 0 156 156" role="img" aria-label="Investissement — Parpaings et pavés en béton">
+<title>Investissement — Parpaings et pavés en béton</title>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#e5e7eb" stroke-width="24"/>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#b45309" stroke-width="24" stroke-dasharray="111.29 253.13" stroke-dashoffset="-0.00" transform="rotate(-90 78 78)"/>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#0f766e" stroke-width="24" stroke-dasharray="60.70 303.72" stroke-dashoffset="-111.29" transform="rotate(-90 78 78)"/>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#4338ca" stroke-width="24" stroke-dasharray="45.53 318.90" stroke-dashoffset="-171.99" transform="rotate(-90 78 78)"/>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#be123c" stroke-width="24" stroke-dasharray="40.67 323.75" stroke-dashoffset="-217.52" transform="rotate(-90 78 78)"/>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#a16207" stroke-width="24" stroke-dasharray="30.35 334.07" stroke-dashoffset="-258.19" transform="rotate(-90 78 78)"/>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#475569" stroke-width="24" stroke-dasharray="30.35 334.07" stroke-dashoffset="-288.55" transform="rotate(-90 78 78)"/>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#0891b2" stroke-width="24" stroke-dasharray="15.18 349.25" stroke-dashoffset="-318.90" transform="rotate(-90 78 78)"/>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#7c3aed" stroke-width="24" stroke-dasharray="30.35 334.07" stroke-dashoffset="-334.07" transform="rotate(-90 78 78)"/>
+<text x="78" y="74" text-anchor="middle" font-size="9" font-weight="600" fill="#6b7280">TOTAL</text><text x="78" y="92" text-anchor="middle" font-size="17" font-weight="700" fill="#111827">72 M</text><text x="78" y="106" text-anchor="middle" font-size="9" fill="#9ca3af">ariary</text>
+</svg></div>
+<div class="legend-col"><ul class="legend-list">
+<li><i style="background:#b45309"></i><span class="ll-lbl">Pondeuse à parpaings</span><span class="ll-amt">22 000 000 Ar<em>31 %</em></span></li>
+<li><i style="background:#0f766e"></i><span class="ll-lbl">Aire de séchage bétonnée</span><span class="ll-amt">12 000 000 Ar<em>17 %</em></span></li>
+<li><i style="background:#4338ca"></i><span class="ll-lbl">Bétonnière</span><span class="ll-amt">9 000 000 Ar<em>12 %</em></span></li>
+<li><i style="background:#be123c"></i><span class="ll-lbl">Stock de départ</span><span class="ll-amt">8 040 000 Ar<em>11 %</em></span></li>
+<li><i style="background:#a16207"></i><span class="ll-lbl">Jeux de moules</span><span class="ll-amt">6 000 000 Ar<em>8 %</em></span></li>
+<li><i style="background:#475569"></i><span class="ll-lbl">Terrain</span><span class="ll-amt">6 000 000 Ar<em>8 %</em></span></li>
+<li><i style="background:#0891b2"></i><span class="ll-lbl">Vibreur, brouettes, pelles, seaux</span><span class="ll-amt">3 000 000 Ar<em>4 %</em></span></li>
+<li><i style="background:#7c3aed"></i><span class="ll-lbl">Réserve de trésorerie</span><span class="ll-amt">6 000 000 Ar<em>8 %</em></span></li>
+</ul></div></div></div><p class="fig-cap"><b>Où part la mise.</b> <span data-v="f3_inv">72 040 000</span> Ar au total.</p></div>
+
+        <div class="block">
+          <div class="block-h"><a href="#lex-charges-fixes" class="lex"
+              data-lex="charges-fixes">Charges fixes mensuelles</a></div>
+          <div class="table-wrap"><table class="tbl"><tbody><tr><td>Quatre ouvriers</td><td class="num"><span data-v="f3_x0">1 400 000</span> Ar</td></tr><tr><td>Livraisons</td><td class="num"><span data-v="f3_x1">700 000</span> Ar</td></tr><tr><td>Électricité</td><td class="num"><span data-v="f3_x2">595 000</span> Ar</td></tr><tr><td>Terrain</td><td class="num"><span data-v="f3_x3">450 000</span> Ar</td></tr><tr><td>Entretien, moules et pièces d’usure</td><td class="num"><span data-v="f3_x4">250 000</span> Ar</td></tr><tr><td>Eau</td><td class="num"><span data-v="f3_x5">180 000</span> Ar</td></tr><tr><td>Divers, imprévus</td><td class="num"><span data-v="f3_x6">150 000</span> Ar</td></tr><tr class="total"><td>Total par mois</td><td class="num"><span data-v="f3_fixes">3 725 000</span> Ar</td></tr></tbody></table></div>
+        </div>
+
+        <div class="block">
+          <div class="block-h">Prévisionnel sur douze mois</div>
+          <div class="table-wrap"><table class="tbl"><thead><tr><th>Mois</th><th class="num">Parpaings</th><th class="num"><a href="#lex-chiffre-affaires" class="lex" data-lex="chiffre-affaires">Chiffre d’affaires</a></th><th class="num"><a href="#lex-cout-variable" class="lex" data-lex="cout-variable">Coût variable</a></th><th class="num"><a href="#lex-charges-fixes" class="lex" data-lex="charges-fixes">Charges fixes</a></th><th class="num">Net du mois</th><th class="num"><a href="#lex-tresorerie" class="lex" data-lex="tresorerie">Trésorerie cumulée</a></th></tr></thead><tbody><tr><td>1 — installation, premières coulées</td><td class="num"><span data-v="f3_m1_q">0</span></td><td class="num"><span data-v="f3_m1_ca">0</span></td><td class="num"><span data-v="f3_m1_cv">0</span></td><td class="num"><span data-v="f3_m1_fx">3 725 000</span></td><td class="num"><span data-v="f3_m1_net">− 3 725 000</span></td><td class="num"><span data-v="f3_m1_cum">− 75 765 000</span></td></tr><tr><td>2</td><td class="num"><span data-v="f3_m2_q">6 000</span></td><td class="num"><span data-v="f3_m2_ca">11 400 000</span></td><td class="num"><span data-v="f3_m2_cv">9 390 000</span></td><td class="num"><span data-v="f3_m2_fx">3 725 000</span></td><td class="num"><span data-v="f3_m2_net">− 1 715 000</span></td><td class="num"><span data-v="f3_m2_cum">− 77 480 000</span></td></tr><tr><td>3</td><td class="num"><span data-v="f3_m3_q">9 500</span></td><td class="num"><span data-v="f3_m3_ca">18 050 000</span></td><td class="num"><span data-v="f3_m3_cv">14 867 500</span></td><td class="num"><span data-v="f3_m3_fx">3 725 000</span></td><td class="num"><span data-v="f3_m3_net">− 542 500</span></td><td class="num"><span data-v="f3_m3_cum">− 78 022 500</span></td></tr><tr><td>4</td><td class="num"><span data-v="f3_m4_q">12 000</span></td><td class="num"><span data-v="f3_m4_ca">22 800 000</span></td><td class="num"><span data-v="f3_m4_cv">18 780 000</span></td><td class="num"><span data-v="f3_m4_fx">3 725 000</span></td><td class="num"><span data-v="f3_m4_net">+ 295 000</span></td><td class="num"><span data-v="f3_m4_cum">− 77 727 500</span></td></tr><tr><td>5</td><td class="num"><span data-v="f3_m5_q">14 000</span></td><td class="num"><span data-v="f3_m5_ca">26 600 000</span></td><td class="num"><span data-v="f3_m5_cv">21 910 000</span></td><td class="num"><span data-v="f3_m5_fx">3 725 000</span></td><td class="num"><span data-v="f3_m5_net">+ 965 000</span></td><td class="num"><span data-v="f3_m5_cum">− 76 762 500</span></td></tr><tr><td>6 — point mort</td><td class="num"><span data-v="f3_m6_q">16 000</span></td><td class="num"><span data-v="f3_m6_ca">30 400 000</span></td><td class="num"><span data-v="f3_m6_cv">25 040 000</span></td><td class="num"><span data-v="f3_m6_fx">3 725 000</span></td><td class="num"><span data-v="f3_m6_net">+ 1 635 000</span></td><td class="num"><span data-v="f3_m6_cum">− 75 127 500</span></td></tr><tr><td>7</td><td class="num"><span data-v="f3_m7_q">18 000</span></td><td class="num"><span data-v="f3_m7_ca">34 200 000</span></td><td class="num"><span data-v="f3_m7_cv">28 170 000</span></td><td class="num"><span data-v="f3_m7_fx">3 725 000</span></td><td class="num"><span data-v="f3_m7_net">+ 2 305 000</span></td><td class="num"><span data-v="f3_m7_cum">− 72 822 500</span></td></tr><tr><td>8</td><td class="num"><span data-v="f3_m8_q">18 000</span></td><td class="num"><span data-v="f3_m8_ca">34 200 000</span></td><td class="num"><span data-v="f3_m8_cv">28 170 000</span></td><td class="num"><span data-v="f3_m8_fx">3 725 000</span></td><td class="num"><span data-v="f3_m8_net">+ 2 305 000</span></td><td class="num"><span data-v="f3_m8_cum">− 70 517 500</span></td></tr><tr><td>9</td><td class="num"><span data-v="f3_m9_q">18 000</span></td><td class="num"><span data-v="f3_m9_ca">34 200 000</span></td><td class="num"><span data-v="f3_m9_cv">28 170 000</span></td><td class="num"><span data-v="f3_m9_fx">3 725 000</span></td><td class="num"><span data-v="f3_m9_net">+ 2 305 000</span></td><td class="num"><span data-v="f3_m9_cum">− 68 212 500</span></td></tr><tr><td>10</td><td class="num"><span data-v="f3_m10_q">18 000</span></td><td class="num"><span data-v="f3_m10_ca">34 200 000</span></td><td class="num"><span data-v="f3_m10_cv">28 170 000</span></td><td class="num"><span data-v="f3_m10_fx">3 725 000</span></td><td class="num"><span data-v="f3_m10_net">+ 2 305 000</span></td><td class="num"><span data-v="f3_m10_cum">− 65 907 500</span></td></tr><tr><td>11</td><td class="num"><span data-v="f3_m11_q">18 000</span></td><td class="num"><span data-v="f3_m11_ca">34 200 000</span></td><td class="num"><span data-v="f3_m11_cv">28 170 000</span></td><td class="num"><span data-v="f3_m11_fx">3 725 000</span></td><td class="num"><span data-v="f3_m11_net">+ 2 305 000</span></td><td class="num"><span data-v="f3_m11_cum">− 63 602 500</span></td></tr><tr><td>12</td><td class="num"><span data-v="f3_m12_q">18 000</span></td><td class="num"><span data-v="f3_m12_ca">34 200 000</span></td><td class="num"><span data-v="f3_m12_cv">28 170 000</span></td><td class="num"><span data-v="f3_m12_fx">3 725 000</span></td><td class="num"><span data-v="f3_m12_net">+ 2 305 000</span></td><td class="num"><span data-v="f3_m12_cum">− 61 297 500</span></td></tr><tr class="total"><td>Total 12 mois</td><td class="num"><span data-v="f3_tq">165 500</span></td><td class="num"><span data-v="f3_tca">314 450 000</span></td><td class="num"><span data-v="f3_tcv">259 007 500</span></td><td class="num"><span data-v="f3_tfx">44 700 000</span></td><td class="num"><span data-v="f3_tnet">+ 10 742 500</span></td><td class="num"><span data-v="f3_tcum">− 61 297 500</span></td></tr></tbody></table></div>
+        </div>
+
+        <div class="fig"><div class="fig-chart"><svg viewBox="0 0 460 270" role="img"><line x1="52" y1="222.8" x2="448" y2="222.8" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="226.3" text-anchor="end" font-size="9.5" fill="#9ca3af">-90 M</text><line x1="52" y1="201.3" x2="448" y2="201.3" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="204.8" text-anchor="end" font-size="9.5" fill="#9ca3af">-80 M</text><line x1="52" y1="179.8" x2="448" y2="179.8" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="183.3" text-anchor="end" font-size="9.5" fill="#9ca3af">-70 M</text><line x1="52" y1="158.3" x2="448" y2="158.3" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="161.8" text-anchor="end" font-size="9.5" fill="#9ca3af">-60 M</text><line x1="52" y1="136.8" x2="448" y2="136.8" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="140.3" text-anchor="end" font-size="9.5" fill="#9ca3af">-50 M</text><line x1="52" y1="115.3" x2="448" y2="115.3" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="118.8" text-anchor="end" font-size="9.5" fill="#9ca3af">-40 M</text><line x1="52" y1="93.8" x2="448" y2="93.8" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="97.3" text-anchor="end" font-size="9.5" fill="#9ca3af">-30 M</text><line x1="52" y1="72.3" x2="448" y2="72.3" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="75.8" text-anchor="end" font-size="9.5" fill="#9ca3af">-20 M</text><line x1="52" y1="50.8" x2="448" y2="50.8" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="54.3" text-anchor="end" font-size="9.5" fill="#9ca3af">-10 M</text><line x1="52" y1="29.3" x2="448" y2="29.3" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="32.8" text-anchor="end" font-size="9.5" fill="#9ca3af">0</text><line x1="52" y1="29.3" x2="448" y2="29.3" stroke="#111827" stroke-width="1.5"/><text x="52.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">1</text><text x="88.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">2</text><text x="124.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">3</text><text x="160.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">4</text><text x="196.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">5</text><text x="232.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">6</text><text x="268.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">7</text><text x="304.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">8</text><text x="340.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">9</text><text x="376.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">10</text><text x="412.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">11</text><text x="448.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">12</text><text x="250.0" y="267" text-anchor="middle" font-size="9.5" fill="#6b7280">mois d’activité</text><polyline points="52.0,192.2 88.0,195.9 124.0,197.1 160.0,196.4 196.0,194.4 232.0,190.9 268.0,185.9 304.0,180.9 340.0,176.0 376.0,171.0 412.0,166.1 448.0,161.1" fill="none" stroke="#b45309" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><polyline points="52.0,192.2 88.0,198.1 124.0,202.6 160.0,206.3 196.0,209.3 232.0,211.5 268.0,213.1 304.0,214.6 340.0,216.1 376.0,217.6 412.0,219.2 448.0,220.7" fill="none" stroke="#0f766e" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/></svg></div><p class="fig-cap"><b>La trésorerie cumulée, mois par mois.</b> Elle démarre à − <span data-v="f3_inv">72 040 000</span> Ar. Le retour sur la mise tombe à <span data-v="f3_retour">3,3 ans</span> au rythme prévu, <span data-v="f3_retourp">jamais</span> si les volumes sont deux fois plus lents.</p></div>
+
+        <div class="block">
+          <div class="block-h">Ce qui bloque la croissance</div>
+          <p>La surface de séchage et le nombre de chantiers dans un rayon de 20 km</p>
+        </div>
+
+        <div class="block">
+          <div class="block-h">Risques et parades</div>
+          <div class="risk"><div class="risk-h">La marge par pièce est minuscule</div><p>Quelques centaines d’ariary. Une hausse du ciment de 10 % efface la moitié de ton bénéfice.</p><p class="risk-p"><b>La parade —</b> Indexe ton prix sur le sac de ciment, ouvertement, et annonce-le à tes clients dès le premier devis. Le champ « ciment » de cette page est là pour que tu refasses le calcul en trente secondes.</p></div><div class="risk"><div class="risk-h">Le béton mal dosé revient en boomerang</div><p>Économiser un dixième de sac par gâchée se voit au premier mur fissuré, et se sait dans tout le quartier.</p><p class="risk-p"><b>La parade —</b> Un dosage écrit, affiché, et la même personne qui gâche tous les jours. Le contrôle, c’est une pesée au hasard par semaine.</p></div><div class="risk"><div class="risk-h">Le chantier ne paie pas</div><p>Les gros chantiers commandent beaucoup et règlent tard.</p><p class="risk-p"><b>La parade —</b> Cinquante pour cent à la commande, solde à l’enlèvement. Tu ne charges pas le camion d’un impayé.</p></div><div class="risk"><div class="risk-h">La saison des pluies</div><p>Le séchage s’allonge, la surface disponible sature, la production tombe.</p><p class="risk-p"><b>La parade —</b> Prévois l’aire couverte dès la construction, et constitue du stock en saison sèche : c’est la seule trésorerie qui te fera passer janvier et février.</p></div>
+        </div>
+
+        <div class="block">
+          <div class="block-h">Plan de lancement</div>
+          <div class="phases"><div class="phase"><div class="phase-q">Mois 1</div><p>Terrain, aire de séchage, montage de la pondeuse. Premières coulées d’essai, dosage figé.</p></div><div class="phase"><div class="phase-q">Mois 2 – 4</div><p>Les maçons du quartier deviennent tes prescripteurs. Tu ajoutes les pavés, plus rémunérateurs.</p></div><div class="phase"><div class="phase-q">Mois 5 – 8</div><p>Point mort passé. Tu vises les petites entreprises de construction plutôt que les particuliers.</p></div><div class="phase"><div class="phase-q">Mois 9 – 12</div><p>Second jeu de moules, stock de saison sèche, et devis aux collectivités pour les pavés.</p></div></div>
+        </div>
+      </article>
+
+      <!-- ─────────── 4 ─────────── -->
+      <article class="model">
+        <div class="model-head">
+          <div class="model-n">4</div>
+          <div class="model-id">
+            <h3>Provende pour volaille</h3>
+            <p>Maïs, son de riz, tourteau et complément minéral, broyés et mélangés à la formule. Tu remplaces à la fois la provende importée et les matières premières que les éleveurs achètent séparément sans savoir doser.</p>
+            <div class="tags"><span class="tag risk-mid">Risque moyen</span><span class="tag ">Alimentation animale</span><span class="tag ">Le client rachète chaque semaine</span></div>
+          </div>
+        </div>
+
+        <div class="kpis"><div class="kpi"><div class="kpi-lbl">Investissement</div><div class="kpi-val"><span data-v="f4_inv">190 000 000</span> Ar</div><div class="kpi-sub">Palier 3 — transformer</div></div><div class="kpi"><div class="kpi-lbl"><a href="#lex-point-mort" class="lex" data-lex="point-mort">Retour sur la mise</a></div><div class="kpi-val"><span data-v="f4_retour">1,8 ans</span></div><div class="kpi-sub">En scénario prudent : <span data-v="f4_retourp">8,5 ans</span></div></div><div class="kpi"><div class="kpi-lbl"><a href="#lex-plafond" class="lex" data-lex="plafond">Bénéfice mensuel au plafond</a></div><div class="kpi-val"><span data-v="f4_plafond">11 505 000</span> Ar</div><div class="kpi-sub">Une fois la montée en charge finie</div></div><div class="kpi"><div class="kpi-lbl"><a href="#lex-rendement" class="lex" data-lex="rendement">Rendement annuel</a></div><div class="kpi-val"><span data-v="f4_rendement">75 %</span></div><div class="kpi-sub">Par ariary investi, au rythme de croisière</div></div></div>
+
+        <div class="block">
+          <div class="block-h">Investissement</div>
+          <div class="table-wrap"><table class="tbl"><tbody><tr><td>Broyeur-mélangeur</td><td class="num"><span data-v="f4_i0">45 000 000</span> Ar</td></tr><tr><td>Hangar et silos de stockage</td><td class="num"><span data-v="f4_i1">40 000 000</span> Ar</td></tr><tr><td>Stock de matières premières : campagne de maïs</td><td class="num"><span data-v="f4_i2">35 000 000</span> Ar</td></tr><tr><td>Camionnette de collecte et de livraison</td><td class="num"><span data-v="f4_i3">25 000 000</span> Ar</td></tr><tr><td>Réserve de trésorerie</td><td class="num"><span data-v="f4_i4">14 000 000</span> Ar</td></tr><tr><td>Groupe électrogène et raccordement</td><td class="num"><span data-v="f4_i5">12 000 000</span> Ar</td></tr><tr><td>Ensacheuse et couseuse</td><td class="num"><span data-v="f4_i6">8 000 000</span> Ar</td></tr><tr><td>Formulation, analyses, agrément <em>(estimation)</em></td><td class="num"><span data-v="f4_i7">8 000 000</span> Ar</td></tr><tr><td>Bascule et petit matériel</td><td class="num"><span data-v="f4_i8">3 000 000</span> Ar</td></tr><tr class="total"><td>Total à engager</td><td class="num"><span data-v="f4_inv">190 000 000</span> Ar</td></tr></tbody></table></div>
+        </div>
+
+        <div class="fig"><div class="fig-chart"><div class="fig-row"><div class="chart">
+<svg viewBox="0 0 156 156" role="img" aria-label="Investissement — Provende pour volaille">
+<title>Investissement — Provende pour volaille</title>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#e5e7eb" stroke-width="24"/>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#b45309" stroke-width="24" stroke-dasharray="86.31 278.11" stroke-dashoffset="-0.00" transform="rotate(-90 78 78)"/>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#0f766e" stroke-width="24" stroke-dasharray="76.72 287.70" stroke-dashoffset="-86.31" transform="rotate(-90 78 78)"/>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#4338ca" stroke-width="24" stroke-dasharray="67.13 297.29" stroke-dashoffset="-163.03" transform="rotate(-90 78 78)"/>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#be123c" stroke-width="24" stroke-dasharray="47.95 316.47" stroke-dashoffset="-230.16" transform="rotate(-90 78 78)"/>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#a16207" stroke-width="24" stroke-dasharray="26.85 337.57" stroke-dashoffset="-278.11" transform="rotate(-90 78 78)"/>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#475569" stroke-width="24" stroke-dasharray="23.02 341.41" stroke-dashoffset="-304.97" transform="rotate(-90 78 78)"/>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#0891b2" stroke-width="24" stroke-dasharray="15.34 349.08" stroke-dashoffset="-327.98" transform="rotate(-90 78 78)"/>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#7c3aed" stroke-width="24" stroke-dasharray="15.34 349.08" stroke-dashoffset="-343.33" transform="rotate(-90 78 78)"/>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#65a30d" stroke-width="24" stroke-dasharray="5.75 358.67" stroke-dashoffset="-358.67" transform="rotate(-90 78 78)"/>
+<text x="78" y="74" text-anchor="middle" font-size="9" font-weight="600" fill="#6b7280">TOTAL</text><text x="78" y="92" text-anchor="middle" font-size="17" font-weight="700" fill="#111827">190 M</text><text x="78" y="106" text-anchor="middle" font-size="9" fill="#9ca3af">ariary</text>
+</svg></div>
+<div class="legend-col"><ul class="legend-list">
+<li><i style="background:#b45309"></i><span class="ll-lbl">Broyeur-mélangeur</span><span class="ll-amt">45 000 000 Ar<em>24 %</em></span></li>
+<li><i style="background:#0f766e"></i><span class="ll-lbl">Hangar et silos de stockage</span><span class="ll-amt">40 000 000 Ar<em>21 %</em></span></li>
+<li><i style="background:#4338ca"></i><span class="ll-lbl">Stock de matières premières</span><span class="ll-amt">35 000 000 Ar<em>18 %</em></span></li>
+<li><i style="background:#be123c"></i><span class="ll-lbl">Camionnette de collecte et de livraison</span><span class="ll-amt">25 000 000 Ar<em>13 %</em></span></li>
+<li><i style="background:#a16207"></i><span class="ll-lbl">Réserve de trésorerie</span><span class="ll-amt">14 000 000 Ar<em>7 %</em></span></li>
+<li><i style="background:#475569"></i><span class="ll-lbl">Groupe électrogène et raccordement</span><span class="ll-amt">12 000 000 Ar<em>6 %</em></span></li>
+<li><i style="background:#0891b2"></i><span class="ll-lbl">Ensacheuse et couseuse</span><span class="ll-amt">8 000 000 Ar<em>4 %</em></span></li>
+<li><i style="background:#7c3aed"></i><span class="ll-lbl">Formulation, analyses, agrément (estimation)</span><span class="ll-amt">8 000 000 Ar<em>4 %</em></span></li>
+<li><i style="background:#65a30d"></i><span class="ll-lbl">Bascule et petit matériel</span><span class="ll-amt">3 000 000 Ar<em>2 %</em></span></li>
+</ul></div></div></div><p class="fig-cap"><b>Où part la mise.</b> <span data-v="f4_inv">190 000 000</span> Ar au total.</p></div>
+
+        <div class="block">
+          <div class="block-h"><a href="#lex-charges-fixes" class="lex"
+              data-lex="charges-fixes">Charges fixes mensuelles</a></div>
+          <div class="table-wrap"><table class="tbl"><tbody><tr><td>Cinq ouvriers</td><td class="num"><span data-v="f4_x0">1 750 000</span> Ar</td></tr><tr><td>Carburant : 300 L</td><td class="num"><span data-v="f4_x1">1 620 000</span> Ar</td></tr><tr><td>Électricité</td><td class="num"><span data-v="f4_x2">1 400 000</span> Ar</td></tr><tr><td>Un technicien de formulation</td><td class="num"><span data-v="f4_x3">700 000</span> Ar</td></tr><tr><td>Terrain et hangar</td><td class="num"><span data-v="f4_x4">900 000</span> Ar</td></tr><tr><td>Entretien du broyeur</td><td class="num"><span data-v="f4_x5">500 000</span> Ar</td></tr><tr><td>Divers, imprévus</td><td class="num"><span data-v="f4_x6">300 000</span> Ar</td></tr><tr class="total"><td>Total par mois</td><td class="num"><span data-v="f4_fixes">7 170 000</span> Ar</td></tr></tbody></table></div>
+        </div>
+
+        <div class="key">
+          <div class="block-h">Pourquoi le stock de matières est la ligne décisive</div>
+          <p>Le maïs pèse près de la moitié du coût d'un sac. Il se récolte en quelques semaines et
+            se consomme toute l'année : son prix monte fortement en période de soudure. La ligne
+            « stock de matières premières » de l'investissement n'est donc pas du confort, c'est
+            <b>l'outil qui fixe ton coût de revient pour douze mois</b>. Un concurrent qui achète
+            au fil de l'eau paiera sa matière plus cher que toi la moitié de l'année.</p>
+        </div>
+
+        <div class="block">
+          <div class="block-h">Prévisionnel sur douze mois</div>
+          <div class="table-wrap"><table class="tbl"><thead><tr><th>Mois</th><th class="num">Sacs</th><th class="num"><a href="#lex-chiffre-affaires" class="lex" data-lex="chiffre-affaires">Chiffre d’affaires</a></th><th class="num"><a href="#lex-cout-variable" class="lex" data-lex="cout-variable">Coût variable</a></th><th class="num"><a href="#lex-charges-fixes" class="lex" data-lex="charges-fixes">Charges fixes</a></th><th class="num">Net du mois</th><th class="num"><a href="#lex-tresorerie" class="lex" data-lex="tresorerie">Trésorerie cumulée</a></th></tr></thead><tbody><tr><td>1 — installation, formulation</td><td class="num"><span data-v="f4_m1_q">0</span></td><td class="num"><span data-v="f4_m1_ca">0</span></td><td class="num"><span data-v="f4_m1_cv">0</span></td><td class="num"><span data-v="f4_m1_fx">7 170 000</span></td><td class="num"><span data-v="f4_m1_net">− 7 170 000</span></td><td class="num"><span data-v="f4_m1_cum">− 197 170 000</span></td></tr><tr><td>2</td><td class="num"><span data-v="f4_m2_q">200</span></td><td class="num"><span data-v="f4_m2_ca">32 010 000</span></td><td class="num"><span data-v="f4_m2_cv">27 860 000</span></td><td class="num"><span data-v="f4_m2_fx">7 170 000</span></td><td class="num"><span data-v="f4_m2_net">− 3 020 000</span></td><td class="num"><span data-v="f4_m2_cum">− 200 190 000</span></td></tr><tr><td>3</td><td class="num"><span data-v="f4_m3_q">350</span></td><td class="num"><span data-v="f4_m3_ca">56 017 500</span></td><td class="num"><span data-v="f4_m3_cv">48 755 000</span></td><td class="num"><span data-v="f4_m3_fx">7 170 000</span></td><td class="num"><span data-v="f4_m3_net">+ 92 500</span></td><td class="num"><span data-v="f4_m3_cum">− 200 097 500</span></td></tr><tr><td>4</td><td class="num"><span data-v="f4_m4_q">500</span></td><td class="num"><span data-v="f4_m4_ca">80 025 000</span></td><td class="num"><span data-v="f4_m4_cv">69 650 000</span></td><td class="num"><span data-v="f4_m4_fx">7 170 000</span></td><td class="num"><span data-v="f4_m4_net">+ 3 205 000</span></td><td class="num"><span data-v="f4_m4_cum">− 196 892 500</span></td></tr><tr><td>5</td><td class="num"><span data-v="f4_m5_q">650</span></td><td class="num"><span data-v="f4_m5_ca">104 032 500</span></td><td class="num"><span data-v="f4_m5_cv">90 545 000</span></td><td class="num"><span data-v="f4_m5_fx">7 170 000</span></td><td class="num"><span data-v="f4_m5_net">+ 6 317 500</span></td><td class="num"><span data-v="f4_m5_cum">− 190 575 000</span></td></tr><tr><td>6 — point mort</td><td class="num"><span data-v="f4_m6_q">780</span></td><td class="num"><span data-v="f4_m6_ca">124 839 000</span></td><td class="num"><span data-v="f4_m6_cv">108 654 000</span></td><td class="num"><span data-v="f4_m6_fx">7 170 000</span></td><td class="num"><span data-v="f4_m6_net">+ 9 015 000</span></td><td class="num"><span data-v="f4_m6_cum">− 181 560 000</span></td></tr><tr><td>7</td><td class="num"><span data-v="f4_m7_q">900</span></td><td class="num"><span data-v="f4_m7_ca">144 045 000</span></td><td class="num"><span data-v="f4_m7_cv">125 370 000</span></td><td class="num"><span data-v="f4_m7_fx">7 170 000</span></td><td class="num"><span data-v="f4_m7_net">+ 11 505 000</span></td><td class="num"><span data-v="f4_m7_cum">− 170 055 000</span></td></tr><tr><td>8</td><td class="num"><span data-v="f4_m8_q">900</span></td><td class="num"><span data-v="f4_m8_ca">144 045 000</span></td><td class="num"><span data-v="f4_m8_cv">125 370 000</span></td><td class="num"><span data-v="f4_m8_fx">7 170 000</span></td><td class="num"><span data-v="f4_m8_net">+ 11 505 000</span></td><td class="num"><span data-v="f4_m8_cum">− 158 550 000</span></td></tr><tr><td>9</td><td class="num"><span data-v="f4_m9_q">900</span></td><td class="num"><span data-v="f4_m9_ca">144 045 000</span></td><td class="num"><span data-v="f4_m9_cv">125 370 000</span></td><td class="num"><span data-v="f4_m9_fx">7 170 000</span></td><td class="num"><span data-v="f4_m9_net">+ 11 505 000</span></td><td class="num"><span data-v="f4_m9_cum">− 147 045 000</span></td></tr><tr><td>10</td><td class="num"><span data-v="f4_m10_q">900</span></td><td class="num"><span data-v="f4_m10_ca">144 045 000</span></td><td class="num"><span data-v="f4_m10_cv">125 370 000</span></td><td class="num"><span data-v="f4_m10_fx">7 170 000</span></td><td class="num"><span data-v="f4_m10_net">+ 11 505 000</span></td><td class="num"><span data-v="f4_m10_cum">− 135 540 000</span></td></tr><tr><td>11</td><td class="num"><span data-v="f4_m11_q">900</span></td><td class="num"><span data-v="f4_m11_ca">144 045 000</span></td><td class="num"><span data-v="f4_m11_cv">125 370 000</span></td><td class="num"><span data-v="f4_m11_fx">7 170 000</span></td><td class="num"><span data-v="f4_m11_net">+ 11 505 000</span></td><td class="num"><span data-v="f4_m11_cum">− 124 035 000</span></td></tr><tr><td>12</td><td class="num"><span data-v="f4_m12_q">900</span></td><td class="num"><span data-v="f4_m12_ca">144 045 000</span></td><td class="num"><span data-v="f4_m12_cv">125 370 000</span></td><td class="num"><span data-v="f4_m12_fx">7 170 000</span></td><td class="num"><span data-v="f4_m12_net">+ 11 505 000</span></td><td class="num"><span data-v="f4_m12_cum">− 112 530 000</span></td></tr><tr class="total"><td>Total 12 mois</td><td class="num"><span data-v="f4_tq">7 880</span></td><td class="num"><span data-v="f4_tca">1 261 194 000</span></td><td class="num"><span data-v="f4_tcv">1 097 684 000</span></td><td class="num"><span data-v="f4_tfx">86 040 000</span></td><td class="num"><span data-v="f4_tnet">+ 77 470 000</span></td><td class="num"><span data-v="f4_tcum">− 112 530 000</span></td></tr></tbody></table></div>
+        </div>
+
+        <div class="fig"><div class="fig-chart"><svg viewBox="0 0 460 270" role="img"><line x1="52" y1="231.5" x2="448" y2="231.5" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="235.0" text-anchor="end" font-size="9.5" fill="#9ca3af">-220 M</text><line x1="52" y1="222.3" x2="448" y2="222.3" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="225.8" text-anchor="end" font-size="9.5" fill="#9ca3af">-210 M</text><line x1="52" y1="213.1" x2="448" y2="213.1" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="216.6" text-anchor="end" font-size="9.5" fill="#9ca3af">-200 M</text><line x1="52" y1="203.9" x2="448" y2="203.9" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="207.4" text-anchor="end" font-size="9.5" fill="#9ca3af">-190 M</text><line x1="52" y1="194.8" x2="448" y2="194.8" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="198.3" text-anchor="end" font-size="9.5" fill="#9ca3af">-180 M</text><line x1="52" y1="185.6" x2="448" y2="185.6" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="189.1" text-anchor="end" font-size="9.5" fill="#9ca3af">-170 M</text><line x1="52" y1="176.4" x2="448" y2="176.4" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="179.9" text-anchor="end" font-size="9.5" fill="#9ca3af">-160 M</text><line x1="52" y1="167.2" x2="448" y2="167.2" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="170.7" text-anchor="end" font-size="9.5" fill="#9ca3af">-150 M</text><line x1="52" y1="158.0" x2="448" y2="158.0" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="161.5" text-anchor="end" font-size="9.5" fill="#9ca3af">-140 M</text><line x1="52" y1="148.8" x2="448" y2="148.8" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="152.3" text-anchor="end" font-size="9.5" fill="#9ca3af">-130 M</text><line x1="52" y1="139.6" x2="448" y2="139.6" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="143.1" text-anchor="end" font-size="9.5" fill="#9ca3af">-120 M</text><line x1="52" y1="130.4" x2="448" y2="130.4" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="133.9" text-anchor="end" font-size="9.5" fill="#9ca3af">-110 M</text><line x1="52" y1="121.2" x2="448" y2="121.2" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="124.7" text-anchor="end" font-size="9.5" fill="#9ca3af">-100 M</text><line x1="52" y1="112.0" x2="448" y2="112.0" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="115.5" text-anchor="end" font-size="9.5" fill="#9ca3af">-90 M</text><line x1="52" y1="102.8" x2="448" y2="102.8" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="106.3" text-anchor="end" font-size="9.5" fill="#9ca3af">-80 M</text><line x1="52" y1="93.7" x2="448" y2="93.7" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="97.2" text-anchor="end" font-size="9.5" fill="#9ca3af">-70 M</text><line x1="52" y1="84.5" x2="448" y2="84.5" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="88.0" text-anchor="end" font-size="9.5" fill="#9ca3af">-60 M</text><line x1="52" y1="75.3" x2="448" y2="75.3" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="78.8" text-anchor="end" font-size="9.5" fill="#9ca3af">-50 M</text><line x1="52" y1="66.1" x2="448" y2="66.1" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="69.6" text-anchor="end" font-size="9.5" fill="#9ca3af">-40 M</text><line x1="52" y1="56.9" x2="448" y2="56.9" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="60.4" text-anchor="end" font-size="9.5" fill="#9ca3af">-30 M</text><line x1="52" y1="47.7" x2="448" y2="47.7" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="51.2" text-anchor="end" font-size="9.5" fill="#9ca3af">-20 M</text><line x1="52" y1="38.5" x2="448" y2="38.5" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="42.0" text-anchor="end" font-size="9.5" fill="#9ca3af">-10 M</text><line x1="52" y1="29.3" x2="448" y2="29.3" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="32.8" text-anchor="end" font-size="9.5" fill="#9ca3af">0</text><line x1="52" y1="20.1" x2="448" y2="20.1" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="23.6" text-anchor="end" font-size="9.5" fill="#9ca3af">10 M</text><line x1="52" y1="29.3" x2="448" y2="29.3" stroke="#111827" stroke-width="1.5"/><text x="52.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">1</text><text x="88.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">2</text><text x="124.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">3</text><text x="160.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">4</text><text x="196.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">5</text><text x="232.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">6</text><text x="268.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">7</text><text x="304.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">8</text><text x="340.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">9</text><text x="376.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">10</text><text x="412.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">11</text><text x="448.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">12</text><text x="250.0" y="267" text-anchor="middle" font-size="9.5" fill="#6b7280">mois d’activité</text><polyline points="52.0,210.5 88.0,213.3 124.0,213.2 160.0,210.3 196.0,204.5 232.0,196.2 268.0,185.6 304.0,175.0 340.0,164.5 376.0,153.9 412.0,143.3 448.0,132.7" fill="none" stroke="#b45309" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><polyline points="52.0,210.5 88.0,215.2 124.0,218.5 160.0,220.3 196.0,220.7 232.0,219.8 268.0,217.8 304.0,215.9 340.0,213.9 376.0,211.9 412.0,209.9 448.0,207.9" fill="none" stroke="#0f766e" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/></svg></div><p class="fig-cap"><b>La trésorerie cumulée, mois par mois.</b> Elle démarre à − <span data-v="f4_inv">190 000 000</span> Ar. Le retour sur la mise tombe à <span data-v="f4_retour">1,8 ans</span> au rythme prévu, <span data-v="f4_retourp">8,5 ans</span> si les volumes sont deux fois plus lents.</p></div>
+
+        <div class="block">
+          <div class="block-h">Ce qui bloque la croissance</div>
+          <p>L’approvisionnement en maïs, et la capacité du broyeur</p>
+        </div>
+
+        <div class="block">
+          <div class="block-h">Risques et parades</div>
+          <div class="risk"><div class="risk-h">Le maïs commande tout</div><p>Il pèse près de la moitié du coût du sac. Sa récolte est saisonnière, son prix monte de 40 % en soudure.</p><p class="risk-p"><b>La parade —</b> Achète toute ta campagne à la récolte, quitte à emprunter pour le faire : le silo est moins cher que la soudure. C’est à cela que sert la ligne « stock de matières premières » de l’investissement.</p></div><div class="risk"><div class="risk-h">Une formule fausse tue les poulets</div><p>Et ton nom avec. En alimentation animale, la réputation se perd en une bande.</p><p class="risk-p"><b>La parade —</b> Un technicien formulateur dès le premier jour, une analyse par lot de matière, et un échantillon de chaque fabrication gardé trois mois.</p></div><div class="risk"><div class="risk-h">La marge est étroite</div><p>Quinze pour cent, pas davantage. C’est un métier de volume et de rigueur, pas de coup.</p><p class="risk-p"><b>La parade —</b> Ne descends jamais le prix pour prendre un client : descends le coût en achetant mieux la matière. Et suis ton coût de revient par lot, pas par mois.</p></div><div class="risk"><div class="risk-h">Les éleveurs disparaissent par vagues</div><p>Une épizootie, et la moitié de tes clients arrête pour six mois.</p><p class="risk-p"><b>La parade —</b> Diversifie tôt : pondeuses, chair, porcs, poissons. Quatre formules valent mieux qu’une clientèle unique.</p></div>
+        </div>
+
+        <div class="block">
+          <div class="block-h">Plan de lancement</div>
+          <div class="phases"><div class="phase"><div class="phase-q">Mois 1</div><p>Montage, raccordement, mise au point des formules avec le technicien. Aucun sac vendu.</p></div><div class="phase"><div class="phase-q">Mois 2 – 4</div><p>Premiers éleveurs, en direct. Tu suis leurs résultats semaine après semaine — c’est ta seule publicité.</p></div><div class="phase"><div class="phase-q">Mois 5 – 8</div><p>Point mort. Tu ouvres la formule chair et tu prends deux revendeurs de province.</p></div><div class="phase"><div class="phase-q">Mois 9 – 12</div><p>Campagne de maïs : tu achètes l’année entière. Le silo devient ton avantage sur les concurrents.</p></div></div>
+        </div>
+      </article>
+
+      <!-- ─────────── 5 ─────────── -->
+      <article class="model">
+        <div class="model-head">
+          <div class="model-n">5</div>
+          <div class="model-id">
+            <h3>Rizerie moderne</h3>
+            <p>Le pays cultive le riz et en importe pourtant chaque année. Le trou n’est pas au champ, il est entre le champ et l’assiette : séchage, décorticage, étuvage, tri, conditionnement. C’est là que se perd la valeur, et c’est là qu’on la reprend.</p>
+            <div class="tags"><span class="tag risk-high">Risque élevé</span><span class="tag ">Agro-industrie</span><span class="tag ">Le symbole du pays</span></div>
+          </div>
+        </div>
+
+        <div class="kpis"><div class="kpi"><div class="kpi-lbl">Investissement</div><div class="kpi-val"><span data-v="f5_inv">727 000 000</span> Ar</div><div class="kpi-sub">Palier 4 — produire la matière</div></div><div class="kpi"><div class="kpi-lbl"><a href="#lex-point-mort" class="lex" data-lex="point-mort">Retour sur la mise</a></div><div class="kpi-val"><span data-v="f5_retour">2,3 ans</span></div><div class="kpi-sub">En scénario prudent : <span data-v="f5_retourp">plus de 10 ans</span></div></div><div class="kpi"><div class="kpi-lbl"><a href="#lex-plafond" class="lex" data-lex="plafond">Bénéfice mensuel au plafond</a></div><div class="kpi-val"><span data-v="f5_plafond">34 590 000</span> Ar</div><div class="kpi-sub">Une fois la montée en charge finie</div></div><div class="kpi"><div class="kpi-lbl"><a href="#lex-rendement" class="lex" data-lex="rendement">Rendement annuel</a></div><div class="kpi-val"><span data-v="f5_rendement">55 %</span></div><div class="kpi-sub">Par ariary investi, au rythme de croisière</div></div></div>
+
+        <div class="key">
+          <div class="block-h">Pourquoi le riz est le symbole</div>
+          <p>Le pays cultive le riz, en mange plus que presque partout ailleurs, et en importe
+            pourtant chaque année. Le trou n'est pas au champ : il est <b>entre le champ et
+              l'assiette</b>. Paddy rentré trop humide, décorticage qui casse le grain, absence de
+            tri, conditionnement inexistant — la valeur se perd là, et c'est là qu'on la reprend.
+            Une rizerie ne demande pas de cultiver : elle demande de <b>sécher, décortiquer, étuver,
+              trier et ensacher mieux que ce qui se fait aujourd'hui</b>.</p>
+        </div>
+
+        <div class="block">
+          <div class="block-h">Investissement</div>
+          <div class="table-wrap"><table class="tbl"><tbody><tr><td>Ligne complète : décortiqueuse, blanchisseur, trieur</td><td class="num"><span data-v="f5_i0">180 000 000</span> Ar</td></tr><tr><td>Fonds de roulement : collecte de paddy de campagne</td><td class="num"><span data-v="f5_i1">120 000 000</span> Ar</td></tr><tr><td>Hangar, magasin et aire de séchage</td><td class="num"><span data-v="f5_i2">120 000 000</span> Ar</td></tr><tr><td>Camion de 10 t d’occasion</td><td class="num"><span data-v="f5_i3">70 000 000</span> Ar</td></tr><tr><td>Étuveuse</td><td class="num"><span data-v="f5_i4">65 000 000</span> Ar</td></tr><tr><td>Séchoir mécanique</td><td class="num"><span data-v="f5_i5">55 000 000</span> Ar</td></tr><tr><td>Groupe électrogène et raccordement moyenne tension</td><td class="num"><span data-v="f5_i6">45 000 000</span> Ar</td></tr><tr><td>Pont-bascule</td><td class="num"><span data-v="f5_i7">35 000 000</span> Ar</td></tr><tr><td>Réserve de trésorerie</td><td class="num"><span data-v="f5_i8">25 000 000</span> Ar</td></tr><tr><td>Statut, certification, analyses <em>(estimation)</em></td><td class="num"><span data-v="f5_i9">12 000 000</span> Ar</td></tr><tr class="total"><td>Total à engager</td><td class="num"><span data-v="f5_inv">727 000 000</span> Ar</td></tr></tbody></table></div>
+        </div>
+
+        <div class="fig"><div class="fig-chart"><div class="fig-row"><div class="chart">
+<svg viewBox="0 0 156 156" role="img" aria-label="Investissement — Rizerie moderne">
+<title>Investissement — Rizerie moderne</title>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#e5e7eb" stroke-width="24"/>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#b45309" stroke-width="24" stroke-dasharray="90.23 274.20" stroke-dashoffset="-0.00" transform="rotate(-90 78 78)"/>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#0f766e" stroke-width="24" stroke-dasharray="60.15 304.27" stroke-dashoffset="-90.23" transform="rotate(-90 78 78)"/>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#4338ca" stroke-width="24" stroke-dasharray="60.15 304.27" stroke-dashoffset="-150.38" transform="rotate(-90 78 78)"/>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#be123c" stroke-width="24" stroke-dasharray="35.09 329.34" stroke-dashoffset="-210.53" transform="rotate(-90 78 78)"/>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#a16207" stroke-width="24" stroke-dasharray="32.58 331.84" stroke-dashoffset="-245.62" transform="rotate(-90 78 78)"/>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#475569" stroke-width="24" stroke-dasharray="27.57 336.85" stroke-dashoffset="-278.21" transform="rotate(-90 78 78)"/>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#0891b2" stroke-width="24" stroke-dasharray="22.56 341.87" stroke-dashoffset="-305.78" transform="rotate(-90 78 78)"/>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#7c3aed" stroke-width="24" stroke-dasharray="17.54 346.88" stroke-dashoffset="-328.33" transform="rotate(-90 78 78)"/>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#65a30d" stroke-width="24" stroke-dasharray="12.53 351.89" stroke-dashoffset="-345.88" transform="rotate(-90 78 78)"/>
+<circle cx="78" cy="78" r="58" fill="none" stroke="#7e22ce" stroke-width="24" stroke-dasharray="6.02 358.41" stroke-dashoffset="-358.41" transform="rotate(-90 78 78)"/>
+<text x="78" y="74" text-anchor="middle" font-size="9" font-weight="600" fill="#6b7280">TOTAL</text><text x="78" y="92" text-anchor="middle" font-size="17" font-weight="700" fill="#111827">727 M</text><text x="78" y="106" text-anchor="middle" font-size="9" fill="#9ca3af">ariary</text>
+</svg></div>
+<div class="legend-col"><ul class="legend-list">
+<li><i style="background:#b45309"></i><span class="ll-lbl">Ligne complète</span><span class="ll-amt">180 000 000 Ar<em>25 %</em></span></li>
+<li><i style="background:#0f766e"></i><span class="ll-lbl">Fonds de roulement</span><span class="ll-amt">120 000 000 Ar<em>17 %</em></span></li>
+<li><i style="background:#4338ca"></i><span class="ll-lbl">Hangar, magasin et aire de séchage</span><span class="ll-amt">120 000 000 Ar<em>17 %</em></span></li>
+<li><i style="background:#be123c"></i><span class="ll-lbl">Camion de 10 t d’occasion</span><span class="ll-amt">70 000 000 Ar<em>10 %</em></span></li>
+<li><i style="background:#a16207"></i><span class="ll-lbl">Étuveuse</span><span class="ll-amt">65 000 000 Ar<em>9 %</em></span></li>
+<li><i style="background:#475569"></i><span class="ll-lbl">Séchoir mécanique</span><span class="ll-amt">55 000 000 Ar<em>8 %</em></span></li>
+<li><i style="background:#0891b2"></i><span class="ll-lbl">Groupe électrogène et raccordement moyenne tension</span><span class="ll-amt">45 000 000 Ar<em>6 %</em></span></li>
+<li><i style="background:#7c3aed"></i><span class="ll-lbl">Pont-bascule</span><span class="ll-amt">35 000 000 Ar<em>5 %</em></span></li>
+<li><i style="background:#65a30d"></i><span class="ll-lbl">Réserve de trésorerie</span><span class="ll-amt">25 000 000 Ar<em>3 %</em></span></li>
+<li><i style="background:#7e22ce"></i><span class="ll-lbl">Statut, certification, analyses (estimation)</span><span class="ll-amt">12 000 000 Ar<em>2 %</em></span></li>
+</ul></div></div></div><p class="fig-cap"><b>Où part la mise.</b> <span data-v="f5_inv">727 000 000</span> Ar au total.</p></div>
+
+        <div class="block">
+          <div class="block-h"><a href="#lex-charges-fixes" class="lex"
+              data-lex="charges-fixes">Charges fixes mensuelles</a></div>
+          <div class="table-wrap"><table class="tbl"><tbody><tr><td>Quatorze ouvriers, deux équipes</td><td class="num"><span data-v="f5_x0">4 900 000</span> Ar</td></tr><tr><td>Électricité</td><td class="num"><span data-v="f5_x1">6 300 000</span> Ar</td></tr><tr><td>Trois cadres : production, collecte, qualité</td><td class="num"><span data-v="f5_x2">2 100 000</span> Ar</td></tr><tr><td>Carburant : 900 L</td><td class="num"><span data-v="f5_x3">4 860 000</span> Ar</td></tr><tr><td>Entretien de la ligne</td><td class="num"><span data-v="f5_x4">2 200 000</span> Ar</td></tr><tr><td>Terrain</td><td class="num"><span data-v="f5_x5">1 350 000</span> Ar</td></tr><tr><td>Assurance</td><td class="num"><span data-v="f5_x6">900 000</span> Ar</td></tr><tr><td>Divers, imprévus</td><td class="num"><span data-v="f5_x7">800 000</span> Ar</td></tr><tr class="total"><td>Total par mois</td><td class="num"><span data-v="f5_fixes">23 410 000</span> Ar</td></tr></tbody></table></div>
+        </div>
+
+        <div class="warn">
+          <div class="block-h">Le <a href="#lex-fonds-roulement" class="lex"
+              data-lex="fonds-roulement">fonds de roulement</a> est la ligne qui tue</div>
+          <p>Cent vingt millions d'ariary de paddy : c'est la deuxième ligne de l'investissement, et
+            c'est celle qu'on rogne toujours en premier parce qu'elle n'achète rien de visible. Or
+            le paddy s'achète en trois mois et se vend en douze. <b>Une rizerie sous-financée
+              tourne un trimestre, puis s'arrête, magasin vide et caisse vide</b>, pendant que la
+            machine à cent quatre-vingts millions dort sous une bâche. Ce n'est presque jamais le
+            marché qui met une rizerie à genoux : c'est sa trésorerie de campagne.</p>
+        </div>
+
+        <div class="block">
+          <div class="block-h">Prévisionnel sur douze mois</div>
+          <div class="table-wrap"><table class="tbl"><thead><tr><th>Mois</th><th class="num">Sacs de 25 kg</th><th class="num"><a href="#lex-chiffre-affaires" class="lex" data-lex="chiffre-affaires">Chiffre d’affaires</a></th><th class="num"><a href="#lex-cout-variable" class="lex" data-lex="cout-variable">Coût variable</a></th><th class="num"><a href="#lex-charges-fixes" class="lex" data-lex="charges-fixes">Charges fixes</a></th><th class="num">Net du mois</th><th class="num"><a href="#lex-tresorerie" class="lex" data-lex="tresorerie">Trésorerie cumulée</a></th></tr></thead><tbody><tr><td>1 — installation et essais</td><td class="num"><span data-v="f5_m1_q">0</span></td><td class="num"><span data-v="f5_m1_ca">0</span></td><td class="num"><span data-v="f5_m1_cv">0</span></td><td class="num"><span data-v="f5_m1_fx">23 410 000</span></td><td class="num"><span data-v="f5_m1_net">− 23 410 000</span></td><td class="num"><span data-v="f5_m1_cum">− 750 410 000</span></td></tr><tr><td>2</td><td class="num"><span data-v="f5_m2_q">1 000</span></td><td class="num"><span data-v="f5_m2_ca">91 200 000</span></td><td class="num"><span data-v="f5_m2_cv">79 600 000</span></td><td class="num"><span data-v="f5_m2_fx">23 410 000</span></td><td class="num"><span data-v="f5_m2_net">− 11 810 000</span></td><td class="num"><span data-v="f5_m2_cum">− 762 220 000</span></td></tr><tr><td>3</td><td class="num"><span data-v="f5_m3_q">1 800</span></td><td class="num"><span data-v="f5_m3_ca">164 160 000</span></td><td class="num"><span data-v="f5_m3_cv">143 280 000</span></td><td class="num"><span data-v="f5_m3_fx">23 410 000</span></td><td class="num"><span data-v="f5_m3_net">− 2 530 000</span></td><td class="num"><span data-v="f5_m3_cum">− 764 750 000</span></td></tr><tr><td>4</td><td class="num"><span data-v="f5_m4_q">2 600</span></td><td class="num"><span data-v="f5_m4_ca">237 120 000</span></td><td class="num"><span data-v="f5_m4_cv">206 960 000</span></td><td class="num"><span data-v="f5_m4_fx">23 410 000</span></td><td class="num"><span data-v="f5_m4_net">+ 6 750 000</span></td><td class="num"><span data-v="f5_m4_cum">− 758 000 000</span></td></tr><tr><td>5</td><td class="num"><span data-v="f5_m5_q">3 400</span></td><td class="num"><span data-v="f5_m5_ca">310 080 000</span></td><td class="num"><span data-v="f5_m5_cv">270 640 000</span></td><td class="num"><span data-v="f5_m5_fx">23 410 000</span></td><td class="num"><span data-v="f5_m5_net">+ 16 030 000</span></td><td class="num"><span data-v="f5_m5_cum">− 741 970 000</span></td></tr><tr><td>6 — point mort</td><td class="num"><span data-v="f5_m6_q">4 200</span></td><td class="num"><span data-v="f5_m6_ca">383 040 000</span></td><td class="num"><span data-v="f5_m6_cv">334 320 000</span></td><td class="num"><span data-v="f5_m6_fx">23 410 000</span></td><td class="num"><span data-v="f5_m6_net">+ 25 310 000</span></td><td class="num"><span data-v="f5_m6_cum">− 716 660 000</span></td></tr><tr><td>7</td><td class="num"><span data-v="f5_m7_q">5 000</span></td><td class="num"><span data-v="f5_m7_ca">456 000 000</span></td><td class="num"><span data-v="f5_m7_cv">398 000 000</span></td><td class="num"><span data-v="f5_m7_fx">23 410 000</span></td><td class="num"><span data-v="f5_m7_net">+ 34 590 000</span></td><td class="num"><span data-v="f5_m7_cum">− 682 070 000</span></td></tr><tr><td>8</td><td class="num"><span data-v="f5_m8_q">5 000</span></td><td class="num"><span data-v="f5_m8_ca">456 000 000</span></td><td class="num"><span data-v="f5_m8_cv">398 000 000</span></td><td class="num"><span data-v="f5_m8_fx">23 410 000</span></td><td class="num"><span data-v="f5_m8_net">+ 34 590 000</span></td><td class="num"><span data-v="f5_m8_cum">− 647 480 000</span></td></tr><tr><td>9</td><td class="num"><span data-v="f5_m9_q">5 000</span></td><td class="num"><span data-v="f5_m9_ca">456 000 000</span></td><td class="num"><span data-v="f5_m9_cv">398 000 000</span></td><td class="num"><span data-v="f5_m9_fx">23 410 000</span></td><td class="num"><span data-v="f5_m9_net">+ 34 590 000</span></td><td class="num"><span data-v="f5_m9_cum">− 612 890 000</span></td></tr><tr><td>10</td><td class="num"><span data-v="f5_m10_q">5 000</span></td><td class="num"><span data-v="f5_m10_ca">456 000 000</span></td><td class="num"><span data-v="f5_m10_cv">398 000 000</span></td><td class="num"><span data-v="f5_m10_fx">23 410 000</span></td><td class="num"><span data-v="f5_m10_net">+ 34 590 000</span></td><td class="num"><span data-v="f5_m10_cum">− 578 300 000</span></td></tr><tr><td>11</td><td class="num"><span data-v="f5_m11_q">5 000</span></td><td class="num"><span data-v="f5_m11_ca">456 000 000</span></td><td class="num"><span data-v="f5_m11_cv">398 000 000</span></td><td class="num"><span data-v="f5_m11_fx">23 410 000</span></td><td class="num"><span data-v="f5_m11_net">+ 34 590 000</span></td><td class="num"><span data-v="f5_m11_cum">− 543 710 000</span></td></tr><tr><td>12</td><td class="num"><span data-v="f5_m12_q">5 000</span></td><td class="num"><span data-v="f5_m12_ca">456 000 000</span></td><td class="num"><span data-v="f5_m12_cv">398 000 000</span></td><td class="num"><span data-v="f5_m12_fx">23 410 000</span></td><td class="num"><span data-v="f5_m12_net">+ 34 590 000</span></td><td class="num"><span data-v="f5_m12_cum">− 509 120 000</span></td></tr><tr class="total"><td>Total 12 mois</td><td class="num"><span data-v="f5_tq">43 000</span></td><td class="num"><span data-v="f5_tca">3 921 600 000</span></td><td class="num"><span data-v="f5_tcv">3 422 800 000</span></td><td class="num"><span data-v="f5_tfx">280 920 000</span></td><td class="num"><span data-v="f5_tnet">+ 217 880 000</span></td><td class="num"><span data-v="f5_tcum">− 509 120 000</span></td></tr></tbody></table></div>
+        </div>
+
+        <div class="fig"><div class="fig-chart"><svg viewBox="0 0 460 270" role="img"><line x1="52" y1="234.4" x2="448" y2="234.4" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="237.9" text-anchor="end" font-size="9.5" fill="#9ca3af">-850 M</text><line x1="52" y1="232.0" x2="448" y2="232.0" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="235.5" text-anchor="end" font-size="9.5" fill="#9ca3af">-840 M</text><line x1="52" y1="229.6" x2="448" y2="229.6" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="233.1" text-anchor="end" font-size="9.5" fill="#9ca3af">-830 M</text><line x1="52" y1="227.2" x2="448" y2="227.2" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="230.7" text-anchor="end" font-size="9.5" fill="#9ca3af">-820 M</text><line x1="52" y1="224.8" x2="448" y2="224.8" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="228.3" text-anchor="end" font-size="9.5" fill="#9ca3af">-810 M</text><line x1="52" y1="222.4" x2="448" y2="222.4" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="225.9" text-anchor="end" font-size="9.5" fill="#9ca3af">-800 M</text><line x1="52" y1="220.0" x2="448" y2="220.0" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="223.5" text-anchor="end" font-size="9.5" fill="#9ca3af">-790 M</text><line x1="52" y1="217.5" x2="448" y2="217.5" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="221.0" text-anchor="end" font-size="9.5" fill="#9ca3af">-780 M</text><line x1="52" y1="215.1" x2="448" y2="215.1" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="218.6" text-anchor="end" font-size="9.5" fill="#9ca3af">-770 M</text><line x1="52" y1="212.7" x2="448" y2="212.7" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="216.2" text-anchor="end" font-size="9.5" fill="#9ca3af">-760 M</text><line x1="52" y1="210.3" x2="448" y2="210.3" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="213.8" text-anchor="end" font-size="9.5" fill="#9ca3af">-750 M</text><line x1="52" y1="207.9" x2="448" y2="207.9" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="211.4" text-anchor="end" font-size="9.5" fill="#9ca3af">-740 M</text><line x1="52" y1="205.5" x2="448" y2="205.5" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="209.0" text-anchor="end" font-size="9.5" fill="#9ca3af">-730 M</text><line x1="52" y1="203.1" x2="448" y2="203.1" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="206.6" text-anchor="end" font-size="9.5" fill="#9ca3af">-720 M</text><line x1="52" y1="200.7" x2="448" y2="200.7" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="204.2" text-anchor="end" font-size="9.5" fill="#9ca3af">-710 M</text><line x1="52" y1="198.2" x2="448" y2="198.2" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="201.7" text-anchor="end" font-size="9.5" fill="#9ca3af">-700 M</text><line x1="52" y1="195.8" x2="448" y2="195.8" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="199.3" text-anchor="end" font-size="9.5" fill="#9ca3af">-690 M</text><line x1="52" y1="193.4" x2="448" y2="193.4" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="196.9" text-anchor="end" font-size="9.5" fill="#9ca3af">-680 M</text><line x1="52" y1="191.0" x2="448" y2="191.0" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="194.5" text-anchor="end" font-size="9.5" fill="#9ca3af">-670 M</text><line x1="52" y1="188.6" x2="448" y2="188.6" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="192.1" text-anchor="end" font-size="9.5" fill="#9ca3af">-660 M</text><line x1="52" y1="186.2" x2="448" y2="186.2" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="189.7" text-anchor="end" font-size="9.5" fill="#9ca3af">-650 M</text><line x1="52" y1="183.8" x2="448" y2="183.8" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="187.3" text-anchor="end" font-size="9.5" fill="#9ca3af">-640 M</text><line x1="52" y1="181.3" x2="448" y2="181.3" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="184.8" text-anchor="end" font-size="9.5" fill="#9ca3af">-630 M</text><line x1="52" y1="178.9" x2="448" y2="178.9" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="182.4" text-anchor="end" font-size="9.5" fill="#9ca3af">-620 M</text><line x1="52" y1="176.5" x2="448" y2="176.5" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="180.0" text-anchor="end" font-size="9.5" fill="#9ca3af">-610 M</text><line x1="52" y1="174.1" x2="448" y2="174.1" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="177.6" text-anchor="end" font-size="9.5" fill="#9ca3af">-600 M</text><line x1="52" y1="171.7" x2="448" y2="171.7" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="175.2" text-anchor="end" font-size="9.5" fill="#9ca3af">-590 M</text><line x1="52" y1="169.3" x2="448" y2="169.3" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="172.8" text-anchor="end" font-size="9.5" fill="#9ca3af">-580 M</text><line x1="52" y1="166.9" x2="448" y2="166.9" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="170.4" text-anchor="end" font-size="9.5" fill="#9ca3af">-570 M</text><line x1="52" y1="164.5" x2="448" y2="164.5" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="168.0" text-anchor="end" font-size="9.5" fill="#9ca3af">-560 M</text><line x1="52" y1="162.0" x2="448" y2="162.0" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="165.5" text-anchor="end" font-size="9.5" fill="#9ca3af">-550 M</text><line x1="52" y1="159.6" x2="448" y2="159.6" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="163.1" text-anchor="end" font-size="9.5" fill="#9ca3af">-540 M</text><line x1="52" y1="157.2" x2="448" y2="157.2" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="160.7" text-anchor="end" font-size="9.5" fill="#9ca3af">-530 M</text><line x1="52" y1="154.8" x2="448" y2="154.8" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="158.3" text-anchor="end" font-size="9.5" fill="#9ca3af">-520 M</text><line x1="52" y1="152.4" x2="448" y2="152.4" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="155.9" text-anchor="end" font-size="9.5" fill="#9ca3af">-510 M</text><line x1="52" y1="150.0" x2="448" y2="150.0" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="153.5" text-anchor="end" font-size="9.5" fill="#9ca3af">-500 M</text><line x1="52" y1="147.6" x2="448" y2="147.6" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="151.1" text-anchor="end" font-size="9.5" fill="#9ca3af">-490 M</text><line x1="52" y1="145.2" x2="448" y2="145.2" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="148.7" text-anchor="end" font-size="9.5" fill="#9ca3af">-480 M</text><line x1="52" y1="142.7" x2="448" y2="142.7" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="146.2" text-anchor="end" font-size="9.5" fill="#9ca3af">-470 M</text><line x1="52" y1="140.3" x2="448" y2="140.3" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="143.8" text-anchor="end" font-size="9.5" fill="#9ca3af">-460 M</text><line x1="52" y1="137.9" x2="448" y2="137.9" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="141.4" text-anchor="end" font-size="9.5" fill="#9ca3af">-450 M</text><line x1="52" y1="135.5" x2="448" y2="135.5" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="139.0" text-anchor="end" font-size="9.5" fill="#9ca3af">-440 M</text><line x1="52" y1="133.1" x2="448" y2="133.1" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="136.6" text-anchor="end" font-size="9.5" fill="#9ca3af">-430 M</text><line x1="52" y1="130.7" x2="448" y2="130.7" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="134.2" text-anchor="end" font-size="9.5" fill="#9ca3af">-420 M</text><line x1="52" y1="128.3" x2="448" y2="128.3" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="131.8" text-anchor="end" font-size="9.5" fill="#9ca3af">-410 M</text><line x1="52" y1="125.8" x2="448" y2="125.8" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="129.3" text-anchor="end" font-size="9.5" fill="#9ca3af">-400 M</text><line x1="52" y1="123.4" x2="448" y2="123.4" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="126.9" text-anchor="end" font-size="9.5" fill="#9ca3af">-390 M</text><line x1="52" y1="121.0" x2="448" y2="121.0" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="124.5" text-anchor="end" font-size="9.5" fill="#9ca3af">-380 M</text><line x1="52" y1="118.6" x2="448" y2="118.6" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="122.1" text-anchor="end" font-size="9.5" fill="#9ca3af">-370 M</text><line x1="52" y1="116.2" x2="448" y2="116.2" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="119.7" text-anchor="end" font-size="9.5" fill="#9ca3af">-360 M</text><line x1="52" y1="113.8" x2="448" y2="113.8" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="117.3" text-anchor="end" font-size="9.5" fill="#9ca3af">-350 M</text><line x1="52" y1="111.4" x2="448" y2="111.4" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="114.9" text-anchor="end" font-size="9.5" fill="#9ca3af">-340 M</text><line x1="52" y1="109.0" x2="448" y2="109.0" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="112.5" text-anchor="end" font-size="9.5" fill="#9ca3af">-330 M</text><line x1="52" y1="106.5" x2="448" y2="106.5" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="110.0" text-anchor="end" font-size="9.5" fill="#9ca3af">-320 M</text><line x1="52" y1="104.1" x2="448" y2="104.1" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="107.6" text-anchor="end" font-size="9.5" fill="#9ca3af">-310 M</text><line x1="52" y1="101.7" x2="448" y2="101.7" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="105.2" text-anchor="end" font-size="9.5" fill="#9ca3af">-300 M</text><line x1="52" y1="99.3" x2="448" y2="99.3" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="102.8" text-anchor="end" font-size="9.5" fill="#9ca3af">-290 M</text><line x1="52" y1="96.9" x2="448" y2="96.9" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="100.4" text-anchor="end" font-size="9.5" fill="#9ca3af">-280 M</text><line x1="52" y1="94.5" x2="448" y2="94.5" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="98.0" text-anchor="end" font-size="9.5" fill="#9ca3af">-270 M</text><line x1="52" y1="92.1" x2="448" y2="92.1" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="95.6" text-anchor="end" font-size="9.5" fill="#9ca3af">-260 M</text><line x1="52" y1="89.6" x2="448" y2="89.6" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="93.1" text-anchor="end" font-size="9.5" fill="#9ca3af">-250 M</text><line x1="52" y1="87.2" x2="448" y2="87.2" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="90.7" text-anchor="end" font-size="9.5" fill="#9ca3af">-240 M</text><line x1="52" y1="84.8" x2="448" y2="84.8" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="88.3" text-anchor="end" font-size="9.5" fill="#9ca3af">-230 M</text><line x1="52" y1="82.4" x2="448" y2="82.4" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="85.9" text-anchor="end" font-size="9.5" fill="#9ca3af">-220 M</text><line x1="52" y1="80.0" x2="448" y2="80.0" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="83.5" text-anchor="end" font-size="9.5" fill="#9ca3af">-210 M</text><line x1="52" y1="77.6" x2="448" y2="77.6" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="81.1" text-anchor="end" font-size="9.5" fill="#9ca3af">-200 M</text><line x1="52" y1="75.2" x2="448" y2="75.2" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="78.7" text-anchor="end" font-size="9.5" fill="#9ca3af">-190 M</text><line x1="52" y1="72.8" x2="448" y2="72.8" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="76.3" text-anchor="end" font-size="9.5" fill="#9ca3af">-180 M</text><line x1="52" y1="70.3" x2="448" y2="70.3" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="73.8" text-anchor="end" font-size="9.5" fill="#9ca3af">-170 M</text><line x1="52" y1="67.9" x2="448" y2="67.9" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="71.4" text-anchor="end" font-size="9.5" fill="#9ca3af">-160 M</text><line x1="52" y1="65.5" x2="448" y2="65.5" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="69.0" text-anchor="end" font-size="9.5" fill="#9ca3af">-150 M</text><line x1="52" y1="63.1" x2="448" y2="63.1" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="66.6" text-anchor="end" font-size="9.5" fill="#9ca3af">-140 M</text><line x1="52" y1="60.7" x2="448" y2="60.7" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="64.2" text-anchor="end" font-size="9.5" fill="#9ca3af">-130 M</text><line x1="52" y1="58.3" x2="448" y2="58.3" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="61.8" text-anchor="end" font-size="9.5" fill="#9ca3af">-120 M</text><line x1="52" y1="55.9" x2="448" y2="55.9" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="59.4" text-anchor="end" font-size="9.5" fill="#9ca3af">-110 M</text><line x1="52" y1="53.4" x2="448" y2="53.4" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="56.9" text-anchor="end" font-size="9.5" fill="#9ca3af">-100 M</text><line x1="52" y1="51.0" x2="448" y2="51.0" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="54.5" text-anchor="end" font-size="9.5" fill="#9ca3af">-90 M</text><line x1="52" y1="48.6" x2="448" y2="48.6" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="52.1" text-anchor="end" font-size="9.5" fill="#9ca3af">-80 M</text><line x1="52" y1="46.2" x2="448" y2="46.2" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="49.7" text-anchor="end" font-size="9.5" fill="#9ca3af">-70 M</text><line x1="52" y1="43.8" x2="448" y2="43.8" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="47.3" text-anchor="end" font-size="9.5" fill="#9ca3af">-60 M</text><line x1="52" y1="41.4" x2="448" y2="41.4" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="44.9" text-anchor="end" font-size="9.5" fill="#9ca3af">-50 M</text><line x1="52" y1="39.0" x2="448" y2="39.0" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="42.5" text-anchor="end" font-size="9.5" fill="#9ca3af">-40 M</text><line x1="52" y1="36.6" x2="448" y2="36.6" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="40.1" text-anchor="end" font-size="9.5" fill="#9ca3af">-30 M</text><line x1="52" y1="34.1" x2="448" y2="34.1" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="37.6" text-anchor="end" font-size="9.5" fill="#9ca3af">-20 M</text><line x1="52" y1="31.7" x2="448" y2="31.7" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="35.2" text-anchor="end" font-size="9.5" fill="#9ca3af">-10 M</text><line x1="52" y1="29.3" x2="448" y2="29.3" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="32.8" text-anchor="end" font-size="9.5" fill="#9ca3af">0</text><line x1="52" y1="26.9" x2="448" y2="26.9" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="30.4" text-anchor="end" font-size="9.5" fill="#9ca3af">10 M</text><line x1="52" y1="24.5" x2="448" y2="24.5" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="28.0" text-anchor="end" font-size="9.5" fill="#9ca3af">20 M</text><line x1="52" y1="22.1" x2="448" y2="22.1" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="25.6" text-anchor="end" font-size="9.5" fill="#9ca3af">30 M</text><line x1="52" y1="19.7" x2="448" y2="19.7" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="23.2" text-anchor="end" font-size="9.5" fill="#9ca3af">40 M</text><line x1="52" y1="17.2" x2="448" y2="17.2" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="20.7" text-anchor="end" font-size="9.5" fill="#9ca3af">50 M</text><line x1="52" y1="14.8" x2="448" y2="14.8" stroke="#e5e7eb" stroke-width="1"/><text x="46" y="18.3" text-anchor="end" font-size="9.5" fill="#9ca3af">60 M</text><line x1="52" y1="29.3" x2="448" y2="29.3" stroke="#111827" stroke-width="1.5"/><text x="52.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">1</text><text x="88.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">2</text><text x="124.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">3</text><text x="160.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">4</text><text x="196.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">5</text><text x="232.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">6</text><text x="268.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">7</text><text x="304.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">8</text><text x="340.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">9</text><text x="376.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">10</text><text x="412.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">11</text><text x="448.0" y="254" text-anchor="middle" font-size="9" fill="#9ca3af">12</text><text x="250.0" y="267" text-anchor="middle" font-size="9.5" fill="#6b7280">mois d’activité</text><polyline points="52.0,210.4 88.0,213.3 124.0,213.9 160.0,212.2 196.0,208.4 232.0,202.3 268.0,193.9 304.0,185.6 340.0,177.2 376.0,168.9 412.0,160.5 448.0,152.2" fill="none" stroke="#b45309" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><polyline points="52.0,210.4 88.0,214.7 124.0,217.8 160.0,219.8 196.0,220.7 232.0,220.5 268.0,219.1 304.0,217.8 340.0,216.4 376.0,215.1 412.0,213.7 448.0,212.4" fill="none" stroke="#0f766e" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/></svg></div><p class="fig-cap"><b>La trésorerie cumulée, mois par mois.</b> Elle démarre à − <span data-v="f5_inv">727 000 000</span> Ar. Le retour sur la mise tombe à <span data-v="f5_retour">2,3 ans</span> au rythme prévu, <span data-v="f5_retourp">plus de 10 ans</span> si les volumes sont deux fois plus lents.</p></div>
+
+        <div class="block">
+          <div class="block-h">Ce qui bloque la croissance</div>
+          <p>La collecte du paddy et la trésorerie de campagne, jamais la demande</p>
+        </div>
+
+        <div class="block">
+          <div class="block-h">Risques et parades</div>
+          <div class="risk"><div class="risk-h">La trésorerie de campagne</div><p>Le paddy s’achète en trois mois et se vend en douze. Il faut porter des mois de stock. C’est ce qui met à genoux les rizeries, jamais le marché.</p><p class="risk-p"><b>La parade —</b> La ligne « fonds de roulement » est la plus importante de tout l’investissement. Si elle n’est pas financée, l’usine tourne trois mois puis s’arrête, moulin plein et caisse vide.</p></div><div class="risk"><div class="risk-h">Le riz importé fixe le plafond</div><p>Tu ne peux pas vendre durablement plus cher que le riz d’import à qualité égale.</p><p class="risk-p"><b>La parade —</b> Ne joue pas sur ce terrain : joue le riz local identifié, étuvé, propre, au grain régulier. C’est un autre produit, et il se paie.</p></div><div class="risk"><div class="risk-h">Le séchage décide de tout</div><p>Un paddy rentré trop humide casse au décorticage. Le taux de brisures fait la différence entre un bon et un mauvais mois.</p><p class="risk-p"><b>La parade —</b> Le séchoir mécanique n’est pas un luxe : il est ce qui rend la collecte possible en saison des pluies, quand le paddy est le moins cher.</p></div><div class="risk"><div class="risk-h">La dépendance aux collecteurs</div><p>S’ils te contournent, l’usine est vide.</p><p class="risk-p"><b>La parade —</b> Paie comptant, au poids juste, sur un pont-bascule que le paysan voit. Le pont-bascule est un outil commercial autant qu’un outil de pesée.</p></div>
+        </div>
+
+        <div class="block">
+          <div class="block-h">Plan de lancement</div>
+          <div class="phases"><div class="phase"><div class="phase-q">Mois 1</div><p>Montage, raccordement, essais. Réglage du blanchisseur sur les variétés locales.</p></div><div class="phase"><div class="phase-q">Mois 2 – 4</div><p>Première collecte, premiers lots. Tu mesures ton taux de brisures à chaque réglage.</p></div><div class="phase"><div class="phase-q">Mois 5 – 8</div><p>Point mort. La marque prend en grande surface et chez les grossistes.</p></div><div class="phase"><div class="phase-q">Mois 9 – 12</div><p>Grande campagne : tu immobilises la totalité de ton fonds de roulement en paddy. L’année suivante se joue là.</p></div></div>
+        </div>
+      </article>
+    </section>
+
+    <!-- ═══════════════════ 09 PISTES ═══════════════════ -->
+    <section class="sec page-break" id="pistes">
+      <div class="sec-h">
+        <div class="sec-n">09</div>
+        <h2>Dix pistes de plus</h2>
+      </div>
+
+      <p>Elles passent toutes les cinq questions. Les montants sont des <b>ordres de grandeur</b>
+        pour situer le palier, pas des devis : chacune mériterait sa propre fiche.</p>
+
+      <div class="table-wrap"><table class="tbl"><thead><tr><th>Piste</th><th>Secteur</th><th class="num">Ordre de grandeur</th><th>Ce que ça remplace</th></tr></thead><tbody><tr><td><b>Huilerie : arachide, coprah, tournesol</b></td><td>Agro-alimentaire</td><td class="num">120 M Ar<br><span class="muted">palier 3</span></td><td>L’huile alimentaire est massivement importée alors que les oléagineux poussent ici.</td></tr><tr><td><b>Savonnerie et détergents</b></td><td>Chimie légère</td><td class="num">45 M Ar<br><span class="muted">palier 2</span></td><td>Base d’huile locale, parfum et soude importés : la valeur ajoutée reste sur place.</td></tr><tr><td><b>Emballage : cartons, pots, étiquettes</b></td><td>Emballage</td><td class="num">90 M Ar<br><span class="muted">palier 3</span></td><td>Tout producteur local importe son emballage. Vendre les pelles à ceux qui creusent.</td></tr><tr><td><b>Laiterie : collecte, pasteurisation, yaourt</b></td><td>Agro-alimentaire</td><td class="num">140 M Ar<br><span class="muted">palier 3</span></td><td>Le lait en poudre importé remplit les rayons au-dessus d’un cheptel bien réel.</td></tr><tr><td><b>Aliment pour poissons</b></td><td>Alimentation animale</td><td class="num">75 M Ar<br><span class="muted">palier 2</span></td><td>La pisciculture grandit et achète aujourd’hui un aliment venu de l’étranger.</td></tr><tr><td><b>Confection : uniformes et vêtements de travail</b></td><td>Textile</td><td class="num">35 M Ar<br><span class="muted">palier 2</span></td><td>Le pays coud pour l’export pendant que le marché intérieur s’habille en friperie.</td></tr><tr><td><b>Jus et boissons de fruits locaux</b></td><td>Agro-alimentaire</td><td class="num">60 M Ar<br><span class="muted">palier 2</span></td><td>Le fruit est ici, le concentré vient de loin. L’écart est la marge.</td></tr><tr><td><b>Quincaillerie transformée : treillis, ferraillage</b></td><td>Métallurgie légère</td><td class="num">110 M Ar<br><span class="muted">palier 3</span></td><td>On importe la barre, on peut façonner sur place ce que le chantier utilise vraiment.</td></tr><tr><td><b>Sucre roux et sirops artisanaux</b></td><td>Agro-alimentaire</td><td class="num">55 M Ar<br><span class="muted">palier 2</span></td><td>La canne pousse, les sucreries industrielles ont vacillé, l’import a pris la place.</td></tr><tr><td><b>Allumettes, bougies, produits d’entretien</b></td><td>Biens de consommation</td><td class="num">25 M Ar<br><span class="muted">palier 2</span></td><td>Des produits simples, à faible valeur unitaire, que le fret rend chers à importer.</td></tr></tbody></table></div>
+
+      <div class="note">
+        <p>Trois d'entre elles méritent une attention particulière parce qu'elles servent
+          <b>les autres producteurs</b> plutôt que le consommateur final : l'emballage, le
+          conditionnement et l'aliment du bétail. Quand tout le monde se met à produire localement,
+          celui qui vend les sacs, les pots et les étiquettes gagne à tous les coups.</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ 10 REMONTER LA CHAÎNE ═══════════════════ -->
+    <section class="sec" id="chaine">
+      <div class="sec-h">
+        <div class="sec-n">10</div>
+        <h2>Remonter la chaîne, et à quel moment</h2>
+      </div>
+
+      <div class="block">
+        <div class="block-h">Les trois signaux qui disent qu'il est temps de monter d'un cran</div>
+        <ul>
+          <li><b>Tu refuses des commandes.</b> Pas une fois, mais tous les mois, faute de capacité.
+            C'est le seul signal vraiment fiable.</li>
+          <li><b>Ton fournisseur devient ton plafond.</b> Quand son prix ou ses délais décident de
+            ta marge et que tu ne peux rien y faire, il est temps de faire toi-même ce qu'il te
+            vend.</li>
+          <li><b>Tu as douze mois de charges fixes en réserve.</b> Monter d'un palier veut dire
+            recreuser un trou de trésorerie. Sans cette réserve, la marche d'après se prend dans la
+            figure.</li>
+        </ul>
+      </div>
+
+      <div class="warn">
+        <div class="block-h">Et les trois signaux qui disent de ne pas bouger</div>
+        <ul>
+          <li>Tu montes parce que c'est plus prestigieux. Une usine à l'arrêt n'impressionne
+            personne longtemps.</li>
+          <li>Tu montes pour fuir un problème commercial. Si tu ne sais pas vendre mille sacs, tu ne
+            sauras pas en vendre dix mille.</li>
+          <li>Tu montes avec de l'argent emprunté à court terme. Le palier suivant se rembourse en
+            années : un crédit à douze mois ne peut pas le financer.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ 11 FINANCEMENT ═══════════════════ -->
+    <section class="sec" id="financement">
+      <div class="sec-h">
+        <div class="sec-n">11</div>
+        <h2>Financement : ce qui change à chaque palier</h2>
+      </div>
+
+      <div class="block">
+        <div class="block-h">Palier 1 — ton argent, et celui de ta famille</div>
+        <p>À dix millions d'ariary, aucune banque ne se dérangera et c'est aussi bien : tu ne veux
+          pas d'échéance fixe tant que tu apprends le métier. Le vrai financement du palier 1
+          s'appelle <b>l'acompte</b> — se faire payer à la commande, et non à la livraison.</p>
+      </div>
+
+      <div class="block">
+        <div class="block-h">Palier 2 — le crédit d'équipement</div>
+        <p>À partir de cinquante millions, une machine constitue une garantie et les
+          institutions de microfinance suivent. La règle à ne pas franchir : <b>l'échéance mensuelle
+            ne doit jamais dépasser le tiers du bénéfice mensuel au plafond</b>, pas du bénéfice
+          espéré. Sur l'engrais organique, cela veut dire un remboursement plafonné à environ le
+          tiers de <span data-v="f2_plafond">7 051 742</span> Ar.</p>
+      </div>
+
+      <div class="block">
+        <div class="block-h">Palier 3 — le crédit de campagne, distinct de l'équipement</div>
+        <p>Deux besoins séparés, deux financements séparés : la machine s'amortit sur cinq ans, le
+          stock de matière se rembourse en une saison. Les confondre dans un seul crédit long est
+          la faute classique — on finit par rembourser pendant des années un maïs consommé depuis
+          longtemps.</p>
+      </div>
+
+      <div class="block">
+        <div class="block-h">Palier 4 — on ne le finance pas seul</div>
+        <p>À sept cents millions d'ariary, il faut un tour de table : apport personnel, crédit
+          bancaire à moyen terme, et souvent un partenaire. C'est aussi l'étage où les dispositifs
+          publics d'appui à l'industrialisation et les fonds de garantie deviennent accessibles —
+          leur existence et leurs conditions se vérifient auprès du ministère de l'Industrie et des
+          banques de la place, <b>pas sur cette page</b>.</p>
+      </div>
+
+      <div class="key">
+        <p><b>La règle qui vaut à tous les paliers :</b> on n'emprunte jamais pour couvrir des
+          pertes, seulement pour acheter quelque chose qui produit. Un crédit qui finance du déficit
+          transforme un problème en catastrophe.</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ 12 ERREURS ═══════════════════ -->
+    <section class="sec page-break" id="erreurs">
+      <div class="sec-h">
+        <div class="sec-n">12</div>
+        <h2>Les sept erreurs qui tuent une unité de production</h2>
+      </div>
+
+      <div class="risk">
+        <div class="risk-h">1. Acheter la machine avant d'avoir le client</div>
+        <p>C'est l'ordre inverse du bon. Vends d'abord ce que tu ne produis pas encore — revends,
+          sous-traite, fais façonner ailleurs. Quand le carnet est plein, la machine devient une
+          évidence au lieu d'un pari.</p>
+      </div>
+
+      <div class="risk">
+        <div class="risk-h">2. Sous-estimer le <a href="#lex-fonds-roulement" class="lex"
+            data-lex="fonds-roulement">fonds de roulement</a></div>
+        <p>La cause numéro un d'arrêt. On finance la machine à l'ariary près et on oublie qu'il faut
+          acheter la matière, payer les salaires et attendre d'être payé. Règle simple :
+          <b>prévois trois mois de charges fixes en plus de tout le reste</b>, et ne les dépense
+          pas.</p>
+      </div>
+
+      <div class="risk">
+        <div class="risk-h">3. Confondre prix de vente bas et avantage concurrentiel</div>
+        <p>Être moins cher que l'import ne suffit pas, parce que l'import peut baisser son prix
+          pendant six mois et toi non. L'avantage durable est ailleurs : la fraîcheur, la
+          proximité, le délai, le service après-vente, la possibilité de commander vingt sacs au
+          lieu d'un conteneur.</p>
+      </div>
+
+      <div class="risk">
+        <div class="risk-h">4. Négliger la régularité de la qualité</div>
+        <p>Un client qui a été déçu une fois retourne à l'import et n'en parle pas : il arrête
+          simplement de commander. En production locale, <b>la régularité vaut mieux que
+            l'excellence occasionnelle</b>.</p>
+      </div>
+
+      <div class="risk">
+        <div class="risk-h">5. Dépendre d'un seul fournisseur de matière</div>
+        <p>Le jour où il augmente, tu n'as aucun recours. Deux fournisseurs, toujours, même si le
+          second est un peu plus cher : cette différence est le prix de ta liberté.</p>
+      </div>
+
+      <div class="risk">
+        <div class="risk-h">6. Faire tourner la machine pour la faire tourner</div>
+        <p>Produire du stock qui ne se vend pas convertit de la trésorerie en marchandise. C'est
+          rassurant à regarder et mortel à vivre. Une machine arrêtée coûte ses charges fixes ; une
+          machine qui produit de l'invendu coûte les charges fixes <b>plus</b> la matière.</p>
+      </div>
+
+      <div class="risk">
+        <div class="risk-h">7. Ne pas connaître son coût de revient par lot</div>
+        <p>Si tu ne peux pas dire ce qu'a coûté <b>la fabrication d'hier</b>, tu ne sais pas si tu
+          gagnes de l'argent — tu le sauras en fin d'année, trop tard. Un cahier, une pesée, un
+          relevé de compteur : cela suffit, et cela vaut tous les logiciels.</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ 13 LEXIQUE ═══════════════════ -->
+    <section class="sec page-break" id="lexique">
+      <div class="sec-h">
+        <div class="sec-n">13</div>
+        <h2>Lexique : les mots des tableaux</h2>
+      </div>
+
+      <p>Quatorze notions suffisent à lire toute cette page. Chacune est expliquée avec
+        <b>les chiffres réels du document ci-dessus</b>, et avec le piège qu'elle cache — parce que
+        la plupart de ces mots ne sont pas difficiles à définir, ils sont faciles à mal utiliser.
+        Dans le texte, les termes soulignés en pointillé ouvrent leur explication sur place.</p>
+
+      <div class="lex-list"><article class="lex-entry" id="lex-valeur-caf"><h3>Valeur CAF</h3><p class="lex-def">Le prix de la marchandise <b>rendue au port</b> : le prix sorti d’usine, plus le transport et l’assurance. C’est sur elle que la douane calcule.</p><p class="lex-calc"><b>Le calcul —</b> Prix usine + fret + assurance.</p><p class="lex-ex"><b>Sur cette page —</b> Le sac d’engrais : <span data-v="fobAr">99 000</span> Ar sorti d’usine, <span data-v="fretAr">11 880</span> Ar de fret, donc <span data-v="caf">110 880</span> Ar de valeur CAF.</p><p class="lex-piege"><b>Le piège —</b> La douane ne taxe jamais le prix d’achat, mais la valeur CAF. Un fret bon marché réduit donc aussi les droits, deux fois plutôt qu’une.</p></article><article class="lex-entry" id="lex-droits"><h3>Droits de douane</h3><p class="lex-def">Ce que l’État prélève à l’entrée d’une marchandise sur le territoire.</p><p class="lex-calc"><b>Le calcul —</b> Valeur CAF × taux. Le taux dépend de la position tarifaire du produit.</p><p class="lex-ex"><b>Sur cette page —</b> <span data-v="droitsPct">20,0 %</span> sur <span data-v="caf">110 880</span> Ar, soit <span data-v="droitsAr">22 176</span> Ar par sac.</p><p class="lex-piege"><b>Le piège —</b> C’est la part que le producteur local <b>ne paie pas</b>. Avec le fret, elle représente <span data-v="evitePct">16 %</span> du prix au marché : c’est ton avance de départ, et elle est acquise avant même d’avoir produit quoi que ce soit.</p></article><article class="lex-entry" id="lex-prix-revient"><h3>Prix de revient</h3><p class="lex-def">Ce que la marchandise te coûte réellement, une fois <b>tout</b> payé : achat, transport, taxes, manutention.</p><p class="lex-calc"><b>Le calcul —</b> Pour l’importateur : valeur CAF + droits + TVA. Pour toi qui produis : matières + main-d’œuvre + énergie + part des charges fixes.</p><p class="lex-ex"><b>Sur cette page —</b> L’importateur revient à <span data-v="revientImp">159 667</span> Ar sur un sac parti à <span data-v="fobAr">99 000</span> Ar d’usine.</p><p class="lex-piege"><b>Le piège —</b> Le prix usine n’en est que la moitié. Comparer un prix usine étranger à ton coût de production, c’est se tromper de bataille : compare au prix de revient rendu.</p></article><article class="lex-entry" id="lex-coefficient"><h3>Coefficient</h3><p class="lex-def">De combien le prix a été multiplié entre la sortie d’usine à l’étranger et l’étalage.</p><p class="lex-calc"><b>Le calcul —</b> Prix au marché ÷ prix usine.</p><p class="lex-ex"><b>Sur cette page —</b> <span data-v="rayon">215 550</span> ÷ <span data-v="fobAr">99 000</span> = <b><span data-v="coefImport">2,18</span></b>.</p><p class="lex-piege"><b>Le piège —</b> Un gros coefficient ne veut pas dire que l’importateur s’enrichit : l’essentiel part en fret, en douane et en TVA. Mais il mesure l’espace dans lequel un producteur local peut se glisser.</p></article><article class="lex-entry" id="lex-chiffre-affaires"><h3>Chiffre d’affaires</h3><p class="lex-def">Tout l’argent que les clients te versent sur le mois, avant d’avoir payé quoi que ce soit.</p><p class="lex-calc"><b>Le calcul —</b> Nombre de ventes × prix de vente, pertes et invendus déduits.</p><p class="lex-ex"><b>Sur cette page —</b> L’engrais organique au douzième mois : <span data-v="f2_m12_ca">25 529 742</span> Ar. Il en reste <span data-v="f2_m12_net">+ 7 051 742</span> Ar une fois tout payé.</p><p class="lex-piege"><b>Le piège —</b> Ce n’est pas ce que tu gagnes. C’est l’erreur la plus fréquente et la plus chère.</p></article><article class="lex-entry" id="lex-cout-variable"><h3>Coût variable</h3><p class="lex-def">Ce que te coûte <b>chaque unité produite</b> : la matière, l’emballage, l’énergie de la machine. Produire zéro ne coûte rien.</p><p class="lex-calc"><b>Le calcul —</b> Coût variable unitaire × nombre d’unités.</p><p class="lex-ex"><b>Sur cette page —</b> Un sac d’engrais organique coûte <span data-v="f2_var">35 500</span> Ar à produire, pour un prix de vente de <span data-v="f2_prix">64 665</span> Ar.</p><p class="lex-piege"><b>Le piège —</b> Il monte avec les ventes : il ne se « rattrape » jamais au volume. Seules les charges fixes se diluent quand tu produis plus.</p></article><article class="lex-entry" id="lex-charges-fixes"><h3>Charges fixes</h3><p class="lex-def">Ce que tu payes <b>même en ne produisant rien</b> : salaires, loyer, électricité d’abonnement, gardiennage.</p><p class="lex-calc"><b>Le calcul —</b> Un total par mois, indépendant du volume produit.</p><p class="lex-ex"><b>Sur cette page —</b> La provende paye <span data-v="f4_fixes">7 170 000</span> Ar par mois, que le broyeur tourne ou non.</p><p class="lex-piege"><b>Le piège —</b> Plus le palier est haut, plus elles écrasent. C’est pour ça qu’une usine à l’arrêt saigne beaucoup plus vite qu’un dépôt fermé.</p></article><article class="lex-entry" id="lex-marge"><h3>Marge</h3><p class="lex-def">Ce qui reste sur <b>une</b> vente une fois son coût variable payé. C’est elle qui sert à couvrir les charges fixes.</p><p class="lex-calc"><b>Le calcul —</b> Prix de vente − coût variable, pertes déduites.</p><p class="lex-ex"><b>Sur cette page —</b> Un parpaing se vend <span data-v="f3_prix">2 000</span> Ar et coûte <span data-v="f3_var">1 565</span> Ar : il reste <span data-v="f3_marge">335</span> Ar, soit <span data-v="f3_margePct">17 %</span> du prix.</p><p class="lex-piege"><b>Le piège —</b> Une marge par unité n’est pas un bénéfice. Sur les parpaings il en faut <span data-v="f3_seuil">11 120</span> par mois avant de gagner le premier ariary.</p></article><article class="lex-entry" id="lex-seuil"><h3>Seuil de rentabilité</h3><p class="lex-def">Le nombre d’unités qu’il faut produire et vendre <b>dans le mois</b> pour ne pas perdre d’argent ce mois-là.</p><p class="lex-calc"><b>Le calcul —</b> Charges fixes ÷ marge par unité.</p><p class="lex-ex"><b>Sur cette page —</b> La provende : <span data-v="f4_fixes">7 170 000</span> Ar ÷ <span data-v="f4_marge">20 750</span> Ar = <b><span data-v="f4_seuil">346</span> sacs par mois</b>.</p><p class="lex-piege"><b>Le piège —</b> Il se compte en unités, pas en ariary — c’est ce qui le rend vérifiable le soir en comptant les sacs. Et l’atteindre ne veut pas dire avoir récupéré sa mise.</p></article><article class="lex-entry" id="lex-point-mort"><h3>Retour sur la mise</h3><p class="lex-def">Le moment où tu as <b>récupéré tout l’argent investi</b>. À partir de là, l’affaire a remboursé son installation.</p><p class="lex-calc"><b>Le calcul —</b> Le premier mois où la trésorerie cumulée repasse au-dessus de zéro. Au-delà du douzième mois, le calcul se prolonge au rythme de croisière.</p><p class="lex-ex"><b>Sur cette page —</b> Le dépôt d’intrants : <span data-v="f1_retour">8 mois</span>. La rizerie : <span data-v="f5_retour">2,3 ans</span>.</p><p class="lex-piege"><b>Le piège —</b> Plus le palier est haut, plus il est long — c’est normal et ce n’est pas un défaut. Ce qui doit t’alerter, c’est la colonne du scénario prudent : les parpaings n’y remboursent <span data-v="f3_retourp">jamais</span>.</p></article><article class="lex-entry" id="lex-tresorerie"><h3>Trésorerie cumulée</h3><p class="lex-def">L’argent réellement disponible depuis le premier jour : l’investissement en négatif, puis chaque bénéfice mensuel ajouté.</p><p class="lex-calc"><b>Le calcul —</b> Trésorerie du mois précédent + net du mois. Elle démarre à moins le montant investi.</p><p class="lex-ex"><b>Sur cette page —</b> La rizerie démarre à − <span data-v="f5_inv">727 000 000</span> Ar. La profondeur de ce trou dit de combien d’argent il faut disposer avant que l’affaire ne se porte elle-même.</p><p class="lex-piege"><b>Le piège —</b> C’est elle qui met en faillite, pas le bénéfice. On peut être rentable chaque mois et manquer d’argent en caisse — c’est exactement ce qui arrive aux rizeries en campagne d’achat.</p></article><article class="lex-entry" id="lex-fonds-roulement"><h3>Fonds de roulement</h3><p class="lex-def">L’argent qu’il faut <b>avancer</b> avant d’encaisser quoi que ce soit : le stock, la matière première, le premier cycle de production.</p><p class="lex-calc"><b>Le calcul —</b> Ce qu’un cycle complet consomme avant sa première vente.</p><p class="lex-ex"><b>Sur cette page —</b> La rizerie en prévoit 120 millions d’ariary de paddy : le riz s’achète en trois mois et se vend en douze.</p><p class="lex-piege"><b>Le piège —</b> Il figure à l’investissement parce qu’il faut l’<b>avoir</b>, mais ce n’est pas une dépense : c’est ce qui finance le trou du départ. Le sous-estimer est la première cause d’arrêt d’une unité de production.</p></article><article class="lex-entry" id="lex-plafond"><h3>Plafond</h3><p class="lex-def">Le bénéfice mensuel maximal que l’affaire atteint <b>seule</b>, une fois lancée. Au-delà, il faut une machine de plus ou une équipe de plus.</p><p class="lex-calc"><b>Le calcul —</b> Le net du mois en régime de croisière, quand les volumes ne montent plus.</p><p class="lex-ex"><b>Sur cette page —</b> Le dépôt plafonne à <span data-v="f1_plafond">2 255 920</span> Ar par mois ; la rizerie à <span data-v="f5_plafond">34 590 000</span> Ar.</p><p class="lex-piege"><b>Le piège —</b> C’est la colonne qui dit ce que l’affaire <b>rapporte</b>, quand le rendement dit seulement ce qu’elle rapporte <b>par ariary investi</b>. Les deux ne classent pas les business dans le même ordre.</p></article><article class="lex-entry" id="lex-rendement"><h3>Rendement annuel</h3><p class="lex-def">Ce que rapporte chaque ariary investi en une année pleine, une fois la montée en charge terminée.</p><p class="lex-calc"><b>Le calcul —</b> Bénéfice mensuel au plafond × 12 ÷ investissement.</p><p class="lex-ex"><b>Sur cette page —</b> Le dépôt : <span data-v="f1_rendement">275 %</span>. La rizerie : <span data-v="f5_rendement">55 %</span>.</p><p class="lex-piege"><b>Le piège —</b> Le dépôt écrase la rizerie en rendement et pourtant la rizerie rapporte <b>bien davantage</b> : <span data-v="f5_plafond">34 590 000</span> Ar par mois contre <span data-v="f1_plafond">2 255 920</span> Ar. Un rendement énorme signale souvent un petit capital, pas une bonne affaire. C’est toute la différence entre bien placer son argent et construire quelque chose.</p></article></div>
+    </section>
+
+    <div class="foot">
+      <p><b>Produire ici ce que Madagascar importe.</b> Les quinze hypothèses du panneau « Tes
+        chiffres » sont modifiables : remplace-les par les prix que tu auras relevés toi-même, et
+        tout le document se recalcule. Rien de ce qui est écrit ici ne remplace une visite à la
+        douane, au centre fiscal et chez trois fournisseurs.</p>
+    </div>
+  </div>
+
+  <script src="business-produire-local.js"></script>
+  <script src="business-lexique.js"></script>
+  <script>
+    var b = document.getElementById('pdf');
+    if (b) b.addEventListener('click', function () { window.print(); });
+  </script>
+</body>
+
+</html>

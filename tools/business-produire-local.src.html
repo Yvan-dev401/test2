@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="favicon.png">
+  <link rel="stylesheet" href="business-plan.css">
+  <title>Produire ici ce que Madagascar importe — cinq business, quatre paliers de capital</title>
+  <style>
+    :root {
+      --accent: #15803d;
+      --accent-dark: #166534;
+      --accent-soft: #f0fdf4;
+      --accent-line: #bbf7d0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <div class="topbar">
+      <a href="index.html" class="back">← Accueil</a>
+      <button type="button" class="export" id="pdf">🖨️ Imprimer / Exporter en PDF</button>
+      <noscript>
+        <style>
+          .export {
+            display: none
+          }
+        </style>
+        <span class="back">Ctrl + P pour imprimer ou enregistrer en PDF</span>
+      </noscript>
+    </div>
+
+    <div class="print-head">
+      <strong>Produire ici ce que Madagascar importe</strong> — quatre paliers de capital, cinq
+      business chiffrés, dix pistes · business-produire-local.html
+    </div>
+
+    <div class="hdr">
+      <span class="eyebrow">Substitution aux importations · du comptoir à l'usine</span>
+      <h1>Produire ici ce que Madagascar achète dehors</h1>
+      <p>Aliko Dangote n'a pas inventé le ciment. Il a remarqué qu'au Nigeria il était
+        <strong>rare, cher et importé</strong> — puis il a fini par le produire sur place. La
+        phrase qui résume tout : <strong>produire en Afrique ce que l'Afrique importe.</strong>
+        Cette page applique la même grille à Madagascar : ce que le pays achète dehors, ce que
+        coûterait de le fabriquer ici, et l'échelle de capital qu'il faut gravir pour y arriver —
+        depuis le dépôt à dix millions d'ariary jusqu'à l'unité de production.</p>
+    </div>
+
+    <div class="params" id="params"></div>
+
+    <div class="toc">
+      <a href="#cadre">Ce que cette page sait</a>
+      <a href="#dangote">La leçon Dangote</a>
+      <a href="#imports">Ce qu'on achète dehors</a>
+      <a href="#plancher">Le prix plancher de l'import</a>
+      <a href="#grille">Les cinq questions</a>
+      <a href="#paliers">Les quatre paliers</a>
+      <a href="#comparer">Comparer</a>
+      <a href="#business">Les cinq business</a>
+      <a href="#pistes">Dix pistes de plus</a>
+      <a href="#chaine">Remonter la chaîne</a>
+      <a href="#financement">Financement</a>
+      <a href="#erreurs">Les erreurs</a>
+      <a href="#lexique">Lexique</a>
+    </div>
+
+    <!-- ═══════════════════ 01 CADRE ═══════════════════ -->
+    <section class="sec" id="cadre">
+      <div class="sec-h">
+        <div class="sec-n">01</div>
+        <h2>Ce que cette page sait, et ce qu'elle ne sait pas</h2>
+      </div>
+
+      <div class="warn">
+        <div class="block-h">Aucun chiffre de cette page n'est un relevé</div>
+        <p>Ce document n'a pas été écrit devant les statistiques de la douane ni devant les prix
+          d'un fournisseur. Personne ici ne connaît le prix du sac de ciment à Toamasina cette
+          semaine, ni le droit de douane exact sur l'engrais, ni ce que ton électricien facturera
+          le raccordement. <b>Inventer ces chiffres et les présenter comme des faits rendrait tout
+            le reste suspect</b> — et c'est le genre de document qu'on finit par montrer à un
+          banquier.</p>
+        <p>Alors la page fait l'inverse : elle pose ses hypothèses <b>à découvert</b>, en haut, dans
+          le panneau « Tes chiffres ». Quinze valeurs, toutes modifiables. Tu relèves les vrais
+          prix chez ton fournisseur, à la douane, au centre fiscal ; tu les saisis ; et
+          <b>l'intégralité du document se recalcule</b> — les tableaux, les totaux, les seuils, les
+          schémas.</p>
+      </div>
+
+      <div class="block">
+        <div class="block-h">Ce qui est solide</div>
+        <p>La <b>structure</b>. Que Madagascar cultive le riz et en importe pourtant chaque année.
+          Que l'engrais minéral vienne presque entièrement de l'extérieur. Que tout producteur
+          local achète son emballage à l'étranger. Que le fret et la douane ajoutent une part
+          considérable au prix de n'importe quel produit débarqué. Ces faits-là ne bougent pas d'une
+          semaine à l'autre, et ce sont eux qui portent le raisonnement.</p>
+        <p>Ce qui est fragile, ce sont les <b>montants en ariary</b>. Ils sont des hypothèses de
+          travail, affichées comme telles, et faites pour être remplacées.</p>
+      </div>
+
+      <div class="block">
+        <div class="block-h">Ce que cette page ne traite pas</div>
+        <ul>
+          <li><b>Le statut juridique et la fiscalité.</b> Entreprise individuelle, SARL, régime
+            réel ou simplifié, assujettissement à la <a href="#lex-droits" class="lex"
+              data-lex="droits">TVA</a> : cela dépend de ton chiffre d'affaires et se décide avec
+            un comptable, pas avec une page web. Les lignes « statut », « agrément » et « analyses »
+            des investissements portent la mention <em>estimation</em> pour cette raison.</li>
+          <li><b>Les autorisations sectorielles.</b> Un engrais s'homologue, un aliment pour animaux
+            se déclare, une denrée alimentaire demande un agrément sanitaire. Les délais et les
+            coûts se demandent au ministère concerné, en personne.</li>
+          <li><b>Le foncier.</b> Rien n'est plus long ni plus risqué à Madagascar qu'un terrain mal
+            titré. Aucun montant de cette page ne couvre un litige foncier.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ 02 DANGOTE ═══════════════════ -->
+    <section class="sec" id="dangote">
+      <div class="sec-h">
+        <div class="sec-n">02</div>
+        <h2>La leçon Dangote — ce qui se transpose, et ce qui ne se transpose pas</h2>
+      </div>
+
+      <p>L'histoire est belle et elle circule beaucoup, souvent déformée. Ce qui compte n'est pas
+        la somme de départ mais <b>l'ordre des étapes</b>, et cet ordre est reproductible.</p>
+
+      <!--MOD:frise-->
+
+      <div class="key">
+        <div class="block-h">Les trois choses qui se transposent</div>
+        <ul>
+          <li><b>Il a commencé par revendre ce qu'il importait.</b> Pas par construire. Le négoce
+            lui a appris qui achète, quand, à quel prix — un renseignement que personne ne vend et
+            qu'aucune étude de marché ne remplace.</li>
+          <li><b>Il a choisi un produit lourd, banal et très importé.</b> Le ciment est cher à
+            transporter précisément parce qu'il est pondéreux : le fret et la douane y pèsent lourd,
+            et c'est cette lourdeur qui fait la place du producteur local. Un produit léger et cher
+            ne laisse pas cet espace.</li>
+          <li><b>Il est remonté vers la matière.</b> Distribuer, puis conditionner, puis
+            transformer, puis produire — dans cet ordre, chaque étage finançant le suivant.</li>
+        </ul>
+      </div>
+
+      <div class="warn">
+        <div class="block-h">Et ce qui ne se transpose pas</div>
+        <p>Le Nigeria compte plus de deux cents millions d'habitants et du pétrole. Madagascar a un
+          marché intérieur bien plus étroit et une logistique intérieure difficile — ce qui ferme
+          certaines portes et en ouvre d'autres : <b>plus le transport intérieur est cher, plus
+            produire près du client devient un avantage</b>. Une unité régionale qui sert sa
+          province peut battre un géant installé à l'autre bout de l'île.</p>
+        <p>Les circonstances politiques du récit ne se transposent pas non plus, et il n'y a rien
+          à en tirer d'utile.</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ 03 IMPORTS ═══════════════════ -->
+    <section class="sec page-break" id="imports">
+      <div class="sec-h">
+        <div class="sec-n">03</div>
+        <h2>Ce que Madagascar achète dehors</h2>
+      </div>
+
+      <p>Toute la démarche commence par une liste : qu'est-ce qui entre dans le pays ? Puis par un
+        tri, car tout ne se substitue pas.</p>
+
+      <!--MOD:imports-->
+
+      <div class="block">
+        <div class="block-h">Le tri, en trois tas</div>
+        <ul>
+          <li><b>Ce qu'on ne remplacera pas.</b> Les produits pétroliers, les machines, les
+            véhicules, l'électronique. Ils demandent des gisements ou des industries lourdes qui
+            n'existent pas ici, et il n'y a aucune honte à les importer.</li>
+          <li><b>Ce qui est trop encadré pour ce document.</b> Le médicament d'abord : la demande
+            est là, la barrière réglementaire aussi, et elle est légitime.</li>
+          <li><b>Ce qui est à portée.</b> Le riz, l'huile alimentaire, l'engrais, l'emballage, le
+            sucre, le lait, l'aliment du bétail, le savon, les matériaux de construction. Tous
+            partagent trois traits : <b>la matière première est ici</b>, <b>le produit est lourd ou
+              encombrant</b> donc coûteux à transporter, et <b>le procédé est accessible</b> à un
+            atelier bien équipé.</li>
+        </ul>
+      </div>
+
+      <div class="note">
+        <p><b>Où vérifier.</b> L'INSTAT publie les comptes du commerce extérieur ; la direction
+          générale des douanes détaille les entrées par position tarifaire ; les chambres de
+          commerce connaissent les importateurs de chaque famille de produits. Ces trois sources
+          diront en une matinée ce que cette page ne peut qu'ordonner.</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ 04 PLANCHER ═══════════════════ -->
+    <section class="sec" id="plancher">
+      <div class="sec-h">
+        <div class="sec-n">04</div>
+        <h2>Le prix plancher de l'import, et l'espace qu'il te laisse</h2>
+      </div>
+
+      <p>Voici le calcul qui décide de tout. Un produit importé ne coûte pas son prix d'usine : il
+        coûte son prix d'usine <b>plus tout ce que le voyage lui ajoute</b>. Le transport et
+        l'assurance en font la <a href="#lex-valeur-caf" class="lex" data-lex="valeur-caf">valeur
+          CAF</a>, sur laquelle la douane calcule ; une fois les taxes payées, l'importateur
+        connaît son <a href="#lex-prix-revient" class="lex" data-lex="prix-revient">prix de
+          revient</a>. Et ce supplément, le producteur local ne le paie pas.</p>
+
+      <!--MOD:cascade-->
+
+      <div class="key">
+        <div class="block-h">Ce que dit ce schéma</div>
+        <p>Entre l'usine étrangère et le marché, le prix est multiplié par
+          <span data-v="coefImport">2,18</span> — c'est le
+          <a href="#lex-coefficient" class="lex" data-lex="coefficient">coefficient</a> de
+          l'import. Une partie de cet écart est la marge de
+          l'importateur et de son réseau — elle se mérite, ils prennent un risque et immobilisent
+          de l'argent. Mais <b><span data-v="evitePct">16 %</span> du prix final</b> n'est ni de la
+          marchandise ni de la marge : c'est du transport international et de la douane, soit
+          <span data-v="evite">34 056</span> Ar par sac.</p>
+        <p>Ce montant est ton <b>avance de départ</b>. Tu l'as avant d'avoir produit la moindre
+          unité, simplement parce que tu es ici. Tout le travail consiste ensuite à ne pas la
+          dilapider en inefficacité.</p>
+      </div>
+
+      <div class="warn">
+        <div class="block-h">Le piège de ce raisonnement</div>
+        <p>Cette avance n'est pas un bénéfice acquis. L'importateur, lui, achète à une usine qui
+          produit un million de sacs par mois avec une électricité fiable. Toi, tu produiras mille
+          sacs avec un groupe électrogène. <b>Son coût de production est plus bas que le tien</b>,
+          et parfois de beaucoup.</p>
+        <p>La substitution ne gagne donc pas partout : elle gagne là où <b>le transport et la
+            douane pèsent plus lourd que ton handicap d'échelle</b>. C'est exactement pourquoi ça
+          marche sur le ciment, l'engrais, l'aliment du bétail et le riz — des produits pondéreux,
+          à faible valeur au kilo — et pourquoi ça échoue sur l'électronique.</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ 05 GRILLE ═══════════════════ -->
+    <section class="sec" id="grille">
+      <div class="sec-h">
+        <div class="sec-n">05</div>
+        <h2>Les cinq questions à poser devant n'importe quel produit importé</h2>
+      </div>
+
+      <!--MOD:arbre-->
+
+      <div class="note">
+        <p>Applique-la à une idée qui te vient : elle en élimine la plupart en deux minutes, et
+          c'est le meilleur usage qu'on puisse en faire. Les cinq business qui suivent passent les
+          cinq questions — c'est le seul critère qui les a fait retenir.</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ 06 PALIERS ═══════════════════ -->
+    <section class="sec page-break" id="paliers">
+      <div class="sec-h">
+        <div class="sec-n">06</div>
+        <h2>Les quatre paliers : on ne saute pas de marche</h2>
+      </div>
+
+      <p>C'est la partie la plus utile du document, et la plus ignorée. On regarde une usine et on
+        se dit « il faudrait des milliards » — puis on ne fait rien. Or personne ne démarre en
+        haut : <b>chaque marche finance la suivante</b>.</p>
+
+      <!--MOD:escalier-->
+
+      <!--MOD:paliers-->
+
+      <div class="key">
+        <div class="block-h">Ce que change chaque marche</div>
+        <p>En montant, trois choses se produisent en même temps. <b>La marge s'élargit</b>, parce
+          qu'on vend un travail et plus une commission. <b>Le capital immobilisé explose</b>, et
+          avec lui le temps qu'il faut pour le récupérer. Et <b>on devient plus difficile à
+            remplacer</b> : un revendeur se contourne en une semaine, une unité de production qui
+          fournit toute une province ne se contourne pas.</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ 07 COMPARER ═══════════════════ -->
+    <section class="sec page-break" id="comparer">
+      <div class="sec-h">
+        <div class="sec-n">07</div>
+        <h2>Comparer les cinq business</h2>
+      </div>
+
+      <!--MOD:comparatif-->
+
+      <!--MOD:capital-->
+
+      <!--MOD:marges-->
+
+      <!--MOD:matrice-->
+
+      <div class="note">
+        <p><b>Lis les deux dernières colonnes ensemble, jamais l'une sans l'autre.</b> Le dépôt
+          d'intrants a le meilleur <a href="#lex-rendement" class="lex"
+            data-lex="rendement">rendement</a> du lot — et il ne dépassera jamais
+          <span data-v="f1_plafond">2 255 920</span> Ar par mois, parce qu'il bute sur le nombre de
+          paysans à portée. La rizerie rend moins par ariary investi et rapporte
+          <span data-v="f5_plafond">34 560 000</span> Ar. Le premier est un bon placement ; la
+          seconde est une entreprise.</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ 08 LES CINQ BUSINESS ═══════════════════ -->
+    <section class="sec page-break" id="business">
+      <div class="sec-h">
+        <div class="sec-n">08</div>
+        <h2>Les cinq business en détail</h2>
+      </div>
+
+      <p>Les deux premiers visent <b>le même client</b> : on revend d'abord l'engrais importé, on le
+        fabrique ensuite. La progression des paliers n'est pas une idée abstraite — elle se lit sur
+        deux fiches qui se suivent.</p>
+
+      <!-- ─────────── 1 ─────────── -->
+      <article class="model">
+        <div class="model-head">
+          <div class="model-n">1</div>
+          <div class="model-id">
+            <h3><!--MOD:f1:titre--></h3>
+            <p><!--MOD:f1:soustitre--></p>
+            <div class="tags"><!--MOD:f1:tags--></div>
+          </div>
+        </div>
+
+        <!--MOD:f1:kpis-->
+
+        <div class="block">
+          <div class="block-h">Investissement</div>
+          <!--MOD:f1:invest-->
+        </div>
+
+        <!--MOD:f1:donut-->
+
+        <div class="block">
+          <div class="block-h"><a href="#lex-charges-fixes" class="lex"
+              data-lex="charges-fixes">Charges fixes mensuelles</a></div>
+          <!--MOD:f1:fixes-->
+        </div>
+
+        <div class="block">
+          <div class="block-h">L'économie d'un sac</div>
+          <p>Tu l'achètes au grossiste <span data-v="achatDepot">183 617</span> Ar et tu le revends
+            <span data-v="f1_prix">215 550</span> Ar. Il te reste
+            <span data-v="f1_marge">27 622</span> Ar de <a href="#lex-marge" class="lex"
+              data-lex="marge">marge</a>, soit <span data-v="f1_margePct">13 %</span> du prix — une
+            marge de négoce, normale pour ce métier. Il t'en faut
+            <span data-v="f1_seuil">29</span> par mois pour couvrir tes charges.</p>
+        </div>
+
+        <div class="block">
+          <div class="block-h">Prévisionnel sur douze mois</div>
+          <!--MOD:f1:tableau-->
+        </div>
+
+        <!--MOD:f1:cash-->
+
+        <div class="block">
+          <div class="block-h">Ce qui bloque la croissance</div>
+          <p><!--MOD:f1:bloque--></p>
+        </div>
+
+        <div class="block">
+          <div class="block-h">Risques et parades</div>
+          <!--MOD:f1:risques-->
+        </div>
+
+        <div class="block">
+          <div class="block-h">Plan de lancement</div>
+          <!--MOD:f1:phases-->
+        </div>
+      </article>
+
+      <!-- ─────────── 2 ─────────── -->
+      <article class="model">
+        <div class="model-head">
+          <div class="model-n">2</div>
+          <div class="model-id">
+            <h3><!--MOD:f2:titre--></h3>
+            <p><!--MOD:f2:soustitre--></p>
+            <div class="tags"><!--MOD:f2:tags--></div>
+          </div>
+        </div>
+
+        <!--MOD:f2:kpis-->
+
+        <div class="key">
+          <div class="block-h">Le même client, un métier différent</div>
+          <p>Le dépôt gagnait <span data-v="f1_marge">27 622</span> Ar par sac en revendant. Ici tu
+            produis : le sac se vend moins cher — <span data-v="f2_prix">64 665</span> Ar contre
+            <span data-v="f1_prix">215 550</span> Ar, parce qu'un sac de compost ne porte pas
+            autant d'éléments fertilisants qu'un sac de NPK — mais il ne te coûte que
+            <span data-v="f2_var">28 500</span> Ar à fabriquer. La marge passe de
+            <span data-v="f1_margePct">13 %</span> à
+            <span data-v="f2_margePct">39 %</span> du prix. <b>C'est exactement ce qu'on gagne en
+              montant d'une marche.</b></p>
+        </div>
+
+        <div class="block">
+          <div class="block-h">Investissement</div>
+          <!--MOD:f2:invest-->
+        </div>
+
+        <!--MOD:f2:donut-->
+
+        <div class="block">
+          <div class="block-h"><a href="#lex-charges-fixes" class="lex"
+              data-lex="charges-fixes">Charges fixes mensuelles</a></div>
+          <!--MOD:f2:fixes-->
+        </div>
+
+        <div class="block">
+          <div class="block-h">Prévisionnel sur douze mois</div>
+          <p>Le premier mois ne vend rien : le compost mûrit entre six et dix semaines avant d'être
+            criblé et ensaché. Cette attente est dans le tableau, et c'est elle qui creuse le trou
+            de trésorerie du départ.</p>
+          <!--MOD:f2:tableau-->
+        </div>
+
+        <!--MOD:f2:cash-->
+
+        <div class="block">
+          <div class="block-h">Ce qui bloque la croissance</div>
+          <p><!--MOD:f2:bloque--></p>
+        </div>
+
+        <div class="block">
+          <div class="block-h">Risques et parades</div>
+          <!--MOD:f2:risques-->
+        </div>
+
+        <div class="block">
+          <div class="block-h">Plan de lancement</div>
+          <!--MOD:f2:phases-->
+        </div>
+      </article>
+
+      <!-- ─────────── 3 ─────────── -->
+      <article class="model">
+        <div class="model-head">
+          <div class="model-n">3</div>
+          <div class="model-id">
+            <h3><!--MOD:f3:titre--></h3>
+            <p><!--MOD:f3:soustitre--></p>
+            <div class="tags"><!--MOD:f3:tags--></div>
+          </div>
+        </div>
+
+        <!--MOD:f3:kpis-->
+
+        <div class="warn">
+          <div class="block-h">La fiche la plus tendue du document — et c'est instructif</div>
+          <p>Un parpaing rapporte <span data-v="f3_marge">335</span> Ar, soit
+            <span data-v="f3_margePct">17 %</span> de son prix. Il en faut
+            <span data-v="f3_seuil">11 120</span> par mois pour simplement couvrir les charges.
+            Dans le scénario prudent — moitié moins de volume — cette affaire
+            <b><span data-v="f3_retourp">jamais</span></b> ne rembourse sa mise : elle perd de
+            l'argent tous les mois.</p>
+          <p>Ce n'est pas une raison de l'écarter, c'est une raison de la regarder en face. Les
+            métiers de matériaux sont des <b>métiers de volume et de discipline</b>, pas des coups.
+            Si tu n'es pas sûr d'écouler quinze mille pièces par mois, ne mets pas
+            <span data-v="f3_inv">72 000 000</span> Ar dedans.</p>
+        </div>
+
+        <div class="block">
+          <div class="block-h">Investissement</div>
+          <!--MOD:f3:invest-->
+        </div>
+
+        <!--MOD:f3:donut-->
+
+        <div class="block">
+          <div class="block-h"><a href="#lex-charges-fixes" class="lex"
+              data-lex="charges-fixes">Charges fixes mensuelles</a></div>
+          <!--MOD:f3:fixes-->
+        </div>
+
+        <div class="block">
+          <div class="block-h">Prévisionnel sur douze mois</div>
+          <!--MOD:f3:tableau-->
+        </div>
+
+        <!--MOD:f3:cash-->
+
+        <div class="block">
+          <div class="block-h">Ce qui bloque la croissance</div>
+          <p><!--MOD:f3:bloque--></p>
+        </div>
+
+        <div class="block">
+          <div class="block-h">Risques et parades</div>
+          <!--MOD:f3:risques-->
+        </div>
+
+        <div class="block">
+          <div class="block-h">Plan de lancement</div>
+          <!--MOD:f3:phases-->
+        </div>
+      </article>
+
+      <!-- ─────────── 4 ─────────── -->
+      <article class="model">
+        <div class="model-head">
+          <div class="model-n">4</div>
+          <div class="model-id">
+            <h3><!--MOD:f4:titre--></h3>
+            <p><!--MOD:f4:soustitre--></p>
+            <div class="tags"><!--MOD:f4:tags--></div>
+          </div>
+        </div>
+
+        <!--MOD:f4:kpis-->
+
+        <div class="block">
+          <div class="block-h">Investissement</div>
+          <!--MOD:f4:invest-->
+        </div>
+
+        <!--MOD:f4:donut-->
+
+        <div class="block">
+          <div class="block-h"><a href="#lex-charges-fixes" class="lex"
+              data-lex="charges-fixes">Charges fixes mensuelles</a></div>
+          <!--MOD:f4:fixes-->
+        </div>
+
+        <div class="key">
+          <div class="block-h">Pourquoi le stock de matières est la ligne décisive</div>
+          <p>Le maïs pèse près de la moitié du coût d'un sac. Il se récolte en quelques semaines et
+            se consomme toute l'année : son prix monte fortement en période de soudure. La ligne
+            « stock de matières premières » de l'investissement n'est donc pas du confort, c'est
+            <b>l'outil qui fixe ton coût de revient pour douze mois</b>. Un concurrent qui achète
+            au fil de l'eau paiera sa matière plus cher que toi la moitié de l'année.</p>
+        </div>
+
+        <div class="block">
+          <div class="block-h">Prévisionnel sur douze mois</div>
+          <!--MOD:f4:tableau-->
+        </div>
+
+        <!--MOD:f4:cash-->
+
+        <div class="block">
+          <div class="block-h">Ce qui bloque la croissance</div>
+          <p><!--MOD:f4:bloque--></p>
+        </div>
+
+        <div class="block">
+          <div class="block-h">Risques et parades</div>
+          <!--MOD:f4:risques-->
+        </div>
+
+        <div class="block">
+          <div class="block-h">Plan de lancement</div>
+          <!--MOD:f4:phases-->
+        </div>
+      </article>
+
+      <!-- ─────────── 5 ─────────── -->
+      <article class="model">
+        <div class="model-head">
+          <div class="model-n">5</div>
+          <div class="model-id">
+            <h3><!--MOD:f5:titre--></h3>
+            <p><!--MOD:f5:soustitre--></p>
+            <div class="tags"><!--MOD:f5:tags--></div>
+          </div>
+        </div>
+
+        <!--MOD:f5:kpis-->
+
+        <div class="key">
+          <div class="block-h">Pourquoi le riz est le symbole</div>
+          <p>Le pays cultive le riz, en mange plus que presque partout ailleurs, et en importe
+            pourtant chaque année. Le trou n'est pas au champ : il est <b>entre le champ et
+              l'assiette</b>. Paddy rentré trop humide, décorticage qui casse le grain, absence de
+            tri, conditionnement inexistant — la valeur se perd là, et c'est là qu'on la reprend.
+            Une rizerie ne demande pas de cultiver : elle demande de <b>sécher, décortiquer, étuver,
+              trier et ensacher mieux que ce qui se fait aujourd'hui</b>.</p>
+        </div>
+
+        <div class="block">
+          <div class="block-h">Investissement</div>
+          <!--MOD:f5:invest-->
+        </div>
+
+        <!--MOD:f5:donut-->
+
+        <div class="block">
+          <div class="block-h"><a href="#lex-charges-fixes" class="lex"
+              data-lex="charges-fixes">Charges fixes mensuelles</a></div>
+          <!--MOD:f5:fixes-->
+        </div>
+
+        <div class="warn">
+          <div class="block-h">Le <a href="#lex-fonds-roulement" class="lex"
+              data-lex="fonds-roulement">fonds de roulement</a> est la ligne qui tue</div>
+          <p>Cent vingt millions d'ariary de paddy : c'est la deuxième ligne de l'investissement, et
+            c'est celle qu'on rogne toujours en premier parce qu'elle n'achète rien de visible. Or
+            le paddy s'achète en trois mois et se vend en douze. <b>Une rizerie sous-financée
+              tourne un trimestre, puis s'arrête, magasin vide et caisse vide</b>, pendant que la
+            machine à cent quatre-vingts millions dort sous une bâche. Ce n'est presque jamais le
+            marché qui met une rizerie à genoux : c'est sa trésorerie de campagne.</p>
+        </div>
+
+        <div class="block">
+          <div class="block-h">Prévisionnel sur douze mois</div>
+          <!--MOD:f5:tableau-->
+        </div>
+
+        <!--MOD:f5:cash-->
+
+        <div class="block">
+          <div class="block-h">Ce qui bloque la croissance</div>
+          <p><!--MOD:f5:bloque--></p>
+        </div>
+
+        <div class="block">
+          <div class="block-h">Risques et parades</div>
+          <!--MOD:f5:risques-->
+        </div>
+
+        <div class="block">
+          <div class="block-h">Plan de lancement</div>
+          <!--MOD:f5:phases-->
+        </div>
+      </article>
+    </section>
+
+    <!-- ═══════════════════ 09 PISTES ═══════════════════ -->
+    <section class="sec page-break" id="pistes">
+      <div class="sec-h">
+        <div class="sec-n">09</div>
+        <h2>Dix pistes de plus</h2>
+      </div>
+
+      <p>Elles passent toutes les cinq questions. Les montants sont des <b>ordres de grandeur</b>
+        pour situer le palier, pas des devis : chacune mériterait sa propre fiche.</p>
+
+      <!--MOD:pistes-->
+
+      <div class="note">
+        <p>Trois d'entre elles méritent une attention particulière parce qu'elles servent
+          <b>les autres producteurs</b> plutôt que le consommateur final : l'emballage, le
+          conditionnement et l'aliment du bétail. Quand tout le monde se met à produire localement,
+          celui qui vend les sacs, les pots et les étiquettes gagne à tous les coups.</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ 10 REMONTER LA CHAÎNE ═══════════════════ -->
+    <section class="sec" id="chaine">
+      <div class="sec-h">
+        <div class="sec-n">10</div>
+        <h2>Remonter la chaîne, et à quel moment</h2>
+      </div>
+
+      <div class="block">
+        <div class="block-h">Les trois signaux qui disent qu'il est temps de monter d'un cran</div>
+        <ul>
+          <li><b>Tu refuses des commandes.</b> Pas une fois, mais tous les mois, faute de capacité.
+            C'est le seul signal vraiment fiable.</li>
+          <li><b>Ton fournisseur devient ton plafond.</b> Quand son prix ou ses délais décident de
+            ta marge et que tu ne peux rien y faire, il est temps de faire toi-même ce qu'il te
+            vend.</li>
+          <li><b>Tu as douze mois de charges fixes en réserve.</b> Monter d'un palier veut dire
+            recreuser un trou de trésorerie. Sans cette réserve, la marche d'après se prend dans la
+            figure.</li>
+        </ul>
+      </div>
+
+      <div class="warn">
+        <div class="block-h">Et les trois signaux qui disent de ne pas bouger</div>
+        <ul>
+          <li>Tu montes parce que c'est plus prestigieux. Une usine à l'arrêt n'impressionne
+            personne longtemps.</li>
+          <li>Tu montes pour fuir un problème commercial. Si tu ne sais pas vendre mille sacs, tu ne
+            sauras pas en vendre dix mille.</li>
+          <li>Tu montes avec de l'argent emprunté à court terme. Le palier suivant se rembourse en
+            années : un crédit à douze mois ne peut pas le financer.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ 11 FINANCEMENT ═══════════════════ -->
+    <section class="sec" id="financement">
+      <div class="sec-h">
+        <div class="sec-n">11</div>
+        <h2>Financement : ce qui change à chaque palier</h2>
+      </div>
+
+      <div class="block">
+        <div class="block-h">Palier 1 — ton argent, et celui de ta famille</div>
+        <p>À dix millions d'ariary, aucune banque ne se dérangera et c'est aussi bien : tu ne veux
+          pas d'échéance fixe tant que tu apprends le métier. Le vrai financement du palier 1
+          s'appelle <b>l'acompte</b> — se faire payer à la commande, et non à la livraison.</p>
+      </div>
+
+      <div class="block">
+        <div class="block-h">Palier 2 — le crédit d'équipement</div>
+        <p>À partir de cinquante millions, une machine constitue une garantie et les
+          institutions de microfinance suivent. La règle à ne pas franchir : <b>l'échéance mensuelle
+            ne doit jamais dépasser le tiers du bénéfice mensuel au plafond</b>, pas du bénéfice
+          espéré. Sur l'engrais organique, cela veut dire un remboursement plafonné à environ le
+          tiers de <span data-v="f2_plafond">7 051 700</span> Ar.</p>
+      </div>
+
+      <div class="block">
+        <div class="block-h">Palier 3 — le crédit de campagne, distinct de l'équipement</div>
+        <p>Deux besoins séparés, deux financements séparés : la machine s'amortit sur cinq ans, le
+          stock de matière se rembourse en une saison. Les confondre dans un seul crédit long est
+          la faute classique — on finit par rembourser pendant des années un maïs consommé depuis
+          longtemps.</p>
+      </div>
+
+      <div class="block">
+        <div class="block-h">Palier 4 — on ne le finance pas seul</div>
+        <p>À sept cents millions d'ariary, il faut un tour de table : apport personnel, crédit
+          bancaire à moyen terme, et souvent un partenaire. C'est aussi l'étage où les dispositifs
+          publics d'appui à l'industrialisation et les fonds de garantie deviennent accessibles —
+          leur existence et leurs conditions se vérifient auprès du ministère de l'Industrie et des
+          banques de la place, <b>pas sur cette page</b>.</p>
+      </div>
+
+      <div class="key">
+        <p><b>La règle qui vaut à tous les paliers :</b> on n'emprunte jamais pour couvrir des
+          pertes, seulement pour acheter quelque chose qui produit. Un crédit qui finance du déficit
+          transforme un problème en catastrophe.</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ 12 ERREURS ═══════════════════ -->
+    <section class="sec page-break" id="erreurs">
+      <div class="sec-h">
+        <div class="sec-n">12</div>
+        <h2>Les sept erreurs qui tuent une unité de production</h2>
+      </div>
+
+      <div class="risk">
+        <div class="risk-h">1. Acheter la machine avant d'avoir le client</div>
+        <p>C'est l'ordre inverse du bon. Vends d'abord ce que tu ne produis pas encore — revends,
+          sous-traite, fais façonner ailleurs. Quand le carnet est plein, la machine devient une
+          évidence au lieu d'un pari.</p>
+      </div>
+
+      <div class="risk">
+        <div class="risk-h">2. Sous-estimer le <a href="#lex-fonds-roulement" class="lex"
+            data-lex="fonds-roulement">fonds de roulement</a></div>
+        <p>La cause numéro un d'arrêt. On finance la machine à l'ariary près et on oublie qu'il faut
+          acheter la matière, payer les salaires et attendre d'être payé. Règle simple :
+          <b>prévois trois mois de charges fixes en plus de tout le reste</b>, et ne les dépense
+          pas.</p>
+      </div>
+
+      <div class="risk">
+        <div class="risk-h">3. Confondre prix de vente bas et avantage concurrentiel</div>
+        <p>Être moins cher que l'import ne suffit pas, parce que l'import peut baisser son prix
+          pendant six mois et toi non. L'avantage durable est ailleurs : la fraîcheur, la
+          proximité, le délai, le service après-vente, la possibilité de commander vingt sacs au
+          lieu d'un conteneur.</p>
+      </div>
+
+      <div class="risk">
+        <div class="risk-h">4. Négliger la régularité de la qualité</div>
+        <p>Un client qui a été déçu une fois retourne à l'import et n'en parle pas : il arrête
+          simplement de commander. En production locale, <b>la régularité vaut mieux que
+            l'excellence occasionnelle</b>.</p>
+      </div>
+
+      <div class="risk">
+        <div class="risk-h">5. Dépendre d'un seul fournisseur de matière</div>
+        <p>Le jour où il augmente, tu n'as aucun recours. Deux fournisseurs, toujours, même si le
+          second est un peu plus cher : cette différence est le prix de ta liberté.</p>
+      </div>
+
+      <div class="risk">
+        <div class="risk-h">6. Faire tourner la machine pour la faire tourner</div>
+        <p>Produire du stock qui ne se vend pas convertit de la trésorerie en marchandise. C'est
+          rassurant à regarder et mortel à vivre. Une machine arrêtée coûte ses charges fixes ; une
+          machine qui produit de l'invendu coûte les charges fixes <b>plus</b> la matière.</p>
+      </div>
+
+      <div class="risk">
+        <div class="risk-h">7. Ne pas connaître son coût de revient par lot</div>
+        <p>Si tu ne peux pas dire ce qu'a coûté <b>la fabrication d'hier</b>, tu ne sais pas si tu
+          gagnes de l'argent — tu le sauras en fin d'année, trop tard. Un cahier, une pesée, un
+          relevé de compteur : cela suffit, et cela vaut tous les logiciels.</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ 13 LEXIQUE ═══════════════════ -->
+    <section class="sec page-break" id="lexique">
+      <div class="sec-h">
+        <div class="sec-n">13</div>
+        <h2>Lexique : les mots des tableaux</h2>
+      </div>
+
+      <p>Quatorze notions suffisent à lire toute cette page. Chacune est expliquée avec
+        <b>les chiffres réels du document ci-dessus</b>, et avec le piège qu'elle cache — parce que
+        la plupart de ces mots ne sont pas difficiles à définir, ils sont faciles à mal utiliser.
+        Dans le texte, les termes soulignés en pointillé ouvrent leur explication sur place.</p>
+
+      <!--MOD:lexique-->
+    </section>
+
+    <div class="foot">
+      <p><b>Produire ici ce que Madagascar importe.</b> Les quinze hypothèses du panneau « Tes
+        chiffres » sont modifiables : remplace-les par les prix que tu auras relevés toi-même, et
+        tout le document se recalcule. Rien de ce qui est écrit ici ne remplace une visite à la
+        douane, au centre fiscal et chez trois fournisseurs.</p>
+    </div>
+  </div>
+
+  <script src="business-produire-local.js"></script>
+  <script src="business-lexique.js"></script>
+  <script>
+    var b = document.getElementById('pdf');
+    if (b) b.addEventListener('click', function () { window.print(); });
+  </script>
+</body>
+
+</html>

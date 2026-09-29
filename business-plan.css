@@ -1222,6 +1222,12 @@ a.lex:hover {
   .sec-h h2 {
     font-size: 17px;
   }
+
+  /* Sur un écran étroit, une étiquette un peu longue poussait la page entière
+     vers la droite : ici elle se replie sur deux lignes plutôt que de déborder. */
+  .tag {
+    white-space: normal;
+  }
 }
 
 /* ─────────────────────────────────────────────────────────────

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Seuls les scripts du site peuvent s'exécuter : ni script en ligne, ni gestionnaire
+       d'événement dans le HTML, ni source extérieure. Même si un nom piégé arrivait par une
+       sauvegarde importée, il ne pourrait rien lancer. Le jour d'un stockage distant, son
+       adresse s'ajoutera à connect-src, et nulle part ailleurs. -->
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta name="robots" content="noindex">
+  <meta name="referrer" content="no-referrer">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="favicon.png">
+  <link rel="stylesheet" href="projets.css">
+  <!-- Le titre ne change jamais : un nom de projet dans le titre finirait en clair dans
+       l'historique du navigateur. -->
+  <title>Mes projets</title>
+</head>
+
+<body>
+  <noscript>
+    <div class="ecran">
+      <div class="ecran-carte">
+        <h1 class="ecran-titre">Mes projets</h1>
+        <p class="ecran-texte">Cette application chiffre tes données dans le navigateur : elle a
+          besoin de JavaScript pour fonctionner.</p>
+        <p class="ecran-texte"><a href="index.html">← Retour à l'accueil</a></p>
+      </div>
+    </div>
+  </noscript>
+
+  <div id="app" class="app" aria-live="polite"></div>
+
+  <script src="projets-modele.js"></script>
+  <script src="projets-coffre.js"></script>
+  <script src="projets-stockage.js"></script>
+  <script src="projets-graphiques.js"></script>
+  <script src="projets-app.js"></script>
+</body>
+
+</html>
